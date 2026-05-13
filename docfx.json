@@ -37,6 +37,6 @@
         "path": "docs"
       }
     },
-    "template": ["default"]
+    "template": ["default", "modern"]
   }
 }
