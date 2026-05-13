@@ -10,4 +10,8 @@
     <ProjectReference Include="..\..\src\MavNet.Protocol\MavNet.Protocol.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <InternalsVisibleTo Include="MavNet.CodeGen.Tests" />
+  </ItemGroup>
+
 </Project>

@@ -1,79 +1,80 @@
 # Getting Started
 
-## Prerequisites
+This is the shortest path from a PX4 SITL UDP endpoint to typed telemetry and commands.
+
+> [!WARNING]
+> `ArmAsync`, `TakeoffAsync`, `LandAsync`, and `ReturnToLaunchAsync` send real MAVLink commands. Do first runs in SITL.
+
+## Requirements
 
 - [.NET 10 SDK](https://dotnet.microsoft.com/download)
-- A MAVLink v2 autopilot or SITL simulator reachable over UDP
+- A MAVLink v2 vehicle or simulator reachable over UDP
 
 ## Install
 
-MavNet is not yet published on NuGet. Clone the repository and add project references directly:
+MavNet is not on NuGet yet. Add a project reference:
 
 ```xml
-<ProjectReference Include="path/to/MavNet/src/MavNet.PX4/MavNet.PX4.csproj" />
+<ItemGroup>
+  <ProjectReference Include="path/to/MavNet/src/MavNet.PX4/MavNet.PX4.csproj" />
+</ItemGroup>
 ```
 
-## Connect to a drone
+## Connect
 
-Use `Drone.ConnectAsync` with a UDP connection string. The call blocks until the first heartbeat is received from the vehicle (or the timeout elapses):
+`Drone.ConnectAsync` opens UDP, waits for the first heartbeat, then returns a `Drone` that owns the connection.
 
 ```csharp
+using MavNet.Core;
 using MavNet.PX4.Vehicles;
 
-Drone drone = await Drone.ConnectAsync(
+await using Drone drone = await Drone.ConnectAsync(
     "udp://0.0.0.0:14550?rhost=127.0.0.1&rport=18570",
     TimeSpan.FromSeconds(30));
 
-await using (drone)
-{
-    Console.WriteLine($"Connected to {drone.DeviceId} (type={drone.VehicleType})");
-    // ...
-}
+Console.WriteLine($"Connected to {drone.DeviceId} ({drone.VehicleType})");
 ```
 
-The connection string format is `udp://lhost:lport?rhost=...&rport=...` where `lhost:lport` is the local bind address and `rhost:rport` is the remote autopilot.
+Connection strings use:
 
-## Subscribe to telemetry
-
-Telemetry properties (`Armed`, `Mode`, `Lat`, `Lon`, `Alt`, `Battery`, …) are updated on the receive thread. Read them from any thread:
-
-```csharp
-drone.HeartbeatReceived += (hb, receivedAt) =>
-{
-    Console.WriteLine($"armed={drone.Armed} mode={drone.Mode} bat={drone.Battery:F0}%");
-};
+```text
+udp://localHost:localPort?rhost=remoteHost&rport=remotePort
 ```
 
-> **Threading note:** Events fire synchronously on the UDP receive thread. Marshal to the UI thread yourself if needed (e.g. `Dispatcher.InvokeAsync` in WPF).
+For PX4 SITL, the common value is:
 
-## Send flight commands
+```text
+udp://0.0.0.0:14550?rhost=127.0.0.1&rport=18570
+```
+
+## Read State
 
 ```csharp
-// Arm
+using StateSubscription sub = drone.SubscribeState(
+    s => Console.WriteLine($"{s.Mode} armed={s.Armed} alt={s.Alt:F1}m sats={s.Sats}"),
+    StateRate.Hz(2));
+```
+
+`SubscribeState` can deliver immutable `DroneState` snapshots. Use `StateRate.Raw` for every state-affecting packet, or throttle with `StateRate.Hz(...)` / `StateRate.Every(...)`.
+
+> [!NOTE]
+> Transport events and raw state changes fire on the receive thread. UI apps should marshal back to their UI thread.
+
+## Send Commands
+
+```csharp
 CommandOutcome arm = await drone.ArmAsync(cancellationToken);
-
-// Takeoff to 10 m
 CommandOutcome takeoff = await drone.TakeoffAsync(10.0, cancellationToken);
-
-// Land
 CommandOutcome land = await drone.LandAsync(cancellationToken);
-
-// Return to launch
 CommandOutcome rtl = await drone.ReturnToLaunchAsync(cancellationToken);
-
-// Disarm
 CommandOutcome disarm = await drone.DisarmAsync(cancellationToken);
 ```
 
-Each call sends `COMMAND_LONG` and waits for the matching `COMMAND_ACK`. The returned `CommandOutcome` contains the result code, ACK result (if any), and elapsed time.
+Command helpers send `COMMAND_LONG` and wait for the matching `COMMAND_ACK` plus, where possible, a confirming state change.
 
-## Run against PX4 SITL
+## Probe App
 
 ```bash
-# In one terminal — start PX4 SITL (adjust path as needed)
-make px4_sitl gazebo
-
-# In another terminal — run the bundled probe
 dotnet run -c Release --project examples/MavNet.Probe -- "udp://0.0.0.0:14550?rhost=127.0.0.1&rport=18570"
 ```
 

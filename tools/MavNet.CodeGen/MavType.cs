@@ -13,9 +13,9 @@ internal sealed record MavType(string Wire, int ElementSize, int ArrayLength, st
     /// `uint8_t_mavlink_version` is rendered as plain `uint8_t` per MAVLink spec.</summary>
     public string CrcType => Wire == "uint8_t_mavlink_version" ? "uint8_t" : Wire;
 
-    /// <summary>C# type for a field of this MAVLink type — array becomes `byte[]` etc.</summary>
+    /// <summary>C# type for a field of this MAVLink type — array becomes `byte[]`, char arrays surface as `string`.</summary>
     public string CSharpFieldType => IsArray
-        ? (CSharpElement == "char" ? "string" : $"{CSharpElement}[]")
+        ? (Wire == "char" ? "string" : $"{CSharpElement}[]")
         : CSharpElement;
 
     public static MavType Parse(string raw)

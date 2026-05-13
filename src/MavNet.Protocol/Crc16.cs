@@ -1,10 +1,12 @@
 namespace MavNet.Protocol;
 
 /// <summary>
-/// CRC-16/X.25 (a.k.a. CRC-CCITT) — the checksum MAVLink uses on every frame.
-/// Initial value 0xFFFF, no final XOR. Match the reference C implementation
-/// byte-for-byte so PX4 accepts our outbound frames. Public because the code
-/// generator (tools/MavLinkCodeGen) reuses it for CRC_EXTRA computation.
+/// CRC-16/MCRF4XX — the checksum MAVLink uses on every frame. The MAVLink community
+/// commonly calls this "CRC-16/X.25", but the reference C implementation omits the
+/// X.25 final XOR (xorout=0x0000), which is formally CRC-16/MCRF4XX
+/// (poly=0x1021, init=0xFFFF, refin/refout=true, check=0x6F91). Match the reference
+/// implementation byte-for-byte so PX4 accepts our outbound frames. Public because
+/// the code generator (tools/MavNet.CodeGen) reuses it for CRC_EXTRA computation.
 /// </summary>
 public static class Crc16
 {

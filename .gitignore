@@ -364,4 +364,5 @@ FodyWeavers.xsd
 
 # DocFX generated outputs
 _site/
-api/
+api/*
+!api/index.md

@@ -2,4 +2,5 @@
   href: articles/toc.yml
   homepage: articles/getting-started.md
 - name: API Reference
-  href: ../api/
+  href: ../api/toc.yml
+  homepage: ../api/index.md

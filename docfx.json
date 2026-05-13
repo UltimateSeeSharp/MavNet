@@ -29,7 +29,7 @@
     "dest": "_site",
     "globalMetadata": {
       "_appName": "MavNet",
-      "_appTitle": "MavNet — MAVLink for .NET",
+      "_appTitle": "MavNet - MAVLink for .NET",
       "_enableSearch": true,
       "_gitContribute": {
         "repo": "https://github.com/UltimateSeeSharp/MavNet",

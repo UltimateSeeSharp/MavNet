@@ -1,0 +1,8 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\MavNet.PX4\MavNet.PX4.csproj" />
+    <ProjectReference Include="..\..\src\MavNet.Transport.Udp\MavNet.Transport.Udp.csproj" />
+  </ItemGroup>
+
+</Project>

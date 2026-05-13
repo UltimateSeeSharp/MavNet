@@ -33,7 +33,10 @@ public static class ConnectionString
             if (eq < 0) continue;
             var key = kv[..eq]; var val = kv[(eq + 1)..];
             if (key.Equals("rhost", StringComparison.OrdinalIgnoreCase)) rhost = val;
-            if (key.Equals("rport", StringComparison.OrdinalIgnoreCase)) int.TryParse(val, out rport);
+            // Only overwrite the default rport when the value parses cleanly — int.TryParse's
+            // out param is zeroed on failure, which would silently swap our 18570 default for 0.
+            if (key.Equals("rport", StringComparison.OrdinalIgnoreCase) &&
+                int.TryParse(val, out var parsed)) rport = parsed;
         }
         var remote = new IPEndPoint(
             string.IsNullOrWhiteSpace(rhost) ? IPAddress.Loopback : IPAddress.Parse(rhost!),

@@ -30,9 +30,10 @@ namespace MavNet.PX4.Base;
 /// </summary>
 public abstract class Vehicle : IAsyncDisposable, IStateObservable
 {
-    private readonly MavlinkConnection _connection;
+    private readonly IMavlinkConnection _connection;
     private readonly bool _ownsConnection;
     private readonly TimeSpan _heartbeatTimeout;
+    private readonly TimeSpan _commandTimeout;
     private readonly ILogger<Vehicle>? _log;
 
     // Throttled state subscriptions. Raw subscribers attach directly to StateChanged; throttled
@@ -142,13 +143,15 @@ public abstract class Vehicle : IAsyncDisposable, IStateObservable
     /// <param name="targetComponentId">Sender component id this Vehicle accepts messages from.</param>
     /// <param name="ownsConnection">When true, <see cref="DisposeAsync"/> also disposes the connection. Use false when sharing a connection across multiple Vehicles.</param>
     /// <param name="heartbeatTimeout">Window in which a heartbeat must arrive for <see cref="LinkUp"/> to stay true.</param>
+    /// <param name="commandTimeout">How long a COMMAND_LONG may wait for ACK + state change before resolving as Sent/Timeout. Defaults to 6 s — the PX4-friendly value.</param>
     /// <param name="logger">Optional. Null = no logging.</param>
     protected Vehicle(
-        MavlinkConnection connection,
+        IMavlinkConnection connection,
         byte targetSystemId,
         byte targetComponentId,
         bool ownsConnection = false,
         TimeSpan? heartbeatTimeout = null,
+        TimeSpan? commandTimeout = null,
         ILogger<Vehicle>? logger = null)
     {
         _connection = connection;
@@ -156,6 +159,7 @@ public abstract class Vehicle : IAsyncDisposable, IStateObservable
         SystemId = targetSystemId;
         ComponentId = targetComponentId;
         _heartbeatTimeout = heartbeatTimeout ?? TimeSpan.FromSeconds(5);
+        _commandTimeout = commandTimeout ?? TimeSpan.FromSeconds(6);
         _log = logger;
 
         _connection.HeartbeatReceived         += OnHeartbeat;
@@ -420,7 +424,7 @@ public abstract class Vehicle : IAsyncDisposable, IStateObservable
         _connection.Send(packet);
 
         using var timeoutCts = new CancellationTokenSource();
-        _ = Task.Delay(TimeSpan.FromSeconds(6), timeoutCts.Token).ContinueWith(t =>
+        _ = Task.Delay(_commandTimeout, timeoutCts.Token).ContinueWith(t =>
         {
             if (t.IsCanceled) return;
             var result = pending.AckAccepted ? CommandResult.Sent : CommandResult.Timeout;

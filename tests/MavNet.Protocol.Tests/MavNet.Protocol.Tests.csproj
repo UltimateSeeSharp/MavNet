@@ -1,0 +1,8 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\MavNet.Protocol\MavNet.Protocol.csproj" />
+    <ProjectReference Include="..\..\src\MavNet.Protocol.Generated\MavNet.Protocol.Generated.csproj" />
+  </ItemGroup>
+
+</Project>

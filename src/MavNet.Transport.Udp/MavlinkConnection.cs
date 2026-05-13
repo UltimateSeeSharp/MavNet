@@ -27,7 +27,7 @@ namespace MavNet.Transport.Udp;
 /// <para><b>Lifetime.</b> Implements <see cref="IAsyncDisposable"/>; safe to dispose
 /// multiple times. Disposing closes the socket and stops the receive loop.</para>
 /// </summary>
-public sealed class MavlinkConnection : IAsyncDisposable
+public sealed class MavlinkConnection : IMavlinkConnection
 {
     private readonly Socket _socket;
     private readonly EndPoint _remote;
@@ -74,6 +74,10 @@ public sealed class MavlinkConnection : IAsyncDisposable
         _gcsHeartbeatIntervalMs = gcsHeartbeatIntervalMs;
         _log = logger;
     }
+
+    /// <summary>The local <see cref="IPEndPoint"/> the UDP socket is bound to. When the caller
+    /// passed port 0 to the constructor, this is the OS-assigned ephemeral port.</summary>
+    public IPEndPoint? LocalEndPoint => _socket.LocalEndPoint as IPEndPoint;
 
     /// <summary>Begin reading from the socket and emitting events. Idempotent within one instance — throws if called twice.</summary>
     public void Start()

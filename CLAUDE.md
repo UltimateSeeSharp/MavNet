@@ -8,7 +8,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - Target framework: `net10.0`, nullable enabled, `TreatWarningsAsErrors=true` (set in `Directory.Build.props`). A warning will fail the build.
 - Build everything: `dotnet build MavNet.slnx`
 - Run the sample client against PX4 SITL: `dotnet run -c Release --project examples/MavNet.Probe -- "udp://0.0.0.0:14550?rhost=127.0.0.1&rport=18570"`
-- No test project exists yet.
+- Run all tests: `dotnet test MavNet.slnx`. Test projects live under `tests/`, one per `src/` project, using xUnit + FluentAssertions. CI (`.github/workflows/ci.yml`) runs build + test on Ubuntu and Windows, plus a codegen-drift check on Linux.
 
 ## Code generation (critical workflow)
 
@@ -25,8 +25,9 @@ With no args it uses repo-relative defaults: spec `specs/common.xml`, allowlist 
 The allowlist controls which messages get emitted as record structs. Enums are emitted for everything. **When you add a message to `allowlist.txt`:**
 
 1. Regenerate (above).
-2. Add a new `event Action<MavId, NewMsg, DateTime>?` and a `case NewMsg.MsgId:` arm in `src/MavNet.Transport.Udp/MavlinkConnection.cs` — the dispatcher silently drops msgids it doesn't know.
+2. Add a new `event Action<MavId, NewMsg, DateTime>?` and a `case NewMsg.MsgId:` arm in `src/MavNet.Transport.Udp/MavlinkConnection.cs` — the dispatcher silently drops msgids it doesn't know. Also add the event to `IMavlinkConnection` so test fakes stay in sync.
 3. If the message is something a `Drone`/vehicle should surface, wire it through `src/MavNet.PX4/Base/Vehicle.cs` and `Vehicles/Drone.cs`.
+4. Add a roundtrip `[Fact]` for the new message in `tests/MavNet.Protocol.Generated.Tests/MessageRoundtripTests.cs` and a dispatch test in `tests/MavNet.Transport.Udp.Tests/MavlinkConnectionDispatchTests.cs`.
 
 `MessageRegistry` lives in the `MavNet.Protocol` assembly (not `.Generated`) so that `MavlinkFrame.TryDecode` can reach it without `Protocol` referencing `Protocol.Generated` (which would be circular). Keep it that way.
 
@@ -40,6 +41,8 @@ Layering, bottom up:
 - **MavNet.Transport.Udp** — `MavlinkConnection` owns one UDP socket, one receive loop, and a fixed-rate GCS heartbeat timer. Decodes frames and fires typed `event Action<MavId, T, DateTime>` per known msgid. `ConnectionString` parses `udp://host:port?rhost=...&rport=...` URIs.
 - **MavNet.PX4** — higher-level vehicle façade. `Vehicle` (base) holds the connection, sysid tracking, and `COMMAND_LONG`→`COMMAND_ACK` correlation via `PendingCommand`/`CommandOutcome`. `Drone` adds arm/disarm/takeoff/land/RTL.
 - **MavNet.Probe** — console example.
+
+`Vehicle` depends on `IMavlinkConnection` (interface in `MavNet.Transport.Udp`), not the concrete `MavlinkConnection`. Tests substitute a fake (`FakeMavlinkConnection` in `tests/MavNet.PX4.Tests/`). The command timeout in `Vehicle.ExecuteCommandAsync` is injectable (`commandTimeout` ctor param, defaults to 6 s) so race-case tests stay sub-second.
 
 ### Frame decode invariants (`MavlinkFrame.TryDecode`)
 
@@ -58,6 +61,7 @@ Drop the frame (return false) on: v1 magic, signed frames (`incompat & 0x01`), a
 - Generated files have a header comment marking them as such; never edit by hand, change the emitter in `tools/MavNet.CodeGen/Emitters/` instead.
 - Casing rules for generated identifiers live in `tools/MavNet.CodeGen/Casing.cs`.
 - Use `Span<byte>` / `stackalloc` on the hot encode/decode paths — don't allocate per-frame.
+- **Ship docs and tests alongside any change.** Every new feature, behavior change, or bug fix lands with: (1) the code, (2) a test that exercises it under `tests/<matching project>.Tests/`, and (3) any doc updates it makes obsolete — XML doc comments on the changed API, the matching article under `docs/articles/`, and any section of this `CLAUDE.md` that became stale. No "I'll add tests later" — if it's worth merging, it's worth proving and documenting in the same PR. Bug fixes specifically must start with a failing test that reproduces the bug, then the fix.
 
 ## Keeping this file current
 

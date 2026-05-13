@@ -12,4 +12,12 @@
   <Folder Name="/tools/">
     <Project Path="tools/MavNet.CodeGen/MavNet.CodeGen.csproj" />
   </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/MavNet.Core.Tests/MavNet.Core.Tests.csproj" />
+    <Project Path="tests/MavNet.Protocol.Tests/MavNet.Protocol.Tests.csproj" />
+    <Project Path="tests/MavNet.Protocol.Generated.Tests/MavNet.Protocol.Generated.Tests.csproj" />
+    <Project Path="tests/MavNet.Transport.Udp.Tests/MavNet.Transport.Udp.Tests.csproj" />
+    <Project Path="tests/MavNet.PX4.Tests/MavNet.PX4.Tests.csproj" />
+    <Project Path="tests/MavNet.CodeGen.Tests/MavNet.CodeGen.Tests.csproj" />
+  </Folder>
 </Solution>
