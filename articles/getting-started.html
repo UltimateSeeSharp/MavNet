@@ -1,0 +1,174 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Getting Started | MavNet — MAVLink for .NET </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Getting Started | MavNet — MAVLink for .NET ">
+    
+    
+      <link rel="shortcut icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../styles/docfx.css">
+      <link rel="stylesheet" href="../styles/main.css">
+      <meta property="docfx:navrel" content="../toc.html">
+      <meta property="docfx:tocrel" content="../toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="MavNet">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        <div class="article row grid">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="getting-started">Getting Started</h1>
+
+<h2 id="prerequisites">Prerequisites</h2>
+<ul>
+<li><a href="https://dotnet.microsoft.com/download">.NET 10 SDK</a></li>
+<li>A MAVLink v2 autopilot or SITL simulator reachable over UDP</li>
+</ul>
+<h2 id="install">Install</h2>
+<p>MavNet is not yet published on NuGet. Clone the repository and add project references directly:</p>
+<pre><code class="lang-xml">&lt;ProjectReference Include=&quot;path/to/MavNet/src/MavNet.PX4/MavNet.PX4.csproj&quot; /&gt;
+</code></pre>
+<h2 id="connect-to-a-drone">Connect to a drone</h2>
+<p>Use <code>Drone.ConnectAsync</code> with a UDP connection string. The call blocks until the first heartbeat is received from the vehicle (or the timeout elapses):</p>
+<pre><code class="lang-csharp">using MavNet.PX4.Vehicles;
+
+Drone drone = await Drone.ConnectAsync(
+    &quot;udp://0.0.0.0:14550?rhost=127.0.0.1&amp;rport=18570&quot;,
+    TimeSpan.FromSeconds(30));
+
+await using (drone)
+{
+    Console.WriteLine($&quot;Connected to {drone.DeviceId} (type={drone.VehicleType})&quot;);
+    // ...
+}
+</code></pre>
+<p>The connection string format is <code>udp://lhost:lport?rhost=...&amp;rport=...</code> where <code>lhost:lport</code> is the local bind address and <code>rhost:rport</code> is the remote autopilot.</p>
+<h2 id="subscribe-to-telemetry">Subscribe to telemetry</h2>
+<p>Telemetry properties (<code>Armed</code>, <code>Mode</code>, <code>Lat</code>, <code>Lon</code>, <code>Alt</code>, <code>Battery</code>, …) are updated on the receive thread. Read them from any thread:</p>
+<pre><code class="lang-csharp">drone.HeartbeatReceived += (hb, receivedAt) =&gt;
+{
+    Console.WriteLine($&quot;armed={drone.Armed} mode={drone.Mode} bat={drone.Battery:F0}%&quot;);
+};
+</code></pre>
+<blockquote>
+<p><strong>Threading note:</strong> Events fire synchronously on the UDP receive thread. Marshal to the UI thread yourself if needed (e.g. <code>Dispatcher.InvokeAsync</code> in WPF).</p>
+</blockquote>
+<h2 id="send-flight-commands">Send flight commands</h2>
+<pre><code class="lang-csharp">// Arm
+CommandOutcome arm = await drone.ArmAsync(cancellationToken);
+
+// Takeoff to 10 m
+CommandOutcome takeoff = await drone.TakeoffAsync(10.0, cancellationToken);
+
+// Land
+CommandOutcome land = await drone.LandAsync(cancellationToken);
+
+// Return to launch
+CommandOutcome rtl = await drone.ReturnToLaunchAsync(cancellationToken);
+
+// Disarm
+CommandOutcome disarm = await drone.DisarmAsync(cancellationToken);
+</code></pre>
+<p>Each call sends <code>COMMAND_LONG</code> and waits for the matching <code>COMMAND_ACK</code>. The returned <code>CommandOutcome</code> contains the result code, ACK result (if any), and elapsed time.</p>
+<h2 id="run-against-px4-sitl">Run against PX4 SITL</h2>
+<pre><code class="lang-bash"># In one terminal — start PX4 SITL (adjust path as needed)
+make px4_sitl gazebo
+
+# In another terminal — run the bundled probe
+dotnet run -c Release --project examples/MavNet.Probe -- &quot;udp://0.0.0.0:14550?rhost=127.0.0.1&amp;rport=18570&quot;
+</code></pre>
+<p>Keys in the probe console: <code>A</code> Arm, <code>D</code> Disarm, <code>T</code> Takeoff (10 m), <code>L</code> Land, <code>R</code> RTL, <code>Q</code> Quit.</p>
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/UltimateSeeSharp/MavNet/blob/main/docs/#L1" class="contribution-link">Edit this page</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      
+      <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

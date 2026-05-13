@@ -1,0 +1,454 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Class Drone | MavNet — MAVLink for .NET </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Class Drone | MavNet — MAVLink for .NET ">
+    
+    <meta name="description" content="A multirotor vehicle. Currently a thin marker over  so consumers can pattern-match on type (if (v is Drone)) and so we have a clear extension point for multirotor-specific behaviour later. The static  factory is the one-liner entry point for the common case: parse URI → open  → wait for first heartbeat → return a Drone that owns the connection.">
+      <link rel="shortcut icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../styles/docfx.css">
+      <link rel="stylesheet" href="../styles/main.css">
+      <meta property="docfx:navrel" content="../toc.html">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="MavNet">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="MavNet.PX4.Vehicles.Drone">
+
+
+
+  <h1 id="MavNet_PX4_Vehicles_Drone" data-uid="MavNet.PX4.Vehicles.Drone" class="text-break">Class Drone</h1>
+  <div class="markdown level0 summary"><p>A multirotor vehicle. Currently a thin marker over <a class="xref" href="MavNet.PX4.Base.Vehicle.html">Vehicle</a> so
+consumers can pattern-match on type (<code>if (v is Drone)</code>) and so we have
+a clear extension point for multirotor-specific behaviour later.</p>
+<p>The static <a class="xref" href="MavNet.PX4.Vehicles.Drone.html#MavNet_PX4_Vehicles_Drone_ConnectAsync_System_String_System_TimeSpan_System_Threading_CancellationToken_Microsoft_Extensions_Logging_ILogger_MavNet_Transport_Udp_MavlinkConnection__Microsoft_Extensions_Logging_ILogger_MavNet_PX4_Base_Vehicle__">ConnectAsync(string, TimeSpan, CancellationToken, ILogger&lt;MavlinkConnection&gt;?, ILogger&lt;Vehicle&gt;?)</a> factory is the one-liner entry
+point for the common case: parse URI → open <a class="xref" href="MavNet.Transport.Udp.MavlinkConnection.html">MavlinkConnection</a>
+→ wait for first heartbeat → return a Drone that owns the connection.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+    <div class="level1"><a class="xref" href="MavNet.PX4.Base.Vehicle.html">Vehicle</a></div>
+    <div class="level2"><span class="xref">Drone</span></div>
+  </div>
+  <div class="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.iasyncdisposable">IAsyncDisposable</a></div>
+    <div><a class="xref" href="MavNet.Core.IStateObservable-1.html">IStateObservable</a>&lt;<a class="xref" href="MavNet.PX4.Vehicles.DroneState.html">DroneState</a>&gt;</div>
+    <div><a class="xref" href="MavNet.Core.IStateObservable.html">IStateObservable</a></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="MavNet.PX4.Base.Vehicle.html#MavNet_PX4_Base_Vehicle_SystemId">Vehicle.SystemId</a>
+    </div>
+    <div>
+      <a class="xref" href="MavNet.PX4.Base.Vehicle.html#MavNet_PX4_Base_Vehicle_ComponentId">Vehicle.ComponentId</a>
+    </div>
+    <div>
+      <a class="xref" href="MavNet.PX4.Base.Vehicle.html#MavNet_PX4_Base_Vehicle_VehicleType">Vehicle.VehicleType</a>
+    </div>
+    <div>
+      <a class="xref" href="MavNet.PX4.Base.Vehicle.html#MavNet_PX4_Base_Vehicle_ConnectionString">Vehicle.ConnectionString</a>
+    </div>
+    <div>
+      <a class="xref" href="MavNet.PX4.Base.Vehicle.html#MavNet_PX4_Base_Vehicle_DeviceId">Vehicle.DeviceId</a>
+    </div>
+    <div>
+      <a class="xref" href="MavNet.PX4.Base.Vehicle.html#MavNet_PX4_Base_Vehicle_Id">Vehicle.Id</a>
+    </div>
+    <div>
+      <a class="xref" href="MavNet.PX4.Base.Vehicle.html#MavNet_PX4_Base_Vehicle_Name">Vehicle.Name</a>
+    </div>
+    <div>
+      <a class="xref" href="MavNet.PX4.Base.Vehicle.html#MavNet_PX4_Base_Vehicle_Armed">Vehicle.Armed</a>
+    </div>
+    <div>
+      <a class="xref" href="MavNet.PX4.Base.Vehicle.html#MavNet_PX4_Base_Vehicle_Mode">Vehicle.Mode</a>
+    </div>
+    <div>
+      <a class="xref" href="MavNet.PX4.Base.Vehicle.html#MavNet_PX4_Base_Vehicle_LinkUp">Vehicle.LinkUp</a>
+    </div>
+    <div>
+      <a class="xref" href="MavNet.PX4.Base.Vehicle.html#MavNet_PX4_Base_Vehicle_LastHeartbeatAt">Vehicle.LastHeartbeatAt</a>
+    </div>
+    <div>
+      <a class="xref" href="MavNet.PX4.Base.Vehicle.html#MavNet_PX4_Base_Vehicle_Lat">Vehicle.Lat</a>
+    </div>
+    <div>
+      <a class="xref" href="MavNet.PX4.Base.Vehicle.html#MavNet_PX4_Base_Vehicle_Lon">Vehicle.Lon</a>
+    </div>
+    <div>
+      <a class="xref" href="MavNet.PX4.Base.Vehicle.html#MavNet_PX4_Base_Vehicle_Alt">Vehicle.Alt</a>
+    </div>
+    <div>
+      <a class="xref" href="MavNet.PX4.Base.Vehicle.html#MavNet_PX4_Base_Vehicle_Hdg">Vehicle.Hdg</a>
+    </div>
+    <div>
+      <a class="xref" href="MavNet.PX4.Base.Vehicle.html#MavNet_PX4_Base_Vehicle_Vel">Vehicle.Vel</a>
+    </div>
+    <div>
+      <a class="xref" href="MavNet.PX4.Base.Vehicle.html#MavNet_PX4_Base_Vehicle_Sats">Vehicle.Sats</a>
+    </div>
+    <div>
+      <a class="xref" href="MavNet.PX4.Base.Vehicle.html#MavNet_PX4_Base_Vehicle_GpsFix">Vehicle.GpsFix</a>
+    </div>
+    <div>
+      <a class="xref" href="MavNet.PX4.Base.Vehicle.html#MavNet_PX4_Base_Vehicle_Battery">Vehicle.Battery</a>
+    </div>
+    <div>
+      <a class="xref" href="MavNet.PX4.Base.Vehicle.html#MavNet_PX4_Base_Vehicle_LandedState">Vehicle.LandedState</a>
+    </div>
+    <div>
+      <a class="xref" href="MavNet.PX4.Base.Vehicle.html#MavNet_PX4_Base_Vehicle_StateChanged">Vehicle.StateChanged</a>
+    </div>
+    <div>
+      <a class="xref" href="MavNet.PX4.Base.Vehicle.html#MavNet_PX4_Base_Vehicle_HeartbeatReceived">Vehicle.HeartbeatReceived</a>
+    </div>
+    <div>
+      <a class="xref" href="MavNet.PX4.Base.Vehicle.html#MavNet_PX4_Base_Vehicle_SubscribeState_System_Action_MavNet_Core_StateRate_">Vehicle.SubscribeState(Action, StateRate)</a>
+    </div>
+    <div>
+      <a class="xref" href="MavNet.PX4.Base.Vehicle.html#MavNet_PX4_Base_Vehicle_ArmAsync_System_Threading_CancellationToken_">Vehicle.ArmAsync(CancellationToken)</a>
+    </div>
+    <div>
+      <a class="xref" href="MavNet.PX4.Base.Vehicle.html#MavNet_PX4_Base_Vehicle_DisarmAsync_System_Threading_CancellationToken_">Vehicle.DisarmAsync(CancellationToken)</a>
+    </div>
+    <div>
+      <a class="xref" href="MavNet.PX4.Base.Vehicle.html#MavNet_PX4_Base_Vehicle_ReturnToLaunchAsync_System_Threading_CancellationToken_">Vehicle.ReturnToLaunchAsync(CancellationToken)</a>
+    </div>
+    <div>
+      <a class="xref" href="MavNet.PX4.Base.Vehicle.html#MavNet_PX4_Base_Vehicle_TakeoffAsync_System_Double_System_Threading_CancellationToken_">Vehicle.TakeoffAsync(double, CancellationToken)</a>
+    </div>
+    <div>
+      <a class="xref" href="MavNet.PX4.Base.Vehicle.html#MavNet_PX4_Base_Vehicle_LandAsync_System_Threading_CancellationToken_">Vehicle.LandAsync(CancellationToken)</a>
+    </div>
+    <div>
+      <a class="xref" href="MavNet.PX4.Base.Vehicle.html#MavNet_PX4_Base_Vehicle_DisposeAsync">Vehicle.DisposeAsync()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="MavNet.html">MavNet</a>.<a class="xref" href="MavNet.PX4.html">PX4</a>.<a class="xref" href="MavNet.PX4.Vehicles.html">Vehicles</a></h6>
+  <h6><strong>Assembly</strong>: MavNet.PX4.dll</h6>
+  <h5 id="MavNet_PX4_Vehicles_Drone_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public sealed class Drone : Vehicle, IAsyncDisposable, IStateObservable&lt;DroneState&gt;, IStateObservable</code></pre>
+  </div>
+  <h3 id="methods">Methods
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/UltimateSeeSharp/MavNet/new/main/apiSpec/new?filename=MavNet_PX4_Vehicles_Drone_ConnectAsync_System_String_System_TimeSpan_System_Threading_CancellationToken_Microsoft_Extensions_Logging_ILogger_MavNet_Transport_Udp_MavlinkConnection__Microsoft_Extensions_Logging_ILogger_MavNet_PX4_Base_Vehicle__.md&amp;value=---%0Auid%3A%20MavNet.PX4.Vehicles.Drone.ConnectAsync(System.String%2CSystem.TimeSpan%2CSystem.Threading.CancellationToken%2CMicrosoft.Extensions.Logging.ILogger%7BMavNet.Transport.Udp.MavlinkConnection%7D%2CMicrosoft.Extensions.Logging.ILogger%7BMavNet.PX4.Base.Vehicle%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Vehicles/Drone.cs/#L72">View Source</a>
+  </span>
+  <a id="MavNet_PX4_Vehicles_Drone_ConnectAsync_" data-uid="MavNet.PX4.Vehicles.Drone.ConnectAsync*"></a>
+  <h4 id="MavNet_PX4_Vehicles_Drone_ConnectAsync_System_String_System_TimeSpan_System_Threading_CancellationToken_Microsoft_Extensions_Logging_ILogger_MavNet_Transport_Udp_MavlinkConnection__Microsoft_Extensions_Logging_ILogger_MavNet_PX4_Base_Vehicle__" data-uid="MavNet.PX4.Vehicles.Drone.ConnectAsync(System.String,System.TimeSpan,System.Threading.CancellationToken,Microsoft.Extensions.Logging.ILogger{MavNet.Transport.Udp.MavlinkConnection},Microsoft.Extensions.Logging.ILogger{MavNet.PX4.Base.Vehicle})">ConnectAsync(string, TimeSpan, CancellationToken, ILogger&lt;MavlinkConnection&gt;?, ILogger&lt;Vehicle&gt;?)</h4>
+  <div class="markdown level1 summary"><p>One-liner factory for the common case. Opens a UDP <a class="xref" href="MavNet.Transport.Udp.MavlinkConnection.html">MavlinkConnection</a>,
+waits for the first inbound heartbeat, returns a <a class="xref" href="MavNet.PX4.Vehicles.Drone.html">Drone</a> that owns the
+connection. Disposing the Drone closes the socket.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Task&lt;Drone&gt; ConnectAsync(string connectionString, TimeSpan timeout, CancellationToken ct = default, ILogger&lt;MavlinkConnection&gt;? connectionLogger = null, ILogger&lt;Vehicle&gt;? vehicleLogger = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">connectionString</span></td>
+        <td><p>URI of the form
+<code>udp://localBind:localPort?rhost=remote&amp;rport=remotePort</code>.
+See <a class="xref" href="MavNet.Transport.Udp.ConnectionString.html">ConnectionString</a>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.timespan">TimeSpan</a></td>
+        <td><span class="parametername">timeout</span></td>
+        <td><p>How long to wait for the first heartbeat before throwing.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></td>
+        <td><span class="parametername">ct</span></td>
+        <td><p>Cancellation token.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.extensions.logging.ilogger-1">ILogger</a>&lt;<a class="xref" href="MavNet.Transport.Udp.MavlinkConnection.html">MavlinkConnection</a>&gt;</td>
+        <td><span class="parametername">connectionLogger</span></td>
+        <td><p>Optional logger for the underlying transport.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.extensions.logging.ilogger-1">ILogger</a>&lt;<a class="xref" href="MavNet.PX4.Base.Vehicle.html">Vehicle</a>&gt;</td>
+        <td><span class="parametername">vehicleLogger</span></td>
+        <td><p>Optional logger for the Vehicle layer.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="MavNet.PX4.Vehicles.Drone.html">Drone</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.timeoutexception">TimeoutException</a></td>
+        <td><p>No heartbeat arrived within <code class="paramref">timeout</code>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/UltimateSeeSharp/MavNet/new/main/apiSpec/new?filename=MavNet_PX4_Vehicles_Drone_Snapshot.md&amp;value=---%0Auid%3A%20MavNet.PX4.Vehicles.Drone.Snapshot%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Vehicles/Drone.cs/#L41">View Source</a>
+  </span>
+  <a id="MavNet_PX4_Vehicles_Drone_Snapshot_" data-uid="MavNet.PX4.Vehicles.Drone.Snapshot*"></a>
+  <h4 id="MavNet_PX4_Vehicles_Drone_Snapshot" data-uid="MavNet.PX4.Vehicles.Drone.Snapshot">Snapshot()</h4>
+  <div class="markdown level1 summary"><p>Capture an immutable snapshot of the current observable state.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DroneState Snapshot()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="MavNet.PX4.Vehicles.DroneState.html">DroneState</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/UltimateSeeSharp/MavNet/new/main/apiSpec/new?filename=MavNet_PX4_Vehicles_Drone_SubscribeState_System_Action_MavNet_PX4_Vehicles_DroneState__MavNet_Core_StateRate_.md&amp;value=---%0Auid%3A%20MavNet.PX4.Vehicles.Drone.SubscribeState(System.Action%7BMavNet.PX4.Vehicles.DroneState%7D%2CMavNet.Core.StateRate)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Vehicles/Drone.cs/#L45">View Source</a>
+  </span>
+  <a id="MavNet_PX4_Vehicles_Drone_SubscribeState_" data-uid="MavNet.PX4.Vehicles.Drone.SubscribeState*"></a>
+  <h4 id="MavNet_PX4_Vehicles_Drone_SubscribeState_System_Action_MavNet_PX4_Vehicles_DroneState__MavNet_Core_StateRate_" data-uid="MavNet.PX4.Vehicles.Drone.SubscribeState(System.Action{MavNet.PX4.Vehicles.DroneState},MavNet.Core.StateRate)">SubscribeState(Action&lt;DroneState&gt;, StateRate)</h4>
+  <div class="markdown level1 summary"><p>Subscribe to state-change notifications at the given rate. The handler may run on
+any thread; consumers needing UI-thread marshalling must do it themselves.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public StateSubscription SubscribeState(Action&lt;DroneState&gt; handler, StateRate rate)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="MavNet.PX4.Vehicles.DroneState.html">DroneState</a>&gt;</td>
+        <td><span class="parametername">handler</span></td>
+        <td><p>Receives an immutable snapshot on each delivery.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="MavNet.Core.StateRate.html">StateRate</a></td>
+        <td><span class="parametername">rate</span></td>
+        <td><p>Delivery rate — see <a class="xref" href="MavNet.Core.StateRate.html">StateRate</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="MavNet.Core.StateSubscription.html">StateSubscription</a></td>
+        <td><p>A handle whose <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.idisposable.dispose">Dispose()</a> unsubscribes.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.iasyncdisposable">IAsyncDisposable</a>
+  </div>
+  <div>
+      <a class="xref" href="MavNet.Core.IStateObservable-1.html">IStateObservable&lt;TState&gt;</a>
+  </div>
+  <div>
+      <a class="xref" href="MavNet.Core.IStateObservable.html">IStateObservable</a>
+  </div>
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/UltimateSeeSharp/MavNet/new/main/apiSpec/new?filename=MavNet_PX4_Vehicles_Drone.md&amp;value=---%0Auid%3A%20MavNet.PX4.Vehicles.Drone%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Edit this page</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Vehicles/Drone.cs/#L38" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      
+      <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

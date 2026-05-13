@@ -1,0 +1,594 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Class MavlinkConnection | MavNet — MAVLink for .NET </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Class MavlinkConnection | MavNet — MAVLink for .NET ">
+    
+    <meta name="description" content="A MAVLink v2 UDP transport. Owns one socket, runs one receive loop, and broadcasts a GCS heartbeat at a fixed rate. Exposes inbound MAVLink as strongly-typed events keyed on the sender&#39;s . Thread model. Inbound events fire on the receive thread, synchronously. Consumers that need to marshal to a UI thread (e.g. Blazor) must do so themselves (InvokeAsync(StateHasChanged)). Subscriber exceptions are caught — a buggy subscriber cannot break the receive loop.Sending. Use  with any generated MAVLink message. The connection knows the message&#39;s , , and  at the call site — no runtime lookup.Lifetime. Implements ; safe to dispose multiple times. Disposing closes the socket and stops the receive loop.">
+      <link rel="shortcut icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../styles/docfx.css">
+      <link rel="stylesheet" href="../styles/main.css">
+      <meta property="docfx:navrel" content="../toc.html">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="MavNet">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="MavNet.Transport.Udp.MavlinkConnection">
+
+
+
+  <h1 id="MavNet_Transport_Udp_MavlinkConnection" data-uid="MavNet.Transport.Udp.MavlinkConnection" class="text-break">Class MavlinkConnection</h1>
+  <div class="markdown level0 summary"><p>A MAVLink v2 UDP transport. Owns one socket, runs one receive loop, and
+broadcasts a GCS heartbeat at a fixed rate. Exposes inbound MAVLink as
+strongly-typed events keyed on the sender's <a class="xref" href="MavNet.Core.MavId.html">MavId</a>.</p>
+<p><b>Thread model.</b> Inbound events fire <strong>on the receive thread</strong>,
+synchronously. Consumers that need to marshal to a UI thread (e.g. Blazor) must
+do so themselves (<code>InvokeAsync(StateHasChanged)</code>). Subscriber exceptions are
+caught — a buggy subscriber cannot break the receive loop.</p><p><b>Sending.</b> Use <a class="xref" href="MavNet.Transport.Udp.MavlinkConnection.html#MavNet_Transport_Udp_MavlinkConnection_Send__1___0_">Send&lt;T&gt;(T)</a> with any generated MAVLink
+message. The connection knows the message's <a class="xref" href="MavNet.Protocol.IMavlinkMessage-1.html#MavNet_Protocol_IMavlinkMessage_1_MsgId">MsgId</a>,
+<a class="xref" href="MavNet.Protocol.IMavlinkMessage-1.html#MavNet_Protocol_IMavlinkMessage_1_CrcExtra">CrcExtra</a>, and <a class="xref" href="MavNet.Protocol.IMavlinkMessage-1.html#MavNet_Protocol_IMavlinkMessage_1_MaxPayloadLength">MaxPayloadLength</a>
+at the call site — no runtime lookup.</p><p><b>Lifetime.</b> Implements <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.iasyncdisposable">IAsyncDisposable</a>; safe to dispose
+multiple times. Disposing closes the socket and stops the receive loop.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+    <div class="level1"><span class="xref">MavlinkConnection</span></div>
+  </div>
+  <div class="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.iasyncdisposable">IAsyncDisposable</a></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="MavNet.html">MavNet</a>.<a class="xref" href="MavNet.Transport.html">Transport</a>.<a class="xref" href="MavNet.Transport.Udp.html">Udp</a></h6>
+  <h6><strong>Assembly</strong>: MavNet.Transport.Udp.dll</h6>
+  <h5 id="MavNet_Transport_Udp_MavlinkConnection_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public sealed class MavlinkConnection : IAsyncDisposable</code></pre>
+  </div>
+  <h3 id="constructors">Constructors
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/UltimateSeeSharp/MavNet/new/main/apiSpec/new?filename=MavNet_Transport_Udp_MavlinkConnection__ctor_System_Net_IPEndPoint_System_Net_IPEndPoint_System_Byte_System_Byte_System_Int32_Microsoft_Extensions_Logging_ILogger_MavNet_Transport_Udp_MavlinkConnection__.md&amp;value=---%0Auid%3A%20MavNet.Transport.Udp.MavlinkConnection.%23ctor(System.Net.IPEndPoint%2CSystem.Net.IPEndPoint%2CSystem.Byte%2CSystem.Byte%2CSystem.Int32%2CMicrosoft.Extensions.Logging.ILogger%7BMavNet.Transport.Udp.MavlinkConnection%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.Transport.Udp/MavlinkConnection.cs/#L61">View Source</a>
+  </span>
+  <a id="MavNet_Transport_Udp_MavlinkConnection__ctor_" data-uid="MavNet.Transport.Udp.MavlinkConnection.#ctor*"></a>
+  <h4 id="MavNet_Transport_Udp_MavlinkConnection__ctor_System_Net_IPEndPoint_System_Net_IPEndPoint_System_Byte_System_Byte_System_Int32_Microsoft_Extensions_Logging_ILogger_MavNet_Transport_Udp_MavlinkConnection__" data-uid="MavNet.Transport.Udp.MavlinkConnection.#ctor(System.Net.IPEndPoint,System.Net.IPEndPoint,System.Byte,System.Byte,System.Int32,Microsoft.Extensions.Logging.ILogger{MavNet.Transport.Udp.MavlinkConnection})">MavlinkConnection(IPEndPoint, IPEndPoint, byte, byte, int, ILogger&lt;MavlinkConnection&gt;?)</h4>
+  <div class="markdown level1 summary"><p>Creates and binds the UDP socket. Call <a class="xref" href="MavNet.Transport.Udp.MavlinkConnection.html#MavNet_Transport_Udp_MavlinkConnection_Start">Start()</a> to begin receiving.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MavlinkConnection(IPEndPoint localBind, IPEndPoint remote, byte selfSystemId = 255, byte selfComponentId = 190, int gcsHeartbeatIntervalMs = 100, ILogger&lt;MavlinkConnection&gt;? logger = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.net.ipendpoint">IPEndPoint</a></td>
+        <td><span class="parametername">localBind</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.net.ipendpoint">IPEndPoint</a></td>
+        <td><span class="parametername">remote</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a></td>
+        <td><span class="parametername">selfSystemId</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a></td>
+        <td><span class="parametername">selfComponentId</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></td>
+        <td><span class="parametername">gcsHeartbeatIntervalMs</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.extensions.logging.ilogger-1">ILogger</a>&lt;<a class="xref" href="MavNet.Transport.Udp.MavlinkConnection.html">MavlinkConnection</a>&gt;</td>
+        <td><span class="parametername">logger</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/UltimateSeeSharp/MavNet/new/main/apiSpec/new?filename=MavNet_Transport_Udp_MavlinkConnection_DisposeAsync.md&amp;value=---%0Auid%3A%20MavNet.Transport.Udp.MavlinkConnection.DisposeAsync%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.Transport.Udp/MavlinkConnection.cs/#L205">View Source</a>
+  </span>
+  <a id="MavNet_Transport_Udp_MavlinkConnection_DisposeAsync_" data-uid="MavNet.Transport.Udp.MavlinkConnection.DisposeAsync*"></a>
+  <h4 id="MavNet_Transport_Udp_MavlinkConnection_DisposeAsync" data-uid="MavNet.Transport.Udp.MavlinkConnection.DisposeAsync">DisposeAsync()</h4>
+  <div class="markdown level1 summary"><p>Performs application-defined tasks associated with freeing, releasing, or
+resetting unmanaged resources asynchronously.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ValueTask DisposeAsync()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.valuetask">ValueTask</a></td>
+        <td><p>A task that represents the asynchronous dispose operation.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/UltimateSeeSharp/MavNet/new/main/apiSpec/new?filename=MavNet_Transport_Udp_MavlinkConnection_SendRaw_System_UInt32_System_Byte_System_ReadOnlySpan_System_Byte__.md&amp;value=---%0Auid%3A%20MavNet.Transport.Udp.MavlinkConnection.SendRaw(System.UInt32%2CSystem.Byte%2CSystem.ReadOnlySpan%7BSystem.Byte%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.Transport.Udp/MavlinkConnection.cs/#L101">View Source</a>
+  </span>
+  <a id="MavNet_Transport_Udp_MavlinkConnection_SendRaw_" data-uid="MavNet.Transport.Udp.MavlinkConnection.SendRaw*"></a>
+  <h4 id="MavNet_Transport_Udp_MavlinkConnection_SendRaw_System_UInt32_System_Byte_System_ReadOnlySpan_System_Byte__" data-uid="MavNet.Transport.Udp.MavlinkConnection.SendRaw(System.UInt32,System.Byte,System.ReadOnlySpan{System.Byte})">SendRaw(uint, byte, ReadOnlySpan&lt;byte&gt;)</h4>
+  <div class="markdown level1 summary"><p>Send raw bytes as a MAVLink v2 frame. Use <a class="xref" href="MavNet.Transport.Udp.MavlinkConnection.html#MavNet_Transport_Udp_MavlinkConnection_Send__1___0_">Send&lt;T&gt;(T)</a> for known message types — this is the escape hatch.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SendRaw(uint msgId, byte crcExtra, ReadOnlySpan&lt;byte&gt; payload)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint32">uint</a></td>
+        <td><span class="parametername">msgId</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a></td>
+        <td><span class="parametername">crcExtra</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.readonlyspan-1">ReadOnlySpan</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>&gt;</td>
+        <td><span class="parametername">payload</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/UltimateSeeSharp/MavNet/new/main/apiSpec/new?filename=MavNet_Transport_Udp_MavlinkConnection_Send__1___0_.md&amp;value=---%0Auid%3A%20MavNet.Transport.Udp.MavlinkConnection.Send%60%601(%60%600)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.Transport.Udp/MavlinkConnection.cs/#L90">View Source</a>
+  </span>
+  <a id="MavNet_Transport_Udp_MavlinkConnection_Send_" data-uid="MavNet.Transport.Udp.MavlinkConnection.Send*"></a>
+  <h4 id="MavNet_Transport_Udp_MavlinkConnection_Send__1___0_" data-uid="MavNet.Transport.Udp.MavlinkConnection.Send``1(``0)">Send&lt;T&gt;(T)</h4>
+  <div class="markdown level1 summary"><p>Send a generated MAVLink message. Frame is built and CRC-stamped on this thread; the actual UDP send is non-blocking.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Send&lt;T&gt;(T message) where T : IMavlinkMessage&lt;T&gt;</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">T</span></td>
+        <td><span class="parametername">message</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/UltimateSeeSharp/MavNet/new/main/apiSpec/new?filename=MavNet_Transport_Udp_MavlinkConnection_Start.md&amp;value=---%0Auid%3A%20MavNet.Transport.Udp.MavlinkConnection.Start%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.Transport.Udp/MavlinkConnection.cs/#L79">View Source</a>
+  </span>
+  <a id="MavNet_Transport_Udp_MavlinkConnection_Start_" data-uid="MavNet.Transport.Udp.MavlinkConnection.Start*"></a>
+  <h4 id="MavNet_Transport_Udp_MavlinkConnection_Start" data-uid="MavNet.Transport.Udp.MavlinkConnection.Start">Start()</h4>
+  <div class="markdown level1 summary"><p>Begin reading from the socket and emitting events. Idempotent within one instance — throws if called twice.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Start()</code></pre>
+  </div>
+  <h3 id="events">Events
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/UltimateSeeSharp/MavNet/new/main/apiSpec/new?filename=MavNet_Transport_Udp_MavlinkConnection_CommandAckReceived.md&amp;value=---%0Auid%3A%20MavNet.Transport.Udp.MavlinkConnection.CommandAckReceived%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.Transport.Udp/MavlinkConnection.cs/#L48">View Source</a>
+  </span>
+  <h4 id="MavNet_Transport_Udp_MavlinkConnection_CommandAckReceived" data-uid="MavNet.Transport.Udp.MavlinkConnection.CommandAckReceived">CommandAckReceived</h4>
+  <div class="markdown level1 summary"><p>Fires for every inbound COMMAND_ACK.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event Action&lt;MavId, CommandAck, DateTime&gt;? CommandAckReceived</code></pre>
+  </div>
+  <h5 class="eventType">Event Type</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-3">Action</a>&lt;<a class="xref" href="MavNet.Core.MavId.html">MavId</a>, <span class="xref">CommandAck</span>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.datetime">DateTime</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/UltimateSeeSharp/MavNet/new/main/apiSpec/new?filename=MavNet_Transport_Udp_MavlinkConnection_ExtendedSysStateReceived.md&amp;value=---%0Auid%3A%20MavNet.Transport.Udp.MavlinkConnection.ExtendedSysStateReceived%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.Transport.Udp/MavlinkConnection.cs/#L58">View Source</a>
+  </span>
+  <h4 id="MavNet_Transport_Udp_MavlinkConnection_ExtendedSysStateReceived" data-uid="MavNet.Transport.Udp.MavlinkConnection.ExtendedSysStateReceived">ExtendedSysStateReceived</h4>
+  <div class="markdown level1 summary"><p>Fires for every inbound EXTENDED_SYS_STATE.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event Action&lt;MavId, ExtendedSysState, DateTime&gt;? ExtendedSysStateReceived</code></pre>
+  </div>
+  <h5 class="eventType">Event Type</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-3">Action</a>&lt;<a class="xref" href="MavNet.Core.MavId.html">MavId</a>, <span class="xref">ExtendedSysState</span>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.datetime">DateTime</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/UltimateSeeSharp/MavNet/new/main/apiSpec/new?filename=MavNet_Transport_Udp_MavlinkConnection_GlobalPositionIntReceived.md&amp;value=---%0Auid%3A%20MavNet.Transport.Udp.MavlinkConnection.GlobalPositionIntReceived%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.Transport.Udp/MavlinkConnection.cs/#L50">View Source</a>
+  </span>
+  <h4 id="MavNet_Transport_Udp_MavlinkConnection_GlobalPositionIntReceived" data-uid="MavNet.Transport.Udp.MavlinkConnection.GlobalPositionIntReceived">GlobalPositionIntReceived</h4>
+  <div class="markdown level1 summary"><p>Fires for every inbound GLOBAL_POSITION_INT.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event Action&lt;MavId, GlobalPositionInt, DateTime&gt;? GlobalPositionIntReceived</code></pre>
+  </div>
+  <h5 class="eventType">Event Type</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-3">Action</a>&lt;<a class="xref" href="MavNet.Core.MavId.html">MavId</a>, <span class="xref">GlobalPositionInt</span>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.datetime">DateTime</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/UltimateSeeSharp/MavNet/new/main/apiSpec/new?filename=MavNet_Transport_Udp_MavlinkConnection_GpsRawIntReceived.md&amp;value=---%0Auid%3A%20MavNet.Transport.Udp.MavlinkConnection.GpsRawIntReceived%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.Transport.Udp/MavlinkConnection.cs/#L54">View Source</a>
+  </span>
+  <h4 id="MavNet_Transport_Udp_MavlinkConnection_GpsRawIntReceived" data-uid="MavNet.Transport.Udp.MavlinkConnection.GpsRawIntReceived">GpsRawIntReceived</h4>
+  <div class="markdown level1 summary"><p>Fires for every inbound GPS_RAW_INT.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event Action&lt;MavId, GpsRawInt, DateTime&gt;? GpsRawIntReceived</code></pre>
+  </div>
+  <h5 class="eventType">Event Type</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-3">Action</a>&lt;<a class="xref" href="MavNet.Core.MavId.html">MavId</a>, <span class="xref">GpsRawInt</span>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.datetime">DateTime</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/UltimateSeeSharp/MavNet/new/main/apiSpec/new?filename=MavNet_Transport_Udp_MavlinkConnection_HeartbeatReceived.md&amp;value=---%0Auid%3A%20MavNet.Transport.Udp.MavlinkConnection.HeartbeatReceived%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.Transport.Udp/MavlinkConnection.cs/#L46">View Source</a>
+  </span>
+  <h4 id="MavNet_Transport_Udp_MavlinkConnection_HeartbeatReceived" data-uid="MavNet.Transport.Udp.MavlinkConnection.HeartbeatReceived">HeartbeatReceived</h4>
+  <div class="markdown level1 summary"><p>Fires for every inbound HEARTBEAT. Args: sender, decoded message, receive timestamp.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event Action&lt;MavId, Heartbeat, DateTime&gt;? HeartbeatReceived</code></pre>
+  </div>
+  <h5 class="eventType">Event Type</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-3">Action</a>&lt;<a class="xref" href="MavNet.Core.MavId.html">MavId</a>, <span class="xref">Heartbeat</span>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.datetime">DateTime</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/UltimateSeeSharp/MavNet/new/main/apiSpec/new?filename=MavNet_Transport_Udp_MavlinkConnection_SysStatusReceived.md&amp;value=---%0Auid%3A%20MavNet.Transport.Udp.MavlinkConnection.SysStatusReceived%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.Transport.Udp/MavlinkConnection.cs/#L56">View Source</a>
+  </span>
+  <h4 id="MavNet_Transport_Udp_MavlinkConnection_SysStatusReceived" data-uid="MavNet.Transport.Udp.MavlinkConnection.SysStatusReceived">SysStatusReceived</h4>
+  <div class="markdown level1 summary"><p>Fires for every inbound SYS_STATUS.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event Action&lt;MavId, SysStatus, DateTime&gt;? SysStatusReceived</code></pre>
+  </div>
+  <h5 class="eventType">Event Type</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-3">Action</a>&lt;<a class="xref" href="MavNet.Core.MavId.html">MavId</a>, <span class="xref">SysStatus</span>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.datetime">DateTime</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/UltimateSeeSharp/MavNet/new/main/apiSpec/new?filename=MavNet_Transport_Udp_MavlinkConnection_VfrHudReceived.md&amp;value=---%0Auid%3A%20MavNet.Transport.Udp.MavlinkConnection.VfrHudReceived%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.Transport.Udp/MavlinkConnection.cs/#L52">View Source</a>
+  </span>
+  <h4 id="MavNet_Transport_Udp_MavlinkConnection_VfrHudReceived" data-uid="MavNet.Transport.Udp.MavlinkConnection.VfrHudReceived">VfrHudReceived</h4>
+  <div class="markdown level1 summary"><p>Fires for every inbound VFR_HUD.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event Action&lt;MavId, VfrHud, DateTime&gt;? VfrHudReceived</code></pre>
+  </div>
+  <h5 class="eventType">Event Type</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-3">Action</a>&lt;<a class="xref" href="MavNet.Core.MavId.html">MavId</a>, <span class="xref">VfrHud</span>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.datetime">DateTime</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.iasyncdisposable">IAsyncDisposable</a>
+  </div>
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/UltimateSeeSharp/MavNet/new/main/apiSpec/new?filename=MavNet_Transport_Udp_MavlinkConnection.md&amp;value=---%0Auid%3A%20MavNet.Transport.Udp.MavlinkConnection%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Edit this page</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.Transport.Udp/MavlinkConnection.cs/#L30" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      
+      <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

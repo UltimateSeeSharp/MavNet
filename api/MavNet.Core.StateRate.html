@@ -1,0 +1,632 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Struct StateRate | MavNet — MAVLink for .NET </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Struct StateRate | MavNet — MAVLink for .NET ">
+    
+    <meta name="description" content="How often a state-change subscriber wants to be called. Choose with the named factories — , ,  — rather than passing raw  values, so call sites stay self-documenting.  fires on every state-affecting packet (full fidelity, no throttling — appropriate for telemetry recorders, packet loggers, replay capture). Throttled rates fire at most once per  per subscriber.">
+      <link rel="shortcut icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../styles/docfx.css">
+      <link rel="stylesheet" href="../styles/main.css">
+      <meta property="docfx:navrel" content="../toc.html">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="MavNet">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="MavNet.Core.StateRate">
+
+
+
+  <h1 id="MavNet_Core_StateRate" data-uid="MavNet.Core.StateRate" class="text-break">Struct StateRate</h1>
+  <div class="markdown level0 summary"><p>How often a state-change subscriber wants to be called. Choose with the named
+factories — <a class="xref" href="MavNet.Core.StateRate.html#MavNet_Core_StateRate_Raw">Raw</a>, <a class="xref" href="MavNet.Core.StateRate.html#MavNet_Core_StateRate_Hz_System_Double_">Hz(double)</a>, <a class="xref" href="MavNet.Core.StateRate.html#MavNet_Core_StateRate_Every_System_TimeSpan_">Every(TimeSpan)</a> — rather
+than passing raw <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.timespan">TimeSpan</a> values, so call sites stay self-documenting.</p>
+<p><a class="xref" href="MavNet.Core.StateRate.html#MavNet_Core_StateRate_Raw">Raw</a> fires on every state-affecting packet (full fidelity, no
+throttling — appropriate for telemetry recorders, packet loggers, replay capture).
+Throttled rates fire at most once per <a class="xref" href="MavNet.Core.StateRate.html#MavNet_Core_StateRate_MinInterval">MinInterval</a> per subscriber.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.iequatable-1">IEquatable</a>&lt;<a class="xref" href="MavNet.Core.StateRate.html">StateRate</a>&gt;</div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="MavNet.html">MavNet</a>.<a class="xref" href="MavNet.Core.html">Core</a></h6>
+  <h6><strong>Assembly</strong>: MavNet.Core.dll</h6>
+  <h5 id="MavNet_Core_StateRate_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public readonly struct StateRate : IEquatable&lt;StateRate&gt;</code></pre>
+  </div>
+  <h3 id="properties">Properties
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/UltimateSeeSharp/MavNet/new/main/apiSpec/new?filename=MavNet_Core_StateRate_IsRaw.md&amp;value=---%0Auid%3A%20MavNet.Core.StateRate.IsRaw%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.Core/StateRate.cs/#L37">View Source</a>
+  </span>
+  <a id="MavNet_Core_StateRate_IsRaw_" data-uid="MavNet.Core.StateRate.IsRaw*"></a>
+  <h4 id="MavNet_Core_StateRate_IsRaw" data-uid="MavNet.Core.StateRate.IsRaw">IsRaw</h4>
+  <div class="markdown level1 summary"><p><code>true</code> when no throttling is applied (equivalent to <a class="xref" href="MavNet.Core.StateRate.html#MavNet_Core_StateRate_Raw">Raw</a>).</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool IsRaw { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/UltimateSeeSharp/MavNet/new/main/apiSpec/new?filename=MavNet_Core_StateRate_MinInterval.md&amp;value=---%0Auid%3A%20MavNet.Core.StateRate.MinInterval%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.Core/StateRate.cs/#L15">View Source</a>
+  </span>
+  <a id="MavNet_Core_StateRate_MinInterval_" data-uid="MavNet.Core.StateRate.MinInterval*"></a>
+  <h4 id="MavNet_Core_StateRate_MinInterval" data-uid="MavNet.Core.StateRate.MinInterval">MinInterval</h4>
+  <div class="markdown level1 summary"><p>Minimum interval between successive deliveries. <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.timespan.zero">Zero</a> = no throttling.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TimeSpan MinInterval { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.timespan">TimeSpan</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/UltimateSeeSharp/MavNet/new/main/apiSpec/new?filename=MavNet_Core_StateRate_Raw.md&amp;value=---%0Auid%3A%20MavNet.Core.StateRate.Raw%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.Core/StateRate.cs/#L18">View Source</a>
+  </span>
+  <a id="MavNet_Core_StateRate_Raw_" data-uid="MavNet.Core.StateRate.Raw*"></a>
+  <h4 id="MavNet_Core_StateRate_Raw" data-uid="MavNet.Core.StateRate.Raw">Raw</h4>
+  <div class="markdown level1 summary"><p>Fire on every state-affecting packet — no throttling.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static StateRate Raw { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="MavNet.Core.StateRate.html">StateRate</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/UltimateSeeSharp/MavNet/new/main/apiSpec/new?filename=MavNet_Core_StateRate_Equals_MavNet_Core_StateRate_.md&amp;value=---%0Auid%3A%20MavNet.Core.StateRate.Equals(MavNet.Core.StateRate)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.Core/StateRate.cs/#L40">View Source</a>
+  </span>
+  <a id="MavNet_Core_StateRate_Equals_" data-uid="MavNet.Core.StateRate.Equals*"></a>
+  <h4 id="MavNet_Core_StateRate_Equals_MavNet_Core_StateRate_" data-uid="MavNet.Core.StateRate.Equals(MavNet.Core.StateRate)">Equals(StateRate)</h4>
+  <div class="markdown level1 summary"><p>Indicates whether the current object is equal to another object of the same type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool Equals(StateRate other)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="MavNet.Core.StateRate.html">StateRate</a></td>
+        <td><span class="parametername">other</span></td>
+        <td><p>An object to compare with this object.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td><p><a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">true</a> if the current object is equal to the <code class="paramref">other</code> parameter; otherwise, <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">false</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/UltimateSeeSharp/MavNet/new/main/apiSpec/new?filename=MavNet_Core_StateRate_Equals_System_Object_.md&amp;value=---%0Auid%3A%20MavNet.Core.StateRate.Equals(System.Object)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.Core/StateRate.cs/#L42">View Source</a>
+  </span>
+  <a id="MavNet_Core_StateRate_Equals_" data-uid="MavNet.Core.StateRate.Equals*"></a>
+  <h4 id="MavNet_Core_StateRate_Equals_System_Object_" data-uid="MavNet.Core.StateRate.Equals(System.Object)">Equals(object?)</h4>
+  <div class="markdown level1 summary"><p>Indicates whether this instance and a specified object are equal.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override bool Equals(object? obj)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></td>
+        <td><span class="parametername">obj</span></td>
+        <td><p>The object to compare with the current instance.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td><p><a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">true</a> if <code class="paramref">obj</code> and this instance are the same type and represent the same value; otherwise, <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">false</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.equals">ValueType.Equals(object)</a></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/UltimateSeeSharp/MavNet/new/main/apiSpec/new?filename=MavNet_Core_StateRate_Every_System_TimeSpan_.md&amp;value=---%0Auid%3A%20MavNet.Core.StateRate.Every(System.TimeSpan)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.Core/StateRate.cs/#L28">View Source</a>
+  </span>
+  <a id="MavNet_Core_StateRate_Every_" data-uid="MavNet.Core.StateRate.Every*"></a>
+  <h4 id="MavNet_Core_StateRate_Every_System_TimeSpan_" data-uid="MavNet.Core.StateRate.Every(System.TimeSpan)">Every(TimeSpan)</h4>
+  <div class="markdown level1 summary"><p>At most one delivery per <code class="paramref">interval</code>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static StateRate Every(TimeSpan interval)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.timespan">TimeSpan</a></td>
+        <td><span class="parametername">interval</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="MavNet.Core.StateRate.html">StateRate</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/UltimateSeeSharp/MavNet/new/main/apiSpec/new?filename=MavNet_Core_StateRate_GetHashCode.md&amp;value=---%0Auid%3A%20MavNet.Core.StateRate.GetHashCode%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.Core/StateRate.cs/#L44">View Source</a>
+  </span>
+  <a id="MavNet_Core_StateRate_GetHashCode_" data-uid="MavNet.Core.StateRate.GetHashCode*"></a>
+  <h4 id="MavNet_Core_StateRate_GetHashCode" data-uid="MavNet.Core.StateRate.GetHashCode">GetHashCode()</h4>
+  <div class="markdown level1 summary"><p>Returns the hash code for this instance.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override int GetHashCode()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></td>
+        <td><p>A 32-bit signed integer that is the hash code for this instance.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode">ValueType.GetHashCode()</a></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/UltimateSeeSharp/MavNet/new/main/apiSpec/new?filename=MavNet_Core_StateRate_Hz_System_Double_.md&amp;value=---%0Auid%3A%20MavNet.Core.StateRate.Hz(System.Double)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.Core/StateRate.cs/#L21">View Source</a>
+  </span>
+  <a id="MavNet_Core_StateRate_Hz_" data-uid="MavNet.Core.StateRate.Hz*"></a>
+  <h4 id="MavNet_Core_StateRate_Hz_System_Double_" data-uid="MavNet.Core.StateRate.Hz(System.Double)">Hz(double)</h4>
+  <div class="markdown level1 summary"><p>At most <code class="paramref">hz</code> deliveries per second.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static StateRate Hz(double hz)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></td>
+        <td><span class="parametername">hz</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="MavNet.Core.StateRate.html">StateRate</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/UltimateSeeSharp/MavNet/new/main/apiSpec/new?filename=MavNet_Core_StateRate_ToString.md&amp;value=---%0Auid%3A%20MavNet.Core.StateRate.ToString%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.Core/StateRate.cs/#L46">View Source</a>
+  </span>
+  <a id="MavNet_Core_StateRate_ToString_" data-uid="MavNet.Core.StateRate.ToString*"></a>
+  <h4 id="MavNet_Core_StateRate_ToString" data-uid="MavNet.Core.StateRate.ToString">ToString()</h4>
+  <div class="markdown level1 summary"><p>Returns the fully qualified type name of this instance.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override string ToString()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><p>The fully qualified type name.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.tostring">ValueType.ToString()</a></div>
+  <h3 id="operators">Operators
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/UltimateSeeSharp/MavNet/new/main/apiSpec/new?filename=MavNet_Core_StateRate_op_Equality_MavNet_Core_StateRate_MavNet_Core_StateRate_.md&amp;value=---%0Auid%3A%20MavNet.Core.StateRate.op_Equality(MavNet.Core.StateRate%2CMavNet.Core.StateRate)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.Core/StateRate.cs/#L49">View Source</a>
+  </span>
+  <a id="MavNet_Core_StateRate_op_Equality_" data-uid="MavNet.Core.StateRate.op_Equality*"></a>
+  <h4 id="MavNet_Core_StateRate_op_Equality_MavNet_Core_StateRate_MavNet_Core_StateRate_" data-uid="MavNet.Core.StateRate.op_Equality(MavNet.Core.StateRate,MavNet.Core.StateRate)">operator ==(StateRate, StateRate)</h4>
+  <div class="markdown level1 summary"><p>Returns <code>true</code> if both rates have the same <a class="xref" href="MavNet.Core.StateRate.html#MavNet_Core_StateRate_MinInterval">MinInterval</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool operator ==(StateRate a, StateRate b)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="MavNet.Core.StateRate.html">StateRate</a></td>
+        <td><span class="parametername">a</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="MavNet.Core.StateRate.html">StateRate</a></td>
+        <td><span class="parametername">b</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/UltimateSeeSharp/MavNet/new/main/apiSpec/new?filename=MavNet_Core_StateRate_op_Inequality_MavNet_Core_StateRate_MavNet_Core_StateRate_.md&amp;value=---%0Auid%3A%20MavNet.Core.StateRate.op_Inequality(MavNet.Core.StateRate%2CMavNet.Core.StateRate)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.Core/StateRate.cs/#L51">View Source</a>
+  </span>
+  <a id="MavNet_Core_StateRate_op_Inequality_" data-uid="MavNet.Core.StateRate.op_Inequality*"></a>
+  <h4 id="MavNet_Core_StateRate_op_Inequality_MavNet_Core_StateRate_MavNet_Core_StateRate_" data-uid="MavNet.Core.StateRate.op_Inequality(MavNet.Core.StateRate,MavNet.Core.StateRate)">operator !=(StateRate, StateRate)</h4>
+  <div class="markdown level1 summary"><p>Returns <code>true</code> if the rates have different <a class="xref" href="MavNet.Core.StateRate.html#MavNet_Core_StateRate_MinInterval">MinInterval</a> values.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool operator !=(StateRate a, StateRate b)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="MavNet.Core.StateRate.html">StateRate</a></td>
+        <td><span class="parametername">a</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="MavNet.Core.StateRate.html">StateRate</a></td>
+        <td><span class="parametername">b</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.iequatable-1">IEquatable&lt;T&gt;</a>
+  </div>
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/UltimateSeeSharp/MavNet/new/main/apiSpec/new?filename=MavNet_Core_StateRate.md&amp;value=---%0Auid%3A%20MavNet.Core.StateRate%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Edit this page</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.Core/StateRate.cs/#L12" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      
+      <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

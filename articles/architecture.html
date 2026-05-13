@@ -1,0 +1,207 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Architecture | MavNet — MAVLink for .NET </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Architecture | MavNet — MAVLink for .NET ">
+    
+    
+      <link rel="shortcut icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../styles/docfx.css">
+      <link rel="stylesheet" href="../styles/main.css">
+      <meta property="docfx:navrel" content="../toc.html">
+      <meta property="docfx:tocrel" content="../toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="MavNet">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        <div class="article row grid">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="architecture">Architecture</h1>
+
+<p>MavNet is layered so that each assembly only depends on layers below it. From bottom to top:</p>
+<pre><code>MavNet.Core
+  └─ MavNet.Protocol
+       ├─ MavNet.Protocol.Generated
+       └─ MavNet.Transport.Udp
+            └─ MavNet.PX4
+</code></pre>
+<hr>
+<h2 id="mavnetcore">MavNet.Core</h2>
+<p>Defines <code>MavId</code> — a <code>(sysid, compid)</code> pair that identifies a MAVLink node. No dependencies.</p>
+<hr>
+<h2 id="mavnetprotocol">MavNet.Protocol</h2>
+<p>Wire-format primitives:</p>
+<ul>
+<li><strong><code>MavlinkFrame</code></strong> — a <code>ref struct</code> that decodes MAVLink v2 frames in-place over a <code>ReadOnlySpan&lt;byte&gt;</code>. Magic byte is <code>0xFD</code>.</li>
+<li><strong><code>Crc16</code></strong> — X.25 CRC implementation used for frame validation.</li>
+<li><strong><code>IMavlinkMessage&lt;TSelf&gt;</code></strong> — CRTP contract with static abstracts: <code>MsgId</code>, <code>CrcExtra</code>, <code>MinPayloadLength</code>, <code>MaxPayloadLength</code>, <code>Encode</code>, <code>Decode</code>.</li>
+<li><strong><code>MessageRegistry</code></strong> — maps msgid → (CrcExtra, min/max payload length). Kept here (not in <code>Protocol.Generated</code>) so <code>MavlinkFrame.TryDecode</code> can validate frames without a circular reference.</li>
+</ul>
+<h3 id="frame-decode-invariants">Frame decode invariants</h3>
+<p><code>MavlinkFrame.TryDecode</code> drops a frame (returns <code>false</code>) on any of:</p>
+<table>
+<thead>
+<tr>
+<th>Condition</th>
+<th>Reason</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>v1 magic (<code>0xFE</code>)</td>
+<td>v1 not supported</td>
+</tr>
+<tr>
+<td>Signed frame (<code>incompat_flags &amp; 0x01</code>)</td>
+<td>Signing not implemented</td>
+</tr>
+<tr>
+<td>Unknown incompatibility bit</td>
+<td>MAVLink spec requires drop for forward compatibility</td>
+</tr>
+<tr>
+<td>Unknown msgid</td>
+<td>No CrcExtra available → cannot verify CRC</td>
+</tr>
+<tr>
+<td>Payload outside <code>[Min, Max]</code></td>
+<td>Malformed frame</td>
+</tr>
+<tr>
+<td>CRC mismatch</td>
+<td>Corrupt or spoofed frame</td>
+</tr>
+</tbody>
+</table>
+<p>The unknown-incompat-bit drop is intentional — relaxing it can corrupt forwarded frames once new spec bits ship.</p>
+<hr>
+<h2 id="mavnetprotocolgenerated">MavNet.Protocol.Generated</h2>
+<p>Auto-generated <code>readonly record struct</code> types for each allowlisted MAVLink message, plus all enums and <code>MAV_CMD_*</code> command structs. Each type implements <code>IMavlinkMessage&lt;TSelf&gt;</code>.</p>
+<p><strong>Do not edit these files.</strong> They are wiped on every codegen run:</p>
+<pre><code class="lang-bash">dotnet run --project tools/MavNet.CodeGen
+</code></pre>
+<p>The allowlist (<code>tools/MavNet.CodeGen/allowlist.txt</code>) controls which messages get emitted as structs. After adding a message to the allowlist:</p>
+<ol>
+<li>Regenerate.</li>
+<li>Add an <code>event Action&lt;MavId, NewMsg, DateTime&gt;?</code> and a <code>case NewMsg.MsgId:</code> dispatch arm in <code>MavlinkConnection.cs</code>.</li>
+<li>Wire telemetry through <code>Vehicle.cs</code> / <code>Drone.cs</code> if needed.</li>
+</ol>
+<hr>
+<h2 id="mavnettransportudp">MavNet.Transport.Udp</h2>
+<p><code>MavlinkConnection</code> owns one UDP socket, one receive loop, and a fixed-rate GCS heartbeat timer.</p>
+<h3 id="receive-path">Receive path</h3>
+<p>Frames are decoded and dispatched as typed events:</p>
+<pre><code class="lang-csharp">event Action&lt;MavId, Heartbeat, DateTime&gt;? HeartbeatReceived;
+event Action&lt;MavId, GlobalPositionInt, DateTime&gt;? GlobalPositionIntReceived;
+// …one per allowlisted message
+</code></pre>
+<p>Unrecognised msgids are silently dropped. Subscriber exceptions are swallowed so a buggy handler cannot kill the receive loop.</p>
+<h3 id="send-path">Send path</h3>
+<pre><code class="lang-csharp">void Send&lt;T&gt;(T msg) where T : IMavlinkMessage&lt;T&gt;
+</code></pre>
+<p>Resolves <code>MsgId</code>, <code>CrcExtra</code>, and <code>MaxPayloadLength</code> via static abstracts at the call site — no runtime dictionary lookup. Trailing zero bytes are stripped to <code>MinPayloadLength</code> (MAVLink v2 payload truncation). Sequence number is <code>Interlocked.Increment</code>.</p>
+<h3 id="threading-model">Threading model</h3>
+<p>Events fire <strong>synchronously on the receive thread</strong>. UI consumers (Blazor, WPF) must marshal to their own thread. Do not block the event handler.</p>
+<hr>
+<h2 id="mavnetpx4">MavNet.PX4</h2>
+<p>Higher-level vehicle façade built on top of <code>MavlinkConnection</code>.</p>
+<ul>
+<li><strong><code>Vehicle</code></strong> (base) — tracks the active sysid, subscribes to transport events, and implements <code>COMMAND_LONG</code> → <code>COMMAND_ACK</code> correlation via <code>PendingCommand</code>/<code>CommandOutcome</code>.</li>
+<li><strong><code>Drone</code></strong> — extends <code>Vehicle</code> with arm, disarm, takeoff, land, and RTL convenience methods.</li>
+</ul>
+<p>Each command method sends <code>COMMAND_LONG</code> and asynchronously awaits the <code>COMMAND_ACK</code> reply, returning a <code>CommandOutcome</code> with the result, ACK code, and elapsed time.</p>
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/UltimateSeeSharp/MavNet/blob/main/docs/#L1" class="contribution-link">Edit this page</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      
+      <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

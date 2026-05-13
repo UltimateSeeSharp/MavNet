@@ -1,0 +1,1329 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Class Vehicle | MavNet — MAVLink for .NET </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Class Vehicle | MavNet — MAVLink for .NET ">
+    
+    <meta name="description" content="Logical handle to one MAVLink vehicle: a typed view of its telemetry plus async command helpers built on the canonical MAVLink command pattern (COMMAND_LONG → race ACK against state-change HEARTBEAT, with timeout). Vehicle is a consumer of  — it subscribes to the connection&#39;s typed events in its constructor and filters by the target /. Multiple Vehicles can in principle share one Connection (they each filter for their own sender), though our factories create one Vehicle per Connection for simplicity.Thread model. State writes happen on the connection&#39;s receive thread. Reads are eventually-consistent — for telemetry display this is fine.  fires synchronously on the receive thread; consumers must marshal to their UI thread themselves.Metadata. and  are opt-in, mutable, never read by the library — set them from your fleet/registry if you want them to follow the vehicle around.">
+      <link rel="shortcut icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../styles/docfx.css">
+      <link rel="stylesheet" href="../styles/main.css">
+      <meta property="docfx:navrel" content="../toc.html">
+      <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="MavNet">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="MavNet.PX4.Base.Vehicle">
+
+
+
+  <h1 id="MavNet_PX4_Base_Vehicle" data-uid="MavNet.PX4.Base.Vehicle" class="text-break">Class Vehicle</h1>
+  <div class="markdown level0 summary"><p>Logical handle to one MAVLink vehicle: a typed view of its telemetry plus
+async command helpers built on the canonical MAVLink command pattern
+(COMMAND_LONG → race ACK against state-change HEARTBEAT, with timeout).</p>
+<p>Vehicle is a <em>consumer</em> of <a class="xref" href="MavNet.Transport.Udp.MavlinkConnection.html">MavlinkConnection</a> — it
+subscribes to the connection's typed events in its constructor and filters by
+the target <a class="xref" href="MavNet.PX4.Base.Vehicle.html#MavNet_PX4_Base_Vehicle_SystemId">SystemId</a>/<a class="xref" href="MavNet.PX4.Base.Vehicle.html#MavNet_PX4_Base_Vehicle_ComponentId">ComponentId</a>. Multiple Vehicles
+can in principle share one Connection (they each filter for their own sender),
+though our factories create one Vehicle per Connection for simplicity.</p><p><b>Thread model.</b> State writes happen on the connection's receive
+thread. Reads are eventually-consistent — for telemetry display this is fine.
+<a class="xref" href="MavNet.PX4.Base.Vehicle.html#MavNet_PX4_Base_Vehicle_StateChanged">StateChanged</a> fires synchronously on the receive thread; consumers
+must marshal to their UI thread themselves.</p><p><b>Metadata.</b><a class="xref" href="MavNet.PX4.Base.Vehicle.html#MavNet_PX4_Base_Vehicle_Id">Id</a> and <a class="xref" href="MavNet.PX4.Base.Vehicle.html#MavNet_PX4_Base_Vehicle_Name">Name</a> are opt-in,
+mutable, never read by the library — set them from your fleet/registry if you
+want them to follow the vehicle around.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+    <div class="level1"><span class="xref">Vehicle</span></div>
+      <div class="level2"><a class="xref" href="MavNet.PX4.Vehicles.Drone.html">Drone</a></div>
+  </div>
+  <div class="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.iasyncdisposable">IAsyncDisposable</a></div>
+    <div><a class="xref" href="MavNet.Core.IStateObservable.html">IStateObservable</a></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="MavNet.html">MavNet</a>.<a class="xref" href="MavNet.PX4.html">PX4</a>.<a class="xref" href="MavNet.PX4.Base.html">Base</a></h6>
+  <h6><strong>Assembly</strong>: MavNet.PX4.dll</h6>
+  <h5 id="MavNet_PX4_Base_Vehicle_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public abstract class Vehicle : IAsyncDisposable, IStateObservable</code></pre>
+  </div>
+  <h3 id="constructors">Constructors
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/UltimateSeeSharp/MavNet/new/main/apiSpec/new?filename=MavNet_PX4_Base_Vehicle__ctor_MavNet_Transport_Udp_MavlinkConnection_System_Byte_System_Byte_System_Boolean_System_Nullable_System_TimeSpan__Microsoft_Extensions_Logging_ILogger_MavNet_PX4_Base_Vehicle__.md&amp;value=---%0Auid%3A%20MavNet.PX4.Base.Vehicle.%23ctor(MavNet.Transport.Udp.MavlinkConnection%2CSystem.Byte%2CSystem.Byte%2CSystem.Boolean%2CSystem.Nullable%7BSystem.TimeSpan%7D%2CMicrosoft.Extensions.Logging.ILogger%7BMavNet.PX4.Base.Vehicle%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Base/Vehicle.cs/#L146">View Source</a>
+  </span>
+  <a id="MavNet_PX4_Base_Vehicle__ctor_" data-uid="MavNet.PX4.Base.Vehicle.#ctor*"></a>
+  <h4 id="MavNet_PX4_Base_Vehicle__ctor_MavNet_Transport_Udp_MavlinkConnection_System_Byte_System_Byte_System_Boolean_System_Nullable_System_TimeSpan__Microsoft_Extensions_Logging_ILogger_MavNet_PX4_Base_Vehicle__" data-uid="MavNet.PX4.Base.Vehicle.#ctor(MavNet.Transport.Udp.MavlinkConnection,System.Byte,System.Byte,System.Boolean,System.Nullable{System.TimeSpan},Microsoft.Extensions.Logging.ILogger{MavNet.PX4.Base.Vehicle})">Vehicle(MavlinkConnection, byte, byte, bool, TimeSpan?, ILogger&lt;Vehicle&gt;?)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected Vehicle(MavlinkConnection connection, byte targetSystemId, byte targetComponentId, bool ownsConnection = false, TimeSpan? heartbeatTimeout = null, ILogger&lt;Vehicle&gt;? logger = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="MavNet.Transport.Udp.MavlinkConnection.html">MavlinkConnection</a></td>
+        <td><span class="parametername">connection</span></td>
+        <td><p>The transport. Subscribes to its typed events.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a></td>
+        <td><span class="parametername">targetSystemId</span></td>
+        <td><p>Sender system id this Vehicle accepts messages from.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a></td>
+        <td><span class="parametername">targetComponentId</span></td>
+        <td><p>Sender component id this Vehicle accepts messages from.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td><span class="parametername">ownsConnection</span></td>
+        <td><p>When true, <a class="xref" href="MavNet.PX4.Base.Vehicle.html#MavNet_PX4_Base_Vehicle_DisposeAsync">DisposeAsync()</a> also disposes the connection. Use false when sharing a connection across multiple Vehicles.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.timespan">TimeSpan</a>?</td>
+        <td><span class="parametername">heartbeatTimeout</span></td>
+        <td><p>Window in which a heartbeat must arrive for <a class="xref" href="MavNet.PX4.Base.Vehicle.html#MavNet_PX4_Base_Vehicle_LinkUp">LinkUp</a> to stay true.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.extensions.logging.ilogger-1">ILogger</a>&lt;<a class="xref" href="MavNet.PX4.Base.Vehicle.html">Vehicle</a>&gt;</td>
+        <td><span class="parametername">logger</span></td>
+        <td><p>Optional. Null = no logging.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/UltimateSeeSharp/MavNet/new/main/apiSpec/new?filename=MavNet_PX4_Base_Vehicle_Alt.md&amp;value=---%0Auid%3A%20MavNet.PX4.Base.Vehicle.Alt%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Base/Vehicle.cs/#L114">View Source</a>
+  </span>
+  <a id="MavNet_PX4_Base_Vehicle_Alt_" data-uid="MavNet.PX4.Base.Vehicle.Alt*"></a>
+  <h4 id="MavNet_PX4_Base_Vehicle_Alt" data-uid="MavNet.PX4.Base.Vehicle.Alt">Alt</h4>
+  <div class="markdown level1 summary"><p>Altitude in metres above mean sea level, updated from GLOBAL_POSITION_INT.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public double Alt { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/UltimateSeeSharp/MavNet/new/main/apiSpec/new?filename=MavNet_PX4_Base_Vehicle_Armed.md&amp;value=---%0Auid%3A%20MavNet.PX4.Base.Vehicle.Armed%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Base/Vehicle.cs/#L90">View Source</a>
+  </span>
+  <a id="MavNet_PX4_Base_Vehicle_Armed_" data-uid="MavNet.PX4.Base.Vehicle.Armed*"></a>
+  <h4 id="MavNet_PX4_Base_Vehicle_Armed" data-uid="MavNet.PX4.Base.Vehicle.Armed">Armed</h4>
+  <div class="markdown level1 summary"><p>Armed bit from the latest HEARTBEAT's base_mode.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool Armed { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/UltimateSeeSharp/MavNet/new/main/apiSpec/new?filename=MavNet_PX4_Base_Vehicle_Battery.md&amp;value=---%0Auid%3A%20MavNet.PX4.Base.Vehicle.Battery%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Base/Vehicle.cs/#L124">View Source</a>
+  </span>
+  <a id="MavNet_PX4_Base_Vehicle_Battery_" data-uid="MavNet.PX4.Base.Vehicle.Battery*"></a>
+  <h4 id="MavNet_PX4_Base_Vehicle_Battery" data-uid="MavNet.PX4.Base.Vehicle.Battery">Battery</h4>
+  <div class="markdown level1 summary"><p>Battery remaining as a percentage (0–100), updated from SYS_STATUS.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public double Battery { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/UltimateSeeSharp/MavNet/new/main/apiSpec/new?filename=MavNet_PX4_Base_Vehicle_ComponentId.md&amp;value=---%0Auid%3A%20MavNet.PX4.Base.Vehicle.ComponentId%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Base/Vehicle.cs/#L72">View Source</a>
+  </span>
+  <a id="MavNet_PX4_Base_Vehicle_ComponentId_" data-uid="MavNet.PX4.Base.Vehicle.ComponentId*"></a>
+  <h4 id="MavNet_PX4_Base_Vehicle_ComponentId" data-uid="MavNet.PX4.Base.Vehicle.ComponentId">ComponentId</h4>
+  <div class="markdown level1 summary"><p>MAVLink component id of this vehicle's autopilot (typically 1).</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public byte ComponentId { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/UltimateSeeSharp/MavNet/new/main/apiSpec/new?filename=MavNet_PX4_Base_Vehicle_ConnectionString.md&amp;value=---%0Auid%3A%20MavNet.PX4.Base.Vehicle.ConnectionString%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Base/Vehicle.cs/#L78">View Source</a>
+  </span>
+  <a id="MavNet_PX4_Base_Vehicle_ConnectionString_" data-uid="MavNet.PX4.Base.Vehicle.ConnectionString*"></a>
+  <h4 id="MavNet_PX4_Base_Vehicle_ConnectionString" data-uid="MavNet.PX4.Base.Vehicle.ConnectionString">ConnectionString</h4>
+  <div class="markdown level1 summary"><p>Connection string the underlying transport was opened with, or null if unknown.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string? ConnectionString { get; init; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/UltimateSeeSharp/MavNet/new/main/apiSpec/new?filename=MavNet_PX4_Base_Vehicle_DeviceId.md&amp;value=---%0Auid%3A%20MavNet.PX4.Base.Vehicle.DeviceId%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Base/Vehicle.cs/#L81">View Source</a>
+  </span>
+  <a id="MavNet_PX4_Base_Vehicle_DeviceId_" data-uid="MavNet.PX4.Base.Vehicle.DeviceId*"></a>
+  <h4 id="MavNet_PX4_Base_Vehicle_DeviceId" data-uid="MavNet.PX4.Base.Vehicle.DeviceId">DeviceId</h4>
+  <div class="markdown level1 summary"><p>Pretty identifier: <code>sys{SystemId}-comp{ComponentId}</code>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string DeviceId { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/UltimateSeeSharp/MavNet/new/main/apiSpec/new?filename=MavNet_PX4_Base_Vehicle_GpsFix.md&amp;value=---%0Auid%3A%20MavNet.PX4.Base.Vehicle.GpsFix%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Base/Vehicle.cs/#L122">View Source</a>
+  </span>
+  <a id="MavNet_PX4_Base_Vehicle_GpsFix_" data-uid="MavNet.PX4.Base.Vehicle.GpsFix*"></a>
+  <h4 id="MavNet_PX4_Base_Vehicle_GpsFix" data-uid="MavNet.PX4.Base.Vehicle.GpsFix">GpsFix</h4>
+  <div class="markdown level1 summary"><p>GPS fix type, updated from GPS_RAW_INT.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GpsFixType GpsFix { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">GpsFixType</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/UltimateSeeSharp/MavNet/new/main/apiSpec/new?filename=MavNet_PX4_Base_Vehicle_Hdg.md&amp;value=---%0Auid%3A%20MavNet.PX4.Base.Vehicle.Hdg%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Base/Vehicle.cs/#L116">View Source</a>
+  </span>
+  <a id="MavNet_PX4_Base_Vehicle_Hdg_" data-uid="MavNet.PX4.Base.Vehicle.Hdg*"></a>
+  <h4 id="MavNet_PX4_Base_Vehicle_Hdg" data-uid="MavNet.PX4.Base.Vehicle.Hdg">Hdg</h4>
+  <div class="markdown level1 summary"><p>Heading in degrees (0–360), updated from GLOBAL_POSITION_INT.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public double Hdg { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/UltimateSeeSharp/MavNet/new/main/apiSpec/new?filename=MavNet_PX4_Base_Vehicle_Id.md&amp;value=---%0Auid%3A%20MavNet.PX4.Base.Vehicle.Id%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Base/Vehicle.cs/#L84">View Source</a>
+  </span>
+  <a id="MavNet_PX4_Base_Vehicle_Id_" data-uid="MavNet.PX4.Base.Vehicle.Id*"></a>
+  <h4 id="MavNet_PX4_Base_Vehicle_Id" data-uid="MavNet.PX4.Base.Vehicle.Id">Id</h4>
+  <div class="markdown level1 summary"><p>Opt-in application-assigned identifier. The library never reads this — set it from your fleet/registry.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string? Id { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/UltimateSeeSharp/MavNet/new/main/apiSpec/new?filename=MavNet_PX4_Base_Vehicle_LandedState.md&amp;value=---%0Auid%3A%20MavNet.PX4.Base.Vehicle.LandedState%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Base/Vehicle.cs/#L126">View Source</a>
+  </span>
+  <a id="MavNet_PX4_Base_Vehicle_LandedState_" data-uid="MavNet.PX4.Base.Vehicle.LandedState*"></a>
+  <h4 id="MavNet_PX4_Base_Vehicle_LandedState" data-uid="MavNet.PX4.Base.Vehicle.LandedState">LandedState</h4>
+  <div class="markdown level1 summary"><p>Landed/in-air state, updated from EXTENDED_SYS_STATE.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MavLandedState LandedState { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">MavLandedState</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/UltimateSeeSharp/MavNet/new/main/apiSpec/new?filename=MavNet_PX4_Base_Vehicle_LastHeartbeatAt.md&amp;value=---%0Auid%3A%20MavNet.PX4.Base.Vehicle.LastHeartbeatAt%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Base/Vehicle.cs/#L107">View Source</a>
+  </span>
+  <a id="MavNet_PX4_Base_Vehicle_LastHeartbeatAt_" data-uid="MavNet.PX4.Base.Vehicle.LastHeartbeatAt*"></a>
+  <h4 id="MavNet_PX4_Base_Vehicle_LastHeartbeatAt" data-uid="MavNet.PX4.Base.Vehicle.LastHeartbeatAt">LastHeartbeatAt</h4>
+  <div class="markdown level1 summary"><p>UTC timestamp of the most recent HEARTBEAT, or <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.datetime.minvalue">MinValue</a> if none received yet.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DateTime LastHeartbeatAt { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.datetime">DateTime</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/UltimateSeeSharp/MavNet/new/main/apiSpec/new?filename=MavNet_PX4_Base_Vehicle_Lat.md&amp;value=---%0Auid%3A%20MavNet.PX4.Base.Vehicle.Lat%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Base/Vehicle.cs/#L110">View Source</a>
+  </span>
+  <a id="MavNet_PX4_Base_Vehicle_Lat_" data-uid="MavNet.PX4.Base.Vehicle.Lat*"></a>
+  <h4 id="MavNet_PX4_Base_Vehicle_Lat" data-uid="MavNet.PX4.Base.Vehicle.Lat">Lat</h4>
+  <div class="markdown level1 summary"><p>Latitude in degrees (WGS-84), updated from GLOBAL_POSITION_INT.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public double Lat { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/UltimateSeeSharp/MavNet/new/main/apiSpec/new?filename=MavNet_PX4_Base_Vehicle_LinkUp.md&amp;value=---%0Auid%3A%20MavNet.PX4.Base.Vehicle.LinkUp%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Base/Vehicle.cs/#L96">View Source</a>
+  </span>
+  <a id="MavNet_PX4_Base_Vehicle_LinkUp_" data-uid="MavNet.PX4.Base.Vehicle.LinkUp*"></a>
+  <h4 id="MavNet_PX4_Base_Vehicle_LinkUp" data-uid="MavNet.PX4.Base.Vehicle.LinkUp">LinkUp</h4>
+  <div class="markdown level1 summary"><p>True iff a HEARTBEAT was received within the heartbeat-timeout window.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool LinkUp { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/UltimateSeeSharp/MavNet/new/main/apiSpec/new?filename=MavNet_PX4_Base_Vehicle_Lon.md&amp;value=---%0Auid%3A%20MavNet.PX4.Base.Vehicle.Lon%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Base/Vehicle.cs/#L112">View Source</a>
+  </span>
+  <a id="MavNet_PX4_Base_Vehicle_Lon_" data-uid="MavNet.PX4.Base.Vehicle.Lon*"></a>
+  <h4 id="MavNet_PX4_Base_Vehicle_Lon" data-uid="MavNet.PX4.Base.Vehicle.Lon">Lon</h4>
+  <div class="markdown level1 summary"><p>Longitude in degrees (WGS-84), updated from GLOBAL_POSITION_INT.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public double Lon { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/UltimateSeeSharp/MavNet/new/main/apiSpec/new?filename=MavNet_PX4_Base_Vehicle_Mode.md&amp;value=---%0Auid%3A%20MavNet.PX4.Base.Vehicle.Mode%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Base/Vehicle.cs/#L93">View Source</a>
+  </span>
+  <a id="MavNet_PX4_Base_Vehicle_Mode_" data-uid="MavNet.PX4.Base.Vehicle.Mode*"></a>
+  <h4 id="MavNet_PX4_Base_Vehicle_Mode" data-uid="MavNet.PX4.Base.Vehicle.Mode">Mode</h4>
+  <div class="markdown level1 summary"><p>Human-readable PX4 mode label (e.g. <code>AUTO.LOITER</code>) parsed from custom_mode.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string Mode { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/UltimateSeeSharp/MavNet/new/main/apiSpec/new?filename=MavNet_PX4_Base_Vehicle_Name.md&amp;value=---%0Auid%3A%20MavNet.PX4.Base.Vehicle.Name%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Base/Vehicle.cs/#L87">View Source</a>
+  </span>
+  <a id="MavNet_PX4_Base_Vehicle_Name_" data-uid="MavNet.PX4.Base.Vehicle.Name*"></a>
+  <h4 id="MavNet_PX4_Base_Vehicle_Name" data-uid="MavNet.PX4.Base.Vehicle.Name">Name</h4>
+  <div class="markdown level1 summary"><p>Opt-in display name. The library never reads this — set it from your fleet/registry.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string? Name { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/UltimateSeeSharp/MavNet/new/main/apiSpec/new?filename=MavNet_PX4_Base_Vehicle_Sats.md&amp;value=---%0Auid%3A%20MavNet.PX4.Base.Vehicle.Sats%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Base/Vehicle.cs/#L120">View Source</a>
+  </span>
+  <a id="MavNet_PX4_Base_Vehicle_Sats_" data-uid="MavNet.PX4.Base.Vehicle.Sats*"></a>
+  <h4 id="MavNet_PX4_Base_Vehicle_Sats" data-uid="MavNet.PX4.Base.Vehicle.Sats">Sats</h4>
+  <div class="markdown level1 summary"><p>Number of GPS satellites visible, updated from GPS_RAW_INT.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int Sats { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/UltimateSeeSharp/MavNet/new/main/apiSpec/new?filename=MavNet_PX4_Base_Vehicle_SystemId.md&amp;value=---%0Auid%3A%20MavNet.PX4.Base.Vehicle.SystemId%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Base/Vehicle.cs/#L69">View Source</a>
+  </span>
+  <a id="MavNet_PX4_Base_Vehicle_SystemId_" data-uid="MavNet.PX4.Base.Vehicle.SystemId*"></a>
+  <h4 id="MavNet_PX4_Base_Vehicle_SystemId" data-uid="MavNet.PX4.Base.Vehicle.SystemId">SystemId</h4>
+  <div class="markdown level1 summary"><p>MAVLink system id of this vehicle (e.g. 1 for a typical autopilot).</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public byte SystemId { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/UltimateSeeSharp/MavNet/new/main/apiSpec/new?filename=MavNet_PX4_Base_Vehicle_VehicleType.md&amp;value=---%0Auid%3A%20MavNet.PX4.Base.Vehicle.VehicleType%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Base/Vehicle.cs/#L75">View Source</a>
+  </span>
+  <a id="MavNet_PX4_Base_Vehicle_VehicleType_" data-uid="MavNet.PX4.Base.Vehicle.VehicleType*"></a>
+  <h4 id="MavNet_PX4_Base_Vehicle_VehicleType" data-uid="MavNet.PX4.Base.Vehicle.VehicleType">VehicleType</h4>
+  <div class="markdown level1 summary"><p>Vehicle category from the latest HEARTBEAT (quadrotor, plane, …).</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MavType VehicleType { get; protected set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">MavType</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/UltimateSeeSharp/MavNet/new/main/apiSpec/new?filename=MavNet_PX4_Base_Vehicle_Vel.md&amp;value=---%0Auid%3A%20MavNet.PX4.Base.Vehicle.Vel%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Base/Vehicle.cs/#L118">View Source</a>
+  </span>
+  <a id="MavNet_PX4_Base_Vehicle_Vel_" data-uid="MavNet.PX4.Base.Vehicle.Vel*"></a>
+  <h4 id="MavNet_PX4_Base_Vehicle_Vel" data-uid="MavNet.PX4.Base.Vehicle.Vel">Vel</h4>
+  <div class="markdown level1 summary"><p>Ground speed in m/s, updated from VFR_HUD.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public double Vel { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/UltimateSeeSharp/MavNet/new/main/apiSpec/new?filename=MavNet_PX4_Base_Vehicle_ArmAsync_System_Threading_CancellationToken_.md&amp;value=---%0Auid%3A%20MavNet.PX4.Base.Vehicle.ArmAsync(System.Threading.CancellationToken)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Base/Vehicle.cs/#L357">View Source</a>
+  </span>
+  <a id="MavNet_PX4_Base_Vehicle_ArmAsync_" data-uid="MavNet.PX4.Base.Vehicle.ArmAsync*"></a>
+  <h4 id="MavNet_PX4_Base_Vehicle_ArmAsync_System_Threading_CancellationToken_" data-uid="MavNet.PX4.Base.Vehicle.ArmAsync(System.Threading.CancellationToken)">ArmAsync(CancellationToken)</h4>
+  <div class="markdown level1 summary"><p>Arms the vehicle. Resolves <a class="xref" href="MavNet.PX4.CommandResult.html#MavNet_PX4_CommandResult_Confirmed">Confirmed</a> once the armed bit is set in HEARTBEAT.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Task&lt;CommandOutcome&gt; ArmAsync(CancellationToken ct = default)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></td>
+        <td><span class="parametername">ct</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="MavNet.PX4.CommandOutcome.html">CommandOutcome</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/UltimateSeeSharp/MavNet/new/main/apiSpec/new?filename=MavNet_PX4_Base_Vehicle_DisarmAsync_System_Threading_CancellationToken_.md&amp;value=---%0Auid%3A%20MavNet.PX4.Base.Vehicle.DisarmAsync(System.Threading.CancellationToken)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Base/Vehicle.cs/#L364">View Source</a>
+  </span>
+  <a id="MavNet_PX4_Base_Vehicle_DisarmAsync_" data-uid="MavNet.PX4.Base.Vehicle.DisarmAsync*"></a>
+  <h4 id="MavNet_PX4_Base_Vehicle_DisarmAsync_System_Threading_CancellationToken_" data-uid="MavNet.PX4.Base.Vehicle.DisarmAsync(System.Threading.CancellationToken)">DisarmAsync(CancellationToken)</h4>
+  <div class="markdown level1 summary"><p>Disarms the vehicle. Resolves <a class="xref" href="MavNet.PX4.CommandResult.html#MavNet_PX4_CommandResult_Confirmed">Confirmed</a> once the armed bit is cleared in HEARTBEAT.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Task&lt;CommandOutcome&gt; DisarmAsync(CancellationToken ct = default)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></td>
+        <td><span class="parametername">ct</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="MavNet.PX4.CommandOutcome.html">CommandOutcome</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/UltimateSeeSharp/MavNet/new/main/apiSpec/new?filename=MavNet_PX4_Base_Vehicle_DisposeAsync.md&amp;value=---%0Auid%3A%20MavNet.PX4.Base.Vehicle.DisposeAsync%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Base/Vehicle.cs/#L445">View Source</a>
+  </span>
+  <a id="MavNet_PX4_Base_Vehicle_DisposeAsync_" data-uid="MavNet.PX4.Base.Vehicle.DisposeAsync*"></a>
+  <h4 id="MavNet_PX4_Base_Vehicle_DisposeAsync" data-uid="MavNet.PX4.Base.Vehicle.DisposeAsync">DisposeAsync()</h4>
+  <div class="markdown level1 summary"><p>Performs application-defined tasks associated with freeing, releasing, or
+resetting unmanaged resources asynchronously.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ValueTask DisposeAsync()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.valuetask">ValueTask</a></td>
+        <td><p>A task that represents the asynchronous dispose operation.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/UltimateSeeSharp/MavNet/new/main/apiSpec/new?filename=MavNet_PX4_Base_Vehicle_LandAsync_System_Threading_CancellationToken_.md&amp;value=---%0Auid%3A%20MavNet.PX4.Base.Vehicle.LandAsync(System.Threading.CancellationToken)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Base/Vehicle.cs/#L389">View Source</a>
+  </span>
+  <a id="MavNet_PX4_Base_Vehicle_LandAsync_" data-uid="MavNet.PX4.Base.Vehicle.LandAsync*"></a>
+  <h4 id="MavNet_PX4_Base_Vehicle_LandAsync_System_Threading_CancellationToken_" data-uid="MavNet.PX4.Base.Vehicle.LandAsync(System.Threading.CancellationToken)">LandAsync(CancellationToken)</h4>
+  <div class="markdown level1 summary"><p>Commands landing at the current position.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;CommandOutcome&gt; LandAsync(CancellationToken ct = default)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></td>
+        <td><span class="parametername">ct</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="MavNet.PX4.CommandOutcome.html">CommandOutcome</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/UltimateSeeSharp/MavNet/new/main/apiSpec/new?filename=MavNet_PX4_Base_Vehicle_ReturnToLaunchAsync_System_Threading_CancellationToken_.md&amp;value=---%0Auid%3A%20MavNet.PX4.Base.Vehicle.ReturnToLaunchAsync(System.Threading.CancellationToken)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Base/Vehicle.cs/#L371">View Source</a>
+  </span>
+  <a id="MavNet_PX4_Base_Vehicle_ReturnToLaunchAsync_" data-uid="MavNet.PX4.Base.Vehicle.ReturnToLaunchAsync*"></a>
+  <h4 id="MavNet_PX4_Base_Vehicle_ReturnToLaunchAsync_System_Threading_CancellationToken_" data-uid="MavNet.PX4.Base.Vehicle.ReturnToLaunchAsync(System.Threading.CancellationToken)">ReturnToLaunchAsync(CancellationToken)</h4>
+  <div class="markdown level1 summary"><p>Commands return-to-launch. Resolves <a class="xref" href="MavNet.PX4.CommandResult.html#MavNet_PX4_CommandResult_Confirmed">Confirmed</a> once mode switches to AUTO.RTL.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Task&lt;CommandOutcome&gt; ReturnToLaunchAsync(CancellationToken ct = default)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></td>
+        <td><span class="parametername">ct</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="MavNet.PX4.CommandOutcome.html">CommandOutcome</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/UltimateSeeSharp/MavNet/new/main/apiSpec/new?filename=MavNet_PX4_Base_Vehicle_Send__1___0_.md&amp;value=---%0Auid%3A%20MavNet.PX4.Base.Vehicle.Send%60%601(%60%600)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Base/Vehicle.cs/#L397">View Source</a>
+  </span>
+  <a id="MavNet_PX4_Base_Vehicle_Send_" data-uid="MavNet.PX4.Base.Vehicle.Send*"></a>
+  <h4 id="MavNet_PX4_Base_Vehicle_Send__1___0_" data-uid="MavNet.PX4.Base.Vehicle.Send``1(``0)">Send&lt;T&gt;(T)</h4>
+  <div class="markdown level1 summary"><p>Send an arbitrary message through this Vehicle's underlying connection. Useful for custom commands that don't have a typed wrapper.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected void Send&lt;T&gt;(T message) where T : IMavlinkMessage&lt;T&gt;</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">T</span></td>
+        <td><span class="parametername">message</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/UltimateSeeSharp/MavNet/new/main/apiSpec/new?filename=MavNet_PX4_Base_Vehicle_SubscribeState_System_Action_MavNet_Core_StateRate_.md&amp;value=---%0Auid%3A%20MavNet.PX4.Base.Vehicle.SubscribeState(System.Action%2CMavNet.Core.StateRate)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Base/Vehicle.cs/#L269">View Source</a>
+  </span>
+  <a id="MavNet_PX4_Base_Vehicle_SubscribeState_" data-uid="MavNet.PX4.Base.Vehicle.SubscribeState*"></a>
+  <h4 id="MavNet_PX4_Base_Vehicle_SubscribeState_System_Action_MavNet_Core_StateRate_" data-uid="MavNet.PX4.Base.Vehicle.SubscribeState(System.Action,MavNet.Core.StateRate)">SubscribeState(Action, StateRate)</h4>
+  <div class="markdown level1 summary"><p>Subscribe to state-change notifications at the given rate. The handler may run on
+any thread — for Blazor consumers, marshal to the UI thread via <code>InvokeAsync</code>
+inside the handler.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public StateSubscription SubscribeState(Action handler, StateRate rate)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action">Action</a></td>
+        <td><span class="parametername">handler</span></td>
+        <td><p>Called on each delivery. Exceptions are swallowed to keep the throttler alive.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="MavNet.Core.StateRate.html">StateRate</a></td>
+        <td><span class="parametername">rate</span></td>
+        <td><p><a class="xref" href="MavNet.Core.StateRate.html#MavNet_Core_StateRate_Raw">Raw</a> = every packet; otherwise rate-limited.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="MavNet.Core.StateSubscription.html">StateSubscription</a></td>
+        <td><p>Dispose to unsubscribe. Idempotent.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/UltimateSeeSharp/MavNet/new/main/apiSpec/new?filename=MavNet_PX4_Base_Vehicle_TakeoffAsync_System_Double_System_Threading_CancellationToken_.md&amp;value=---%0Auid%3A%20MavNet.PX4.Base.Vehicle.TakeoffAsync(System.Double%2CSystem.Threading.CancellationToken)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Base/Vehicle.cs/#L378">View Source</a>
+  </span>
+  <a id="MavNet_PX4_Base_Vehicle_TakeoffAsync_" data-uid="MavNet.PX4.Base.Vehicle.TakeoffAsync*"></a>
+  <h4 id="MavNet_PX4_Base_Vehicle_TakeoffAsync_System_Double_System_Threading_CancellationToken_" data-uid="MavNet.PX4.Base.Vehicle.TakeoffAsync(System.Double,System.Threading.CancellationToken)">TakeoffAsync(double, CancellationToken)</h4>
+  <div class="markdown level1 summary"><p>Commands takeoff to <code class="paramref">altMeters</code> metres above the home point.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Task&lt;CommandOutcome&gt; TakeoffAsync(double altMeters, CancellationToken ct = default)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></td>
+        <td><span class="parametername">altMeters</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></td>
+        <td><span class="parametername">ct</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="MavNet.PX4.CommandOutcome.html">CommandOutcome</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="events">Events
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/UltimateSeeSharp/MavNet/new/main/apiSpec/new?filename=MavNet_PX4_Base_Vehicle_HeartbeatReceived.md&amp;value=---%0Auid%3A%20MavNet.PX4.Base.Vehicle.HeartbeatReceived%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Base/Vehicle.cs/#L138">View Source</a>
+  </span>
+  <h4 id="MavNet_PX4_Base_Vehicle_HeartbeatReceived" data-uid="MavNet.PX4.Base.Vehicle.HeartbeatReceived">HeartbeatReceived</h4>
+  <div class="markdown level1 summary"><p>Diagnostic: fires once per inbound HEARTBEAT with the decoded payload and wall-clock receive timestamp.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event Action&lt;Heartbeat, DateTime&gt;? HeartbeatReceived</code></pre>
+  </div>
+  <h5 class="eventType">Event Type</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-2">Action</a>&lt;<span class="xref">Heartbeat</span>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.datetime">DateTime</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/UltimateSeeSharp/MavNet/new/main/apiSpec/new?filename=MavNet_PX4_Base_Vehicle_StateChanged.md&amp;value=---%0Auid%3A%20MavNet.PX4.Base.Vehicle.StateChanged%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Base/Vehicle.cs/#L135">View Source</a>
+  </span>
+  <h4 id="MavNet_PX4_Base_Vehicle_StateChanged" data-uid="MavNet.PX4.Base.Vehicle.StateChanged">StateChanged</h4>
+  <div class="markdown level1 summary"><p>Fires after every state-affecting message — high frequency (10–50 Hz typical). Prefer
+<a class="xref" href="MavNet.PX4.Base.Vehicle.html#MavNet_PX4_Base_Vehicle_SubscribeState_System_Action_MavNet_Core_StateRate_">SubscribeState(Action, StateRate)</a>: it lets you pick a throttle rate at
+the call site (<code>StateRate.Hz(2)</code>, <code>StateRate.Every(...)</code>, or <code>StateRate.Raw</code>
+for full fidelity). This raw event remains public for consumers that genuinely want
+every packet without going through the throttler.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event Action? StateChanged</code></pre>
+  </div>
+  <h5 class="eventType">Event Type</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action">Action</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.iasyncdisposable">IAsyncDisposable</a>
+  </div>
+  <div>
+      <a class="xref" href="MavNet.Core.IStateObservable.html">IStateObservable</a>
+  </div>
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/UltimateSeeSharp/MavNet/new/main/apiSpec/new?filename=MavNet_PX4_Base_Vehicle.md&amp;value=---%0Auid%3A%20MavNet.PX4.Base.Vehicle%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Edit this page</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Base/Vehicle.cs/#L31" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      
+      <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>
