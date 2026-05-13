@@ -1,0 +1,9 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <PackageId>MavNet.Core</PackageId>
+    <Description>MavNet — shared primitive types (MavId) used across the MAVLink stack.</Description>
+    <IsPackable>true</IsPackable>
+  </PropertyGroup>
+
+</Project>

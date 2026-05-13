@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <PackageId>MavNet.Protocol.Generated</PackageId>
+    <Description>MavNet — auto-generated MAVLink message structs and enums (common dialect subset).</Description>
+    <IsPackable>true</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MavNet.Protocol\MavNet.Protocol.csproj" />
+  </ItemGroup>
+
+</Project>

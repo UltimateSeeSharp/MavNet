@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <PackageId>MavNet.PX4</PackageId>
+    <Description>MavNet — PX4-flavoured Drone/Vehicle abstractions on top of the MAVLink transport.</Description>
+    <IsPackable>true</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MavNet.Transport.Udp\MavNet.Transport.Udp.csproj" />
+    <ProjectReference Include="..\MavNet.Protocol.Generated\MavNet.Protocol.Generated.csproj" />
+  </ItemGroup>
+
+</Project>

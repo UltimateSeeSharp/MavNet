@@ -1,0 +1,29 @@
+<Project>
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <LangVersion>latest</LangVersion>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <Authors>UltimateSeeSharp</Authors>
+    <Company>UltimateSeeSharp</Company>
+    <Product>MavNet</Product>
+    <Copyright>Copyright (c) UltimateSeeSharp</Copyright>
+    <Version>0.1.0</Version>
+    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/UltimateSeeSharp/MavNet</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/UltimateSeeSharp/MavNet</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>mavlink;drone;uav;px4;ardupilot</PackageTags>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <ContinuousIntegrationBuild Condition="'$(GITHUB_ACTIONS)' == 'true'">true</ContinuousIntegrationBuild>
+  </PropertyGroup>
+
+</Project>

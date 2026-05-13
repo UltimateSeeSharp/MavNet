@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <PackageId>MavNet.Protocol</PackageId>
+    <Description>MavNet — MAVLink v2 wire-format primitives: CRC16, frame layout, IMavlinkMessage abstraction.</Description>
+    <IsPackable>true</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MavNet.Core\MavNet.Core.csproj" />
+  </ItemGroup>
+
+</Project>

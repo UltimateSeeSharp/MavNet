@@ -1,0 +1,15 @@
+<Solution>
+  <Folder Name="/examples/">
+    <Project Path="examples/MavNet.Probe/MavNet.Probe.csproj" />
+  </Folder>
+  <Folder Name="/src/">
+    <Project Path="src/MavNet.Core/MavNet.Core.csproj" />
+    <Project Path="src/MavNet.Protocol.Generated/MavNet.Protocol.Generated.csproj" />
+    <Project Path="src/MavNet.Protocol/MavNet.Protocol.csproj" />
+    <Project Path="src/MavNet.PX4/MavNet.PX4.csproj" />
+    <Project Path="src/MavNet.Transport.Udp/MavNet.Transport.Udp.csproj" />
+  </Folder>
+  <Folder Name="/tools/">
+    <Project Path="tools/MavNet.CodeGen/MavNet.CodeGen.csproj" />
+  </Folder>
+</Solution>
