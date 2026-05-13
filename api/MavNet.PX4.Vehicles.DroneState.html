@@ -1,99 +1,129 @@
 ﻿<!DOCTYPE html>
-<!--[if IE]><![endif]-->
 <html>
-
   <head>
     <meta charset="utf-8">
-      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
       <title>Struct DroneState | MavNet — MAVLink for .NET </title>
-      <meta name="viewport" content="width=device-width">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <meta name="title" content="Struct DroneState | MavNet — MAVLink for .NET ">
-    
-    <meta name="description" content="Immutable per-fire snapshot of a &#39;s observable state. Captured atomically when  delivers, so consumers see a coherent view (no torn reads across separate property gets). Use this overload from telemetry recorders, replay, and anywhere a handler might run on a different thread from the receive loop.">
-      <link rel="shortcut icon" href="../favicon.ico">
-      <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
-      <link rel="stylesheet" href="../styles/docfx.css">
-      <link rel="stylesheet" href="../styles/main.css">
-      <meta property="docfx:navrel" content="../toc.html">
-      <meta property="docfx:tocrel" content="toc.html">
-    
-    <meta property="docfx:rel" content="../">
-    
+      
+      <meta name="description" content="Immutable per-fire snapshot of a &#39;s observable state. Captured atomically when  delivers, so consumers see a coherent view (no torn reads across separate property gets). Use this overload from telemetry recorders, replay, and anywhere a handler might run on a different thread from the receive loop.">
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/UltimateSeeSharp/MavNet/new/main/apiSpec/new?filename=MavNet_PX4_Vehicles_DroneState.md&amp;value=---%0Auid%3A%20MavNet.PX4.Vehicles.DroneState%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
   </head>
-  <body data-spy="scroll" data-target="#affix" data-offset="120">
-    <div id="wrapper">
-      <header>
 
-        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
-          <div class="container">
-            <div class="navbar-header">
-              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-              </button>
-
-              <a class="navbar-brand" href="../index.html">
-                <img id="logo" class="svg" src="../logo.svg" alt="MavNet">
-              </a>
-            </div>
-            <div class="collapse navbar-collapse" id="navbar">
-              <form class="navbar-form navbar-right" role="search" id="search">
-                <div class="form-group">
-                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
-                </div>
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../logo.svg" alt="MavNet">
+            MavNet
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
               </form>
             </div>
           </div>
-        </nav>
-
-        <div class="subnav navbar navbar-default">
-          <div class="container hide-when-search" id="breadcrumb">
-            <ul class="breadcrumb">
-              <li></li>
-            </ul>
-          </div>
         </div>
-      </header>
-      <div class="container body-content">
+      </nav>
+    </header>
 
-        <div id="search-results">
-          <div class="search-list">Search Results for <span></span></div>
-          <div class="sr-items">
-            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
           </div>
-          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last"></ul>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
         </div>
       </div>
-      <div role="main" class="container body-content hide-when-search">
 
-        <div class="sidenav hide-when-search">
-          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
-          <div class="sidetoggle collapse" id="sidetoggle">
-            <div id="sidetoc"></div>
-          </div>
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
         </div>
-        <div class="article row grid-right">
-          <div class="col-md-10">
-            <article class="content wrap" id="_content" data-uid="MavNet.PX4.Vehicles.DroneState">
+
+        <article data-uid="MavNet.PX4.Vehicles.DroneState">
 
 
 
-  <h1 id="MavNet_PX4_Vehicles_DroneState" data-uid="MavNet.PX4.Vehicles.DroneState" class="text-break">Struct DroneState</h1>
-  <div class="markdown level0 summary"><p>Immutable per-fire snapshot of a <a class="xref" href="MavNet.PX4.Vehicles.Drone.html">Drone</a>'s observable state. Captured
+  <h1 id="MavNet_PX4_Vehicles_DroneState" data-uid="MavNet.PX4.Vehicles.DroneState" class="text-break">
+Struct DroneState  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Vehicles/Drone.cs/#L17"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="MavNet.html">MavNet</a>.<a class="xref" href="MavNet.PX4.html">PX4</a>.<a class="xref" href="MavNet.PX4.Vehicles.html">Vehicles</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>MavNet.PX4.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>Immutable per-fire snapshot of a <a class="xref" href="MavNet.PX4.Vehicles.Drone.html">Drone</a>'s observable state. Captured
 atomically when <a class="xref" href="MavNet.PX4.Vehicles.Drone.html#MavNet_PX4_Vehicles_Drone_SubscribeState_System_Action_MavNet_PX4_Vehicles_DroneState__MavNet_Core_StateRate_">SubscribeState(Action&lt;DroneState&gt;, StateRate)</a>
 delivers, so consumers see a coherent view (no torn reads across separate property
 gets). Use this overload from telemetry recorders, replay, and anywhere a handler
 might run on a different thread from the receive loop.</p>
 </div>
-  <div class="markdown level0 conceptual"></div>
-  <div class="implements">
-    <h5>Implements</h5>
-    <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.iequatable-1">IEquatable</a>&lt;<a class="xref" href="MavNet.PX4.Vehicles.DroneState.html">DroneState</a>&gt;</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public readonly record struct DroneState : IEquatable&lt;DroneState&gt;</code></pre>
   </div>
-  <div class="inheritedMembers">
-    <h5>Inherited Members</h5>
+
+
+
+
+
+  <dl class="typelist implements">
+    <dt>Implements</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.iequatable-1">IEquatable</a>&lt;<a class="xref" href="MavNet.PX4.Vehicles.DroneState.html">DroneState</a>&gt;</div>
+    </dd>
+  </dl>
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
     <div>
       <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.equals">ValueType.Equals(object)</a>
     </div>
@@ -112,24 +142,24 @@ might run on a different thread from the receive loop.</p>
     <div>
       <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
     </div>
-  </div>
-  <h6><strong>Namespace</strong>: <a class="xref" href="MavNet.html">MavNet</a>.<a class="xref" href="MavNet.PX4.html">PX4</a>.<a class="xref" href="MavNet.PX4.Vehicles.html">Vehicles</a></h6>
-  <h6><strong>Assembly</strong>: MavNet.PX4.dll</h6>
-  <h5 id="MavNet_PX4_Vehicles_DroneState_syntax">Syntax</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public readonly record struct DroneState : IEquatable&lt;DroneState&gt;</code></pre>
-  </div>
-  <h3 id="constructors">Constructors
-</h3>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/UltimateSeeSharp/MavNet/new/main/apiSpec/new?filename=MavNet_PX4_Vehicles_DroneState__ctor_System_Double_System_Double_System_Double_System_Double_System_Double_System_String_System_Boolean_System_Double_System_Int32_System_Boolean_.md&amp;value=---%0Auid%3A%20MavNet.PX4.Vehicles.DroneState.%23ctor(System.Double%2CSystem.Double%2CSystem.Double%2CSystem.Double%2CSystem.Double%2CSystem.String%2CSystem.Boolean%2CSystem.Double%2CSystem.Int32%2CSystem.Boolean)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Vehicles/Drone.cs/#L17">View Source</a>
-  </span>
+  </dd></dl>
+
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
   <a id="MavNet_PX4_Vehicles_DroneState__ctor_" data-uid="MavNet.PX4.Vehicles.DroneState.#ctor*"></a>
-  <h4 id="MavNet_PX4_Vehicles_DroneState__ctor_System_Double_System_Double_System_Double_System_Double_System_Double_System_String_System_Boolean_System_Double_System_Int32_System_Boolean_" data-uid="MavNet.PX4.Vehicles.DroneState.#ctor(System.Double,System.Double,System.Double,System.Double,System.Double,System.String,System.Boolean,System.Double,System.Int32,System.Boolean)">DroneState(double, double, double, double, double, string, bool, double, int, bool)</h4>
+
+  <h3 id="MavNet_PX4_Vehicles_DroneState__ctor_System_Double_System_Double_System_Double_System_Double_System_Double_System_String_System_Boolean_System_Double_System_Int32_System_Boolean_" data-uid="MavNet.PX4.Vehicles.DroneState.#ctor(System.Double,System.Double,System.Double,System.Double,System.Double,System.String,System.Boolean,System.Double,System.Int32,System.Boolean)">
+  DroneState(double, double, double, double, double, string, bool, double, int, bool)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Vehicles/Drone.cs/#L17"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
   <div class="markdown level1 summary"><p>Immutable per-fire snapshot of a <a class="xref" href="MavNet.PX4.Vehicles.Drone.html">Drone</a>'s observable state. Captured
 atomically when <a class="xref" href="MavNet.PX4.Vehicles.Drone.html#MavNet_PX4_Vehicles_Drone_SubscribeState_System_Action_MavNet_PX4_Vehicles_DroneState__MavNet_Core_StateRate_">SubscribeState(Action&lt;DroneState&gt;, StateRate)</a>
 delivers, so consumers see a coherent view (no torn reads across separate property
@@ -137,419 +167,383 @@ gets). Use this overload from telemetry recorders, replay, and anywhere a handle
 might run on a different thread from the receive loop.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
+
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public DroneState(double Lat, double Lon, double Alt, double Hdg, double Vel, string Mode, bool Armed, double Battery, int Sats, bool LinkUp)</code></pre>
   </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></td>
-        <td><span class="parametername">Lat</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></td>
-        <td><span class="parametername">Lon</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></td>
-        <td><span class="parametername">Alt</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></td>
-        <td><span class="parametername">Hdg</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></td>
-        <td><span class="parametername">Vel</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
-        <td><span class="parametername">Mode</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
-        <td><span class="parametername">Armed</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></td>
-        <td><span class="parametername">Battery</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></td>
-        <td><span class="parametername">Sats</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
-        <td><span class="parametername">LinkUp</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h3 id="properties">Properties
-</h3>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/UltimateSeeSharp/MavNet/new/main/apiSpec/new?filename=MavNet_PX4_Vehicles_DroneState_Alt.md&amp;value=---%0Auid%3A%20MavNet.PX4.Vehicles.DroneState.Alt%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Vehicles/Drone.cs/#L20">View Source</a>
-  </span>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>Lat</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd></dd>
+    <dt><code>Lon</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd></dd>
+    <dt><code>Alt</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd></dd>
+    <dt><code>Hdg</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd></dd>
+    <dt><code>Vel</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd></dd>
+    <dt><code>Mode</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+    <dt><code>Armed</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+    <dt><code>Battery</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd></dd>
+    <dt><code>Sats</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+    <dt><code>LinkUp</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
   <a id="MavNet_PX4_Vehicles_DroneState_Alt_" data-uid="MavNet.PX4.Vehicles.DroneState.Alt*"></a>
-  <h4 id="MavNet_PX4_Vehicles_DroneState_Alt" data-uid="MavNet.PX4.Vehicles.DroneState.Alt">Alt</h4>
+
+  <h3 id="MavNet_PX4_Vehicles_DroneState_Alt" data-uid="MavNet.PX4.Vehicles.DroneState.Alt">
+  Alt
+  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Vehicles/Drone.cs/#L20"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
+
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public double Alt { get; init; }</code></pre>
   </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/UltimateSeeSharp/MavNet/new/main/apiSpec/new?filename=MavNet_PX4_Vehicles_DroneState_Armed.md&amp;value=---%0Auid%3A%20MavNet.PX4.Vehicles.DroneState.Armed%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Vehicles/Drone.cs/#L24">View Source</a>
-  </span>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
   <a id="MavNet_PX4_Vehicles_DroneState_Armed_" data-uid="MavNet.PX4.Vehicles.DroneState.Armed*"></a>
-  <h4 id="MavNet_PX4_Vehicles_DroneState_Armed" data-uid="MavNet.PX4.Vehicles.DroneState.Armed">Armed</h4>
+
+  <h3 id="MavNet_PX4_Vehicles_DroneState_Armed" data-uid="MavNet.PX4.Vehicles.DroneState.Armed">
+  Armed
+  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Vehicles/Drone.cs/#L24"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
+
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public bool Armed { get; init; }</code></pre>
   </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/UltimateSeeSharp/MavNet/new/main/apiSpec/new?filename=MavNet_PX4_Vehicles_DroneState_Battery.md&amp;value=---%0Auid%3A%20MavNet.PX4.Vehicles.DroneState.Battery%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Vehicles/Drone.cs/#L25">View Source</a>
-  </span>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
   <a id="MavNet_PX4_Vehicles_DroneState_Battery_" data-uid="MavNet.PX4.Vehicles.DroneState.Battery*"></a>
-  <h4 id="MavNet_PX4_Vehicles_DroneState_Battery" data-uid="MavNet.PX4.Vehicles.DroneState.Battery">Battery</h4>
+
+  <h3 id="MavNet_PX4_Vehicles_DroneState_Battery" data-uid="MavNet.PX4.Vehicles.DroneState.Battery">
+  Battery
+  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Vehicles/Drone.cs/#L25"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
+
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public double Battery { get; init; }</code></pre>
   </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/UltimateSeeSharp/MavNet/new/main/apiSpec/new?filename=MavNet_PX4_Vehicles_DroneState_Hdg.md&amp;value=---%0Auid%3A%20MavNet.PX4.Vehicles.DroneState.Hdg%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Vehicles/Drone.cs/#L21">View Source</a>
-  </span>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
   <a id="MavNet_PX4_Vehicles_DroneState_Hdg_" data-uid="MavNet.PX4.Vehicles.DroneState.Hdg*"></a>
-  <h4 id="MavNet_PX4_Vehicles_DroneState_Hdg" data-uid="MavNet.PX4.Vehicles.DroneState.Hdg">Hdg</h4>
+
+  <h3 id="MavNet_PX4_Vehicles_DroneState_Hdg" data-uid="MavNet.PX4.Vehicles.DroneState.Hdg">
+  Hdg
+  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Vehicles/Drone.cs/#L21"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
+
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public double Hdg { get; init; }</code></pre>
   </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/UltimateSeeSharp/MavNet/new/main/apiSpec/new?filename=MavNet_PX4_Vehicles_DroneState_Lat.md&amp;value=---%0Auid%3A%20MavNet.PX4.Vehicles.DroneState.Lat%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Vehicles/Drone.cs/#L18">View Source</a>
-  </span>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
   <a id="MavNet_PX4_Vehicles_DroneState_Lat_" data-uid="MavNet.PX4.Vehicles.DroneState.Lat*"></a>
-  <h4 id="MavNet_PX4_Vehicles_DroneState_Lat" data-uid="MavNet.PX4.Vehicles.DroneState.Lat">Lat</h4>
+
+  <h3 id="MavNet_PX4_Vehicles_DroneState_Lat" data-uid="MavNet.PX4.Vehicles.DroneState.Lat">
+  Lat
+  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Vehicles/Drone.cs/#L18"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
+
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public double Lat { get; init; }</code></pre>
   </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/UltimateSeeSharp/MavNet/new/main/apiSpec/new?filename=MavNet_PX4_Vehicles_DroneState_LinkUp.md&amp;value=---%0Auid%3A%20MavNet.PX4.Vehicles.DroneState.LinkUp%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Vehicles/Drone.cs/#L27">View Source</a>
-  </span>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
   <a id="MavNet_PX4_Vehicles_DroneState_LinkUp_" data-uid="MavNet.PX4.Vehicles.DroneState.LinkUp*"></a>
-  <h4 id="MavNet_PX4_Vehicles_DroneState_LinkUp" data-uid="MavNet.PX4.Vehicles.DroneState.LinkUp">LinkUp</h4>
+
+  <h3 id="MavNet_PX4_Vehicles_DroneState_LinkUp" data-uid="MavNet.PX4.Vehicles.DroneState.LinkUp">
+  LinkUp
+  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Vehicles/Drone.cs/#L27"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
+
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public bool LinkUp { get; init; }</code></pre>
   </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/UltimateSeeSharp/MavNet/new/main/apiSpec/new?filename=MavNet_PX4_Vehicles_DroneState_Lon.md&amp;value=---%0Auid%3A%20MavNet.PX4.Vehicles.DroneState.Lon%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Vehicles/Drone.cs/#L19">View Source</a>
-  </span>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
   <a id="MavNet_PX4_Vehicles_DroneState_Lon_" data-uid="MavNet.PX4.Vehicles.DroneState.Lon*"></a>
-  <h4 id="MavNet_PX4_Vehicles_DroneState_Lon" data-uid="MavNet.PX4.Vehicles.DroneState.Lon">Lon</h4>
+
+  <h3 id="MavNet_PX4_Vehicles_DroneState_Lon" data-uid="MavNet.PX4.Vehicles.DroneState.Lon">
+  Lon
+  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Vehicles/Drone.cs/#L19"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
+
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public double Lon { get; init; }</code></pre>
   </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/UltimateSeeSharp/MavNet/new/main/apiSpec/new?filename=MavNet_PX4_Vehicles_DroneState_Mode.md&amp;value=---%0Auid%3A%20MavNet.PX4.Vehicles.DroneState.Mode%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Vehicles/Drone.cs/#L23">View Source</a>
-  </span>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
   <a id="MavNet_PX4_Vehicles_DroneState_Mode_" data-uid="MavNet.PX4.Vehicles.DroneState.Mode*"></a>
-  <h4 id="MavNet_PX4_Vehicles_DroneState_Mode" data-uid="MavNet.PX4.Vehicles.DroneState.Mode">Mode</h4>
+
+  <h3 id="MavNet_PX4_Vehicles_DroneState_Mode" data-uid="MavNet.PX4.Vehicles.DroneState.Mode">
+  Mode
+  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Vehicles/Drone.cs/#L23"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
+
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public string Mode { get; init; }</code></pre>
   </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/UltimateSeeSharp/MavNet/new/main/apiSpec/new?filename=MavNet_PX4_Vehicles_DroneState_Sats.md&amp;value=---%0Auid%3A%20MavNet.PX4.Vehicles.DroneState.Sats%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Vehicles/Drone.cs/#L26">View Source</a>
-  </span>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
   <a id="MavNet_PX4_Vehicles_DroneState_Sats_" data-uid="MavNet.PX4.Vehicles.DroneState.Sats*"></a>
-  <h4 id="MavNet_PX4_Vehicles_DroneState_Sats" data-uid="MavNet.PX4.Vehicles.DroneState.Sats">Sats</h4>
+
+  <h3 id="MavNet_PX4_Vehicles_DroneState_Sats" data-uid="MavNet.PX4.Vehicles.DroneState.Sats">
+  Sats
+  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Vehicles/Drone.cs/#L26"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
+
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public int Sats { get; init; }</code></pre>
   </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/UltimateSeeSharp/MavNet/new/main/apiSpec/new?filename=MavNet_PX4_Vehicles_DroneState_Vel.md&amp;value=---%0Auid%3A%20MavNet.PX4.Vehicles.DroneState.Vel%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Vehicles/Drone.cs/#L22">View Source</a>
-  </span>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
   <a id="MavNet_PX4_Vehicles_DroneState_Vel_" data-uid="MavNet.PX4.Vehicles.DroneState.Vel*"></a>
-  <h4 id="MavNet_PX4_Vehicles_DroneState_Vel" data-uid="MavNet.PX4.Vehicles.DroneState.Vel">Vel</h4>
+
+  <h3 id="MavNet_PX4_Vehicles_DroneState_Vel" data-uid="MavNet.PX4.Vehicles.DroneState.Vel">
+  Vel
+  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Vehicles/Drone.cs/#L22"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
+
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public double Vel { get; init; }</code></pre>
   </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h3 id="implements">Implements</h3>
-  <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.iequatable-1">IEquatable&lt;T&gt;</a>
-  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
 
 </article>
-          </div>
 
-          <div class="hidden-sm col-md-2" role="complementary">
-            <div class="sideaffix">
-              <div class="contribution">
-                <ul class="nav">
-                  <li>
-                    <a href="https://github.com/UltimateSeeSharp/MavNet/new/main/apiSpec/new?filename=MavNet_PX4_Vehicles_DroneState.md&amp;value=---%0Auid%3A%20MavNet.PX4.Vehicles.DroneState%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Edit this page</a>
-                  </li>
-                  <li>
-                    <a href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Vehicles/Drone.cs/#L17" class="contribution-link">View Source</a>
-                  </li>
-                </ul>
-              </div>
-              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
-                <h5>In this article</h5>
-                <div></div>
-              </nav>
-            </div>
-          </div>
+        <div class="contribution d-print-none">
+          <a href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Vehicles/Drone.cs/#L17" class="edit-link">Edit this page</a>
         </div>
+
+
       </div>
 
-      <footer>
-        <div class="grad-bottom"></div>
-        <div class="footer">
-          <div class="container">
-            <span class="pull-right">
-              <a href="#top">Back to top</a>
-            </span>
-      
-      <span>Generated by <strong>DocFX</strong></span>
-          </div>
-        </div>
-      </footer>
-    </div>
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
 
-    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
-    <script type="text/javascript" src="../styles/docfx.js"></script>
-    <script type="text/javascript" src="../styles/main.js"></script>
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
   </body>
 </html>

@@ -1,91 +1,119 @@
 ﻿<!DOCTYPE html>
-<!--[if IE]><![endif]-->
 <html>
-
   <head>
     <meta charset="utf-8">
-      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
       <title>Struct MavlinkFrame | MavNet — MAVLink for .NET </title>
-      <meta name="viewport" content="width=device-width">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <meta name="title" content="Struct MavlinkFrame | MavNet — MAVLink for .NET ">
-    
-    <meta name="description" content="MAVLink v2 wire frame: [0xFD][len][incompat][compat][seq][sysid][compid][msgid(3)][payload][crc(2)].">
-      <link rel="shortcut icon" href="../favicon.ico">
-      <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
-      <link rel="stylesheet" href="../styles/docfx.css">
-      <link rel="stylesheet" href="../styles/main.css">
-      <meta property="docfx:navrel" content="../toc.html">
-      <meta property="docfx:tocrel" content="toc.html">
-    
-    <meta property="docfx:rel" content="../">
-    
+      
+      <meta name="description" content="MAVLink v2 wire frame: [0xFD][len][incompat][compat][seq][sysid][compid][msgid(3)][payload][crc(2)].">
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/UltimateSeeSharp/MavNet/new/main/apiSpec/new?filename=MavNet_Protocol_MavlinkFrame.md&amp;value=---%0Auid%3A%20MavNet.Protocol.MavlinkFrame%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
   </head>
-  <body data-spy="scroll" data-target="#affix" data-offset="120">
-    <div id="wrapper">
-      <header>
 
-        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
-          <div class="container">
-            <div class="navbar-header">
-              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-              </button>
-
-              <a class="navbar-brand" href="../index.html">
-                <img id="logo" class="svg" src="../logo.svg" alt="MavNet">
-              </a>
-            </div>
-            <div class="collapse navbar-collapse" id="navbar">
-              <form class="navbar-form navbar-right" role="search" id="search">
-                <div class="form-group">
-                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
-                </div>
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../logo.svg" alt="MavNet">
+            MavNet
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
               </form>
             </div>
           </div>
-        </nav>
-
-        <div class="subnav navbar navbar-default">
-          <div class="container hide-when-search" id="breadcrumb">
-            <ul class="breadcrumb">
-              <li></li>
-            </ul>
-          </div>
         </div>
-      </header>
-      <div class="container body-content">
+      </nav>
+    </header>
 
-        <div id="search-results">
-          <div class="search-list">Search Results for <span></span></div>
-          <div class="sr-items">
-            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
           </div>
-          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last"></ul>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
         </div>
       </div>
-      <div role="main" class="container body-content hide-when-search">
 
-        <div class="sidenav hide-when-search">
-          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
-          <div class="sidetoggle collapse" id="sidetoggle">
-            <div id="sidetoc"></div>
-          </div>
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
         </div>
-        <div class="article row grid-right">
-          <div class="col-md-10">
-            <article class="content wrap" id="_content" data-uid="MavNet.Protocol.MavlinkFrame">
+
+        <article data-uid="MavNet.Protocol.MavlinkFrame">
 
 
 
-  <h1 id="MavNet_Protocol_MavlinkFrame" data-uid="MavNet.Protocol.MavlinkFrame" class="text-break">Struct MavlinkFrame</h1>
-  <div class="markdown level0 summary"><p>MAVLink v2 wire frame: [0xFD][len][incompat][compat][seq][sysid][compid][msgid(3)][payload][crc(2)].</p>
+  <h1 id="MavNet_Protocol_MavlinkFrame" data-uid="MavNet.Protocol.MavlinkFrame" class="text-break">
+Struct MavlinkFrame  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.Protocol/MavlinkFrame.cs/#L8"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="MavNet.html">MavNet</a>.<a class="xref" href="MavNet.Protocol.html">Protocol</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>MavNet.Protocol.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>MAVLink v2 wire frame: [0xFD][len][incompat][compat][seq][sysid][compid][msgid(3)][payload][crc(2)].</p>
 </div>
-  <div class="markdown level0 conceptual"></div>
-  <div class="inheritedMembers">
-    <h5>Inherited Members</h5>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public readonly ref struct MavlinkFrame</code></pre>
+  </div>
+
+
+
+
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
     <div>
       <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.equals">ValueType.Equals(object)</a>
     </div>
@@ -104,360 +132,340 @@
     <div>
       <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
     </div>
-  </div>
-  <h6><strong>Namespace</strong>: <a class="xref" href="MavNet.html">MavNet</a>.<a class="xref" href="MavNet.Protocol.html">Protocol</a></h6>
-  <h6><strong>Assembly</strong>: MavNet.Protocol.dll</h6>
-  <h5 id="MavNet_Protocol_MavlinkFrame_syntax">Syntax</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public readonly ref struct MavlinkFrame</code></pre>
-  </div>
-  <h3 id="properties">Properties
-</h3>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/UltimateSeeSharp/MavNet/new/main/apiSpec/new?filename=MavNet_Protocol_MavlinkFrame_CompatFlags.md&amp;value=---%0Auid%3A%20MavNet.Protocol.MavlinkFrame.CompatFlags%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.Protocol/MavlinkFrame.cs/#L15">View Source</a>
-  </span>
+  </dd></dl>
+
+
+
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
   <a id="MavNet_Protocol_MavlinkFrame_CompatFlags_" data-uid="MavNet.Protocol.MavlinkFrame.CompatFlags*"></a>
-  <h4 id="MavNet_Protocol_MavlinkFrame_CompatFlags" data-uid="MavNet.Protocol.MavlinkFrame.CompatFlags">CompatFlags</h4>
+
+  <h3 id="MavNet_Protocol_MavlinkFrame_CompatFlags" data-uid="MavNet.Protocol.MavlinkFrame.CompatFlags">
+  CompatFlags
+  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.Protocol/MavlinkFrame.cs/#L15"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
   <div class="markdown level1 summary"><p>Compatibility flags; unknown bits are ignored by receivers.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
+
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public byte CompatFlags { get; }</code></pre>
   </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/UltimateSeeSharp/MavNet/new/main/apiSpec/new?filename=MavNet_Protocol_MavlinkFrame_ComponentId.md&amp;value=---%0Auid%3A%20MavNet.Protocol.MavlinkFrame.ComponentId%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.Protocol/MavlinkFrame.cs/#L21">View Source</a>
-  </span>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
   <a id="MavNet_Protocol_MavlinkFrame_ComponentId_" data-uid="MavNet.Protocol.MavlinkFrame.ComponentId*"></a>
-  <h4 id="MavNet_Protocol_MavlinkFrame_ComponentId" data-uid="MavNet.Protocol.MavlinkFrame.ComponentId">ComponentId</h4>
+
+  <h3 id="MavNet_Protocol_MavlinkFrame_ComponentId" data-uid="MavNet.Protocol.MavlinkFrame.ComponentId">
+  ComponentId
+  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.Protocol/MavlinkFrame.cs/#L21"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
   <div class="markdown level1 summary"><p>Sender component id.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
+
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public byte ComponentId { get; }</code></pre>
   </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/UltimateSeeSharp/MavNet/new/main/apiSpec/new?filename=MavNet_Protocol_MavlinkFrame_IncompatFlags.md&amp;value=---%0Auid%3A%20MavNet.Protocol.MavlinkFrame.IncompatFlags%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.Protocol/MavlinkFrame.cs/#L13">View Source</a>
-  </span>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
   <a id="MavNet_Protocol_MavlinkFrame_IncompatFlags_" data-uid="MavNet.Protocol.MavlinkFrame.IncompatFlags*"></a>
-  <h4 id="MavNet_Protocol_MavlinkFrame_IncompatFlags" data-uid="MavNet.Protocol.MavlinkFrame.IncompatFlags">IncompatFlags</h4>
+
+  <h3 id="MavNet_Protocol_MavlinkFrame_IncompatFlags" data-uid="MavNet.Protocol.MavlinkFrame.IncompatFlags">
+  IncompatFlags
+  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.Protocol/MavlinkFrame.cs/#L13"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
   <div class="markdown level1 summary"><p>Incompatibility flags; any unknown bit causes the frame to be dropped.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
+
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public byte IncompatFlags { get; }</code></pre>
   </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/UltimateSeeSharp/MavNet/new/main/apiSpec/new?filename=MavNet_Protocol_MavlinkFrame_MessageId.md&amp;value=---%0Auid%3A%20MavNet.Protocol.MavlinkFrame.MessageId%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.Protocol/MavlinkFrame.cs/#L23">View Source</a>
-  </span>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
   <a id="MavNet_Protocol_MavlinkFrame_MessageId_" data-uid="MavNet.Protocol.MavlinkFrame.MessageId*"></a>
-  <h4 id="MavNet_Protocol_MavlinkFrame_MessageId" data-uid="MavNet.Protocol.MavlinkFrame.MessageId">MessageId</h4>
+
+  <h3 id="MavNet_Protocol_MavlinkFrame_MessageId" data-uid="MavNet.Protocol.MavlinkFrame.MessageId">
+  MessageId
+  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.Protocol/MavlinkFrame.cs/#L23"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
   <div class="markdown level1 summary"><p>24-bit MAVLink message id.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
+
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public uint MessageId { get; }</code></pre>
   </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint32">uint</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/UltimateSeeSharp/MavNet/new/main/apiSpec/new?filename=MavNet_Protocol_MavlinkFrame_Payload.md&amp;value=---%0Auid%3A%20MavNet.Protocol.MavlinkFrame.Payload%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.Protocol/MavlinkFrame.cs/#L25">View Source</a>
-  </span>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint32">uint</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
   <a id="MavNet_Protocol_MavlinkFrame_Payload_" data-uid="MavNet.Protocol.MavlinkFrame.Payload*"></a>
-  <h4 id="MavNet_Protocol_MavlinkFrame_Payload" data-uid="MavNet.Protocol.MavlinkFrame.Payload">Payload</h4>
+
+  <h3 id="MavNet_Protocol_MavlinkFrame_Payload" data-uid="MavNet.Protocol.MavlinkFrame.Payload">
+  Payload
+  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.Protocol/MavlinkFrame.cs/#L25"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
   <div class="markdown level1 summary"><p>Decoded payload bytes (length = <a class="xref" href="MavNet.Protocol.MavlinkFrame.html#MavNet_Protocol_MavlinkFrame_PayloadLength">PayloadLength</a>). Slice of the original buffer — do not hold past the buffer's lifetime.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
+
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public ReadOnlySpan&lt;byte&gt; Payload { get; }</code></pre>
   </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.readonlyspan-1">ReadOnlySpan</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>&gt;</td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/UltimateSeeSharp/MavNet/new/main/apiSpec/new?filename=MavNet_Protocol_MavlinkFrame_PayloadLength.md&amp;value=---%0Auid%3A%20MavNet.Protocol.MavlinkFrame.PayloadLength%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.Protocol/MavlinkFrame.cs/#L11">View Source</a>
-  </span>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.readonlyspan-1">ReadOnlySpan</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
   <a id="MavNet_Protocol_MavlinkFrame_PayloadLength_" data-uid="MavNet.Protocol.MavlinkFrame.PayloadLength*"></a>
-  <h4 id="MavNet_Protocol_MavlinkFrame_PayloadLength" data-uid="MavNet.Protocol.MavlinkFrame.PayloadLength">PayloadLength</h4>
+
+  <h3 id="MavNet_Protocol_MavlinkFrame_PayloadLength" data-uid="MavNet.Protocol.MavlinkFrame.PayloadLength">
+  PayloadLength
+  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.Protocol/MavlinkFrame.cs/#L11"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
   <div class="markdown level1 summary"><p>Number of payload bytes on the wire (0–255).</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
+
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public byte PayloadLength { get; }</code></pre>
   </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/UltimateSeeSharp/MavNet/new/main/apiSpec/new?filename=MavNet_Protocol_MavlinkFrame_Sequence.md&amp;value=---%0Auid%3A%20MavNet.Protocol.MavlinkFrame.Sequence%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.Protocol/MavlinkFrame.cs/#L17">View Source</a>
-  </span>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
   <a id="MavNet_Protocol_MavlinkFrame_Sequence_" data-uid="MavNet.Protocol.MavlinkFrame.Sequence*"></a>
-  <h4 id="MavNet_Protocol_MavlinkFrame_Sequence" data-uid="MavNet.Protocol.MavlinkFrame.Sequence">Sequence</h4>
+
+  <h3 id="MavNet_Protocol_MavlinkFrame_Sequence" data-uid="MavNet.Protocol.MavlinkFrame.Sequence">
+  Sequence
+  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.Protocol/MavlinkFrame.cs/#L17"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
   <div class="markdown level1 summary"><p>Packet sequence number, wraps at 255.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
+
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public byte Sequence { get; }</code></pre>
   </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/UltimateSeeSharp/MavNet/new/main/apiSpec/new?filename=MavNet_Protocol_MavlinkFrame_SystemId.md&amp;value=---%0Auid%3A%20MavNet.Protocol.MavlinkFrame.SystemId%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.Protocol/MavlinkFrame.cs/#L19">View Source</a>
-  </span>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
   <a id="MavNet_Protocol_MavlinkFrame_SystemId_" data-uid="MavNet.Protocol.MavlinkFrame.SystemId*"></a>
-  <h4 id="MavNet_Protocol_MavlinkFrame_SystemId" data-uid="MavNet.Protocol.MavlinkFrame.SystemId">SystemId</h4>
+
+  <h3 id="MavNet_Protocol_MavlinkFrame_SystemId" data-uid="MavNet.Protocol.MavlinkFrame.SystemId">
+  SystemId
+  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.Protocol/MavlinkFrame.cs/#L19"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
   <div class="markdown level1 summary"><p>Sender system id (1–255).</p>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
+
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public byte SystemId { get; }</code></pre>
   </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h3 id="methods">Methods
-</h3>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/UltimateSeeSharp/MavNet/new/main/apiSpec/new?filename=MavNet_Protocol_MavlinkFrame_TryDecode_System_ReadOnlySpan_System_Byte__MavNet_Protocol_MavlinkFrame__.md&amp;value=---%0Auid%3A%20MavNet.Protocol.MavlinkFrame.TryDecode(System.ReadOnlySpan%7BSystem.Byte%7D%2CMavNet.Protocol.MavlinkFrame%40)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.Protocol/MavlinkFrame.cs/#L49">View Source</a>
-  </span>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
   <a id="MavNet_Protocol_MavlinkFrame_TryDecode_" data-uid="MavNet.Protocol.MavlinkFrame.TryDecode*"></a>
-  <h4 id="MavNet_Protocol_MavlinkFrame_TryDecode_System_ReadOnlySpan_System_Byte__MavNet_Protocol_MavlinkFrame__" data-uid="MavNet.Protocol.MavlinkFrame.TryDecode(System.ReadOnlySpan{System.Byte},MavNet.Protocol.MavlinkFrame@)">TryDecode(ReadOnlySpan&lt;byte&gt;, out MavlinkFrame)</h4>
+
+  <h3 id="MavNet_Protocol_MavlinkFrame_TryDecode_System_ReadOnlySpan_System_Byte__MavNet_Protocol_MavlinkFrame__" data-uid="MavNet.Protocol.MavlinkFrame.TryDecode(System.ReadOnlySpan{System.Byte},MavNet.Protocol.MavlinkFrame@)">
+  TryDecode(ReadOnlySpan&lt;byte&gt;, out MavlinkFrame)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.Protocol/MavlinkFrame.cs/#L49"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
   <div class="markdown level1 summary"><p>Attempt to decode a MAVLink v2 frame. Returns false if:
 <ul><li>data too short / not v2 magic / signed frame (we don't handle signatures yet)</li><li>msgid is unknown to the registry — without CrcExtra we can't verify the frame</li><li>payload length is outside [MinPayloadLength, MaxPayloadLength] for this msgid</li><li>declared payload length doesn't fit in the buffer</li><li>CRC doesn't match the per-msgid CRC_EXTRA from MessageRegistry</li></ul>
 </div>
   <div class="markdown level1 conceptual"></div>
-  <h5 class="declaration">Declaration</h5>
+
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public static bool TryDecode(ReadOnlySpan&lt;byte&gt; data, out MavlinkFrame frame)</code></pre>
   </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.readonlyspan-1">ReadOnlySpan</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>&gt;</td>
-        <td><span class="parametername">data</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="MavNet.Protocol.MavlinkFrame.html">MavlinkFrame</a></td>
-        <td><span class="parametername">frame</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>data</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.readonlyspan-1">ReadOnlySpan</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>&gt;</dt>
+    <dd></dd>
+    <dt><code>frame</code> <a class="xref" href="MavNet.Protocol.MavlinkFrame.html">MavlinkFrame</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
 
 </article>
-          </div>
 
-          <div class="hidden-sm col-md-2" role="complementary">
-            <div class="sideaffix">
-              <div class="contribution">
-                <ul class="nav">
-                  <li>
-                    <a href="https://github.com/UltimateSeeSharp/MavNet/new/main/apiSpec/new?filename=MavNet_Protocol_MavlinkFrame.md&amp;value=---%0Auid%3A%20MavNet.Protocol.MavlinkFrame%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Edit this page</a>
-                  </li>
-                  <li>
-                    <a href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.Protocol/MavlinkFrame.cs/#L8" class="contribution-link">View Source</a>
-                  </li>
-                </ul>
-              </div>
-              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
-                <h5>In this article</h5>
-                <div></div>
-              </nav>
-            </div>
-          </div>
+        <div class="contribution d-print-none">
+          <a href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.Protocol/MavlinkFrame.cs/#L8" class="edit-link">Edit this page</a>
         </div>
+
+
       </div>
 
-      <footer>
-        <div class="grad-bottom"></div>
-        <div class="footer">
-          <div class="container">
-            <span class="pull-right">
-              <a href="#top">Back to top</a>
-            </span>
-      
-      <span>Generated by <strong>DocFX</strong></span>
-          </div>
-        </div>
-      </footer>
-    </div>
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
 
-    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
-    <script type="text/javascript" src="../styles/docfx.js"></script>
-    <script type="text/javascript" src="../styles/main.js"></script>
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
   </body>
 </html>
