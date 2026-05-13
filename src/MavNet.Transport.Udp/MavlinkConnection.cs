@@ -21,7 +21,7 @@ namespace MavNet.Transport.Udp;
 ///
 /// <para><b>Sending.</b> Use <see cref="Send{T}(T)"/> with any generated MAVLink
 /// message. The connection knows the message's <see cref="IMavlinkMessage{TSelf}.MsgId"/>,
-/// <see cref="IMavlinkMessage{TSelf}.CrcExtra"/>, and <see cref="IMavlinkMessage{TSelf}.PayloadLength"/>
+/// <see cref="IMavlinkMessage{TSelf}.CrcExtra"/>, and <see cref="IMavlinkMessage{TSelf}.MaxPayloadLength"/>
 /// at the call site — no runtime lookup.</para>
 ///
 /// <para><b>Lifetime.</b> Implements <see cref="IAsyncDisposable"/>; safe to dispose
@@ -44,13 +44,20 @@ public sealed class MavlinkConnection : IAsyncDisposable
 
     /// <summary>Fires for every inbound HEARTBEAT. Args: sender, decoded message, receive timestamp.</summary>
     public event Action<MavId, Heartbeat, DateTime>?         HeartbeatReceived;
+    /// <summary>Fires for every inbound COMMAND_ACK.</summary>
     public event Action<MavId, CommandAck, DateTime>?        CommandAckReceived;
+    /// <summary>Fires for every inbound GLOBAL_POSITION_INT.</summary>
     public event Action<MavId, GlobalPositionInt, DateTime>? GlobalPositionIntReceived;
+    /// <summary>Fires for every inbound VFR_HUD.</summary>
     public event Action<MavId, VfrHud, DateTime>?            VfrHudReceived;
+    /// <summary>Fires for every inbound GPS_RAW_INT.</summary>
     public event Action<MavId, GpsRawInt, DateTime>?         GpsRawIntReceived;
+    /// <summary>Fires for every inbound SYS_STATUS.</summary>
     public event Action<MavId, SysStatus, DateTime>?         SysStatusReceived;
+    /// <summary>Fires for every inbound EXTENDED_SYS_STATE.</summary>
     public event Action<MavId, ExtendedSysState, DateTime>?  ExtendedSysStateReceived;
 
+    /// <summary>Creates and binds the UDP socket. Call <see cref="Start"/> to begin receiving.</summary>
     public MavlinkConnection(
         IPEndPoint localBind,
         IPEndPoint remote,
@@ -194,6 +201,7 @@ public sealed class MavlinkConnection : IAsyncDisposable
         catch (Exception ex) { _log?.LogDebug(ex, "GCS heartbeat send failed (retrying next tick)"); }
     }
 
+    /// <inheritdoc/>
     public async ValueTask DisposeAsync()
     {
         if (_disposed) return;

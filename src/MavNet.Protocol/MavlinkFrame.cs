@@ -7,13 +7,21 @@ namespace MavNet.Protocol;
 /// </summary>
 public readonly ref struct MavlinkFrame
 {
+    /// <summary>Number of payload bytes on the wire (0–255).</summary>
     public byte PayloadLength { get; }
+    /// <summary>Incompatibility flags; any unknown bit causes the frame to be dropped.</summary>
     public byte IncompatFlags { get; }
+    /// <summary>Compatibility flags; unknown bits are ignored by receivers.</summary>
     public byte CompatFlags { get; }
+    /// <summary>Packet sequence number, wraps at 255.</summary>
     public byte Sequence { get; }
+    /// <summary>Sender system id (1–255).</summary>
     public byte SystemId { get; }
+    /// <summary>Sender component id.</summary>
     public byte ComponentId { get; }
+    /// <summary>24-bit MAVLink message id.</summary>
     public uint MessageId { get; }
+    /// <summary>Decoded payload bytes (length = <see cref="PayloadLength"/>). Slice of the original buffer — do not hold past the buffer's lifetime.</summary>
     public ReadOnlySpan<byte> Payload { get; }
 
     private MavlinkFrame(byte len, byte incompat, byte compat, byte seq,

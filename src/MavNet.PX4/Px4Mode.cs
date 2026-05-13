@@ -7,6 +7,7 @@ namespace MavNet.PX4;
 /// </summary>
 public static class Px4Mode
 {
+    /// <summary>Unpacks a PX4 <c>custom_mode</c> uint32 into a human-readable mode label (e.g. <c>"AUTO.LOITER"</c>).</summary>
     public static string Format(uint customMode)
     {
         var mainMode = (byte)((customMode >> 16) & 0xFF);

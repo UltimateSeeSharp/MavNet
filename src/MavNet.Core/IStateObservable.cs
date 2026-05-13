@@ -26,5 +26,8 @@ public interface IStateObservable
 /// <typeparam name="TState">An immutable snapshot type (typically a <c>readonly record struct</c>).</typeparam>
 public interface IStateObservable<TState> : IStateObservable where TState : struct
 {
+    /// <inheritdoc cref="IStateObservable.SubscribeState(Action, StateRate)"/>
+    /// <param name="handler">Receives an immutable snapshot on each delivery.</param>
+    /// <param name="rate">Delivery rate — see <see cref="StateRate"/>.</param>
     StateSubscription SubscribeState(Action<TState> handler, StateRate rate);
 }

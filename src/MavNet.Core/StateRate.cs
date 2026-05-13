@@ -33,13 +33,20 @@ public readonly struct StateRate : IEquatable<StateRate>
 
     private StateRate(TimeSpan minInterval) => MinInterval = minInterval;
 
+    /// <summary><c>true</c> when no throttling is applied (equivalent to <see cref="Raw"/>).</summary>
     public bool IsRaw => MinInterval == TimeSpan.Zero;
 
+    /// <inheritdoc/>
     public bool Equals(StateRate other) => MinInterval == other.MinInterval;
+    /// <inheritdoc/>
     public override bool Equals(object? obj) => obj is StateRate r && Equals(r);
+    /// <inheritdoc/>
     public override int GetHashCode() => MinInterval.GetHashCode();
+    /// <inheritdoc/>
     public override string ToString() => IsRaw ? "raw" : $"≥ {MinInterval.TotalMilliseconds:F0} ms";
 
+    /// <summary>Returns <c>true</c> if both rates have the same <see cref="MinInterval"/>.</summary>
     public static bool operator ==(StateRate a, StateRate b) => a.Equals(b);
+    /// <summary>Returns <c>true</c> if the rates have different <see cref="MinInterval"/> values.</summary>
     public static bool operator !=(StateRate a, StateRate b) => !a.Equals(b);
 }

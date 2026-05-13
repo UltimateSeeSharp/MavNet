@@ -30,6 +30,7 @@ public readonly record struct MessageInfo(
 [System.Flags]
 public enum MessageFlags : byte
 {
+    /// <summary>No capability flags set.</summary>
     None          = 0,
     /// <summary>Message has MAVLink 2 extension fields — payload may be truncated on the wire.</summary>
     HasExtensions = 1 << 0,

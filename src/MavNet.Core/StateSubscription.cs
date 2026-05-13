@@ -15,6 +15,9 @@ public sealed class StateSubscription : IDisposable
     private int _disposed;
     private readonly Action _onDispose;
 
+    /// <summary>Creates a subscription with the given rate and disposal callback.</summary>
+    /// <param name="rate">Rate this subscription was registered at.</param>
+    /// <param name="onDispose">Called once on first <see cref="Dispose"/>.</param>
     public StateSubscription(StateRate rate, Action onDispose)
     {
         ArgumentNullException.ThrowIfNull(onDispose);
@@ -25,6 +28,7 @@ public sealed class StateSubscription : IDisposable
     /// <summary><c>true</c> until <see cref="Dispose"/> is called.</summary>
     public bool IsActive => Volatile.Read(ref _disposed) == 0;
 
+    /// <inheritdoc/>
     public void Dispose()
     {
         if (Interlocked.Exchange(ref _disposed, 1) != 0) return;

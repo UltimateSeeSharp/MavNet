@@ -12,6 +12,8 @@ namespace MavNet.Transport.Udp;
 /// </summary>
 public static class ConnectionString
 {
+    /// <summary>Parses a connection string into local and remote <see cref="IPEndPoint"/> values.</summary>
+    /// <exception cref="ArgumentException">Thrown if the scheme is not <c>udp</c>.</exception>
     public static (IPEndPoint Local, IPEndPoint Remote) Parse(string s)
     {
         var uri = new Uri(s.Contains("://") ? s : "udp://" + s);

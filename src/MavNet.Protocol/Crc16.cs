@@ -8,6 +8,7 @@ namespace MavNet.Protocol;
 /// </summary>
 public static class Crc16
 {
+    /// <summary>Accumulates a single byte into a running CRC-16/X.25 checksum.</summary>
     public static ushort Accumulate(byte b, ushort crc)
     {
         byte tmp = (byte)(b ^ (crc & 0xff));
@@ -15,6 +16,7 @@ public static class Crc16
         return (ushort)((crc >> 8) ^ (tmp << 8) ^ (tmp << 3) ^ (tmp >> 4));
     }
 
+    /// <summary>Accumulates a span of bytes into a CRC-16/X.25 checksum.</summary>
     public static ushort Accumulate(ReadOnlySpan<byte> data, ushort crc = 0xFFFF)
     {
         foreach (var b in data) crc = Accumulate(b, crc);

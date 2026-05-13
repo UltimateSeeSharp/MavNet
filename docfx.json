@@ -1,0 +1,42 @@
+{
+  "metadata": [
+    {
+      "src": [
+        {
+          "src": ".",
+          "files": [
+            "src/MavNet.Core/MavNet.Core.csproj",
+            "src/MavNet.Protocol/MavNet.Protocol.csproj",
+            "src/MavNet.Transport.Udp/MavNet.Transport.Udp.csproj",
+            "src/MavNet.PX4/MavNet.PX4.csproj"
+          ]
+        }
+      ],
+      "dest": "api"
+    }
+  ],
+  "build": {
+    "content": [
+      {
+        "files": ["api/**.yml", "api/index.md"]
+      },
+      {
+        "files": ["**.md", "**/toc.yml"],
+        "src": "docs",
+        "dest": "."
+      }
+    ],
+    "dest": "_site",
+    "globalMetadata": {
+      "_appName": "MavNet",
+      "_appTitle": "MavNet — MAVLink for .NET",
+      "_enableSearch": true,
+      "_gitContribute": {
+        "repo": "https://github.com/UltimateSeeSharp/MavNet",
+        "branch": "main",
+        "path": "docs"
+      }
+    },
+    "template": ["default"]
+  }
+}

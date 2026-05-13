@@ -103,16 +103,26 @@ public abstract class Vehicle : IAsyncDisposable, IStateObservable
         }
     }
 
+    /// <summary>UTC timestamp of the most recent HEARTBEAT, or <see cref="DateTime.MinValue"/> if none received yet.</summary>
     public DateTime LastHeartbeatAt => new(Interlocked.Read(ref _lastHbTicks), DateTimeKind.Utc);
 
+    /// <summary>Latitude in degrees (WGS-84), updated from GLOBAL_POSITION_INT.</summary>
     public double Lat => _lat;
+    /// <summary>Longitude in degrees (WGS-84), updated from GLOBAL_POSITION_INT.</summary>
     public double Lon => _lon;
+    /// <summary>Altitude in metres above mean sea level, updated from GLOBAL_POSITION_INT.</summary>
     public double Alt => _alt;
+    /// <summary>Heading in degrees (0–360), updated from GLOBAL_POSITION_INT.</summary>
     public double Hdg => _hdg;
+    /// <summary>Ground speed in m/s, updated from VFR_HUD.</summary>
     public double Vel => _vel;
+    /// <summary>Number of GPS satellites visible, updated from GPS_RAW_INT.</summary>
     public int Sats => _sats;
+    /// <summary>GPS fix type, updated from GPS_RAW_INT.</summary>
     public GpsFixType GpsFix => _gpsFix;
+    /// <summary>Battery remaining as a percentage (0–100), updated from SYS_STATUS.</summary>
     public double Battery => _battery;
+    /// <summary>Landed/in-air state, updated from EXTENDED_SYS_STATE.</summary>
     public MavLandedState LandedState => _landedState;
 
     /// <summary>
@@ -343,24 +353,28 @@ public abstract class Vehicle : IAsyncDisposable, IStateObservable
 
     // ----- Commands ---------------------------------------------------------
 
+    /// <summary>Arms the vehicle. Resolves <see cref="CommandResult.Confirmed"/> once the armed bit is set in HEARTBEAT.</summary>
     public Task<CommandOutcome> ArmAsync(CancellationToken ct = default) =>
         ExecuteCommandAsync(
             BuildCommandLong(MavCmd.ComponentArmDisarm, p1: 1f),
             hb => (hb.BaseMode & MavModeFlag.SafetyArmed) != 0,
             ct);
 
+    /// <summary>Disarms the vehicle. Resolves <see cref="CommandResult.Confirmed"/> once the armed bit is cleared in HEARTBEAT.</summary>
     public Task<CommandOutcome> DisarmAsync(CancellationToken ct = default) =>
         ExecuteCommandAsync(
             BuildCommandLong(MavCmd.ComponentArmDisarm, p1: 0f),
             hb => (hb.BaseMode & MavModeFlag.SafetyArmed) == 0,
             ct);
 
+    /// <summary>Commands return-to-launch. Resolves <see cref="CommandResult.Confirmed"/> once mode switches to AUTO.RTL.</summary>
     public Task<CommandOutcome> ReturnToLaunchAsync(CancellationToken ct = default) =>
         ExecuteCommandAsync(
             BuildCommandLong(MavCmd.NavReturnToLaunch),
             hb => Px4Mode.Format(hb.CustomMode).StartsWith("AUTO.RTL", StringComparison.Ordinal),
             ct);
 
+    /// <summary>Commands takeoff to <paramref name="altMeters"/> metres above the home point.</summary>
     public virtual Task<CommandOutcome> TakeoffAsync(double altMeters, CancellationToken ct = default) =>
         ExecuteCommandAsync(
             BuildCommandLong(MavCmd.NavTakeoff,
@@ -371,6 +385,7 @@ public abstract class Vehicle : IAsyncDisposable, IStateObservable
                   || Px4Mode.Format(hb.CustomMode).StartsWith("AUTO.TAKEOFF", StringComparison.Ordinal),
             ct);
 
+    /// <summary>Commands landing at the current position.</summary>
     public virtual Task<CommandOutcome> LandAsync(CancellationToken ct = default) =>
         ExecuteCommandAsync(
             BuildCommandLong(MavCmd.NavLand,
@@ -426,6 +441,7 @@ public abstract class Vehicle : IAsyncDisposable, IStateObservable
         }
     }
 
+    /// <inheritdoc/>
     public async ValueTask DisposeAsync()
     {
         _connection.HeartbeatReceived         -= OnHeartbeat;
