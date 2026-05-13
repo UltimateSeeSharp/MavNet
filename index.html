@@ -2,9 +2,9 @@
 <html>
   <head>
     <meta charset="utf-8">
-      <title>MavNet | MavNet — MAVLink for .NET </title>
+      <title>MavNet | MavNet - MAVLink for .NET </title>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta name="title" content="MavNet | MavNet — MAVLink for .NET ">
+      <meta name="title" content="MavNet | MavNet - MAVLink for .NET ">
       
       
       <link rel="icon" href="favicon.ico">
@@ -39,7 +39,7 @@
 
   </head>
 
-  <body class="tex2jax_ignore" data-layout="landing" data-yaml-mime="">
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
     <header class="bg-body border-bottom">
       <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
         <div class="container-xxl flex-nowrap">
@@ -73,13 +73,27 @@
         <article data-uid="">
 <h1 id="mavnet">MavNet</h1>
 
-<p>A .NET library for communicating with MAVLink-based autopilots (PX4, ArduPilot).</p>
-<p>MavNet provides typed access to MAVLink v2 — connect over UDP, subscribe to telemetry events, and send flight commands, all from idiomatic C#.</p>
+<p>Typed MAVLink v2 over UDP for .NET, with a PX4 <code>Drone</code> facade for common telemetry and commands.</p>
+<div class="WARNING">
+<h5>Warning</h5>
+<p>MavNet can send real vehicle commands. Use SITL first, keep props off real vehicles, and verify the UDP endpoint before sending arm or takeoff.</p>
+</div>
+<pre><code class="lang-csharp">using MavNet.Core;
+using MavNet.PX4.Vehicles;
+
+await using Drone drone = await Drone.ConnectAsync(
+    &quot;udp://0.0.0.0:14550?rhost=127.0.0.1&amp;rport=18570&quot;,
+    TimeSpan.FromSeconds(30));
+
+using StateSubscription sub = drone.SubscribeState(
+    s =&gt; Console.WriteLine($&quot;{s.Mode} alt={s.Alt:F1}m bat={s.Battery:F0}%&quot;),
+    StateRate.Hz(2));
+</code></pre>
 <h2 id="quick-links">Quick links</h2>
 <ul>
-<li><a href="articles/getting-started.html">Getting Started</a> — connect to PX4 SITL in minutes</li>
-<li><a href="articles/architecture.html">Architecture</a> — how the layers fit together</li>
-<li>API Reference — use the <strong>API Reference</strong> tab above, generated from source XML comments</li>
+<li><a href="articles/getting-started.html">Getting Started</a></li>
+<li><a href="articles/architecture.html">Architecture</a></li>
+<li><a href="api/index.html">API Reference</a></li>
 </ul>
 
 </article>

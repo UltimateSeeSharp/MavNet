@@ -2,9 +2,9 @@
 <html>
   <head>
     <meta charset="utf-8">
-      <title>Namespace MavNet.PX4.Vehicles | MavNet - MAVLink for .NET </title>
+      <title>API Reference | MavNet - MAVLink for .NET </title>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta name="title" content="Namespace MavNet.PX4.Vehicles | MavNet - MAVLink for .NET ">
+      <meta name="title" content="API Reference | MavNet - MAVLink for .NET ">
       
       
       <link rel="icon" href="../favicon.ico">
@@ -16,7 +16,7 @@
       <meta name="docfx:rel" content="../">
       
       
-      
+      <meta name="docfx:docurl" content="https://github.com/UltimateSeeSharp/MavNet/blob/main/docs/#L1">
       <meta name="loc:inThisArticle" content="In this article">
       <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
       <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
@@ -39,7 +39,7 @@
 
   </head>
 
-  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
     <header class="bg-body border-bottom">
       <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
         <div class="container-xxl flex-nowrap">
@@ -70,45 +70,27 @@
           <nav id="breadcrumb"></nav>
         </div>
 
-        <article data-uid="MavNet.PX4.Vehicles">
+        <article data-uid="">
+<h1 id="api-reference">API Reference</h1>
 
-  <h1 id="MavNet_PX4_Vehicles" data-uid="MavNet.PX4.Vehicles" class="text-break">Namespace MavNet.PX4.Vehicles</h1>
-  <div class="markdown level0 summary"></div>
-  <div class="markdown level0 conceptual"></div>
-  <div class="markdown level0 remarks"></div>
-
-    <h3 id="classes">
-Classes
-</h3>
-    <dl class="jumplist">
-      <dt><a class="xref" href="MavNet.PX4.Vehicles.Drone.html">Drone</a></dt>
-      <dd><p>A multirotor vehicle. Currently a thin marker over <a class="xref" href="MavNet.PX4.Base.Vehicle.html">Vehicle</a> so
-consumers can pattern-match on type (<code>if (v is Drone)</code>) and so we have
-a clear extension point for multirotor-specific behaviour later.</p>
-<p>The static <a class="xref" href="MavNet.PX4.Vehicles.Drone.html#MavNet_PX4_Vehicles_Drone_ConnectAsync_System_String_System_TimeSpan_System_Threading_CancellationToken_Microsoft_Extensions_Logging_ILogger_MavNet_Transport_Udp_MavlinkConnection__Microsoft_Extensions_Logging_ILogger_MavNet_PX4_Base_Vehicle__">ConnectAsync(string, TimeSpan, CancellationToken, ILogger&lt;MavlinkConnection&gt;?, ILogger&lt;Vehicle&gt;?)</a> factory is the one-liner entry
-point for the common case: parse URI → open <a class="xref" href="MavNet.Transport.Udp.MavlinkConnection.html">MavlinkConnection</a>
-→ wait for first heartbeat → return a Drone that owns the connection.</p>
-</dd>
-    </dl>
-    <h3 id="structs">
-Structs
-</h3>
-    <dl class="jumplist">
-      <dt><a class="xref" href="MavNet.PX4.Vehicles.DroneState.html">DroneState</a></dt>
-      <dd><p>Immutable per-fire snapshot of a <a class="xref" href="MavNet.PX4.Vehicles.Drone.html">Drone</a>'s observable state. Captured
-atomically when <a class="xref" href="MavNet.PX4.Vehicles.Drone.html#MavNet_PX4_Vehicles_Drone_SubscribeState_System_Action_MavNet_PX4_Vehicles_DroneState__MavNet_Core_StateRate_">SubscribeState(Action&lt;DroneState&gt;, StateRate)</a>
-delivers, so consumers see a coherent view (no torn reads across separate property
-gets). Use this overload from telemetry recorders, replay, and anywhere a handler
-might run on a different thread from the receive loop.</p>
-</dd>
-    </dl>
-
+<p>Public namespaces:</p>
+<ul>
+<li><a class="xref" href="MavNet.Core.html">MavNet.Core</a></li>
+<li><a class="xref" href="MavNet.Protocol.html">MavNet.Protocol</a></li>
+<li><a class="xref" href="MavNet.Protocol.Generated.html">MavNet.Protocol.Generated</a></li>
+<li><a class="xref" href="MavNet.Transport.Udp.html">MavNet.Transport.Udp</a></li>
+<li><a class="xref" href="MavNet.PX4.html">MavNet.PX4</a></li>
+<li><a class="xref" href="MavNet.PX4.Base.html">MavNet.PX4.Base</a></li>
+<li><a class="xref" href="MavNet.PX4.Vehicles.html">MavNet.PX4.Vehicles</a></li>
+</ul>
 
 </article>
 
         <div class="contribution d-print-none">
+          <a href="https://github.com/UltimateSeeSharp/MavNet/blob/main/docs/#L1" class="edit-link">Edit this page</a>
         </div>
 
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
 
       </div>
 

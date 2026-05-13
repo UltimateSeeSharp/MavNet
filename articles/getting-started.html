@@ -2,9 +2,9 @@
 <html>
   <head>
     <meta charset="utf-8">
-      <title>Getting Started | MavNet — MAVLink for .NET </title>
+      <title>Getting Started | MavNet - MAVLink for .NET </title>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta name="title" content="Getting Started | MavNet — MAVLink for .NET ">
+      <meta name="title" content="Getting Started | MavNet - MAVLink for .NET ">
       
       
       <link rel="icon" href="../favicon.ico">
@@ -73,63 +73,59 @@
         <article data-uid="">
 <h1 id="getting-started">Getting Started</h1>
 
-<h2 id="prerequisites">Prerequisites</h2>
+<p>This is the shortest path from a PX4 SITL UDP endpoint to typed telemetry and commands.</p>
+<div class="WARNING">
+<h5>Warning</h5>
+<p><code>ArmAsync</code>, <code>TakeoffAsync</code>, <code>LandAsync</code>, and <code>ReturnToLaunchAsync</code> send real MAVLink commands. Do first runs in SITL.</p>
+</div>
+<h2 id="requirements">Requirements</h2>
 <ul>
 <li><a href="https://dotnet.microsoft.com/download">.NET 10 SDK</a></li>
-<li>A MAVLink v2 autopilot or SITL simulator reachable over UDP</li>
+<li>A MAVLink v2 vehicle or simulator reachable over UDP</li>
 </ul>
 <h2 id="install">Install</h2>
-<p>MavNet is not yet published on NuGet. Clone the repository and add project references directly:</p>
-<pre><code class="lang-xml">&lt;ProjectReference Include=&quot;path/to/MavNet/src/MavNet.PX4/MavNet.PX4.csproj&quot; /&gt;
+<p>MavNet is not on NuGet yet. Add a project reference:</p>
+<pre><code class="lang-xml">&lt;ItemGroup&gt;
+  &lt;ProjectReference Include=&quot;path/to/MavNet/src/MavNet.PX4/MavNet.PX4.csproj&quot; /&gt;
+&lt;/ItemGroup&gt;
 </code></pre>
-<h2 id="connect-to-a-drone">Connect to a drone</h2>
-<p>Use <code>Drone.ConnectAsync</code> with a UDP connection string. The call blocks until the first heartbeat is received from the vehicle (or the timeout elapses):</p>
-<pre><code class="lang-csharp">using MavNet.PX4.Vehicles;
+<h2 id="connect">Connect</h2>
+<p><code>Drone.ConnectAsync</code> opens UDP, waits for the first heartbeat, then returns a <code>Drone</code> that owns the connection.</p>
+<pre><code class="lang-csharp">using MavNet.Core;
+using MavNet.PX4.Vehicles;
 
-Drone drone = await Drone.ConnectAsync(
+await using Drone drone = await Drone.ConnectAsync(
     &quot;udp://0.0.0.0:14550?rhost=127.0.0.1&amp;rport=18570&quot;,
     TimeSpan.FromSeconds(30));
 
-await using (drone)
-{
-    Console.WriteLine($&quot;Connected to {drone.DeviceId} (type={drone.VehicleType})&quot;);
-    // ...
-}
+Console.WriteLine($&quot;Connected to {drone.DeviceId} ({drone.VehicleType})&quot;);
 </code></pre>
-<p>The connection string format is <code>udp://lhost:lport?rhost=...&amp;rport=...</code> where <code>lhost:lport</code> is the local bind address and <code>rhost:rport</code> is the remote autopilot.</p>
-<h2 id="subscribe-to-telemetry">Subscribe to telemetry</h2>
-<p>Telemetry properties (<code>Armed</code>, <code>Mode</code>, <code>Lat</code>, <code>Lon</code>, <code>Alt</code>, <code>Battery</code>, …) are updated on the receive thread. Read them from any thread:</p>
-<pre><code class="lang-csharp">drone.HeartbeatReceived += (hb, receivedAt) =&gt;
-{
-    Console.WriteLine($&quot;armed={drone.Armed} mode={drone.Mode} bat={drone.Battery:F0}%&quot;);
-};
+<p>Connection strings use:</p>
+<pre><code class="lang-text">udp://localHost:localPort?rhost=remoteHost&amp;rport=remotePort
 </code></pre>
-<blockquote>
-<p><strong>Threading note:</strong> Events fire synchronously on the UDP receive thread. Marshal to the UI thread yourself if needed (e.g. <code>Dispatcher.InvokeAsync</code> in WPF).</p>
-</blockquote>
-<h2 id="send-flight-commands">Send flight commands</h2>
-<pre><code class="lang-csharp">// Arm
-CommandOutcome arm = await drone.ArmAsync(cancellationToken);
-
-// Takeoff to 10 m
+<p>For PX4 SITL, the common value is:</p>
+<pre><code class="lang-text">udp://0.0.0.0:14550?rhost=127.0.0.1&amp;rport=18570
+</code></pre>
+<h2 id="read-state">Read State</h2>
+<pre><code class="lang-csharp">using StateSubscription sub = drone.SubscribeState(
+    s =&gt; Console.WriteLine($&quot;{s.Mode} armed={s.Armed} alt={s.Alt:F1}m sats={s.Sats}&quot;),
+    StateRate.Hz(2));
+</code></pre>
+<p><code>SubscribeState</code> can deliver immutable <code>DroneState</code> snapshots. Use <code>StateRate.Raw</code> for every state-affecting packet, or throttle with <code>StateRate.Hz(...)</code> / <code>StateRate.Every(...)</code>.</p>
+<div class="NOTE">
+<h5>Note</h5>
+<p>Transport events and raw state changes fire on the receive thread. UI apps should marshal back to their UI thread.</p>
+</div>
+<h2 id="send-commands">Send Commands</h2>
+<pre><code class="lang-csharp">CommandOutcome arm = await drone.ArmAsync(cancellationToken);
 CommandOutcome takeoff = await drone.TakeoffAsync(10.0, cancellationToken);
-
-// Land
 CommandOutcome land = await drone.LandAsync(cancellationToken);
-
-// Return to launch
 CommandOutcome rtl = await drone.ReturnToLaunchAsync(cancellationToken);
-
-// Disarm
 CommandOutcome disarm = await drone.DisarmAsync(cancellationToken);
 </code></pre>
-<p>Each call sends <code>COMMAND_LONG</code> and waits for the matching <code>COMMAND_ACK</code>. The returned <code>CommandOutcome</code> contains the result code, ACK result (if any), and elapsed time.</p>
-<h2 id="run-against-px4-sitl">Run against PX4 SITL</h2>
-<pre><code class="lang-bash"># In one terminal — start PX4 SITL (adjust path as needed)
-make px4_sitl gazebo
-
-# In another terminal — run the bundled probe
-dotnet run -c Release --project examples/MavNet.Probe -- &quot;udp://0.0.0.0:14550?rhost=127.0.0.1&amp;rport=18570&quot;
+<p>Command helpers send <code>COMMAND_LONG</code> and wait for the matching <code>COMMAND_ACK</code> plus, where possible, a confirming state change.</p>
+<h2 id="probe-app">Probe App</h2>
+<pre><code class="lang-bash">dotnet run -c Release --project examples/MavNet.Probe -- &quot;udp://0.0.0.0:14550?rhost=127.0.0.1&amp;rport=18570&quot;
 </code></pre>
 <p>Keys in the probe console: <code>A</code> Arm, <code>D</code> Disarm, <code>T</code> Takeoff (10 m), <code>L</code> Land, <code>R</code> RTL, <code>Q</code> Quit.</p>
 

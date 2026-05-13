@@ -2,16 +2,16 @@
 <html>
   <head>
     <meta charset="utf-8">
-      <title>Namespace MavNet.Transport.Udp | MavNet — MAVLink for .NET </title>
+      <title>Namespace MavNet.Transport.Udp | MavNet - MAVLink for .NET </title>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta name="title" content="Namespace MavNet.Transport.Udp | MavNet — MAVLink for .NET ">
+      <meta name="title" content="Namespace MavNet.Transport.Udp | MavNet - MAVLink for .NET ">
       
       
       <link rel="icon" href="../favicon.ico">
       <link rel="stylesheet" href="../public/docfx.min.css">
       <link rel="stylesheet" href="../public/main.css">
       <meta name="docfx:navrel" content="../toc.html">
-      <meta name="docfx:tocrel" content="toc.html">
+      <meta name="docfx:tocrel" content="../toc.html">
       
       <meta name="docfx:rel" content="../">
       
@@ -63,23 +63,9 @@
     </header>
 
     <main class="container-xxl">
-      <div class="toc-offcanvas">
-        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
-          <div class="offcanvas-header">
-            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
-          </div>
-          <div class="offcanvas-body">
-            <nav class="toc" id="toc"></nav>
-          </div>
-        </div>
-      </div>
 
       <div class="content">
         <div class="actionbar">
-          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
-            <i class="bi bi-list"></i>
-          </button>
 
           <nav id="breadcrumb"></nav>
         </div>
@@ -116,6 +102,17 @@ message. The connection knows the message's <a class="xref" href="MavNet.Protoco
 <a class="xref" href="MavNet.Protocol.IMavlinkMessage-1.html#MavNet_Protocol_IMavlinkMessage_1_CrcExtra">CrcExtra</a>, and <a class="xref" href="MavNet.Protocol.IMavlinkMessage-1.html#MavNet_Protocol_IMavlinkMessage_1_MaxPayloadLength">MaxPayloadLength</a>
 at the call site — no runtime lookup.</p><p><b>Lifetime.</b> Implements <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.iasyncdisposable">IAsyncDisposable</a>; safe to dispose
 multiple times. Disposing closes the socket and stops the receive loop.</p>
+</dd>
+    </dl>
+    <h3 id="interfaces">
+Interfaces
+</h3>
+    <dl class="jumplist">
+      <dt><a class="xref" href="MavNet.Transport.Udp.IMavlinkConnection.html">IMavlinkConnection</a></dt>
+      <dd><p>Abstraction over a MAVLink transport that publishes inbound messages as typed
+events and accepts outbound messages via <a class="xref" href="MavNet.Transport.Udp.IMavlinkConnection.html#MavNet_Transport_Udp_IMavlinkConnection_Send__1___0_">Send&lt;T&gt;(T)</a>. <a class="xref" href="MavNet.Transport.Udp.MavlinkConnection.html">MavlinkConnection</a>
+is the production implementation; tests substitute a fake that drives the same
+events synthetically.</p>
 </dd>
     </dl>
 

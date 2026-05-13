@@ -359,15 +359,15 @@ references:
   commentId: T:MavNet.PX4.Base.Vehicle
   fullName: MavNet.PX4.Base.Vehicle
   nameWithType: Vehicle
-- uid: MavNet.PX4.Base.Vehicle.#ctor(MavNet.Transport.Udp.MavlinkConnection,System.Byte,System.Byte,System.Boolean,System.Nullable{System.TimeSpan},Microsoft.Extensions.Logging.ILogger{MavNet.PX4.Base.Vehicle})
-  name: Vehicle(MavlinkConnection, byte, byte, bool, TimeSpan?, ILogger<Vehicle>?)
-  href: api/MavNet.PX4.Base.Vehicle.html#MavNet_PX4_Base_Vehicle__ctor_MavNet_Transport_Udp_MavlinkConnection_System_Byte_System_Byte_System_Boolean_System_Nullable_System_TimeSpan__Microsoft_Extensions_Logging_ILogger_MavNet_PX4_Base_Vehicle__
-  commentId: M:MavNet.PX4.Base.Vehicle.#ctor(MavNet.Transport.Udp.MavlinkConnection,System.Byte,System.Byte,System.Boolean,System.Nullable{System.TimeSpan},Microsoft.Extensions.Logging.ILogger{MavNet.PX4.Base.Vehicle})
-  name.vb: New(MavlinkConnection, Byte, Byte, Boolean, TimeSpan?, ILogger(Of Vehicle))
-  fullName: MavNet.PX4.Base.Vehicle.Vehicle(MavNet.Transport.Udp.MavlinkConnection, byte, byte, bool, System.TimeSpan?, Microsoft.Extensions.Logging.ILogger<MavNet.PX4.Base.Vehicle>?)
-  fullName.vb: MavNet.PX4.Base.Vehicle.New(MavNet.Transport.Udp.MavlinkConnection, Byte, Byte, Boolean, System.TimeSpan?, Microsoft.Extensions.Logging.ILogger(Of MavNet.PX4.Base.Vehicle))
-  nameWithType: Vehicle.Vehicle(MavlinkConnection, byte, byte, bool, TimeSpan?, ILogger<Vehicle>?)
-  nameWithType.vb: Vehicle.New(MavlinkConnection, Byte, Byte, Boolean, TimeSpan?, ILogger(Of Vehicle))
+- uid: MavNet.PX4.Base.Vehicle.#ctor(MavNet.Transport.Udp.IMavlinkConnection,System.Byte,System.Byte,System.Boolean,System.Nullable{System.TimeSpan},System.Nullable{System.TimeSpan},Microsoft.Extensions.Logging.ILogger{MavNet.PX4.Base.Vehicle})
+  name: Vehicle(IMavlinkConnection, byte, byte, bool, TimeSpan?, TimeSpan?, ILogger<Vehicle>?)
+  href: api/MavNet.PX4.Base.Vehicle.html#MavNet_PX4_Base_Vehicle__ctor_MavNet_Transport_Udp_IMavlinkConnection_System_Byte_System_Byte_System_Boolean_System_Nullable_System_TimeSpan__System_Nullable_System_TimeSpan__Microsoft_Extensions_Logging_ILogger_MavNet_PX4_Base_Vehicle__
+  commentId: M:MavNet.PX4.Base.Vehicle.#ctor(MavNet.Transport.Udp.IMavlinkConnection,System.Byte,System.Byte,System.Boolean,System.Nullable{System.TimeSpan},System.Nullable{System.TimeSpan},Microsoft.Extensions.Logging.ILogger{MavNet.PX4.Base.Vehicle})
+  name.vb: New(IMavlinkConnection, Byte, Byte, Boolean, TimeSpan?, TimeSpan?, ILogger(Of Vehicle))
+  fullName: MavNet.PX4.Base.Vehicle.Vehicle(MavNet.Transport.Udp.IMavlinkConnection, byte, byte, bool, System.TimeSpan?, System.TimeSpan?, Microsoft.Extensions.Logging.ILogger<MavNet.PX4.Base.Vehicle>?)
+  fullName.vb: MavNet.PX4.Base.Vehicle.New(MavNet.Transport.Udp.IMavlinkConnection, Byte, Byte, Boolean, System.TimeSpan?, System.TimeSpan?, Microsoft.Extensions.Logging.ILogger(Of MavNet.PX4.Base.Vehicle))
+  nameWithType: Vehicle.Vehicle(IMavlinkConnection, byte, byte, bool, TimeSpan?, TimeSpan?, ILogger<Vehicle>?)
+  nameWithType.vb: Vehicle.New(IMavlinkConnection, Byte, Byte, Boolean, TimeSpan?, TimeSpan?, ILogger(Of Vehicle))
 - uid: MavNet.PX4.Base.Vehicle.#ctor*
   name: Vehicle
   href: api/MavNet.PX4.Base.Vehicle.html#MavNet_PX4_Base_Vehicle__ctor_
@@ -1586,6 +1586,70 @@ references:
   isSpec: "True"
   fullName: MavNet.Transport.Udp.ConnectionString.Parse
   nameWithType: ConnectionString.Parse
+- uid: MavNet.Transport.Udp.IMavlinkConnection
+  name: IMavlinkConnection
+  href: api/MavNet.Transport.Udp.IMavlinkConnection.html
+  commentId: T:MavNet.Transport.Udp.IMavlinkConnection
+  fullName: MavNet.Transport.Udp.IMavlinkConnection
+  nameWithType: IMavlinkConnection
+- uid: MavNet.Transport.Udp.IMavlinkConnection.CommandAckReceived
+  name: CommandAckReceived
+  href: api/MavNet.Transport.Udp.IMavlinkConnection.html#MavNet_Transport_Udp_IMavlinkConnection_CommandAckReceived
+  commentId: E:MavNet.Transport.Udp.IMavlinkConnection.CommandAckReceived
+  fullName: MavNet.Transport.Udp.IMavlinkConnection.CommandAckReceived
+  nameWithType: IMavlinkConnection.CommandAckReceived
+- uid: MavNet.Transport.Udp.IMavlinkConnection.ExtendedSysStateReceived
+  name: ExtendedSysStateReceived
+  href: api/MavNet.Transport.Udp.IMavlinkConnection.html#MavNet_Transport_Udp_IMavlinkConnection_ExtendedSysStateReceived
+  commentId: E:MavNet.Transport.Udp.IMavlinkConnection.ExtendedSysStateReceived
+  fullName: MavNet.Transport.Udp.IMavlinkConnection.ExtendedSysStateReceived
+  nameWithType: IMavlinkConnection.ExtendedSysStateReceived
+- uid: MavNet.Transport.Udp.IMavlinkConnection.GlobalPositionIntReceived
+  name: GlobalPositionIntReceived
+  href: api/MavNet.Transport.Udp.IMavlinkConnection.html#MavNet_Transport_Udp_IMavlinkConnection_GlobalPositionIntReceived
+  commentId: E:MavNet.Transport.Udp.IMavlinkConnection.GlobalPositionIntReceived
+  fullName: MavNet.Transport.Udp.IMavlinkConnection.GlobalPositionIntReceived
+  nameWithType: IMavlinkConnection.GlobalPositionIntReceived
+- uid: MavNet.Transport.Udp.IMavlinkConnection.GpsRawIntReceived
+  name: GpsRawIntReceived
+  href: api/MavNet.Transport.Udp.IMavlinkConnection.html#MavNet_Transport_Udp_IMavlinkConnection_GpsRawIntReceived
+  commentId: E:MavNet.Transport.Udp.IMavlinkConnection.GpsRawIntReceived
+  fullName: MavNet.Transport.Udp.IMavlinkConnection.GpsRawIntReceived
+  nameWithType: IMavlinkConnection.GpsRawIntReceived
+- uid: MavNet.Transport.Udp.IMavlinkConnection.HeartbeatReceived
+  name: HeartbeatReceived
+  href: api/MavNet.Transport.Udp.IMavlinkConnection.html#MavNet_Transport_Udp_IMavlinkConnection_HeartbeatReceived
+  commentId: E:MavNet.Transport.Udp.IMavlinkConnection.HeartbeatReceived
+  fullName: MavNet.Transport.Udp.IMavlinkConnection.HeartbeatReceived
+  nameWithType: IMavlinkConnection.HeartbeatReceived
+- uid: MavNet.Transport.Udp.IMavlinkConnection.Send*
+  name: Send
+  href: api/MavNet.Transport.Udp.IMavlinkConnection.html#MavNet_Transport_Udp_IMavlinkConnection_Send_
+  commentId: Overload:MavNet.Transport.Udp.IMavlinkConnection.Send
+  isSpec: "True"
+  fullName: MavNet.Transport.Udp.IMavlinkConnection.Send
+  nameWithType: IMavlinkConnection.Send
+- uid: MavNet.Transport.Udp.IMavlinkConnection.Send``1(``0)
+  name: Send<T>(T)
+  href: api/MavNet.Transport.Udp.IMavlinkConnection.html#MavNet_Transport_Udp_IMavlinkConnection_Send__1___0_
+  commentId: M:MavNet.Transport.Udp.IMavlinkConnection.Send``1(``0)
+  name.vb: Send(Of T)(T)
+  fullName: MavNet.Transport.Udp.IMavlinkConnection.Send<T>(T)
+  fullName.vb: MavNet.Transport.Udp.IMavlinkConnection.Send(Of T)(T)
+  nameWithType: IMavlinkConnection.Send<T>(T)
+  nameWithType.vb: IMavlinkConnection.Send(Of T)(T)
+- uid: MavNet.Transport.Udp.IMavlinkConnection.SysStatusReceived
+  name: SysStatusReceived
+  href: api/MavNet.Transport.Udp.IMavlinkConnection.html#MavNet_Transport_Udp_IMavlinkConnection_SysStatusReceived
+  commentId: E:MavNet.Transport.Udp.IMavlinkConnection.SysStatusReceived
+  fullName: MavNet.Transport.Udp.IMavlinkConnection.SysStatusReceived
+  nameWithType: IMavlinkConnection.SysStatusReceived
+- uid: MavNet.Transport.Udp.IMavlinkConnection.VfrHudReceived
+  name: VfrHudReceived
+  href: api/MavNet.Transport.Udp.IMavlinkConnection.html#MavNet_Transport_Udp_IMavlinkConnection_VfrHudReceived
+  commentId: E:MavNet.Transport.Udp.IMavlinkConnection.VfrHudReceived
+  fullName: MavNet.Transport.Udp.IMavlinkConnection.VfrHudReceived
+  nameWithType: IMavlinkConnection.VfrHudReceived
 - uid: MavNet.Transport.Udp.MavlinkConnection
   name: MavlinkConnection
   href: api/MavNet.Transport.Udp.MavlinkConnection.html
@@ -1654,6 +1718,19 @@ references:
   commentId: E:MavNet.Transport.Udp.MavlinkConnection.HeartbeatReceived
   fullName: MavNet.Transport.Udp.MavlinkConnection.HeartbeatReceived
   nameWithType: MavlinkConnection.HeartbeatReceived
+- uid: MavNet.Transport.Udp.MavlinkConnection.LocalEndPoint
+  name: LocalEndPoint
+  href: api/MavNet.Transport.Udp.MavlinkConnection.html#MavNet_Transport_Udp_MavlinkConnection_LocalEndPoint
+  commentId: P:MavNet.Transport.Udp.MavlinkConnection.LocalEndPoint
+  fullName: MavNet.Transport.Udp.MavlinkConnection.LocalEndPoint
+  nameWithType: MavlinkConnection.LocalEndPoint
+- uid: MavNet.Transport.Udp.MavlinkConnection.LocalEndPoint*
+  name: LocalEndPoint
+  href: api/MavNet.Transport.Udp.MavlinkConnection.html#MavNet_Transport_Udp_MavlinkConnection_LocalEndPoint_
+  commentId: Overload:MavNet.Transport.Udp.MavlinkConnection.LocalEndPoint
+  isSpec: "True"
+  fullName: MavNet.Transport.Udp.MavlinkConnection.LocalEndPoint
+  nameWithType: MavlinkConnection.LocalEndPoint
 - uid: MavNet.Transport.Udp.MavlinkConnection.Send*
   name: Send
   href: api/MavNet.Transport.Udp.MavlinkConnection.html#MavNet_Transport_Udp_MavlinkConnection_Send_

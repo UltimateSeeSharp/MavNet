@@ -2,16 +2,16 @@
 <html>
   <head>
     <meta charset="utf-8">
-      <title>Class Vehicle | MavNet — MAVLink for .NET </title>
+      <title>Class Vehicle | MavNet - MAVLink for .NET </title>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta name="title" content="Class Vehicle | MavNet — MAVLink for .NET ">
+      <meta name="title" content="Class Vehicle | MavNet - MAVLink for .NET ">
       
       <meta name="description" content="Logical handle to one MAVLink vehicle: a typed view of its telemetry plus async command helpers built on the canonical MAVLink command pattern (COMMAND_LONG → race ACK against state-change HEARTBEAT, with timeout). Vehicle is a consumer of  — it subscribes to the connection&#39;s typed events in its constructor and filters by the target /. Multiple Vehicles can in principle share one Connection (they each filter for their own sender), though our factories create one Vehicle per Connection for simplicity.Thread model. State writes happen on the connection&#39;s receive thread. Reads are eventually-consistent — for telemetry display this is fine.  fires synchronously on the receive thread; consumers must marshal to their UI thread themselves.Metadata. and  are opt-in, mutable, never read by the library — set them from your fleet/registry if you want them to follow the vehicle around.">
       <link rel="icon" href="../favicon.ico">
       <link rel="stylesheet" href="../public/docfx.min.css">
       <link rel="stylesheet" href="../public/main.css">
       <meta name="docfx:navrel" content="../toc.html">
-      <meta name="docfx:tocrel" content="toc.html">
+      <meta name="docfx:tocrel" content="../toc.html">
       
       <meta name="docfx:rel" content="../">
       
@@ -63,23 +63,9 @@
     </header>
 
     <main class="container-xxl">
-      <div class="toc-offcanvas">
-        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
-          <div class="offcanvas-header">
-            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
-          </div>
-          <div class="offcanvas-body">
-            <nav class="toc" id="toc"></nav>
-          </div>
-        </div>
-      </div>
 
       <div class="content">
         <div class="actionbar">
-          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
-            <i class="bi bi-list"></i>
-          </button>
 
           <nav id="breadcrumb"></nav>
         </div>
@@ -180,21 +166,21 @@ want them to follow the vehicle around.</p>
 
   <a id="MavNet_PX4_Base_Vehicle__ctor_" data-uid="MavNet.PX4.Base.Vehicle.#ctor*"></a>
 
-  <h3 id="MavNet_PX4_Base_Vehicle__ctor_MavNet_Transport_Udp_MavlinkConnection_System_Byte_System_Byte_System_Boolean_System_Nullable_System_TimeSpan__Microsoft_Extensions_Logging_ILogger_MavNet_PX4_Base_Vehicle__" data-uid="MavNet.PX4.Base.Vehicle.#ctor(MavNet.Transport.Udp.MavlinkConnection,System.Byte,System.Byte,System.Boolean,System.Nullable{System.TimeSpan},Microsoft.Extensions.Logging.ILogger{MavNet.PX4.Base.Vehicle})">
-  Vehicle(MavlinkConnection, byte, byte, bool, TimeSpan?, ILogger&lt;Vehicle&gt;?)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Base/Vehicle.cs/#L146"><i class="bi bi-code-slash"></i></a>
+  <h3 id="MavNet_PX4_Base_Vehicle__ctor_MavNet_Transport_Udp_IMavlinkConnection_System_Byte_System_Byte_System_Boolean_System_Nullable_System_TimeSpan__System_Nullable_System_TimeSpan__Microsoft_Extensions_Logging_ILogger_MavNet_PX4_Base_Vehicle__" data-uid="MavNet.PX4.Base.Vehicle.#ctor(MavNet.Transport.Udp.IMavlinkConnection,System.Byte,System.Byte,System.Boolean,System.Nullable{System.TimeSpan},System.Nullable{System.TimeSpan},Microsoft.Extensions.Logging.ILogger{MavNet.PX4.Base.Vehicle})">
+  Vehicle(IMavlinkConnection, byte, byte, bool, TimeSpan?, TimeSpan?, ILogger&lt;Vehicle&gt;?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Base/Vehicle.cs/#L148"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected Vehicle(MavlinkConnection connection, byte targetSystemId, byte targetComponentId, bool ownsConnection = false, TimeSpan? heartbeatTimeout = null, ILogger&lt;Vehicle&gt;? logger = null)</code></pre>
+    <pre><code class="lang-csharp hljs">protected Vehicle(IMavlinkConnection connection, byte targetSystemId, byte targetComponentId, bool ownsConnection = false, TimeSpan? heartbeatTimeout = null, TimeSpan? commandTimeout = null, ILogger&lt;Vehicle&gt;? logger = null)</code></pre>
   </div>
 
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
-    <dt><code>connection</code> <a class="xref" href="MavNet.Transport.Udp.MavlinkConnection.html">MavlinkConnection</a></dt>
+    <dt><code>connection</code> <a class="xref" href="MavNet.Transport.Udp.IMavlinkConnection.html">IMavlinkConnection</a></dt>
     <dd><p>The transport. Subscribes to its typed events.</p>
 </dd>
     <dt><code>targetSystemId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a></dt>
@@ -208,6 +194,9 @@ want them to follow the vehicle around.</p>
 </dd>
     <dt><code>heartbeatTimeout</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.timespan">TimeSpan</a>?</dt>
     <dd><p>Window in which a heartbeat must arrive for <a class="xref" href="MavNet.PX4.Base.Vehicle.html#MavNet_PX4_Base_Vehicle_LinkUp">LinkUp</a> to stay true.</p>
+</dd>
+    <dt><code>commandTimeout</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.timespan">TimeSpan</a>?</dt>
+    <dd><p>How long a COMMAND_LONG may wait for ACK + state change before resolving as Sent/Timeout. Defaults to 6 s — the PX4-friendly value.</p>
 </dd>
     <dt><code>logger</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.extensions.logging.ilogger-1">ILogger</a>&lt;<a class="xref" href="MavNet.PX4.Base.Vehicle.html">Vehicle</a>&gt;</dt>
     <dd><p>Optional. Null = no logging.</p>
@@ -233,7 +222,7 @@ want them to follow the vehicle around.</p>
 
   <h3 id="MavNet_PX4_Base_Vehicle_Alt" data-uid="MavNet.PX4.Base.Vehicle.Alt">
   Alt
-  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Base/Vehicle.cs/#L114"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Base/Vehicle.cs/#L115"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Altitude in metres above mean sea level, updated from GLOBAL_POSITION_INT.</p>
@@ -265,7 +254,7 @@ want them to follow the vehicle around.</p>
 
   <h3 id="MavNet_PX4_Base_Vehicle_Armed" data-uid="MavNet.PX4.Base.Vehicle.Armed">
   Armed
-  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Base/Vehicle.cs/#L90"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Base/Vehicle.cs/#L91"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Armed bit from the latest HEARTBEAT's base_mode.</p>
@@ -297,7 +286,7 @@ want them to follow the vehicle around.</p>
 
   <h3 id="MavNet_PX4_Base_Vehicle_Battery" data-uid="MavNet.PX4.Base.Vehicle.Battery">
   Battery
-  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Base/Vehicle.cs/#L124"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Base/Vehicle.cs/#L125"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Battery remaining as a percentage (0–100), updated from SYS_STATUS.</p>
@@ -329,7 +318,7 @@ want them to follow the vehicle around.</p>
 
   <h3 id="MavNet_PX4_Base_Vehicle_ComponentId" data-uid="MavNet.PX4.Base.Vehicle.ComponentId">
   ComponentId
-  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Base/Vehicle.cs/#L72"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Base/Vehicle.cs/#L73"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>MAVLink component id of this vehicle's autopilot (typically 1).</p>
@@ -361,7 +350,7 @@ want them to follow the vehicle around.</p>
 
   <h3 id="MavNet_PX4_Base_Vehicle_ConnectionString" data-uid="MavNet.PX4.Base.Vehicle.ConnectionString">
   ConnectionString
-  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Base/Vehicle.cs/#L78"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Base/Vehicle.cs/#L79"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Connection string the underlying transport was opened with, or null if unknown.</p>
@@ -393,7 +382,7 @@ want them to follow the vehicle around.</p>
 
   <h3 id="MavNet_PX4_Base_Vehicle_DeviceId" data-uid="MavNet.PX4.Base.Vehicle.DeviceId">
   DeviceId
-  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Base/Vehicle.cs/#L81"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Base/Vehicle.cs/#L82"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Pretty identifier: <code>sys{SystemId}-comp{ComponentId}</code>.</p>
@@ -425,7 +414,7 @@ want them to follow the vehicle around.</p>
 
   <h3 id="MavNet_PX4_Base_Vehicle_GpsFix" data-uid="MavNet.PX4.Base.Vehicle.GpsFix">
   GpsFix
-  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Base/Vehicle.cs/#L122"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Base/Vehicle.cs/#L123"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>GPS fix type, updated from GPS_RAW_INT.</p>
@@ -457,7 +446,7 @@ want them to follow the vehicle around.</p>
 
   <h3 id="MavNet_PX4_Base_Vehicle_Hdg" data-uid="MavNet.PX4.Base.Vehicle.Hdg">
   Hdg
-  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Base/Vehicle.cs/#L116"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Base/Vehicle.cs/#L117"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Heading in degrees (0–360), updated from GLOBAL_POSITION_INT.</p>
@@ -489,7 +478,7 @@ want them to follow the vehicle around.</p>
 
   <h3 id="MavNet_PX4_Base_Vehicle_Id" data-uid="MavNet.PX4.Base.Vehicle.Id">
   Id
-  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Base/Vehicle.cs/#L84"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Base/Vehicle.cs/#L85"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Opt-in application-assigned identifier. The library never reads this — set it from your fleet/registry.</p>
@@ -521,7 +510,7 @@ want them to follow the vehicle around.</p>
 
   <h3 id="MavNet_PX4_Base_Vehicle_LandedState" data-uid="MavNet.PX4.Base.Vehicle.LandedState">
   LandedState
-  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Base/Vehicle.cs/#L126"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Base/Vehicle.cs/#L127"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Landed/in-air state, updated from EXTENDED_SYS_STATE.</p>
@@ -553,7 +542,7 @@ want them to follow the vehicle around.</p>
 
   <h3 id="MavNet_PX4_Base_Vehicle_LastHeartbeatAt" data-uid="MavNet.PX4.Base.Vehicle.LastHeartbeatAt">
   LastHeartbeatAt
-  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Base/Vehicle.cs/#L107"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Base/Vehicle.cs/#L108"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>UTC timestamp of the most recent HEARTBEAT, or <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.datetime.minvalue">MinValue</a> if none received yet.</p>
@@ -585,7 +574,7 @@ want them to follow the vehicle around.</p>
 
   <h3 id="MavNet_PX4_Base_Vehicle_Lat" data-uid="MavNet.PX4.Base.Vehicle.Lat">
   Lat
-  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Base/Vehicle.cs/#L110"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Base/Vehicle.cs/#L111"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Latitude in degrees (WGS-84), updated from GLOBAL_POSITION_INT.</p>
@@ -617,7 +606,7 @@ want them to follow the vehicle around.</p>
 
   <h3 id="MavNet_PX4_Base_Vehicle_LinkUp" data-uid="MavNet.PX4.Base.Vehicle.LinkUp">
   LinkUp
-  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Base/Vehicle.cs/#L96"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Base/Vehicle.cs/#L97"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>True iff a HEARTBEAT was received within the heartbeat-timeout window.</p>
@@ -649,7 +638,7 @@ want them to follow the vehicle around.</p>
 
   <h3 id="MavNet_PX4_Base_Vehicle_Lon" data-uid="MavNet.PX4.Base.Vehicle.Lon">
   Lon
-  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Base/Vehicle.cs/#L112"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Base/Vehicle.cs/#L113"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Longitude in degrees (WGS-84), updated from GLOBAL_POSITION_INT.</p>
@@ -681,7 +670,7 @@ want them to follow the vehicle around.</p>
 
   <h3 id="MavNet_PX4_Base_Vehicle_Mode" data-uid="MavNet.PX4.Base.Vehicle.Mode">
   Mode
-  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Base/Vehicle.cs/#L93"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Base/Vehicle.cs/#L94"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Human-readable PX4 mode label (e.g. <code>AUTO.LOITER</code>) parsed from custom_mode.</p>
@@ -713,7 +702,7 @@ want them to follow the vehicle around.</p>
 
   <h3 id="MavNet_PX4_Base_Vehicle_Name" data-uid="MavNet.PX4.Base.Vehicle.Name">
   Name
-  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Base/Vehicle.cs/#L87"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Base/Vehicle.cs/#L88"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Opt-in display name. The library never reads this — set it from your fleet/registry.</p>
@@ -745,7 +734,7 @@ want them to follow the vehicle around.</p>
 
   <h3 id="MavNet_PX4_Base_Vehicle_Sats" data-uid="MavNet.PX4.Base.Vehicle.Sats">
   Sats
-  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Base/Vehicle.cs/#L120"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Base/Vehicle.cs/#L121"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Number of GPS satellites visible, updated from GPS_RAW_INT.</p>
@@ -777,7 +766,7 @@ want them to follow the vehicle around.</p>
 
   <h3 id="MavNet_PX4_Base_Vehicle_SystemId" data-uid="MavNet.PX4.Base.Vehicle.SystemId">
   SystemId
-  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Base/Vehicle.cs/#L69"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Base/Vehicle.cs/#L70"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>MAVLink system id of this vehicle (e.g. 1 for a typical autopilot).</p>
@@ -809,7 +798,7 @@ want them to follow the vehicle around.</p>
 
   <h3 id="MavNet_PX4_Base_Vehicle_VehicleType" data-uid="MavNet.PX4.Base.Vehicle.VehicleType">
   VehicleType
-  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Base/Vehicle.cs/#L75"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Base/Vehicle.cs/#L76"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Vehicle category from the latest HEARTBEAT (quadrotor, plane, …).</p>
@@ -841,7 +830,7 @@ want them to follow the vehicle around.</p>
 
   <h3 id="MavNet_PX4_Base_Vehicle_Vel" data-uid="MavNet.PX4.Base.Vehicle.Vel">
   Vel
-  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Base/Vehicle.cs/#L118"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Base/Vehicle.cs/#L119"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Ground speed in m/s, updated from VFR_HUD.</p>
@@ -877,7 +866,7 @@ want them to follow the vehicle around.</p>
 
   <h3 id="MavNet_PX4_Base_Vehicle_ArmAsync_System_Threading_CancellationToken_" data-uid="MavNet.PX4.Base.Vehicle.ArmAsync(System.Threading.CancellationToken)">
   ArmAsync(CancellationToken)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Base/Vehicle.cs/#L357"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Base/Vehicle.cs/#L361"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Arms the vehicle. Resolves <a class="xref" href="MavNet.PX4.CommandResult.html#MavNet_PX4_CommandResult_Confirmed">Confirmed</a> once the armed bit is set in HEARTBEAT.</p>
@@ -914,7 +903,7 @@ want them to follow the vehicle around.</p>
 
   <h3 id="MavNet_PX4_Base_Vehicle_DisarmAsync_System_Threading_CancellationToken_" data-uid="MavNet.PX4.Base.Vehicle.DisarmAsync(System.Threading.CancellationToken)">
   DisarmAsync(CancellationToken)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Base/Vehicle.cs/#L364"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Base/Vehicle.cs/#L368"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Disarms the vehicle. Resolves <a class="xref" href="MavNet.PX4.CommandResult.html#MavNet_PX4_CommandResult_Confirmed">Confirmed</a> once the armed bit is cleared in HEARTBEAT.</p>
@@ -951,7 +940,7 @@ want them to follow the vehicle around.</p>
 
   <h3 id="MavNet_PX4_Base_Vehicle_DisposeAsync" data-uid="MavNet.PX4.Base.Vehicle.DisposeAsync">
   DisposeAsync()
-  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Base/Vehicle.cs/#L445"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Base/Vehicle.cs/#L449"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Performs application-defined tasks associated with freeing, releasing, or
@@ -985,7 +974,7 @@ resetting unmanaged resources asynchronously.</p>
 
   <h3 id="MavNet_PX4_Base_Vehicle_LandAsync_System_Threading_CancellationToken_" data-uid="MavNet.PX4.Base.Vehicle.LandAsync(System.Threading.CancellationToken)">
   LandAsync(CancellationToken)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Base/Vehicle.cs/#L389"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Base/Vehicle.cs/#L393"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Commands landing at the current position.</p>
@@ -1022,7 +1011,7 @@ resetting unmanaged resources asynchronously.</p>
 
   <h3 id="MavNet_PX4_Base_Vehicle_ReturnToLaunchAsync_System_Threading_CancellationToken_" data-uid="MavNet.PX4.Base.Vehicle.ReturnToLaunchAsync(System.Threading.CancellationToken)">
   ReturnToLaunchAsync(CancellationToken)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Base/Vehicle.cs/#L371"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Base/Vehicle.cs/#L375"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Commands return-to-launch. Resolves <a class="xref" href="MavNet.PX4.CommandResult.html#MavNet_PX4_CommandResult_Confirmed">Confirmed</a> once mode switches to AUTO.RTL.</p>
@@ -1059,7 +1048,7 @@ resetting unmanaged resources asynchronously.</p>
 
   <h3 id="MavNet_PX4_Base_Vehicle_Send__1___0_" data-uid="MavNet.PX4.Base.Vehicle.Send``1(``0)">
   Send&lt;T&gt;(T)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Base/Vehicle.cs/#L397"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Base/Vehicle.cs/#L401"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Send an arbitrary message through this Vehicle's underlying connection. Useful for custom commands that don't have a typed wrapper.</p>
@@ -1096,7 +1085,7 @@ resetting unmanaged resources asynchronously.</p>
 
   <h3 id="MavNet_PX4_Base_Vehicle_SubscribeState_System_Action_MavNet_Core_StateRate_" data-uid="MavNet.PX4.Base.Vehicle.SubscribeState(System.Action,MavNet.Core.StateRate)">
   SubscribeState(Action, StateRate)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Base/Vehicle.cs/#L269"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Base/Vehicle.cs/#L273"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Subscribe to state-change notifications at the given rate. The handler may run on
@@ -1140,7 +1129,7 @@ inside the handler.</p>
 
   <h3 id="MavNet_PX4_Base_Vehicle_TakeoffAsync_System_Double_System_Threading_CancellationToken_" data-uid="MavNet.PX4.Base.Vehicle.TakeoffAsync(System.Double,System.Threading.CancellationToken)">
   TakeoffAsync(double, CancellationToken)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Base/Vehicle.cs/#L378"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Base/Vehicle.cs/#L382"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Commands takeoff to <code class="paramref">altMeters</code> metres above the home point.</p>
@@ -1182,7 +1171,7 @@ inside the handler.</p>
 
   <h3 id="MavNet_PX4_Base_Vehicle_HeartbeatReceived" data-uid="MavNet.PX4.Base.Vehicle.HeartbeatReceived">
   HeartbeatReceived
-  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Base/Vehicle.cs/#L138"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Base/Vehicle.cs/#L139"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Diagnostic: fires once per inbound HEARTBEAT with the decoded payload and wall-clock receive timestamp.</p>
@@ -1213,7 +1202,7 @@ inside the handler.</p>
 
   <h3 id="MavNet_PX4_Base_Vehicle_StateChanged" data-uid="MavNet.PX4.Base.Vehicle.StateChanged">
   StateChanged
-  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Base/Vehicle.cs/#L135"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Base/Vehicle.cs/#L136"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Fires after every state-affecting message — high frequency (10–50 Hz typical). Prefer

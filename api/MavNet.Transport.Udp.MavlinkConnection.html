@@ -2,16 +2,16 @@
 <html>
   <head>
     <meta charset="utf-8">
-      <title>Class MavlinkConnection | MavNet — MAVLink for .NET </title>
+      <title>Class MavlinkConnection | MavNet - MAVLink for .NET </title>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta name="title" content="Class MavlinkConnection | MavNet — MAVLink for .NET ">
+      <meta name="title" content="Class MavlinkConnection | MavNet - MAVLink for .NET ">
       
       <meta name="description" content="A MAVLink v2 UDP transport. Owns one socket, runs one receive loop, and broadcasts a GCS heartbeat at a fixed rate. Exposes inbound MAVLink as strongly-typed events keyed on the sender&#39;s . Thread model. Inbound events fire on the receive thread, synchronously. Consumers that need to marshal to a UI thread (e.g. Blazor) must do so themselves (InvokeAsync(StateHasChanged)). Subscriber exceptions are caught — a buggy subscriber cannot break the receive loop.Sending. Use  with any generated MAVLink message. The connection knows the message&#39;s , , and  at the call site — no runtime lookup.Lifetime. Implements ; safe to dispose multiple times. Disposing closes the socket and stops the receive loop.">
       <link rel="icon" href="../favicon.ico">
       <link rel="stylesheet" href="../public/docfx.min.css">
       <link rel="stylesheet" href="../public/main.css">
       <meta name="docfx:navrel" content="../toc.html">
-      <meta name="docfx:tocrel" content="toc.html">
+      <meta name="docfx:tocrel" content="../toc.html">
       
       <meta name="docfx:rel" content="../">
       
@@ -63,23 +63,9 @@
     </header>
 
     <main class="container-xxl">
-      <div class="toc-offcanvas">
-        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
-          <div class="offcanvas-header">
-            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
-          </div>
-          <div class="offcanvas-body">
-            <nav class="toc" id="toc"></nav>
-          </div>
-        </div>
-      </div>
 
       <div class="content">
         <div class="actionbar">
-          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
-            <i class="bi bi-list"></i>
-          </button>
 
           <nav id="breadcrumb"></nav>
         </div>
@@ -112,7 +98,7 @@ multiple times. Disposing closes the socket and stops the receive loop.</p>
   <div class="markdown conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public sealed class MavlinkConnection : IAsyncDisposable</code></pre>
+    <pre><code class="lang-csharp hljs">public sealed class MavlinkConnection : IMavlinkConnection, IAsyncDisposable</code></pre>
   </div>
 
 
@@ -129,6 +115,7 @@ multiple times. Disposing closes the socket and stops the receive loop.</p>
   <dl class="typelist implements">
     <dt>Implements</dt>
     <dd>
+      <div><a class="xref" href="MavNet.Transport.Udp.IMavlinkConnection.html">IMavlinkConnection</a></div>
       <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.iasyncdisposable">IAsyncDisposable</a></div>
     </dd>
   </dl>
@@ -208,6 +195,43 @@ multiple times. Disposing closes the socket and stops the receive loop.</p>
 
 
 
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="MavNet_Transport_Udp_MavlinkConnection_LocalEndPoint_" data-uid="MavNet.Transport.Udp.MavlinkConnection.LocalEndPoint*"></a>
+
+  <h3 id="MavNet_Transport_Udp_MavlinkConnection_LocalEndPoint" data-uid="MavNet.Transport.Udp.MavlinkConnection.LocalEndPoint">
+  LocalEndPoint
+  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.Transport.Udp/MavlinkConnection.cs/#L80"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>The local <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.net.ipendpoint">IPEndPoint</a> the UDP socket is bound to. When the caller
+passed port 0 to the constructor, this is the OS-assigned ephemeral port.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IPEndPoint? LocalEndPoint { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.net.ipendpoint">IPEndPoint</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
   <h2 class="section" id="methods">Methods
 </h2>
 
@@ -216,7 +240,7 @@ multiple times. Disposing closes the socket and stops the receive loop.</p>
 
   <h3 id="MavNet_Transport_Udp_MavlinkConnection_DisposeAsync" data-uid="MavNet.Transport.Udp.MavlinkConnection.DisposeAsync">
   DisposeAsync()
-  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.Transport.Udp/MavlinkConnection.cs/#L205"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.Transport.Udp/MavlinkConnection.cs/#L209"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Performs application-defined tasks associated with freeing, releasing, or
@@ -250,7 +274,7 @@ resetting unmanaged resources asynchronously.</p>
 
   <h3 id="MavNet_Transport_Udp_MavlinkConnection_SendRaw_System_UInt32_System_Byte_System_ReadOnlySpan_System_Byte__" data-uid="MavNet.Transport.Udp.MavlinkConnection.SendRaw(System.UInt32,System.Byte,System.ReadOnlySpan{System.Byte})">
   SendRaw(uint, byte, ReadOnlySpan&lt;byte&gt;)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.Transport.Udp/MavlinkConnection.cs/#L101"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.Transport.Udp/MavlinkConnection.cs/#L105"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Send raw bytes as a MAVLink v2 frame. Use <a class="xref" href="MavNet.Transport.Udp.MavlinkConnection.html#MavNet_Transport_Udp_MavlinkConnection_Send__1___0_">Send&lt;T&gt;(T)</a> for known message types — this is the escape hatch.</p>
@@ -286,7 +310,7 @@ resetting unmanaged resources asynchronously.</p>
 
   <h3 id="MavNet_Transport_Udp_MavlinkConnection_Send__1___0_" data-uid="MavNet.Transport.Udp.MavlinkConnection.Send``1(``0)">
   Send&lt;T&gt;(T)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.Transport.Udp/MavlinkConnection.cs/#L90"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.Transport.Udp/MavlinkConnection.cs/#L94"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Send a generated MAVLink message. Frame is built and CRC-stamped on this thread; the actual UDP send is non-blocking.</p>
@@ -323,7 +347,7 @@ resetting unmanaged resources asynchronously.</p>
 
   <h3 id="MavNet_Transport_Udp_MavlinkConnection_Start" data-uid="MavNet.Transport.Udp.MavlinkConnection.Start">
   Start()
-  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.Transport.Udp/MavlinkConnection.cs/#L79"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.Transport.Udp/MavlinkConnection.cs/#L83"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Begin reading from the socket and emitting events. Idempotent within one instance — throws if called twice.</p>
