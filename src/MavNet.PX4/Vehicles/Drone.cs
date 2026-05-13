@@ -8,6 +8,25 @@ using MavNet.Protocol.Generated.Messages;
 namespace MavNet.PX4.Vehicles;
 
 /// <summary>
+/// Immutable per-fire snapshot of a <see cref="Drone"/>'s observable state. Captured
+/// atomically when <see cref="Drone.SubscribeState(Action{DroneState}, StateRate)"/>
+/// delivers, so consumers see a coherent view (no torn reads across separate property
+/// gets). Use this overload from telemetry recorders, replay, and anywhere a handler
+/// might run on a different thread from the receive loop.
+/// </summary>
+public readonly record struct DroneState(
+    double Lat,
+    double Lon,
+    double Alt,
+    double Hdg,
+    double Vel,
+    string Mode,
+    bool Armed,
+    double Battery,
+    int Sats,
+    bool LinkUp);
+
+/// <summary>
 /// A multirotor vehicle. Currently a thin marker over <see cref="Vehicle"/> so
 /// consumers can pattern-match on type (<c>if (v is Drone)</c>) and so we have
 /// a clear extension point for multirotor-specific behaviour later.
@@ -16,8 +35,20 @@ namespace MavNet.PX4.Vehicles;
 /// point for the common case: parse URI → open <see cref="MavlinkConnection"/>
 /// → wait for first heartbeat → return a Drone that owns the connection.</para>
 /// </summary>
-public sealed class Drone : Vehicle
+public sealed class Drone : Vehicle, IStateObservable<DroneState>
 {
+    /// <summary>Capture an immutable snapshot of the current observable state.</summary>
+    public DroneState Snapshot() => new(
+        Lat, Lon, Alt, Hdg, Vel, Mode, Armed, Battery, Sats, LinkUp);
+
+    /// <inheritdoc cref="IStateObservable{TState}.SubscribeState(Action{TState}, StateRate)"/>
+    public StateSubscription SubscribeState(Action<DroneState> handler, StateRate rate)
+    {
+        ArgumentNullException.ThrowIfNull(handler);
+        // Reuses the base throttler. One snapshot per fire — cheap (~10 doubles).
+        return SubscribeState(() => handler(Snapshot()), rate);
+    }
+
     private Drone(MavlinkConnection conn, byte sys, byte comp, string? cs,
         ILogger<Vehicle>? logger)
         : base(conn, sys, comp, ownsConnection: true, heartbeatTimeout: null, logger: logger)

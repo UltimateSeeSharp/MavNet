@@ -28,12 +28,29 @@ namespace MavNet.PX4.Base;
 /// mutable, never read by the library — set them from your fleet/registry if you
 /// want them to follow the vehicle around.</para>
 /// </summary>
-public abstract class Vehicle : IAsyncDisposable
+public abstract class Vehicle : IAsyncDisposable, IStateObservable
 {
     private readonly MavlinkConnection _connection;
     private readonly bool _ownsConnection;
     private readonly TimeSpan _heartbeatTimeout;
     private readonly ILogger<Vehicle>? _log;
+
+    // Throttled state subscriptions. Raw subscribers attach directly to StateChanged; throttled
+    // ones live in _throttledSubs and share one Timer whose period tracks the FASTEST subscriber.
+    // Each sub still honors its own MinInterval — the shared timer only sets the granularity at
+    // which "is anyone due?" is checked. Allocated lazily so raw-only consumers pay nothing.
+    private readonly object _subsLock = new();
+    private List<ThrottledSub>? _throttledSubs;
+    private Timer? _throttleTimer;
+    private long _currentTimerPeriodTicks;
+
+    private sealed class ThrottledSub
+    {
+        public required Action Handler { get; init; }
+        public required long MinIntervalTicks { get; init; }
+        public long LastFiredTicks;
+        public int Dirty;
+    }
 
     // Heartbeat-derived state.
     private volatile bool _armed;
@@ -98,7 +115,13 @@ public abstract class Vehicle : IAsyncDisposable
     public double Battery => _battery;
     public MavLandedState LandedState => _landedState;
 
-    /// <summary>Fires after every state-affecting message. Consumers should coalesce on a UI tick rather than re-render per event.</summary>
+    /// <summary>
+    /// Fires after every state-affecting message — high frequency (10–50 Hz typical). Prefer
+    /// <see cref="SubscribeState(Action, StateRate)"/>: it lets you pick a throttle rate at
+    /// the call site (<c>StateRate.Hz(2)</c>, <c>StateRate.Every(...)</c>, or <c>StateRate.Raw</c>
+    /// for full fidelity). This raw event remains public for consumers that genuinely want
+    /// every packet without going through the throttler.
+    /// </summary>
     public event Action? StateChanged;
 
     /// <summary>Diagnostic: fires once per inbound HEARTBEAT with the decoded payload and wall-clock receive timestamp.</summary>
@@ -213,6 +236,109 @@ public abstract class Vehicle : IAsyncDisposable
     private void FireStateChanged()
     {
         try { StateChanged?.Invoke(); } catch { /* never break the receive loop */ }
+
+        // Mark throttled subscribers dirty. Snapshot the list outside the per-handler call to
+        // keep the lock window tiny; the timer reads the same list.
+        if (_throttledSubs is null) return;
+        lock (_subsLock)
+        {
+            if (_throttledSubs is null) return;
+            for (int i = 0; i < _throttledSubs.Count; i++)
+                Interlocked.Exchange(ref _throttledSubs[i].Dirty, 1);
+        }
+    }
+
+    /// <summary>
+    /// Subscribe to state-change notifications at the given rate. The handler may run on
+    /// any thread — for Blazor consumers, marshal to the UI thread via <c>InvokeAsync</c>
+    /// inside the handler.
+    /// </summary>
+    /// <param name="handler">Called on each delivery. Exceptions are swallowed to keep the throttler alive.</param>
+    /// <param name="rate"><see cref="StateRate.Raw"/> = every packet; otherwise rate-limited.</param>
+    /// <returns>Dispose to unsubscribe. Idempotent.</returns>
+    public StateSubscription SubscribeState(Action handler, StateRate rate)
+    {
+        ArgumentNullException.ThrowIfNull(handler);
+
+        if (rate.IsRaw)
+        {
+            StateChanged += handler;
+            return new StateSubscription(rate, () => StateChanged -= handler);
+        }
+
+        var sub = new ThrottledSub { Handler = handler, MinIntervalTicks = rate.MinInterval.Ticks };
+        lock (_subsLock)
+        {
+            _throttledSubs ??= new List<ThrottledSub>();
+            _throttledSubs.Add(sub);
+            RetargetTimerLocked();
+        }
+        return new StateSubscription(rate, () =>
+        {
+            lock (_subsLock)
+            {
+                if (_throttledSubs is null) return;
+                _throttledSubs.Remove(sub);
+                if (_throttledSubs.Count == 0)
+                {
+                    _throttleTimer?.Dispose();
+                    _throttleTimer = null;
+                    _throttledSubs = null;
+                    _currentTimerPeriodTicks = 0;
+                }
+                else
+                {
+                    RetargetTimerLocked();
+                }
+            }
+        });
+    }
+
+    /// <summary>
+    /// Recomputes the shared throttle timer's period to match the fastest active subscriber and
+    /// retargets the timer if it changed. Must be called under <see cref="_subsLock"/>.
+    /// </summary>
+    private void RetargetTimerLocked()
+    {
+        if (_throttledSubs is null || _throttledSubs.Count == 0) return;
+
+        long fastestTicks = long.MaxValue;
+        foreach (var s in _throttledSubs)
+            if (s.MinIntervalTicks < fastestTicks) fastestTicks = s.MinIntervalTicks;
+
+        if (fastestTicks == _currentTimerPeriodTicks) return;
+        _currentTimerPeriodTicks = fastestTicks;
+
+        var period = TimeSpan.FromTicks(fastestTicks);
+        if (_throttleTimer is null)
+            _throttleTimer = new Timer(_ => OnThrottleTick(), null, period, period);
+        else
+            _throttleTimer.Change(period, period);
+    }
+
+    private void OnThrottleTick()
+    {
+        ThrottledSub[] snapshot;
+        lock (_subsLock)
+        {
+            if (_throttledSubs is null || _throttledSubs.Count == 0) return;
+            snapshot = _throttledSubs.ToArray();
+        }
+
+        var nowTicks = DateTime.UtcNow.Ticks;
+        foreach (var sub in snapshot)
+        {
+            // Only fire if dirty AND the min interval has elapsed since the last delivery.
+            if (Interlocked.CompareExchange(ref sub.Dirty, 0, 1) != 1) continue;
+            if (nowTicks - Interlocked.Read(ref sub.LastFiredTicks) < sub.MinIntervalTicks)
+            {
+                // Too soon — put it back in the dirty queue for a later tick.
+                Interlocked.Exchange(ref sub.Dirty, 1);
+                continue;
+            }
+            Interlocked.Exchange(ref sub.LastFiredTicks, nowTicks);
+            try { sub.Handler(); } catch { /* never throw from throttler */ }
+        }
     }
 
     // ----- Commands ---------------------------------------------------------
@@ -309,6 +435,13 @@ public abstract class Vehicle : IAsyncDisposable
         _connection.GpsRawIntReceived         -= OnGpsRaw;
         _connection.SysStatusReceived         -= OnSysStatus;
         _connection.ExtendedSysStateReceived  -= OnExtendedSysState;
+
+        lock (_subsLock)
+        {
+            _throttleTimer?.Dispose();
+            _throttleTimer = null;
+            _throttledSubs = null;
+        }
 
         if (_ownsConnection)
             await _connection.DisposeAsync().ConfigureAwait(false);
