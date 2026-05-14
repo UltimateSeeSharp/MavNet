@@ -56,6 +56,24 @@ public sealed class MavlinkConnection : IMavlinkConnection
     public event Action<MavId, SysStatus, DateTime>?         SysStatusReceived;
     /// <summary>Fires for every inbound EXTENDED_SYS_STATE.</summary>
     public event Action<MavId, ExtendedSysState, DateTime>?  ExtendedSysStateReceived;
+    /// <summary>Fires for every inbound MISSION_REQUEST_LIST.</summary>
+    public event Action<MavId, MissionRequestList, DateTime>?  MissionRequestListReceived;
+    /// <summary>Fires for every inbound MISSION_COUNT.</summary>
+    public event Action<MavId, MissionCount, DateTime>?        MissionCountReceived;
+    /// <summary>Fires for every inbound MISSION_CLEAR_ALL.</summary>
+    public event Action<MavId, MissionClearAll, DateTime>?     MissionClearAllReceived;
+    /// <summary>Fires for every inbound MISSION_ITEM_REACHED.</summary>
+    public event Action<MavId, MissionItemReached, DateTime>?  MissionItemReachedReceived;
+    /// <summary>Fires for every inbound MISSION_ACK.</summary>
+    public event Action<MavId, MissionAck, DateTime>?          MissionAckReceived;
+    /// <summary>Fires for every inbound MISSION_CURRENT.</summary>
+    public event Action<MavId, MissionCurrent, DateTime>?      MissionCurrentReceived;
+    /// <summary>Fires for every inbound MISSION_REQUEST. Deprecated by the MAVLink spec, but ArduPilot still sends it — respond with a MISSION_ITEM_INT.</summary>
+    public event Action<MavId, MissionRequest, DateTime>?      MissionRequestReceived;
+    /// <summary>Fires for every inbound MISSION_REQUEST_INT.</summary>
+    public event Action<MavId, MissionRequestInt, DateTime>?   MissionRequestIntReceived;
+    /// <summary>Fires for every inbound MISSION_ITEM_INT.</summary>
+    public event Action<MavId, MissionItemInt, DateTime>?      MissionItemIntReceived;
 
     /// <summary>Creates and binds the UDP socket. Call <see cref="Start"/> to begin receiving.</summary>
     public MavlinkConnection(
@@ -178,6 +196,33 @@ public sealed class MavlinkConnection : IMavlinkConnection
                 break;
             case ExtendedSysState.MsgId:
                 Fire(ExtendedSysStateReceived, sender, ExtendedSysState.Decode(frame.Payload), receivedAt);
+                break;
+            case MissionRequestList.MsgId:
+                Fire(MissionRequestListReceived, sender, MissionRequestList.Decode(frame.Payload), receivedAt);
+                break;
+            case MissionCount.MsgId:
+                Fire(MissionCountReceived, sender, MissionCount.Decode(frame.Payload), receivedAt);
+                break;
+            case MissionClearAll.MsgId:
+                Fire(MissionClearAllReceived, sender, MissionClearAll.Decode(frame.Payload), receivedAt);
+                break;
+            case MissionItemReached.MsgId:
+                Fire(MissionItemReachedReceived, sender, MissionItemReached.Decode(frame.Payload), receivedAt);
+                break;
+            case MissionAck.MsgId:
+                Fire(MissionAckReceived, sender, MissionAck.Decode(frame.Payload), receivedAt);
+                break;
+            case MissionCurrent.MsgId:
+                Fire(MissionCurrentReceived, sender, MissionCurrent.Decode(frame.Payload), receivedAt);
+                break;
+            case MissionRequest.MsgId:
+                Fire(MissionRequestReceived, sender, MissionRequest.Decode(frame.Payload), receivedAt);
+                break;
+            case MissionRequestInt.MsgId:
+                Fire(MissionRequestIntReceived, sender, MissionRequestInt.Decode(frame.Payload), receivedAt);
+                break;
+            case MissionItemInt.MsgId:
+                Fire(MissionItemIntReceived, sender, MissionItemInt.Decode(frame.Payload), receivedAt);
                 break;
                 // Other message ids are silently ignored — extend the dispatcher when you add msgs to the allowlist.
         }

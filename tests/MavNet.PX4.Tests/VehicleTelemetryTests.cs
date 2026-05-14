@@ -121,4 +121,107 @@ public class VehicleTelemetryTests
         snap.Battery.Should().Be(75);
         snap.LinkUp.Should().BeTrue();
     }
+
+    [Fact]
+    public void Vehicle_mission_state_starts_unknown()
+    {
+        var (drone, _) = Build();
+        drone.MissionCurrentSeq.Should().Be(-1, "no MISSION_CURRENT yet");
+        drone.MissionTotal.Should().Be(-1);
+        drone.MissionOpaqueId.Should().Be(0u);
+        drone.FenceOpaqueId.Should().Be(0u);
+        drone.RallyOpaqueId.Should().Be(0u);
+        drone.MissionReachedCount.Should().Be(0);
+    }
+
+    [Fact]
+    public void MissionCurrent_updates_all_state_fields_and_fires_StateChanged()
+    {
+        var (drone, conn) = Build();
+        int stateChanges = 0;
+        drone.SubscribeState(() => Interlocked.Increment(ref stateChanges), StateRate.Raw);
+
+        conn.RaiseMissionCurrent(new MavId(1, 1), new MissionCurrent(
+            Seq: 2, Total: 5,
+            MissionState: MissionState.Active,
+            MissionMode: 1,
+            MissionId: 0xAAAA, FenceId: 0xBBBB, RallyPointsId: 0xCCCC));
+
+        drone.MissionCurrentSeq.Should().Be(2);
+        drone.MissionTotal.Should().Be(5);
+        drone.MissionState.Should().Be(MissionState.Active);
+        drone.MissionOpaqueId.Should().Be(0xAAAAu);
+        drone.FenceOpaqueId.Should().Be(0xBBBBu);
+        drone.RallyOpaqueId.Should().Be(0xCCCCu);
+        stateChanges.Should().Be(1, "MISSION_CURRENT must fire StateChanged so throttled subs see progress");
+    }
+
+    [Fact]
+    public void MissionCurrent_from_wrong_sysid_is_ignored()
+    {
+        var (drone, conn) = Build();
+        conn.RaiseMissionCurrent(new MavId(99, 1), new MissionCurrent(
+            Seq: 2, Total: 5, MissionState: MissionState.Active, MissionMode: 0,
+            MissionId: 0xAAAA, FenceId: 0, RallyPointsId: 0));
+
+        drone.MissionCurrentSeq.Should().Be(-1, "the update came from a different vehicle");
+        drone.MissionOpaqueId.Should().Be(0u);
+    }
+
+    [Fact]
+    public void MissionItemReached_increments_count_and_fires_event()
+    {
+        var (drone, conn) = Build();
+        int eventCount = 0;
+        int lastSeqSeen = -1;
+        drone.MissionItemReached += seq =>
+        {
+            Interlocked.Increment(ref eventCount);
+            Interlocked.Exchange(ref lastSeqSeen, seq);
+        };
+
+        conn.RaiseMissionItemReached(new MavId(1, 1), new MissionItemReached(Seq: 0));
+        conn.RaiseMissionItemReached(new MavId(1, 1), new MissionItemReached(Seq: 1));
+        conn.RaiseMissionItemReached(new MavId(1, 1), new MissionItemReached(Seq: 2));
+
+        drone.MissionReachedCount.Should().Be(3);
+        eventCount.Should().Be(3);
+        lastSeqSeen.Should().Be(2);
+    }
+
+    [Fact]
+    public void MissionItemReached_duplicate_seq_is_deduplicated()
+    {
+        // PX4 occasionally re-emits the same MISSION_ITEM_REACHED on mode transitions.
+        // We dedupe consecutive duplicates so the counter reflects distinct reach events.
+        var (drone, conn) = Build();
+        int eventCount = 0;
+        drone.MissionItemReached += _ => Interlocked.Increment(ref eventCount);
+
+        conn.RaiseMissionItemReached(new MavId(1, 1), new MissionItemReached(Seq: 1));
+        conn.RaiseMissionItemReached(new MavId(1, 1), new MissionItemReached(Seq: 1)); // duplicate
+        conn.RaiseMissionItemReached(new MavId(1, 1), new MissionItemReached(Seq: 2));
+
+        drone.MissionReachedCount.Should().Be(2);
+        eventCount.Should().Be(2);
+    }
+
+    [Fact]
+    public void MissionItemReached_from_wrong_sysid_is_ignored()
+    {
+        var (drone, conn) = Build();
+        conn.RaiseMissionItemReached(new MavId(99, 1), new MissionItemReached(Seq: 0));
+        drone.MissionReachedCount.Should().Be(0);
+    }
+
+    [Fact]
+    public void MissionItemReached_subscriber_exception_does_not_break_state()
+    {
+        var (drone, conn) = Build();
+        drone.MissionItemReached += _ => throw new InvalidOperationException("subscriber boom");
+
+        // Subscriber throws — count must still increment, FireStateChanged must still run.
+        conn.RaiseMissionItemReached(new MavId(1, 1), new MissionItemReached(Seq: 0));
+        drone.MissionReachedCount.Should().Be(1);
+    }
 }

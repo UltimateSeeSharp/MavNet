@@ -176,4 +176,121 @@ public class MessageRoundtripTests
 
         Roundtrip(original).Should().Be(original);
     }
+
+    [Fact]
+    public void MissionRequestList_roundtrip()
+    {
+        var original = new MissionRequestList(
+            TargetSystem: 1, TargetComponent: 1, MissionType: MavMissionType.Mission);
+
+        Roundtrip(original).Should().Be(original);
+    }
+
+    [Fact]
+    public void MissionCount_roundtrip_preserves_opaque_id()
+    {
+        var original = new MissionCount(
+            Count: 7, TargetSystem: 1, TargetComponent: 1,
+            MissionType: MavMissionType.Fence,
+            OpaqueId: 0xDEADBEEFu);
+
+        Roundtrip(original).Should().Be(original);
+    }
+
+    [Fact]
+    public void MissionClearAll_roundtrip()
+    {
+        var original = new MissionClearAll(
+            TargetSystem: 1, TargetComponent: 1, MissionType: MavMissionType.Rally);
+
+        Roundtrip(original).Should().Be(original);
+    }
+
+    [Fact]
+    public void MissionItemReached_roundtrip()
+    {
+        var original = new MissionItemReached(Seq: 42);
+
+        Roundtrip(original).Should().Be(original);
+    }
+
+    [Fact]
+    public void MissionAck_roundtrip_preserves_opaque_id()
+    {
+        var original = new MissionAck(
+            TargetSystem: 1, TargetComponent: 1,
+            Type: MavMissionResult.MavMissionAccepted,
+            MissionType: MavMissionType.Mission,
+            OpaqueId: 0xCAFEBABEu);
+
+        Roundtrip(original).Should().Be(original);
+    }
+
+    [Fact]
+    public void MissionCurrent_roundtrip_preserves_all_three_plan_ids()
+    {
+        var original = new MissionCurrent(
+            Seq: 3, Total: 10,
+            MissionState: (MissionState)2, MissionMode: 1,
+            MissionId: 0x11111111u, FenceId: 0x22222222u, RallyPointsId: 0x33333333u);
+
+        Roundtrip(original).Should().Be(original);
+    }
+
+    [Fact]
+    public void MissionRequest_roundtrip_deprecated_but_still_decoded()
+    {
+        // MISSION_REQUEST (msgid 40) is deprecated per spec but ArduPilot still sends it.
+        // We must still decode it correctly to know which item to respond with.
+        var original = new MissionRequest(
+            Seq: 5, TargetSystem: 1, TargetComponent: 1, MissionType: MavMissionType.Mission);
+
+        Roundtrip(original).Should().Be(original);
+    }
+
+    [Fact]
+    public void MissionRequestInt_roundtrip()
+    {
+        var original = new MissionRequestInt(
+            Seq: 5, TargetSystem: 1, TargetComponent: 1, MissionType: MavMissionType.Mission);
+
+        Roundtrip(original).Should().Be(original);
+    }
+
+    [Fact]
+    public void MissionItemInt_roundtrip_full_layout()
+    {
+        // Per MAVLink spec, MISSION_ITEM_INT uses int32 × 1e7 for global lat/lon.
+        // Verify all 15 fields round-trip including the signed ints and the float Z.
+        var original = new MissionItemInt(
+            Param1: 0f, Param2: 5f, Param3: 0f, Param4: float.NaN,    // NaN for "current heading" is common
+            X: -47_123_456, Y: 151_234_567, Z: 50f,
+            Seq: 2,
+            Command: (MavCmd)16,                                       // MAV_CMD_NAV_WAYPOINT
+            TargetSystem: 1, TargetComponent: 1,
+            Frame: (MavFrame)3,                                         // GLOBAL_RELATIVE_ALT_INT
+            Current: 0, Autocontinue: 1,
+            MissionType: MavMissionType.Mission);
+
+        System.Span<byte> buf = stackalloc byte[MissionItemInt.MaxPayloadLength];
+        original.Encode(buf);
+        var decoded = MissionItemInt.Decode(buf);
+
+        // float.NaN does not equal itself, so compare it separately and the rest via field-wise equality.
+        decoded.Param1.Should().Be(0f);
+        decoded.Param2.Should().Be(5f);
+        decoded.Param3.Should().Be(0f);
+        float.IsNaN(decoded.Param4).Should().BeTrue();
+        decoded.X.Should().Be(-47_123_456);
+        decoded.Y.Should().Be(151_234_567);
+        decoded.Z.Should().Be(50f);
+        decoded.Seq.Should().Be((ushort)2);
+        decoded.Command.Should().Be((MavCmd)16);
+        decoded.TargetSystem.Should().Be((byte)1);
+        decoded.TargetComponent.Should().Be((byte)1);
+        decoded.Frame.Should().Be((MavFrame)3);
+        decoded.Current.Should().Be((byte)0);
+        decoded.Autocontinue.Should().Be((byte)1);
+        decoded.MissionType.Should().Be(MavMissionType.Mission);
+    }
 }
