@@ -112,6 +112,76 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/MavNet.PX4.Missions.MissionClearResult.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MavNet.PX4.Missions.MissionClearResult.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MavNet.PX4.Missions.MissionClient.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MavNet.PX4.Missions.MissionClient.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MavNet.PX4.Missions.MissionDownloadResult.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MavNet.PX4.Missions.MissionDownloadResult.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MavNet.PX4.Missions.MissionItem.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MavNet.PX4.Missions.MissionItem.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MavNet.PX4.Missions.MissionTransactionStatus.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MavNet.PX4.Missions.MissionTransactionStatus.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MavNet.PX4.Missions.MissionUploadResult.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MavNet.PX4.Missions.MissionUploadResult.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MavNet.PX4.Missions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MavNet.PX4.Missions.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/MavNet.PX4.Px4Mode.yml",
       "output": {
         ".html": {
@@ -319,6 +389,16 @@
       "output": {
         ".html": {
           "relative_path": "articles/getting-started.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/articles/missions.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/missions.html"
         }
       },
       "version": ""

@@ -1,0 +1,293 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Missions | MavNet - MAVLink for .NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Missions | MavNet - MAVLink for .NET ">
+      
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="../toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/UltimateSeeSharp/MavNet/blob/main/docs/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../logo.svg" alt="MavNet">
+            MavNet
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+
+      <div class="content">
+        <div class="actionbar">
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="missions">Missions</h1>
+
+<p>The mission protocol lets you upload, download, clear, and run an on-vehicle plan
+(waypoints, geofence, or rally points) over MAVLink. MavNet implements the full
+three-direction state machine — upload, download, clear — plus the
+<code>MAV_CMD_MISSION_START</code> execute path on top of the existing <code>COMMAND_LONG</code>
+infrastructure.</p>
+<h2 id="quick-start">Quick start</h2>
+<pre><code class="lang-csharp">using MavNet.PX4.Missions;
+using MavNet.PX4.Vehicles;
+
+await using var drone = await Drone.ConnectAsync(
+    &quot;udp://0.0.0.0:14550?rhost=127.0.0.1&amp;rport=18570&quot;,
+    TimeSpan.FromSeconds(30));
+
+// Build a 4-waypoint loop around (47.0°, 8.5°) at 20 m AGL.
+var mission = new[]
+{
+    MissionItem.Takeoff(altMeters: 20f),
+    MissionItem.Waypoint(47.0010, 8.5000, 20f, hold: 2f, acceptanceRadius: 3f),
+    MissionItem.Waypoint(47.0010, 8.5010, 20f, hold: 2f, acceptanceRadius: 3f),
+    MissionItem.Waypoint(47.0000, 8.5010, 20f, hold: 2f, acceptanceRadius: 3f),
+    MissionItem.ReturnToLaunch(),
+};
+
+drone.MissionItemReached += seq =&gt; Console.WriteLine($&quot;reached waypoint {seq}&quot;);
+
+var upload = await drone.UploadMissionAsync(mission);
+if (!upload.IsAccepted) throw new Exception($&quot;Upload failed: {upload.AckResult}&quot;);
+
+await drone.ArmAsync();
+var start = await drone.StartMissionAsync();
+Console.WriteLine($&quot;Mission started: {start.Result}&quot;);
+</code></pre>
+<h2 id="api-surface">API surface</h2>
+<p>All nine methods live on <code>Vehicle</code> (so <code>Drone</code>, and any future <code>Boat</code> / <code>Plane</code>
+inherit them):</p>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Wire flow</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>UploadMissionAsync(items, ct)</code></td>
+<td><code>MISSION_COUNT</code> → loop(<code>MISSION_REQUEST_INT</code> → <code>MISSION_ITEM_INT</code>) → <code>MISSION_ACK</code></td>
+</tr>
+<tr>
+<td><code>DownloadMissionAsync(ct)</code></td>
+<td><code>MISSION_REQUEST_LIST</code> → <code>MISSION_COUNT</code> → loop(<code>MISSION_REQUEST_INT</code> → <code>MISSION_ITEM_INT</code>) → our <code>MISSION_ACK(Accepted)</code></td>
+</tr>
+<tr>
+<td><code>ClearMissionAsync(ct)</code></td>
+<td><code>MISSION_CLEAR_ALL</code> → <code>MISSION_ACK</code></td>
+</tr>
+<tr>
+<td><code>UploadFenceAsync</code> / <code>DownloadFenceAsync</code> / <code>ClearFenceAsync</code></td>
+<td>Same protocol, <code>MAV_MISSION_TYPE_FENCE</code></td>
+</tr>
+<tr>
+<td><code>UploadRallyAsync</code> / <code>DownloadRallyAsync</code> / <code>ClearRallyAsync</code></td>
+<td>Same protocol, <code>MAV_MISSION_TYPE_RALLY</code></td>
+</tr>
+<tr>
+<td><code>StartMissionAsync(firstItem, lastItem, ct)</code></td>
+<td><code>COMMAND_LONG</code> with <code>MAV_CMD_MISSION_START</code>, confirms when HEARTBEAT shows <code>AUTO.MISSION</code></td>
+</tr>
+<tr>
+<td><code>SetCurrentMissionItemAsync(seq, ct)</code></td>
+<td><code>COMMAND_LONG</code> with <code>MAV_CMD_DO_SET_MISSION_CURRENT</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="timing-and-retries">Timing and retries</h2>
+<p>Per the MAVLink spec:</p>
+<ul>
+<li><strong>1500 ms</strong> default per-message timeout (initial sends, ACK waits).</li>
+<li><strong>250 ms</strong> inner timeout for the item request/response loop.</li>
+<li><strong>5</strong> retries before a transaction fails as <code>Timeout</code>.</li>
+</ul>
+<p>All three are constructor-injectable on <code>MissionClient</code> so unit tests stay
+sub-second. The <code>Vehicle</code>-level facade uses spec defaults.</p>
+<h2 id="out-of-sequence-is-not-an-error">Out-of-sequence is not an error</h2>
+<p>The spec says: <em>&quot;Out-of-sequence messages in mission upload/download are
+recoverable, and are not treated as errors.&quot;</em> MavNet honors this:</p>
+<ul>
+<li>On the upload side, if the vehicle re-requests an earlier seq (or repeats one),
+we re-answer with that item rather than abort.</li>
+<li>On the download side, if an item arrives with the wrong seq, we drop it and
+let the watchdog re-request the expected one.</li>
+</ul>
+<p>The only paths to a failed transaction are:</p>
+<ol>
+<li>A non-<code>Accepted</code> <code>MISSION_ACK</code> (→ <code>Status.Rejected</code>, <code>AckResult</code> carries the
+specific <code>MAV_MISSION_RESULT</code>).</li>
+<li>Retry budget exhausted (→ <code>Status.Timeout</code>).</li>
+<li>Caller cancellation (→ <code>Status.Cancelled</code>).</li>
+</ol>
+<p>Per spec, on rejection both ends return to idle and the on-vehicle mission is
+unchanged.</p>
+<h2 id="mission-types-run-independently">Mission types run independently</h2>
+<p><code>MAV_MISSION_TYPE_MISSION</code>, <code>_FENCE</code>, and <code>_RALLY</code> are three parallel state
+machines. <code>Vehicle</code> lazily builds one <code>MissionClient</code> per type. You can run
+upload-mission, upload-fence, and upload-rally concurrently without interference
+— each client filters inbound mission messages by its own <code>mission_type</code>.</p>
+<pre><code class="lang-csharp">var t1 = drone.UploadMissionAsync(waypoints);
+var t2 = drone.UploadFenceAsync(fence);
+var t3 = drone.UploadRallyAsync(rally);
+await Task.WhenAll(t1, t2, t3);
+</code></pre>
+<p>What you <em>cannot</em> do is run two transactions of the same type concurrently on
+the same <code>Vehicle</code> — that throws <code>InvalidOperationException</code>. Single-flight is
+per <code>MissionClient</code>, which is per type.</p>
+<h2 id="live-progress-mission_current--mission_item_reached">Live progress (<code>MISSION_CURRENT</code> / <code>MISSION_ITEM_REACHED</code>)</h2>
+<p>When the vehicle broadcasts <code>MISSION_CURRENT</code> or <code>MISSION_ITEM_REACHED</code>, <code>Vehicle</code>
+updates:</p>
+<ul>
+<li><code>MissionCurrentSeq</code>, <code>MissionTotal</code> (or <code>-1</code> if unknown)</li>
+<li><code>MissionState</code> — <code>Active</code> / <code>Paused</code> / <code>Complete</code> / <code>NotStarted</code> per the enum</li>
+<li><code>MissionOpaqueId</code>, <code>FenceOpaqueId</code>, <code>RallyOpaqueId</code> — see <em>opaque ids</em> below</li>
+<li><code>MissionReachedCount</code> — distinct reach events seen</li>
+<li>Fires the public <code>MissionItemReached</code> event with the reached seq</li>
+</ul>
+<p>Both <code>MISSION_CURRENT</code> and <code>MISSION_ITEM_REACHED</code> call <code>FireStateChanged()</code>, so
+throttled <code>SubscribeState</code> subscribers (e.g. a Blazor 2 Hz panel) pick up
+progress without extra plumbing. The fields are mirrored on <code>DroneState</code> so the
+typed-snapshot overload sees them.</p>
+<h2 id="opaque-ids-plan-change-detection">Opaque IDs (plan-change detection)</h2>
+<p><code>MISSION_CURRENT</code> carries three <code>uint32</code> fields — <code>mission_id</code>, <code>fence_id</code>,
+<code>rally_points_id</code> — that change whenever the on-vehicle plan changes.
+<code>MISSION_ACK</code> on a successful upload returns the new <code>opaque_id</code>. Cache that
+value after upload; if a future <code>MISSION_CURRENT</code> shows a different id, someone
+else (another GCS, a CompanionComputer) has replaced the plan. <code>0</code> means the
+vehicle either has no plan or doesn't support change-detection ids.</p>
+<pre><code class="lang-csharp">var result = await drone.UploadMissionAsync(items);
+if (result.IsAccepted)
+{
+    var ourPlanId = result.OpaqueId!.Value;
+    drone.SubscribeState(() =&gt;
+    {
+        if (drone.MissionOpaqueId != ourPlanId)
+            Log(&quot;on-vehicle plan changed externally&quot;);
+    }, StateRate.Hz(1));
+}
+</code></pre>
+<h2 id="threading">Threading</h2>
+<p>Identical to the rest of MavNet:</p>
+<ul>
+<li>Inbound mission events fire <strong>on the receive thread</strong>, synchronously.</li>
+<li>The <code>MissionItemReached</code> handler runs there.</li>
+<li><code>MissionClient</code> watchdog continuations run on the <code>ThreadPool</code>. The internal
+lock makes the receive thread and the watchdog mutually exclusive, so neither
+can observe torn state.</li>
+<li>Subscriber exceptions are swallowed — a buggy handler can't break the receive
+loop or the throttler.</li>
+</ul>
+<p>Long-running mission handlers should marshal off the receive thread themselves
+(<code>Task.Run</code> for CPU work, <code>InvokeAsync(StateHasChanged)</code> for Blazor).</p>
+<h2 id="coordinate-scaling">Coordinate scaling</h2>
+<p><code>MissionItem.X</code> and <code>MissionItem.Y</code> are <code>int32</code> — the raw wire shape of
+<code>MISSION_ITEM_INT</code>. For global frames, that's <code>degrees × 1e7</code>; for local frames,
+<code>metres × 1e4</code>. The static factories on <code>MissionItem</code> (<code>Waypoint</code>, <code>Takeoff</code>,
+<code>Land</code>, <code>ReturnToLaunch</code>) accept doubles and do the scaling for you. If you
+need a command MavNet doesn't have a factory for, use <code>MissionItem.ToInt1e7</code> on
+your lat/lon.</p>
+<h2 id="testing">Testing</h2>
+<p><code>MissionClient</code> is testable in isolation against a fake connection. See
+<code>tests/MavNet.PX4.Tests/MissionClientTests.cs</code> for the full state-machine
+coverage. The common pattern:</p>
+<pre><code class="lang-csharp">var conn = new FakeMavlinkConnection();
+using var client = new MissionClient(conn, 1, 1,
+    defaultTimeout: TimeSpan.FromMilliseconds(50),
+    itemTimeout:    TimeSpan.FromMilliseconds(30),
+    maxRetries: 2);
+
+var task = client.UploadAsync(items);
+conn.RaiseMissionRequestInt(new MavId(1,1), new MissionRequestInt(0, 1, 1, MavMissionType.Mission));
+// ... drive the state machine ...
+conn.RaiseMissionAck(new MavId(1,1), new MissionAck(255, 190,
+    MavMissionResult.MavMissionAccepted, MavMissionType.Mission, 0xDEADBEEFu));
+
+var result = await task;
+result.IsAccepted.Should().BeTrue();
+</code></pre>
+<h2 id="probe-demo">Probe demo</h2>
+<p><code>examples/MavNet.Probe</code> includes a one-key mission demo: press <code>M</code> after the
+drone has a GPS fix and it will upload a 6-item square mission around the current
+position, arm, and start it. The console prints each <code>MISSION_ITEM_REACHED</code> as
+it arrives.</p>
+<pre><code>dotnet run -c Release --project examples/MavNet.Probe -- &quot;udp://0.0.0.0:14550?rhost=127.0.0.1&amp;rport=18570&quot;
+</code></pre>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/UltimateSeeSharp/MavNet/blob/main/docs/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

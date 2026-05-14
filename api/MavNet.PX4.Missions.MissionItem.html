@@ -1,0 +1,789 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Struct MissionItem | MavNet - MAVLink for .NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Struct MissionItem | MavNet - MAVLink for .NET ">
+      
+      <meta name="description" content="Protocol-shaped mission item — mirrors the MAVLink MISSION_ITEM_INT wire layout but without the per-transaction fields (Seq, TargetSystem, TargetComponent, MissionType).  stamps those in when it sends each item. Coordinate scaling matches the spec: for global frames,  /  are degrees &#215; 1e7; for local frames, metres &#215; 1e4.  is always a float. Use the static factories (Waypoint, Takeoff, Land, ReturnToLaunch) to avoid hand-scaling.The same record is used for waypoint, geofence, and rally-point missions — the Command field plus MAV_MISSION_TYPE (passed to the ) determine the semantics.">
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="../toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/UltimateSeeSharp/MavNet/new/main/apiSpec/new?filename=MavNet_PX4_Missions_MissionItem.md&amp;value=---%0Auid%3A%20MavNet.PX4.Missions.MissionItem%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../logo.svg" alt="MavNet">
+            MavNet
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+
+      <div class="content">
+        <div class="actionbar">
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="MavNet.PX4.Missions.MissionItem">
+
+
+
+  <h1 id="MavNet_PX4_Missions_MissionItem" data-uid="MavNet.PX4.Missions.MissionItem" class="text-break">
+Struct MissionItem  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Missions/MissionItem.cs/#L21"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="MavNet.html">MavNet</a>.<a class="xref" href="MavNet.PX4.html">PX4</a>.<a class="xref" href="MavNet.PX4.Missions.html">Missions</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>MavNet.PX4.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>Protocol-shaped mission item — mirrors the MAVLink <code>MISSION_ITEM_INT</code> wire
+layout but without the per-transaction fields (<code>Seq</code>, <code>TargetSystem</code>,
+<code>TargetComponent</code>, <code>MissionType</code>). <a class="xref" href="MavNet.PX4.Missions.MissionClient.html">MissionClient</a> stamps
+those in when it sends each item.</p>
+<p>Coordinate scaling matches the spec: for global frames, <a class="xref" href="MavNet.PX4.Missions.MissionItem.html#MavNet_PX4_Missions_MissionItem_X">X</a> /
+<a class="xref" href="MavNet.PX4.Missions.MissionItem.html#MavNet_PX4_Missions_MissionItem_Y">Y</a> are <code>degrees × 1e7</code>; for local frames, <code>metres × 1e4</code>.
+<a class="xref" href="MavNet.PX4.Missions.MissionItem.html#MavNet_PX4_Missions_MissionItem_Z">Z</a> is always a float. Use the static factories
+(<code>Waypoint</code>, <code>Takeoff</code>, <code>Land</code>, <code>ReturnToLaunch</code>) to avoid hand-scaling.</p><p>The same record is used for waypoint, geofence, and rally-point missions
+— the <code>Command</code> field plus <code>MAV_MISSION_TYPE</code> (passed to the
+<a class="xref" href="MavNet.PX4.Missions.MissionClient.html">MissionClient</a>) determine the semantics.</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public readonly record struct MissionItem : IEquatable&lt;MissionItem&gt;</code></pre>
+  </div>
+
+
+
+
+
+  <dl class="typelist implements">
+    <dt>Implements</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.iequatable-1">IEquatable</a>&lt;<a class="xref" href="MavNet.PX4.Missions.MissionItem.html">MissionItem</a>&gt;</div>
+    </dd>
+  </dl>
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.equals">ValueType.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode">ValueType.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetype.tostring">ValueType.ToString()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+  </dd></dl>
+
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="MavNet_PX4_Missions_MissionItem__ctor_" data-uid="MavNet.PX4.Missions.MissionItem.#ctor*"></a>
+
+  <h3 id="MavNet_PX4_Missions_MissionItem__ctor_MavNet_Protocol_Generated_Enums_MavFrame_MavNet_Protocol_Generated_Enums_MavCmd_System_Single_System_Single_System_Single_System_Single_System_Int32_System_Int32_System_Single_System_Byte_" data-uid="MavNet.PX4.Missions.MissionItem.#ctor(MavNet.Protocol.Generated.Enums.MavFrame,MavNet.Protocol.Generated.Enums.MavCmd,System.Single,System.Single,System.Single,System.Single,System.Int32,System.Int32,System.Single,System.Byte)">
+  MissionItem(MavFrame, MavCmd, float, float, float, float, int, int, float, byte)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Missions/MissionItem.cs/#L21"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Protocol-shaped mission item — mirrors the MAVLink <code>MISSION_ITEM_INT</code> wire
+layout but without the per-transaction fields (<code>Seq</code>, <code>TargetSystem</code>,
+<code>TargetComponent</code>, <code>MissionType</code>). <a class="xref" href="MavNet.PX4.Missions.MissionClient.html">MissionClient</a> stamps
+those in when it sends each item.</p>
+<p>Coordinate scaling matches the spec: for global frames, <a class="xref" href="MavNet.PX4.Missions.MissionItem.html#MavNet_PX4_Missions_MissionItem_X">X</a> /
+<a class="xref" href="MavNet.PX4.Missions.MissionItem.html#MavNet_PX4_Missions_MissionItem_Y">Y</a> are <code>degrees × 1e7</code>; for local frames, <code>metres × 1e4</code>.
+<a class="xref" href="MavNet.PX4.Missions.MissionItem.html#MavNet_PX4_Missions_MissionItem_Z">Z</a> is always a float. Use the static factories
+(<code>Waypoint</code>, <code>Takeoff</code>, <code>Land</code>, <code>ReturnToLaunch</code>) to avoid hand-scaling.</p><p>The same record is used for waypoint, geofence, and rally-point missions
+— the <code>Command</code> field plus <code>MAV_MISSION_TYPE</code> (passed to the
+<a class="xref" href="MavNet.PX4.Missions.MissionClient.html">MissionClient</a>) determine the semantics.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MissionItem(MavFrame Frame, MavCmd Command, float Param1, float Param2, float Param3, float Param4, int X, int Y, float Z, byte AutoContinue = 1)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>Frame</code> <span class="xref">MavFrame</span></dt>
+    <dd></dd>
+    <dt><code>Command</code> <span class="xref">MavCmd</span></dt>
+    <dd></dd>
+    <dt><code>Param1</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+    <dt><code>Param2</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+    <dt><code>Param3</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+    <dt><code>Param4</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+    <dt><code>X</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+    <dt><code>Y</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+    <dt><code>Z</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+    <dt><code>AutoContinue</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="MavNet_PX4_Missions_MissionItem_AutoContinue_" data-uid="MavNet.PX4.Missions.MissionItem.AutoContinue*"></a>
+
+  <h3 id="MavNet_PX4_Missions_MissionItem_AutoContinue" data-uid="MavNet.PX4.Missions.MissionItem.AutoContinue">
+  AutoContinue
+  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Missions/MissionItem.cs/#L31"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public byte AutoContinue { get; init; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="MavNet_PX4_Missions_MissionItem_Command_" data-uid="MavNet.PX4.Missions.MissionItem.Command*"></a>
+
+  <h3 id="MavNet_PX4_Missions_MissionItem_Command" data-uid="MavNet.PX4.Missions.MissionItem.Command">
+  Command
+  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Missions/MissionItem.cs/#L23"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MavCmd Command { get; init; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><span class="xref">MavCmd</span></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="MavNet_PX4_Missions_MissionItem_Frame_" data-uid="MavNet.PX4.Missions.MissionItem.Frame*"></a>
+
+  <h3 id="MavNet_PX4_Missions_MissionItem_Frame" data-uid="MavNet.PX4.Missions.MissionItem.Frame">
+  Frame
+  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Missions/MissionItem.cs/#L22"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MavFrame Frame { get; init; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><span class="xref">MavFrame</span></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="MavNet_PX4_Missions_MissionItem_Param1_" data-uid="MavNet.PX4.Missions.MissionItem.Param1*"></a>
+
+  <h3 id="MavNet_PX4_Missions_MissionItem_Param1" data-uid="MavNet.PX4.Missions.MissionItem.Param1">
+  Param1
+  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Missions/MissionItem.cs/#L24"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float Param1 { get; init; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="MavNet_PX4_Missions_MissionItem_Param2_" data-uid="MavNet.PX4.Missions.MissionItem.Param2*"></a>
+
+  <h3 id="MavNet_PX4_Missions_MissionItem_Param2" data-uid="MavNet.PX4.Missions.MissionItem.Param2">
+  Param2
+  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Missions/MissionItem.cs/#L25"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float Param2 { get; init; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="MavNet_PX4_Missions_MissionItem_Param3_" data-uid="MavNet.PX4.Missions.MissionItem.Param3*"></a>
+
+  <h3 id="MavNet_PX4_Missions_MissionItem_Param3" data-uid="MavNet.PX4.Missions.MissionItem.Param3">
+  Param3
+  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Missions/MissionItem.cs/#L26"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float Param3 { get; init; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="MavNet_PX4_Missions_MissionItem_Param4_" data-uid="MavNet.PX4.Missions.MissionItem.Param4*"></a>
+
+  <h3 id="MavNet_PX4_Missions_MissionItem_Param4" data-uid="MavNet.PX4.Missions.MissionItem.Param4">
+  Param4
+  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Missions/MissionItem.cs/#L27"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float Param4 { get; init; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="MavNet_PX4_Missions_MissionItem_X_" data-uid="MavNet.PX4.Missions.MissionItem.X*"></a>
+
+  <h3 id="MavNet_PX4_Missions_MissionItem_X" data-uid="MavNet.PX4.Missions.MissionItem.X">
+  X
+  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Missions/MissionItem.cs/#L28"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int X { get; init; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="MavNet_PX4_Missions_MissionItem_Y_" data-uid="MavNet.PX4.Missions.MissionItem.Y*"></a>
+
+  <h3 id="MavNet_PX4_Missions_MissionItem_Y" data-uid="MavNet.PX4.Missions.MissionItem.Y">
+  Y
+  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Missions/MissionItem.cs/#L29"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int Y { get; init; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="MavNet_PX4_Missions_MissionItem_Z_" data-uid="MavNet.PX4.Missions.MissionItem.Z*"></a>
+
+  <h3 id="MavNet_PX4_Missions_MissionItem_Z" data-uid="MavNet.PX4.Missions.MissionItem.Z">
+  Z
+  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Missions/MissionItem.cs/#L30"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float Z { get; init; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="MavNet_PX4_Missions_MissionItem_FromInt1e7_" data-uid="MavNet.PX4.Missions.MissionItem.FromInt1e7*"></a>
+
+  <h3 id="MavNet_PX4_Missions_MissionItem_FromInt1e7_System_Int32_" data-uid="MavNet.PX4.Missions.MissionItem.FromInt1e7(System.Int32)">
+  FromInt1e7(int)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Missions/MissionItem.cs/#L97"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Decode MAVLink int32 (× 1e7) back to degrees.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static double FromInt1e7(int scaled)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>scaled</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="MavNet_PX4_Missions_MissionItem_Land_" data-uid="MavNet.PX4.Missions.MissionItem.Land*"></a>
+
+  <h3 id="MavNet_PX4_Missions_MissionItem_Land_System_Double_System_Double_System_Single_MavNet_Protocol_Generated_Enums_MavFrame_" data-uid="MavNet.PX4.Missions.MissionItem.Land(System.Double,System.Double,System.Single,MavNet.Protocol.Generated.Enums.MavFrame)">
+  Land(double, double, float, MavFrame)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Missions/MissionItem.cs/#L53"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Build a NAV_LAND item at the given coordinate. <code class="paramref">abortAlt</code>
+is the minimum altitude (m) the autopilot may abort a landing at (param1).</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static MissionItem Land(double latDeg, double lonDeg, float abortAlt = 0, MavFrame frame = MavFrame.GlobalRelativeAltInt)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>latDeg</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd></dd>
+    <dt><code>lonDeg</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd></dd>
+    <dt><code>abortAlt</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+    <dt><code>frame</code> <span class="xref">MavFrame</span></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="MavNet.PX4.Missions.MissionItem.html">MissionItem</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="MavNet_PX4_Missions_MissionItem_ReturnToLaunch_" data-uid="MavNet.PX4.Missions.MissionItem.ReturnToLaunch*"></a>
+
+  <h3 id="MavNet_PX4_Missions_MissionItem_ReturnToLaunch" data-uid="MavNet.PX4.Missions.MissionItem.ReturnToLaunch">
+  ReturnToLaunch()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Missions/MissionItem.cs/#L85"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Build a NAV_RETURN_TO_LAUNCH item.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static MissionItem ReturnToLaunch()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="MavNet.PX4.Missions.MissionItem.html">MissionItem</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="MavNet_PX4_Missions_MissionItem_Takeoff_" data-uid="MavNet.PX4.Missions.MissionItem.Takeoff*"></a>
+
+  <h3 id="MavNet_PX4_Missions_MissionItem_Takeoff_System_Single_System_Single_MavNet_Protocol_Generated_Enums_MavFrame_" data-uid="MavNet.PX4.Missions.MissionItem.Takeoff(System.Single,System.Single,MavNet.Protocol.Generated.Enums.MavFrame)">
+  Takeoff(float, float, MavFrame)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Missions/MissionItem.cs/#L69"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Build a NAV_TAKEOFF item at the given altitude.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static MissionItem Takeoff(float altMeters, float pitch = 0, MavFrame frame = MavFrame.GlobalRelativeAltInt)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>altMeters</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+    <dt><code>pitch</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+    <dt><code>frame</code> <span class="xref">MavFrame</span></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="MavNet.PX4.Missions.MissionItem.html">MissionItem</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="MavNet_PX4_Missions_MissionItem_ToInt1e7_" data-uid="MavNet.PX4.Missions.MissionItem.ToInt1e7*"></a>
+
+  <h3 id="MavNet_PX4_Missions_MissionItem_ToInt1e7_System_Double_" data-uid="MavNet.PX4.Missions.MissionItem.ToInt1e7(System.Double)">
+  ToInt1e7(double)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Missions/MissionItem.cs/#L93"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Encode degrees to MAVLink int32 (× 1e7), rounding half-away-from-zero.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static int ToInt1e7(double degrees)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>degrees</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="MavNet_PX4_Missions_MissionItem_Waypoint_" data-uid="MavNet.PX4.Missions.MissionItem.Waypoint*"></a>
+
+  <h3 id="MavNet_PX4_Missions_MissionItem_Waypoint_System_Double_System_Double_System_Single_System_Single_System_Single_MavNet_Protocol_Generated_Enums_MavFrame_" data-uid="MavNet.PX4.Missions.MissionItem.Waypoint(System.Double,System.Double,System.Single,System.Single,System.Single,MavNet.Protocol.Generated.Enums.MavFrame)">
+  Waypoint(double, double, float, float, float, MavFrame)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Missions/MissionItem.cs/#L36"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Build a NAV_WAYPOINT item from human-friendly degrees/metres. <code class="paramref">hold</code>
+is the time-to-hold in seconds at the waypoint (param1); <code class="paramref">acceptanceRadius</code>
+is the radius (m) within which the waypoint is considered reached (param2).</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static MissionItem Waypoint(double latDeg, double lonDeg, float altMeters, float hold = 0, float acceptanceRadius = 0, MavFrame frame = MavFrame.GlobalRelativeAltInt)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>latDeg</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd></dd>
+    <dt><code>lonDeg</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd></dd>
+    <dt><code>altMeters</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+    <dt><code>hold</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+    <dt><code>acceptanceRadius</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+    <dt><code>frame</code> <span class="xref">MavFrame</span></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="MavNet.PX4.Missions.MissionItem.html">MissionItem</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Missions/MissionItem.cs/#L21" class="edit-link">Edit this page</a>
+        </div>
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

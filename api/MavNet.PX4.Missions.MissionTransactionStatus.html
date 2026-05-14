@@ -1,0 +1,153 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Enum MissionTransactionStatus | MavNet - MAVLink for .NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Enum MissionTransactionStatus | MavNet - MAVLink for .NET ">
+      
+      <meta name="description" content="How a mission upload transaction terminated.">
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="../toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/UltimateSeeSharp/MavNet/new/main/apiSpec/new?filename=MavNet_PX4_Missions_MissionTransactionStatus.md&amp;value=---%0Auid%3A%20MavNet.PX4.Missions.MissionTransactionStatus%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../logo.svg" alt="MavNet">
+            MavNet
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+
+      <div class="content">
+        <div class="actionbar">
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="MavNet.PX4.Missions.MissionTransactionStatus">
+
+
+
+
+  <h1 id="MavNet_PX4_Missions_MissionTransactionStatus" data-uid="MavNet.PX4.Missions.MissionTransactionStatus" class="text-break">
+Enum MissionTransactionStatus  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Missions/MissionUploadResult.cs/#L6"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="MavNet.html">MavNet</a>.<a class="xref" href="MavNet.PX4.html">PX4</a>.<a class="xref" href="MavNet.PX4.Missions.html">Missions</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>MavNet.PX4.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>How a mission upload transaction terminated.</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public enum MissionTransactionStatus</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+  <h2 id="fields">Fields
+</h2>
+  <dl class="parameters">
+    <dt id="MavNet_PX4_Missions_MissionTransactionStatus_Accepted"><code>Accepted = 0</code></dt>
+    <dd><p>Vehicle responded with <span class="xref">MavNet.Protocol.Generated.Enums.MavMissionResult.MavMissionAccepted</span>.
+The mission is now stored on the vehicle; <a class="xref" href="MavNet.PX4.Missions.MissionUploadResult.html#MavNet_PX4_Missions_MissionUploadResult_OpaqueId">OpaqueId</a>
+is the new on-vehicle plan id.</p>
+</dd>
+    <dt id="MavNet_PX4_Missions_MissionTransactionStatus_Cancelled"><code>Cancelled = 3</code></dt>
+    <dd><p>The caller's <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a> fired before
+the transaction completed. No final state is implied — the vehicle may have a
+partial upload, so a follow-up clear or re-upload is advisable.</p>
+</dd>
+    <dt id="MavNet_PX4_Missions_MissionTransactionStatus_Rejected"><code>Rejected = 1</code></dt>
+    <dd><p>Vehicle responded with a non-Accepted <code>MISSION_ACK</code>. Per spec these
+are unrecoverable — both ends reset to idle and the prior mission is unchanged.
+<a class="xref" href="MavNet.PX4.Missions.MissionUploadResult.html#MavNet_PX4_Missions_MissionUploadResult_AckResult">AckResult</a> carries the specific error code.</p>
+</dd>
+    <dt id="MavNet_PX4_Missions_MissionTransactionStatus_Timeout"><code>Timeout = 2</code></dt>
+    <dd><p>No <code>MISSION_REQUEST(_INT)</code> or <code>MISSION_ACK</code> arrived within the
+retry budget. Both ends reset to idle; the prior mission is unchanged.</p>
+</dd>
+  </dl>
+
+
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Missions/MissionUploadResult.cs/#L6" class="edit-link">Edit this page</a>
+        </div>
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

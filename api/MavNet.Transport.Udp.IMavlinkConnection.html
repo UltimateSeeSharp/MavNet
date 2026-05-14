@@ -121,7 +121,7 @@ events synthetically.</p>
 
   <h3 id="MavNet_Transport_Udp_IMavlinkConnection_Send__1___0_" data-uid="MavNet.Transport.Udp.IMavlinkConnection.Send``1(``0)">
   Send&lt;T&gt;(T)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.Transport.Udp/IMavlinkConnection.cs/#L31"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.Transport.Udp/IMavlinkConnection.cs/#L49"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Send a generated MAVLink message. Performs MAVLink v2 wire truncation and CRC stamping.</p>
@@ -304,6 +304,285 @@ events synthetically.</p>
   <h4 class="section">Event Type</h4>
   <dl class="parameters">
     <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-3">Action</a>&lt;<a class="xref" href="MavNet.Core.MavId.html">MavId</a>, <span class="xref">Heartbeat</span>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.datetime">DateTime</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h3 id="MavNet_Transport_Udp_IMavlinkConnection_MissionAckReceived" data-uid="MavNet.Transport.Udp.IMavlinkConnection.MissionAckReceived">
+  MissionAckReceived
+  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.Transport.Udp/IMavlinkConnection.cs/#L38"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Inbound MISSION_ACK.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">event Action&lt;MavId, MissionAck, DateTime&gt;? MissionAckReceived</code></pre>
+  </div>
+
+
+
+
+
+
+  <h4 class="section">Event Type</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-3">Action</a>&lt;<a class="xref" href="MavNet.Core.MavId.html">MavId</a>, <span class="xref">MissionAck</span>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.datetime">DateTime</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h3 id="MavNet_Transport_Udp_IMavlinkConnection_MissionClearAllReceived" data-uid="MavNet.Transport.Udp.IMavlinkConnection.MissionClearAllReceived">
+  MissionClearAllReceived
+  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.Transport.Udp/IMavlinkConnection.cs/#L34"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Inbound MISSION_CLEAR_ALL.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">event Action&lt;MavId, MissionClearAll, DateTime&gt;? MissionClearAllReceived</code></pre>
+  </div>
+
+
+
+
+
+
+  <h4 class="section">Event Type</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-3">Action</a>&lt;<a class="xref" href="MavNet.Core.MavId.html">MavId</a>, <span class="xref">MissionClearAll</span>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.datetime">DateTime</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h3 id="MavNet_Transport_Udp_IMavlinkConnection_MissionCountReceived" data-uid="MavNet.Transport.Udp.IMavlinkConnection.MissionCountReceived">
+  MissionCountReceived
+  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.Transport.Udp/IMavlinkConnection.cs/#L32"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Inbound MISSION_COUNT.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">event Action&lt;MavId, MissionCount, DateTime&gt;? MissionCountReceived</code></pre>
+  </div>
+
+
+
+
+
+
+  <h4 class="section">Event Type</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-3">Action</a>&lt;<a class="xref" href="MavNet.Core.MavId.html">MavId</a>, <span class="xref">MissionCount</span>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.datetime">DateTime</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h3 id="MavNet_Transport_Udp_IMavlinkConnection_MissionCurrentReceived" data-uid="MavNet.Transport.Udp.IMavlinkConnection.MissionCurrentReceived">
+  MissionCurrentReceived
+  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.Transport.Udp/IMavlinkConnection.cs/#L40"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Inbound MISSION_CURRENT.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">event Action&lt;MavId, MissionCurrent, DateTime&gt;? MissionCurrentReceived</code></pre>
+  </div>
+
+
+
+
+
+
+  <h4 class="section">Event Type</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-3">Action</a>&lt;<a class="xref" href="MavNet.Core.MavId.html">MavId</a>, <span class="xref">MissionCurrent</span>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.datetime">DateTime</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h3 id="MavNet_Transport_Udp_IMavlinkConnection_MissionItemIntReceived" data-uid="MavNet.Transport.Udp.IMavlinkConnection.MissionItemIntReceived">
+  MissionItemIntReceived
+  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.Transport.Udp/IMavlinkConnection.cs/#L46"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Inbound MISSION_ITEM_INT.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">event Action&lt;MavId, MissionItemInt, DateTime&gt;? MissionItemIntReceived</code></pre>
+  </div>
+
+
+
+
+
+
+  <h4 class="section">Event Type</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-3">Action</a>&lt;<a class="xref" href="MavNet.Core.MavId.html">MavId</a>, <span class="xref">MissionItemInt</span>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.datetime">DateTime</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h3 id="MavNet_Transport_Udp_IMavlinkConnection_MissionItemReachedReceived" data-uid="MavNet.Transport.Udp.IMavlinkConnection.MissionItemReachedReceived">
+  MissionItemReachedReceived
+  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.Transport.Udp/IMavlinkConnection.cs/#L36"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Inbound MISSION_ITEM_REACHED.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">event Action&lt;MavId, MissionItemReached, DateTime&gt;? MissionItemReachedReceived</code></pre>
+  </div>
+
+
+
+
+
+
+  <h4 class="section">Event Type</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-3">Action</a>&lt;<a class="xref" href="MavNet.Core.MavId.html">MavId</a>, <span class="xref">MissionItemReached</span>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.datetime">DateTime</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h3 id="MavNet_Transport_Udp_IMavlinkConnection_MissionRequestIntReceived" data-uid="MavNet.Transport.Udp.IMavlinkConnection.MissionRequestIntReceived">
+  MissionRequestIntReceived
+  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.Transport.Udp/IMavlinkConnection.cs/#L44"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Inbound MISSION_REQUEST_INT.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">event Action&lt;MavId, MissionRequestInt, DateTime&gt;? MissionRequestIntReceived</code></pre>
+  </div>
+
+
+
+
+
+
+  <h4 class="section">Event Type</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-3">Action</a>&lt;<a class="xref" href="MavNet.Core.MavId.html">MavId</a>, <span class="xref">MissionRequestInt</span>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.datetime">DateTime</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h3 id="MavNet_Transport_Udp_IMavlinkConnection_MissionRequestListReceived" data-uid="MavNet.Transport.Udp.IMavlinkConnection.MissionRequestListReceived">
+  MissionRequestListReceived
+  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.Transport.Udp/IMavlinkConnection.cs/#L30"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Inbound MISSION_REQUEST_LIST.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">event Action&lt;MavId, MissionRequestList, DateTime&gt;? MissionRequestListReceived</code></pre>
+  </div>
+
+
+
+
+
+
+  <h4 class="section">Event Type</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-3">Action</a>&lt;<a class="xref" href="MavNet.Core.MavId.html">MavId</a>, <span class="xref">MissionRequestList</span>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.datetime">DateTime</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h3 id="MavNet_Transport_Udp_IMavlinkConnection_MissionRequestReceived" data-uid="MavNet.Transport.Udp.IMavlinkConnection.MissionRequestReceived">
+  MissionRequestReceived
+  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.Transport.Udp/IMavlinkConnection.cs/#L42"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Inbound MISSION_REQUEST (deprecated, but ArduPilot still sends it — respond with a MISSION_ITEM_INT).</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">event Action&lt;MavId, MissionRequest, DateTime&gt;? MissionRequestReceived</code></pre>
+  </div>
+
+
+
+
+
+
+  <h4 class="section">Event Type</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-3">Action</a>&lt;<a class="xref" href="MavNet.Core.MavId.html">MavId</a>, <span class="xref">MissionRequest</span>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.datetime">DateTime</a>&gt;</dt>
     <dd></dd>
   </dl>
 

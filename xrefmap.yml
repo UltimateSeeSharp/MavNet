@@ -430,6 +430,45 @@ references:
   isSpec: "True"
   fullName: MavNet.PX4.Base.Vehicle.Battery
   nameWithType: Vehicle.Battery
+- uid: MavNet.PX4.Base.Vehicle.ClearFenceAsync(System.Threading.CancellationToken)
+  name: ClearFenceAsync(CancellationToken)
+  href: api/MavNet.PX4.Base.Vehicle.html#MavNet_PX4_Base_Vehicle_ClearFenceAsync_System_Threading_CancellationToken_
+  commentId: M:MavNet.PX4.Base.Vehicle.ClearFenceAsync(System.Threading.CancellationToken)
+  fullName: MavNet.PX4.Base.Vehicle.ClearFenceAsync(System.Threading.CancellationToken)
+  nameWithType: Vehicle.ClearFenceAsync(CancellationToken)
+- uid: MavNet.PX4.Base.Vehicle.ClearFenceAsync*
+  name: ClearFenceAsync
+  href: api/MavNet.PX4.Base.Vehicle.html#MavNet_PX4_Base_Vehicle_ClearFenceAsync_
+  commentId: Overload:MavNet.PX4.Base.Vehicle.ClearFenceAsync
+  isSpec: "True"
+  fullName: MavNet.PX4.Base.Vehicle.ClearFenceAsync
+  nameWithType: Vehicle.ClearFenceAsync
+- uid: MavNet.PX4.Base.Vehicle.ClearMissionAsync(System.Threading.CancellationToken)
+  name: ClearMissionAsync(CancellationToken)
+  href: api/MavNet.PX4.Base.Vehicle.html#MavNet_PX4_Base_Vehicle_ClearMissionAsync_System_Threading_CancellationToken_
+  commentId: M:MavNet.PX4.Base.Vehicle.ClearMissionAsync(System.Threading.CancellationToken)
+  fullName: MavNet.PX4.Base.Vehicle.ClearMissionAsync(System.Threading.CancellationToken)
+  nameWithType: Vehicle.ClearMissionAsync(CancellationToken)
+- uid: MavNet.PX4.Base.Vehicle.ClearMissionAsync*
+  name: ClearMissionAsync
+  href: api/MavNet.PX4.Base.Vehicle.html#MavNet_PX4_Base_Vehicle_ClearMissionAsync_
+  commentId: Overload:MavNet.PX4.Base.Vehicle.ClearMissionAsync
+  isSpec: "True"
+  fullName: MavNet.PX4.Base.Vehicle.ClearMissionAsync
+  nameWithType: Vehicle.ClearMissionAsync
+- uid: MavNet.PX4.Base.Vehicle.ClearRallyAsync(System.Threading.CancellationToken)
+  name: ClearRallyAsync(CancellationToken)
+  href: api/MavNet.PX4.Base.Vehicle.html#MavNet_PX4_Base_Vehicle_ClearRallyAsync_System_Threading_CancellationToken_
+  commentId: M:MavNet.PX4.Base.Vehicle.ClearRallyAsync(System.Threading.CancellationToken)
+  fullName: MavNet.PX4.Base.Vehicle.ClearRallyAsync(System.Threading.CancellationToken)
+  nameWithType: Vehicle.ClearRallyAsync(CancellationToken)
+- uid: MavNet.PX4.Base.Vehicle.ClearRallyAsync*
+  name: ClearRallyAsync
+  href: api/MavNet.PX4.Base.Vehicle.html#MavNet_PX4_Base_Vehicle_ClearRallyAsync_
+  commentId: Overload:MavNet.PX4.Base.Vehicle.ClearRallyAsync
+  isSpec: "True"
+  fullName: MavNet.PX4.Base.Vehicle.ClearRallyAsync
+  nameWithType: Vehicle.ClearRallyAsync
 - uid: MavNet.PX4.Base.Vehicle.ComponentId
   name: ComponentId
   href: api/MavNet.PX4.Base.Vehicle.html#MavNet_PX4_Base_Vehicle_ComponentId
@@ -495,6 +534,58 @@ references:
   isSpec: "True"
   fullName: MavNet.PX4.Base.Vehicle.DisposeAsync
   nameWithType: Vehicle.DisposeAsync
+- uid: MavNet.PX4.Base.Vehicle.DownloadFenceAsync(System.Threading.CancellationToken)
+  name: DownloadFenceAsync(CancellationToken)
+  href: api/MavNet.PX4.Base.Vehicle.html#MavNet_PX4_Base_Vehicle_DownloadFenceAsync_System_Threading_CancellationToken_
+  commentId: M:MavNet.PX4.Base.Vehicle.DownloadFenceAsync(System.Threading.CancellationToken)
+  fullName: MavNet.PX4.Base.Vehicle.DownloadFenceAsync(System.Threading.CancellationToken)
+  nameWithType: Vehicle.DownloadFenceAsync(CancellationToken)
+- uid: MavNet.PX4.Base.Vehicle.DownloadFenceAsync*
+  name: DownloadFenceAsync
+  href: api/MavNet.PX4.Base.Vehicle.html#MavNet_PX4_Base_Vehicle_DownloadFenceAsync_
+  commentId: Overload:MavNet.PX4.Base.Vehicle.DownloadFenceAsync
+  isSpec: "True"
+  fullName: MavNet.PX4.Base.Vehicle.DownloadFenceAsync
+  nameWithType: Vehicle.DownloadFenceAsync
+- uid: MavNet.PX4.Base.Vehicle.DownloadMissionAsync(System.Threading.CancellationToken)
+  name: DownloadMissionAsync(CancellationToken)
+  href: api/MavNet.PX4.Base.Vehicle.html#MavNet_PX4_Base_Vehicle_DownloadMissionAsync_System_Threading_CancellationToken_
+  commentId: M:MavNet.PX4.Base.Vehicle.DownloadMissionAsync(System.Threading.CancellationToken)
+  fullName: MavNet.PX4.Base.Vehicle.DownloadMissionAsync(System.Threading.CancellationToken)
+  nameWithType: Vehicle.DownloadMissionAsync(CancellationToken)
+- uid: MavNet.PX4.Base.Vehicle.DownloadMissionAsync*
+  name: DownloadMissionAsync
+  href: api/MavNet.PX4.Base.Vehicle.html#MavNet_PX4_Base_Vehicle_DownloadMissionAsync_
+  commentId: Overload:MavNet.PX4.Base.Vehicle.DownloadMissionAsync
+  isSpec: "True"
+  fullName: MavNet.PX4.Base.Vehicle.DownloadMissionAsync
+  nameWithType: Vehicle.DownloadMissionAsync
+- uid: MavNet.PX4.Base.Vehicle.DownloadRallyAsync(System.Threading.CancellationToken)
+  name: DownloadRallyAsync(CancellationToken)
+  href: api/MavNet.PX4.Base.Vehicle.html#MavNet_PX4_Base_Vehicle_DownloadRallyAsync_System_Threading_CancellationToken_
+  commentId: M:MavNet.PX4.Base.Vehicle.DownloadRallyAsync(System.Threading.CancellationToken)
+  fullName: MavNet.PX4.Base.Vehicle.DownloadRallyAsync(System.Threading.CancellationToken)
+  nameWithType: Vehicle.DownloadRallyAsync(CancellationToken)
+- uid: MavNet.PX4.Base.Vehicle.DownloadRallyAsync*
+  name: DownloadRallyAsync
+  href: api/MavNet.PX4.Base.Vehicle.html#MavNet_PX4_Base_Vehicle_DownloadRallyAsync_
+  commentId: Overload:MavNet.PX4.Base.Vehicle.DownloadRallyAsync
+  isSpec: "True"
+  fullName: MavNet.PX4.Base.Vehicle.DownloadRallyAsync
+  nameWithType: Vehicle.DownloadRallyAsync
+- uid: MavNet.PX4.Base.Vehicle.FenceOpaqueId
+  name: FenceOpaqueId
+  href: api/MavNet.PX4.Base.Vehicle.html#MavNet_PX4_Base_Vehicle_FenceOpaqueId
+  commentId: P:MavNet.PX4.Base.Vehicle.FenceOpaqueId
+  fullName: MavNet.PX4.Base.Vehicle.FenceOpaqueId
+  nameWithType: Vehicle.FenceOpaqueId
+- uid: MavNet.PX4.Base.Vehicle.FenceOpaqueId*
+  name: FenceOpaqueId
+  href: api/MavNet.PX4.Base.Vehicle.html#MavNet_PX4_Base_Vehicle_FenceOpaqueId_
+  commentId: Overload:MavNet.PX4.Base.Vehicle.FenceOpaqueId
+  isSpec: "True"
+  fullName: MavNet.PX4.Base.Vehicle.FenceOpaqueId
+  nameWithType: Vehicle.FenceOpaqueId
 - uid: MavNet.PX4.Base.Vehicle.GpsFix
   name: GpsFix
   href: api/MavNet.PX4.Base.Vehicle.html#MavNet_PX4_Base_Vehicle_GpsFix
@@ -618,6 +709,77 @@ references:
   isSpec: "True"
   fullName: MavNet.PX4.Base.Vehicle.Lon
   nameWithType: Vehicle.Lon
+- uid: MavNet.PX4.Base.Vehicle.MissionCurrentSeq
+  name: MissionCurrentSeq
+  href: api/MavNet.PX4.Base.Vehicle.html#MavNet_PX4_Base_Vehicle_MissionCurrentSeq
+  commentId: P:MavNet.PX4.Base.Vehicle.MissionCurrentSeq
+  fullName: MavNet.PX4.Base.Vehicle.MissionCurrentSeq
+  nameWithType: Vehicle.MissionCurrentSeq
+- uid: MavNet.PX4.Base.Vehicle.MissionCurrentSeq*
+  name: MissionCurrentSeq
+  href: api/MavNet.PX4.Base.Vehicle.html#MavNet_PX4_Base_Vehicle_MissionCurrentSeq_
+  commentId: Overload:MavNet.PX4.Base.Vehicle.MissionCurrentSeq
+  isSpec: "True"
+  fullName: MavNet.PX4.Base.Vehicle.MissionCurrentSeq
+  nameWithType: Vehicle.MissionCurrentSeq
+- uid: MavNet.PX4.Base.Vehicle.MissionItemReached
+  name: MissionItemReached
+  href: api/MavNet.PX4.Base.Vehicle.html#MavNet_PX4_Base_Vehicle_MissionItemReached
+  commentId: E:MavNet.PX4.Base.Vehicle.MissionItemReached
+  fullName: MavNet.PX4.Base.Vehicle.MissionItemReached
+  nameWithType: Vehicle.MissionItemReached
+- uid: MavNet.PX4.Base.Vehicle.MissionOpaqueId
+  name: MissionOpaqueId
+  href: api/MavNet.PX4.Base.Vehicle.html#MavNet_PX4_Base_Vehicle_MissionOpaqueId
+  commentId: P:MavNet.PX4.Base.Vehicle.MissionOpaqueId
+  fullName: MavNet.PX4.Base.Vehicle.MissionOpaqueId
+  nameWithType: Vehicle.MissionOpaqueId
+- uid: MavNet.PX4.Base.Vehicle.MissionOpaqueId*
+  name: MissionOpaqueId
+  href: api/MavNet.PX4.Base.Vehicle.html#MavNet_PX4_Base_Vehicle_MissionOpaqueId_
+  commentId: Overload:MavNet.PX4.Base.Vehicle.MissionOpaqueId
+  isSpec: "True"
+  fullName: MavNet.PX4.Base.Vehicle.MissionOpaqueId
+  nameWithType: Vehicle.MissionOpaqueId
+- uid: MavNet.PX4.Base.Vehicle.MissionReachedCount
+  name: MissionReachedCount
+  href: api/MavNet.PX4.Base.Vehicle.html#MavNet_PX4_Base_Vehicle_MissionReachedCount
+  commentId: P:MavNet.PX4.Base.Vehicle.MissionReachedCount
+  fullName: MavNet.PX4.Base.Vehicle.MissionReachedCount
+  nameWithType: Vehicle.MissionReachedCount
+- uid: MavNet.PX4.Base.Vehicle.MissionReachedCount*
+  name: MissionReachedCount
+  href: api/MavNet.PX4.Base.Vehicle.html#MavNet_PX4_Base_Vehicle_MissionReachedCount_
+  commentId: Overload:MavNet.PX4.Base.Vehicle.MissionReachedCount
+  isSpec: "True"
+  fullName: MavNet.PX4.Base.Vehicle.MissionReachedCount
+  nameWithType: Vehicle.MissionReachedCount
+- uid: MavNet.PX4.Base.Vehicle.MissionState
+  name: MissionState
+  href: api/MavNet.PX4.Base.Vehicle.html#MavNet_PX4_Base_Vehicle_MissionState
+  commentId: P:MavNet.PX4.Base.Vehicle.MissionState
+  fullName: MavNet.PX4.Base.Vehicle.MissionState
+  nameWithType: Vehicle.MissionState
+- uid: MavNet.PX4.Base.Vehicle.MissionState*
+  name: MissionState
+  href: api/MavNet.PX4.Base.Vehicle.html#MavNet_PX4_Base_Vehicle_MissionState_
+  commentId: Overload:MavNet.PX4.Base.Vehicle.MissionState
+  isSpec: "True"
+  fullName: MavNet.PX4.Base.Vehicle.MissionState
+  nameWithType: Vehicle.MissionState
+- uid: MavNet.PX4.Base.Vehicle.MissionTotal
+  name: MissionTotal
+  href: api/MavNet.PX4.Base.Vehicle.html#MavNet_PX4_Base_Vehicle_MissionTotal
+  commentId: P:MavNet.PX4.Base.Vehicle.MissionTotal
+  fullName: MavNet.PX4.Base.Vehicle.MissionTotal
+  nameWithType: Vehicle.MissionTotal
+- uid: MavNet.PX4.Base.Vehicle.MissionTotal*
+  name: MissionTotal
+  href: api/MavNet.PX4.Base.Vehicle.html#MavNet_PX4_Base_Vehicle_MissionTotal_
+  commentId: Overload:MavNet.PX4.Base.Vehicle.MissionTotal
+  isSpec: "True"
+  fullName: MavNet.PX4.Base.Vehicle.MissionTotal
+  nameWithType: Vehicle.MissionTotal
 - uid: MavNet.PX4.Base.Vehicle.Mode
   name: Mode
   href: api/MavNet.PX4.Base.Vehicle.html#MavNet_PX4_Base_Vehicle_Mode
@@ -644,6 +806,19 @@ references:
   isSpec: "True"
   fullName: MavNet.PX4.Base.Vehicle.Name
   nameWithType: Vehicle.Name
+- uid: MavNet.PX4.Base.Vehicle.RallyOpaqueId
+  name: RallyOpaqueId
+  href: api/MavNet.PX4.Base.Vehicle.html#MavNet_PX4_Base_Vehicle_RallyOpaqueId
+  commentId: P:MavNet.PX4.Base.Vehicle.RallyOpaqueId
+  fullName: MavNet.PX4.Base.Vehicle.RallyOpaqueId
+  nameWithType: Vehicle.RallyOpaqueId
+- uid: MavNet.PX4.Base.Vehicle.RallyOpaqueId*
+  name: RallyOpaqueId
+  href: api/MavNet.PX4.Base.Vehicle.html#MavNet_PX4_Base_Vehicle_RallyOpaqueId_
+  commentId: Overload:MavNet.PX4.Base.Vehicle.RallyOpaqueId
+  isSpec: "True"
+  fullName: MavNet.PX4.Base.Vehicle.RallyOpaqueId
+  nameWithType: Vehicle.RallyOpaqueId
 - uid: MavNet.PX4.Base.Vehicle.ReturnToLaunchAsync(System.Threading.CancellationToken)
   name: ReturnToLaunchAsync(CancellationToken)
   href: api/MavNet.PX4.Base.Vehicle.html#MavNet_PX4_Base_Vehicle_ReturnToLaunchAsync_System_Threading_CancellationToken_
@@ -686,6 +861,38 @@ references:
   fullName.vb: MavNet.PX4.Base.Vehicle.Send(Of T)(T)
   nameWithType: Vehicle.Send<T>(T)
   nameWithType.vb: Vehicle.Send(Of T)(T)
+- uid: MavNet.PX4.Base.Vehicle.SetCurrentMissionItemAsync(System.Int32,System.Threading.CancellationToken)
+  name: SetCurrentMissionItemAsync(int, CancellationToken)
+  href: api/MavNet.PX4.Base.Vehicle.html#MavNet_PX4_Base_Vehicle_SetCurrentMissionItemAsync_System_Int32_System_Threading_CancellationToken_
+  commentId: M:MavNet.PX4.Base.Vehicle.SetCurrentMissionItemAsync(System.Int32,System.Threading.CancellationToken)
+  name.vb: SetCurrentMissionItemAsync(Integer, CancellationToken)
+  fullName: MavNet.PX4.Base.Vehicle.SetCurrentMissionItemAsync(int, System.Threading.CancellationToken)
+  fullName.vb: MavNet.PX4.Base.Vehicle.SetCurrentMissionItemAsync(Integer, System.Threading.CancellationToken)
+  nameWithType: Vehicle.SetCurrentMissionItemAsync(int, CancellationToken)
+  nameWithType.vb: Vehicle.SetCurrentMissionItemAsync(Integer, CancellationToken)
+- uid: MavNet.PX4.Base.Vehicle.SetCurrentMissionItemAsync*
+  name: SetCurrentMissionItemAsync
+  href: api/MavNet.PX4.Base.Vehicle.html#MavNet_PX4_Base_Vehicle_SetCurrentMissionItemAsync_
+  commentId: Overload:MavNet.PX4.Base.Vehicle.SetCurrentMissionItemAsync
+  isSpec: "True"
+  fullName: MavNet.PX4.Base.Vehicle.SetCurrentMissionItemAsync
+  nameWithType: Vehicle.SetCurrentMissionItemAsync
+- uid: MavNet.PX4.Base.Vehicle.StartMissionAsync(System.Int32,System.Int32,System.Threading.CancellationToken)
+  name: StartMissionAsync(int, int, CancellationToken)
+  href: api/MavNet.PX4.Base.Vehicle.html#MavNet_PX4_Base_Vehicle_StartMissionAsync_System_Int32_System_Int32_System_Threading_CancellationToken_
+  commentId: M:MavNet.PX4.Base.Vehicle.StartMissionAsync(System.Int32,System.Int32,System.Threading.CancellationToken)
+  name.vb: StartMissionAsync(Integer, Integer, CancellationToken)
+  fullName: MavNet.PX4.Base.Vehicle.StartMissionAsync(int, int, System.Threading.CancellationToken)
+  fullName.vb: MavNet.PX4.Base.Vehicle.StartMissionAsync(Integer, Integer, System.Threading.CancellationToken)
+  nameWithType: Vehicle.StartMissionAsync(int, int, CancellationToken)
+  nameWithType.vb: Vehicle.StartMissionAsync(Integer, Integer, CancellationToken)
+- uid: MavNet.PX4.Base.Vehicle.StartMissionAsync*
+  name: StartMissionAsync
+  href: api/MavNet.PX4.Base.Vehicle.html#MavNet_PX4_Base_Vehicle_StartMissionAsync_
+  commentId: Overload:MavNet.PX4.Base.Vehicle.StartMissionAsync
+  isSpec: "True"
+  fullName: MavNet.PX4.Base.Vehicle.StartMissionAsync
+  nameWithType: Vehicle.StartMissionAsync
 - uid: MavNet.PX4.Base.Vehicle.StateChanged
   name: StateChanged
   href: api/MavNet.PX4.Base.Vehicle.html#MavNet_PX4_Base_Vehicle_StateChanged
@@ -734,6 +941,54 @@ references:
   isSpec: "True"
   fullName: MavNet.PX4.Base.Vehicle.TakeoffAsync
   nameWithType: Vehicle.TakeoffAsync
+- uid: MavNet.PX4.Base.Vehicle.UploadFenceAsync(System.Collections.Generic.IReadOnlyList{MavNet.PX4.Missions.MissionItem},System.Threading.CancellationToken)
+  name: UploadFenceAsync(IReadOnlyList<MissionItem>, CancellationToken)
+  href: api/MavNet.PX4.Base.Vehicle.html#MavNet_PX4_Base_Vehicle_UploadFenceAsync_System_Collections_Generic_IReadOnlyList_MavNet_PX4_Missions_MissionItem__System_Threading_CancellationToken_
+  commentId: M:MavNet.PX4.Base.Vehicle.UploadFenceAsync(System.Collections.Generic.IReadOnlyList{MavNet.PX4.Missions.MissionItem},System.Threading.CancellationToken)
+  name.vb: UploadFenceAsync(IReadOnlyList(Of MissionItem), CancellationToken)
+  fullName: MavNet.PX4.Base.Vehicle.UploadFenceAsync(System.Collections.Generic.IReadOnlyList<MavNet.PX4.Missions.MissionItem>, System.Threading.CancellationToken)
+  fullName.vb: MavNet.PX4.Base.Vehicle.UploadFenceAsync(System.Collections.Generic.IReadOnlyList(Of MavNet.PX4.Missions.MissionItem), System.Threading.CancellationToken)
+  nameWithType: Vehicle.UploadFenceAsync(IReadOnlyList<MissionItem>, CancellationToken)
+  nameWithType.vb: Vehicle.UploadFenceAsync(IReadOnlyList(Of MissionItem), CancellationToken)
+- uid: MavNet.PX4.Base.Vehicle.UploadFenceAsync*
+  name: UploadFenceAsync
+  href: api/MavNet.PX4.Base.Vehicle.html#MavNet_PX4_Base_Vehicle_UploadFenceAsync_
+  commentId: Overload:MavNet.PX4.Base.Vehicle.UploadFenceAsync
+  isSpec: "True"
+  fullName: MavNet.PX4.Base.Vehicle.UploadFenceAsync
+  nameWithType: Vehicle.UploadFenceAsync
+- uid: MavNet.PX4.Base.Vehicle.UploadMissionAsync(System.Collections.Generic.IReadOnlyList{MavNet.PX4.Missions.MissionItem},System.Threading.CancellationToken)
+  name: UploadMissionAsync(IReadOnlyList<MissionItem>, CancellationToken)
+  href: api/MavNet.PX4.Base.Vehicle.html#MavNet_PX4_Base_Vehicle_UploadMissionAsync_System_Collections_Generic_IReadOnlyList_MavNet_PX4_Missions_MissionItem__System_Threading_CancellationToken_
+  commentId: M:MavNet.PX4.Base.Vehicle.UploadMissionAsync(System.Collections.Generic.IReadOnlyList{MavNet.PX4.Missions.MissionItem},System.Threading.CancellationToken)
+  name.vb: UploadMissionAsync(IReadOnlyList(Of MissionItem), CancellationToken)
+  fullName: MavNet.PX4.Base.Vehicle.UploadMissionAsync(System.Collections.Generic.IReadOnlyList<MavNet.PX4.Missions.MissionItem>, System.Threading.CancellationToken)
+  fullName.vb: MavNet.PX4.Base.Vehicle.UploadMissionAsync(System.Collections.Generic.IReadOnlyList(Of MavNet.PX4.Missions.MissionItem), System.Threading.CancellationToken)
+  nameWithType: Vehicle.UploadMissionAsync(IReadOnlyList<MissionItem>, CancellationToken)
+  nameWithType.vb: Vehicle.UploadMissionAsync(IReadOnlyList(Of MissionItem), CancellationToken)
+- uid: MavNet.PX4.Base.Vehicle.UploadMissionAsync*
+  name: UploadMissionAsync
+  href: api/MavNet.PX4.Base.Vehicle.html#MavNet_PX4_Base_Vehicle_UploadMissionAsync_
+  commentId: Overload:MavNet.PX4.Base.Vehicle.UploadMissionAsync
+  isSpec: "True"
+  fullName: MavNet.PX4.Base.Vehicle.UploadMissionAsync
+  nameWithType: Vehicle.UploadMissionAsync
+- uid: MavNet.PX4.Base.Vehicle.UploadRallyAsync(System.Collections.Generic.IReadOnlyList{MavNet.PX4.Missions.MissionItem},System.Threading.CancellationToken)
+  name: UploadRallyAsync(IReadOnlyList<MissionItem>, CancellationToken)
+  href: api/MavNet.PX4.Base.Vehicle.html#MavNet_PX4_Base_Vehicle_UploadRallyAsync_System_Collections_Generic_IReadOnlyList_MavNet_PX4_Missions_MissionItem__System_Threading_CancellationToken_
+  commentId: M:MavNet.PX4.Base.Vehicle.UploadRallyAsync(System.Collections.Generic.IReadOnlyList{MavNet.PX4.Missions.MissionItem},System.Threading.CancellationToken)
+  name.vb: UploadRallyAsync(IReadOnlyList(Of MissionItem), CancellationToken)
+  fullName: MavNet.PX4.Base.Vehicle.UploadRallyAsync(System.Collections.Generic.IReadOnlyList<MavNet.PX4.Missions.MissionItem>, System.Threading.CancellationToken)
+  fullName.vb: MavNet.PX4.Base.Vehicle.UploadRallyAsync(System.Collections.Generic.IReadOnlyList(Of MavNet.PX4.Missions.MissionItem), System.Threading.CancellationToken)
+  nameWithType: Vehicle.UploadRallyAsync(IReadOnlyList<MissionItem>, CancellationToken)
+  nameWithType.vb: Vehicle.UploadRallyAsync(IReadOnlyList(Of MissionItem), CancellationToken)
+- uid: MavNet.PX4.Base.Vehicle.UploadRallyAsync*
+  name: UploadRallyAsync
+  href: api/MavNet.PX4.Base.Vehicle.html#MavNet_PX4_Base_Vehicle_UploadRallyAsync_
+  commentId: Overload:MavNet.PX4.Base.Vehicle.UploadRallyAsync
+  isSpec: "True"
+  fullName: MavNet.PX4.Base.Vehicle.UploadRallyAsync
+  nameWithType: Vehicle.UploadRallyAsync
 - uid: MavNet.PX4.Base.Vehicle.VehicleType
   name: VehicleType
   href: api/MavNet.PX4.Base.Vehicle.html#MavNet_PX4_Base_Vehicle_VehicleType
@@ -854,6 +1109,692 @@ references:
   commentId: F:MavNet.PX4.CommandResult.Timeout
   fullName: MavNet.PX4.CommandResult.Timeout
   nameWithType: CommandResult.Timeout
+- uid: MavNet.PX4.Missions
+  name: MavNet.PX4.Missions
+  href: api/MavNet.PX4.Missions.html
+  commentId: N:MavNet.PX4.Missions
+  fullName: MavNet.PX4.Missions
+  nameWithType: MavNet.PX4.Missions
+- uid: MavNet.PX4.Missions.MissionClearResult
+  name: MissionClearResult
+  href: api/MavNet.PX4.Missions.MissionClearResult.html
+  commentId: T:MavNet.PX4.Missions.MissionClearResult
+  fullName: MavNet.PX4.Missions.MissionClearResult
+  nameWithType: MissionClearResult
+- uid: MavNet.PX4.Missions.MissionClearResult.#ctor(MavNet.PX4.Missions.MissionTransactionStatus,System.Nullable{MavNet.Protocol.Generated.Enums.MavMissionResult},System.TimeSpan)
+  name: MissionClearResult(MissionTransactionStatus, MavMissionResult?, TimeSpan)
+  href: api/MavNet.PX4.Missions.MissionClearResult.html#MavNet_PX4_Missions_MissionClearResult__ctor_MavNet_PX4_Missions_MissionTransactionStatus_System_Nullable_MavNet_Protocol_Generated_Enums_MavMissionResult__System_TimeSpan_
+  commentId: M:MavNet.PX4.Missions.MissionClearResult.#ctor(MavNet.PX4.Missions.MissionTransactionStatus,System.Nullable{MavNet.Protocol.Generated.Enums.MavMissionResult},System.TimeSpan)
+  name.vb: New(MissionTransactionStatus, MavMissionResult?, TimeSpan)
+  fullName: MavNet.PX4.Missions.MissionClearResult.MissionClearResult(MavNet.PX4.Missions.MissionTransactionStatus, MavNet.Protocol.Generated.Enums.MavMissionResult?, System.TimeSpan)
+  fullName.vb: MavNet.PX4.Missions.MissionClearResult.New(MavNet.PX4.Missions.MissionTransactionStatus, MavNet.Protocol.Generated.Enums.MavMissionResult?, System.TimeSpan)
+  nameWithType: MissionClearResult.MissionClearResult(MissionTransactionStatus, MavMissionResult?, TimeSpan)
+  nameWithType.vb: MissionClearResult.New(MissionTransactionStatus, MavMissionResult?, TimeSpan)
+- uid: MavNet.PX4.Missions.MissionClearResult.#ctor*
+  name: MissionClearResult
+  href: api/MavNet.PX4.Missions.MissionClearResult.html#MavNet_PX4_Missions_MissionClearResult__ctor_
+  commentId: Overload:MavNet.PX4.Missions.MissionClearResult.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: MavNet.PX4.Missions.MissionClearResult.MissionClearResult
+  fullName.vb: MavNet.PX4.Missions.MissionClearResult.New
+  nameWithType: MissionClearResult.MissionClearResult
+  nameWithType.vb: MissionClearResult.New
+- uid: MavNet.PX4.Missions.MissionClearResult.AckResult
+  name: AckResult
+  href: api/MavNet.PX4.Missions.MissionClearResult.html#MavNet_PX4_Missions_MissionClearResult_AckResult
+  commentId: P:MavNet.PX4.Missions.MissionClearResult.AckResult
+  fullName: MavNet.PX4.Missions.MissionClearResult.AckResult
+  nameWithType: MissionClearResult.AckResult
+- uid: MavNet.PX4.Missions.MissionClearResult.AckResult*
+  name: AckResult
+  href: api/MavNet.PX4.Missions.MissionClearResult.html#MavNet_PX4_Missions_MissionClearResult_AckResult_
+  commentId: Overload:MavNet.PX4.Missions.MissionClearResult.AckResult
+  isSpec: "True"
+  fullName: MavNet.PX4.Missions.MissionClearResult.AckResult
+  nameWithType: MissionClearResult.AckResult
+- uid: MavNet.PX4.Missions.MissionClearResult.Elapsed
+  name: Elapsed
+  href: api/MavNet.PX4.Missions.MissionClearResult.html#MavNet_PX4_Missions_MissionClearResult_Elapsed
+  commentId: P:MavNet.PX4.Missions.MissionClearResult.Elapsed
+  fullName: MavNet.PX4.Missions.MissionClearResult.Elapsed
+  nameWithType: MissionClearResult.Elapsed
+- uid: MavNet.PX4.Missions.MissionClearResult.Elapsed*
+  name: Elapsed
+  href: api/MavNet.PX4.Missions.MissionClearResult.html#MavNet_PX4_Missions_MissionClearResult_Elapsed_
+  commentId: Overload:MavNet.PX4.Missions.MissionClearResult.Elapsed
+  isSpec: "True"
+  fullName: MavNet.PX4.Missions.MissionClearResult.Elapsed
+  nameWithType: MissionClearResult.Elapsed
+- uid: MavNet.PX4.Missions.MissionClearResult.IsAccepted
+  name: IsAccepted
+  href: api/MavNet.PX4.Missions.MissionClearResult.html#MavNet_PX4_Missions_MissionClearResult_IsAccepted
+  commentId: P:MavNet.PX4.Missions.MissionClearResult.IsAccepted
+  fullName: MavNet.PX4.Missions.MissionClearResult.IsAccepted
+  nameWithType: MissionClearResult.IsAccepted
+- uid: MavNet.PX4.Missions.MissionClearResult.IsAccepted*
+  name: IsAccepted
+  href: api/MavNet.PX4.Missions.MissionClearResult.html#MavNet_PX4_Missions_MissionClearResult_IsAccepted_
+  commentId: Overload:MavNet.PX4.Missions.MissionClearResult.IsAccepted
+  isSpec: "True"
+  fullName: MavNet.PX4.Missions.MissionClearResult.IsAccepted
+  nameWithType: MissionClearResult.IsAccepted
+- uid: MavNet.PX4.Missions.MissionClearResult.Status
+  name: Status
+  href: api/MavNet.PX4.Missions.MissionClearResult.html#MavNet_PX4_Missions_MissionClearResult_Status
+  commentId: P:MavNet.PX4.Missions.MissionClearResult.Status
+  fullName: MavNet.PX4.Missions.MissionClearResult.Status
+  nameWithType: MissionClearResult.Status
+- uid: MavNet.PX4.Missions.MissionClearResult.Status*
+  name: Status
+  href: api/MavNet.PX4.Missions.MissionClearResult.html#MavNet_PX4_Missions_MissionClearResult_Status_
+  commentId: Overload:MavNet.PX4.Missions.MissionClearResult.Status
+  isSpec: "True"
+  fullName: MavNet.PX4.Missions.MissionClearResult.Status
+  nameWithType: MissionClearResult.Status
+- uid: MavNet.PX4.Missions.MissionClient
+  name: MissionClient
+  href: api/MavNet.PX4.Missions.MissionClient.html
+  commentId: T:MavNet.PX4.Missions.MissionClient
+  fullName: MavNet.PX4.Missions.MissionClient
+  nameWithType: MissionClient
+- uid: MavNet.PX4.Missions.MissionClient.#ctor(MavNet.Transport.Udp.IMavlinkConnection,System.Byte,System.Byte,MavNet.Protocol.Generated.Enums.MavMissionType,System.Nullable{System.TimeSpan},System.Nullable{System.TimeSpan},System.Int32,Microsoft.Extensions.Logging.ILogger)
+  name: MissionClient(IMavlinkConnection, byte, byte, MavMissionType, TimeSpan?, TimeSpan?, int, ILogger?)
+  href: api/MavNet.PX4.Missions.MissionClient.html#MavNet_PX4_Missions_MissionClient__ctor_MavNet_Transport_Udp_IMavlinkConnection_System_Byte_System_Byte_MavNet_Protocol_Generated_Enums_MavMissionType_System_Nullable_System_TimeSpan__System_Nullable_System_TimeSpan__System_Int32_Microsoft_Extensions_Logging_ILogger_
+  commentId: M:MavNet.PX4.Missions.MissionClient.#ctor(MavNet.Transport.Udp.IMavlinkConnection,System.Byte,System.Byte,MavNet.Protocol.Generated.Enums.MavMissionType,System.Nullable{System.TimeSpan},System.Nullable{System.TimeSpan},System.Int32,Microsoft.Extensions.Logging.ILogger)
+  name.vb: New(IMavlinkConnection, Byte, Byte, MavMissionType, TimeSpan?, TimeSpan?, Integer, ILogger)
+  fullName: MavNet.PX4.Missions.MissionClient.MissionClient(MavNet.Transport.Udp.IMavlinkConnection, byte, byte, MavNet.Protocol.Generated.Enums.MavMissionType, System.TimeSpan?, System.TimeSpan?, int, Microsoft.Extensions.Logging.ILogger?)
+  fullName.vb: MavNet.PX4.Missions.MissionClient.New(MavNet.Transport.Udp.IMavlinkConnection, Byte, Byte, MavNet.Protocol.Generated.Enums.MavMissionType, System.TimeSpan?, System.TimeSpan?, Integer, Microsoft.Extensions.Logging.ILogger)
+  nameWithType: MissionClient.MissionClient(IMavlinkConnection, byte, byte, MavMissionType, TimeSpan?, TimeSpan?, int, ILogger?)
+  nameWithType.vb: MissionClient.New(IMavlinkConnection, Byte, Byte, MavMissionType, TimeSpan?, TimeSpan?, Integer, ILogger)
+- uid: MavNet.PX4.Missions.MissionClient.#ctor*
+  name: MissionClient
+  href: api/MavNet.PX4.Missions.MissionClient.html#MavNet_PX4_Missions_MissionClient__ctor_
+  commentId: Overload:MavNet.PX4.Missions.MissionClient.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: MavNet.PX4.Missions.MissionClient.MissionClient
+  fullName.vb: MavNet.PX4.Missions.MissionClient.New
+  nameWithType: MissionClient.MissionClient
+  nameWithType.vb: MissionClient.New
+- uid: MavNet.PX4.Missions.MissionClient.ClearAsync(System.Threading.CancellationToken)
+  name: ClearAsync(CancellationToken)
+  href: api/MavNet.PX4.Missions.MissionClient.html#MavNet_PX4_Missions_MissionClient_ClearAsync_System_Threading_CancellationToken_
+  commentId: M:MavNet.PX4.Missions.MissionClient.ClearAsync(System.Threading.CancellationToken)
+  fullName: MavNet.PX4.Missions.MissionClient.ClearAsync(System.Threading.CancellationToken)
+  nameWithType: MissionClient.ClearAsync(CancellationToken)
+- uid: MavNet.PX4.Missions.MissionClient.ClearAsync*
+  name: ClearAsync
+  href: api/MavNet.PX4.Missions.MissionClient.html#MavNet_PX4_Missions_MissionClient_ClearAsync_
+  commentId: Overload:MavNet.PX4.Missions.MissionClient.ClearAsync
+  isSpec: "True"
+  fullName: MavNet.PX4.Missions.MissionClient.ClearAsync
+  nameWithType: MissionClient.ClearAsync
+- uid: MavNet.PX4.Missions.MissionClient.DefaultTimeout
+  name: DefaultTimeout
+  href: api/MavNet.PX4.Missions.MissionClient.html#MavNet_PX4_Missions_MissionClient_DefaultTimeout
+  commentId: P:MavNet.PX4.Missions.MissionClient.DefaultTimeout
+  fullName: MavNet.PX4.Missions.MissionClient.DefaultTimeout
+  nameWithType: MissionClient.DefaultTimeout
+- uid: MavNet.PX4.Missions.MissionClient.DefaultTimeout*
+  name: DefaultTimeout
+  href: api/MavNet.PX4.Missions.MissionClient.html#MavNet_PX4_Missions_MissionClient_DefaultTimeout_
+  commentId: Overload:MavNet.PX4.Missions.MissionClient.DefaultTimeout
+  isSpec: "True"
+  fullName: MavNet.PX4.Missions.MissionClient.DefaultTimeout
+  nameWithType: MissionClient.DefaultTimeout
+- uid: MavNet.PX4.Missions.MissionClient.Dispose
+  name: Dispose()
+  href: api/MavNet.PX4.Missions.MissionClient.html#MavNet_PX4_Missions_MissionClient_Dispose
+  commentId: M:MavNet.PX4.Missions.MissionClient.Dispose
+  fullName: MavNet.PX4.Missions.MissionClient.Dispose()
+  nameWithType: MissionClient.Dispose()
+- uid: MavNet.PX4.Missions.MissionClient.Dispose*
+  name: Dispose
+  href: api/MavNet.PX4.Missions.MissionClient.html#MavNet_PX4_Missions_MissionClient_Dispose_
+  commentId: Overload:MavNet.PX4.Missions.MissionClient.Dispose
+  isSpec: "True"
+  fullName: MavNet.PX4.Missions.MissionClient.Dispose
+  nameWithType: MissionClient.Dispose
+- uid: MavNet.PX4.Missions.MissionClient.DownloadAsync(System.Threading.CancellationToken)
+  name: DownloadAsync(CancellationToken)
+  href: api/MavNet.PX4.Missions.MissionClient.html#MavNet_PX4_Missions_MissionClient_DownloadAsync_System_Threading_CancellationToken_
+  commentId: M:MavNet.PX4.Missions.MissionClient.DownloadAsync(System.Threading.CancellationToken)
+  fullName: MavNet.PX4.Missions.MissionClient.DownloadAsync(System.Threading.CancellationToken)
+  nameWithType: MissionClient.DownloadAsync(CancellationToken)
+- uid: MavNet.PX4.Missions.MissionClient.DownloadAsync*
+  name: DownloadAsync
+  href: api/MavNet.PX4.Missions.MissionClient.html#MavNet_PX4_Missions_MissionClient_DownloadAsync_
+  commentId: Overload:MavNet.PX4.Missions.MissionClient.DownloadAsync
+  isSpec: "True"
+  fullName: MavNet.PX4.Missions.MissionClient.DownloadAsync
+  nameWithType: MissionClient.DownloadAsync
+- uid: MavNet.PX4.Missions.MissionClient.IsBusy
+  name: IsBusy
+  href: api/MavNet.PX4.Missions.MissionClient.html#MavNet_PX4_Missions_MissionClient_IsBusy
+  commentId: P:MavNet.PX4.Missions.MissionClient.IsBusy
+  fullName: MavNet.PX4.Missions.MissionClient.IsBusy
+  nameWithType: MissionClient.IsBusy
+- uid: MavNet.PX4.Missions.MissionClient.IsBusy*
+  name: IsBusy
+  href: api/MavNet.PX4.Missions.MissionClient.html#MavNet_PX4_Missions_MissionClient_IsBusy_
+  commentId: Overload:MavNet.PX4.Missions.MissionClient.IsBusy
+  isSpec: "True"
+  fullName: MavNet.PX4.Missions.MissionClient.IsBusy
+  nameWithType: MissionClient.IsBusy
+- uid: MavNet.PX4.Missions.MissionClient.ItemTimeout
+  name: ItemTimeout
+  href: api/MavNet.PX4.Missions.MissionClient.html#MavNet_PX4_Missions_MissionClient_ItemTimeout
+  commentId: P:MavNet.PX4.Missions.MissionClient.ItemTimeout
+  fullName: MavNet.PX4.Missions.MissionClient.ItemTimeout
+  nameWithType: MissionClient.ItemTimeout
+- uid: MavNet.PX4.Missions.MissionClient.ItemTimeout*
+  name: ItemTimeout
+  href: api/MavNet.PX4.Missions.MissionClient.html#MavNet_PX4_Missions_MissionClient_ItemTimeout_
+  commentId: Overload:MavNet.PX4.Missions.MissionClient.ItemTimeout
+  isSpec: "True"
+  fullName: MavNet.PX4.Missions.MissionClient.ItemTimeout
+  nameWithType: MissionClient.ItemTimeout
+- uid: MavNet.PX4.Missions.MissionClient.MaxRetries
+  name: MaxRetries
+  href: api/MavNet.PX4.Missions.MissionClient.html#MavNet_PX4_Missions_MissionClient_MaxRetries
+  commentId: P:MavNet.PX4.Missions.MissionClient.MaxRetries
+  fullName: MavNet.PX4.Missions.MissionClient.MaxRetries
+  nameWithType: MissionClient.MaxRetries
+- uid: MavNet.PX4.Missions.MissionClient.MaxRetries*
+  name: MaxRetries
+  href: api/MavNet.PX4.Missions.MissionClient.html#MavNet_PX4_Missions_MissionClient_MaxRetries_
+  commentId: Overload:MavNet.PX4.Missions.MissionClient.MaxRetries
+  isSpec: "True"
+  fullName: MavNet.PX4.Missions.MissionClient.MaxRetries
+  nameWithType: MissionClient.MaxRetries
+- uid: MavNet.PX4.Missions.MissionClient.MissionType
+  name: MissionType
+  href: api/MavNet.PX4.Missions.MissionClient.html#MavNet_PX4_Missions_MissionClient_MissionType
+  commentId: P:MavNet.PX4.Missions.MissionClient.MissionType
+  fullName: MavNet.PX4.Missions.MissionClient.MissionType
+  nameWithType: MissionClient.MissionType
+- uid: MavNet.PX4.Missions.MissionClient.MissionType*
+  name: MissionType
+  href: api/MavNet.PX4.Missions.MissionClient.html#MavNet_PX4_Missions_MissionClient_MissionType_
+  commentId: Overload:MavNet.PX4.Missions.MissionClient.MissionType
+  isSpec: "True"
+  fullName: MavNet.PX4.Missions.MissionClient.MissionType
+  nameWithType: MissionClient.MissionType
+- uid: MavNet.PX4.Missions.MissionClient.UploadAsync(System.Collections.Generic.IReadOnlyList{MavNet.PX4.Missions.MissionItem},System.Threading.CancellationToken)
+  name: UploadAsync(IReadOnlyList<MissionItem>, CancellationToken)
+  href: api/MavNet.PX4.Missions.MissionClient.html#MavNet_PX4_Missions_MissionClient_UploadAsync_System_Collections_Generic_IReadOnlyList_MavNet_PX4_Missions_MissionItem__System_Threading_CancellationToken_
+  commentId: M:MavNet.PX4.Missions.MissionClient.UploadAsync(System.Collections.Generic.IReadOnlyList{MavNet.PX4.Missions.MissionItem},System.Threading.CancellationToken)
+  name.vb: UploadAsync(IReadOnlyList(Of MissionItem), CancellationToken)
+  fullName: MavNet.PX4.Missions.MissionClient.UploadAsync(System.Collections.Generic.IReadOnlyList<MavNet.PX4.Missions.MissionItem>, System.Threading.CancellationToken)
+  fullName.vb: MavNet.PX4.Missions.MissionClient.UploadAsync(System.Collections.Generic.IReadOnlyList(Of MavNet.PX4.Missions.MissionItem), System.Threading.CancellationToken)
+  nameWithType: MissionClient.UploadAsync(IReadOnlyList<MissionItem>, CancellationToken)
+  nameWithType.vb: MissionClient.UploadAsync(IReadOnlyList(Of MissionItem), CancellationToken)
+- uid: MavNet.PX4.Missions.MissionClient.UploadAsync*
+  name: UploadAsync
+  href: api/MavNet.PX4.Missions.MissionClient.html#MavNet_PX4_Missions_MissionClient_UploadAsync_
+  commentId: Overload:MavNet.PX4.Missions.MissionClient.UploadAsync
+  isSpec: "True"
+  fullName: MavNet.PX4.Missions.MissionClient.UploadAsync
+  nameWithType: MissionClient.UploadAsync
+- uid: MavNet.PX4.Missions.MissionDownloadResult
+  name: MissionDownloadResult
+  href: api/MavNet.PX4.Missions.MissionDownloadResult.html
+  commentId: T:MavNet.PX4.Missions.MissionDownloadResult
+  fullName: MavNet.PX4.Missions.MissionDownloadResult
+  nameWithType: MissionDownloadResult
+- uid: MavNet.PX4.Missions.MissionDownloadResult.#ctor(MavNet.PX4.Missions.MissionTransactionStatus,System.Collections.Generic.IReadOnlyList{MavNet.PX4.Missions.MissionItem},System.Nullable{System.UInt32},System.TimeSpan)
+  name: MissionDownloadResult(MissionTransactionStatus, IReadOnlyList<MissionItem>, uint?, TimeSpan)
+  href: api/MavNet.PX4.Missions.MissionDownloadResult.html#MavNet_PX4_Missions_MissionDownloadResult__ctor_MavNet_PX4_Missions_MissionTransactionStatus_System_Collections_Generic_IReadOnlyList_MavNet_PX4_Missions_MissionItem__System_Nullable_System_UInt32__System_TimeSpan_
+  commentId: M:MavNet.PX4.Missions.MissionDownloadResult.#ctor(MavNet.PX4.Missions.MissionTransactionStatus,System.Collections.Generic.IReadOnlyList{MavNet.PX4.Missions.MissionItem},System.Nullable{System.UInt32},System.TimeSpan)
+  name.vb: New(MissionTransactionStatus, IReadOnlyList(Of MissionItem), UInteger?, TimeSpan)
+  fullName: MavNet.PX4.Missions.MissionDownloadResult.MissionDownloadResult(MavNet.PX4.Missions.MissionTransactionStatus, System.Collections.Generic.IReadOnlyList<MavNet.PX4.Missions.MissionItem>, uint?, System.TimeSpan)
+  fullName.vb: MavNet.PX4.Missions.MissionDownloadResult.New(MavNet.PX4.Missions.MissionTransactionStatus, System.Collections.Generic.IReadOnlyList(Of MavNet.PX4.Missions.MissionItem), UInteger?, System.TimeSpan)
+  nameWithType: MissionDownloadResult.MissionDownloadResult(MissionTransactionStatus, IReadOnlyList<MissionItem>, uint?, TimeSpan)
+  nameWithType.vb: MissionDownloadResult.New(MissionTransactionStatus, IReadOnlyList(Of MissionItem), UInteger?, TimeSpan)
+- uid: MavNet.PX4.Missions.MissionDownloadResult.#ctor*
+  name: MissionDownloadResult
+  href: api/MavNet.PX4.Missions.MissionDownloadResult.html#MavNet_PX4_Missions_MissionDownloadResult__ctor_
+  commentId: Overload:MavNet.PX4.Missions.MissionDownloadResult.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: MavNet.PX4.Missions.MissionDownloadResult.MissionDownloadResult
+  fullName.vb: MavNet.PX4.Missions.MissionDownloadResult.New
+  nameWithType: MissionDownloadResult.MissionDownloadResult
+  nameWithType.vb: MissionDownloadResult.New
+- uid: MavNet.PX4.Missions.MissionDownloadResult.Elapsed
+  name: Elapsed
+  href: api/MavNet.PX4.Missions.MissionDownloadResult.html#MavNet_PX4_Missions_MissionDownloadResult_Elapsed
+  commentId: P:MavNet.PX4.Missions.MissionDownloadResult.Elapsed
+  fullName: MavNet.PX4.Missions.MissionDownloadResult.Elapsed
+  nameWithType: MissionDownloadResult.Elapsed
+- uid: MavNet.PX4.Missions.MissionDownloadResult.Elapsed*
+  name: Elapsed
+  href: api/MavNet.PX4.Missions.MissionDownloadResult.html#MavNet_PX4_Missions_MissionDownloadResult_Elapsed_
+  commentId: Overload:MavNet.PX4.Missions.MissionDownloadResult.Elapsed
+  isSpec: "True"
+  fullName: MavNet.PX4.Missions.MissionDownloadResult.Elapsed
+  nameWithType: MissionDownloadResult.Elapsed
+- uid: MavNet.PX4.Missions.MissionDownloadResult.IsAccepted
+  name: IsAccepted
+  href: api/MavNet.PX4.Missions.MissionDownloadResult.html#MavNet_PX4_Missions_MissionDownloadResult_IsAccepted
+  commentId: P:MavNet.PX4.Missions.MissionDownloadResult.IsAccepted
+  fullName: MavNet.PX4.Missions.MissionDownloadResult.IsAccepted
+  nameWithType: MissionDownloadResult.IsAccepted
+- uid: MavNet.PX4.Missions.MissionDownloadResult.IsAccepted*
+  name: IsAccepted
+  href: api/MavNet.PX4.Missions.MissionDownloadResult.html#MavNet_PX4_Missions_MissionDownloadResult_IsAccepted_
+  commentId: Overload:MavNet.PX4.Missions.MissionDownloadResult.IsAccepted
+  isSpec: "True"
+  fullName: MavNet.PX4.Missions.MissionDownloadResult.IsAccepted
+  nameWithType: MissionDownloadResult.IsAccepted
+- uid: MavNet.PX4.Missions.MissionDownloadResult.Items
+  name: Items
+  href: api/MavNet.PX4.Missions.MissionDownloadResult.html#MavNet_PX4_Missions_MissionDownloadResult_Items
+  commentId: P:MavNet.PX4.Missions.MissionDownloadResult.Items
+  fullName: MavNet.PX4.Missions.MissionDownloadResult.Items
+  nameWithType: MissionDownloadResult.Items
+- uid: MavNet.PX4.Missions.MissionDownloadResult.Items*
+  name: Items
+  href: api/MavNet.PX4.Missions.MissionDownloadResult.html#MavNet_PX4_Missions_MissionDownloadResult_Items_
+  commentId: Overload:MavNet.PX4.Missions.MissionDownloadResult.Items
+  isSpec: "True"
+  fullName: MavNet.PX4.Missions.MissionDownloadResult.Items
+  nameWithType: MissionDownloadResult.Items
+- uid: MavNet.PX4.Missions.MissionDownloadResult.OpaqueId
+  name: OpaqueId
+  href: api/MavNet.PX4.Missions.MissionDownloadResult.html#MavNet_PX4_Missions_MissionDownloadResult_OpaqueId
+  commentId: P:MavNet.PX4.Missions.MissionDownloadResult.OpaqueId
+  fullName: MavNet.PX4.Missions.MissionDownloadResult.OpaqueId
+  nameWithType: MissionDownloadResult.OpaqueId
+- uid: MavNet.PX4.Missions.MissionDownloadResult.OpaqueId*
+  name: OpaqueId
+  href: api/MavNet.PX4.Missions.MissionDownloadResult.html#MavNet_PX4_Missions_MissionDownloadResult_OpaqueId_
+  commentId: Overload:MavNet.PX4.Missions.MissionDownloadResult.OpaqueId
+  isSpec: "True"
+  fullName: MavNet.PX4.Missions.MissionDownloadResult.OpaqueId
+  nameWithType: MissionDownloadResult.OpaqueId
+- uid: MavNet.PX4.Missions.MissionDownloadResult.Status
+  name: Status
+  href: api/MavNet.PX4.Missions.MissionDownloadResult.html#MavNet_PX4_Missions_MissionDownloadResult_Status
+  commentId: P:MavNet.PX4.Missions.MissionDownloadResult.Status
+  fullName: MavNet.PX4.Missions.MissionDownloadResult.Status
+  nameWithType: MissionDownloadResult.Status
+- uid: MavNet.PX4.Missions.MissionDownloadResult.Status*
+  name: Status
+  href: api/MavNet.PX4.Missions.MissionDownloadResult.html#MavNet_PX4_Missions_MissionDownloadResult_Status_
+  commentId: Overload:MavNet.PX4.Missions.MissionDownloadResult.Status
+  isSpec: "True"
+  fullName: MavNet.PX4.Missions.MissionDownloadResult.Status
+  nameWithType: MissionDownloadResult.Status
+- uid: MavNet.PX4.Missions.MissionItem
+  name: MissionItem
+  href: api/MavNet.PX4.Missions.MissionItem.html
+  commentId: T:MavNet.PX4.Missions.MissionItem
+  fullName: MavNet.PX4.Missions.MissionItem
+  nameWithType: MissionItem
+- uid: MavNet.PX4.Missions.MissionItem.#ctor(MavNet.Protocol.Generated.Enums.MavFrame,MavNet.Protocol.Generated.Enums.MavCmd,System.Single,System.Single,System.Single,System.Single,System.Int32,System.Int32,System.Single,System.Byte)
+  name: MissionItem(MavFrame, MavCmd, float, float, float, float, int, int, float, byte)
+  href: api/MavNet.PX4.Missions.MissionItem.html#MavNet_PX4_Missions_MissionItem__ctor_MavNet_Protocol_Generated_Enums_MavFrame_MavNet_Protocol_Generated_Enums_MavCmd_System_Single_System_Single_System_Single_System_Single_System_Int32_System_Int32_System_Single_System_Byte_
+  commentId: M:MavNet.PX4.Missions.MissionItem.#ctor(MavNet.Protocol.Generated.Enums.MavFrame,MavNet.Protocol.Generated.Enums.MavCmd,System.Single,System.Single,System.Single,System.Single,System.Int32,System.Int32,System.Single,System.Byte)
+  name.vb: New(MavFrame, MavCmd, Single, Single, Single, Single, Integer, Integer, Single, Byte)
+  fullName: MavNet.PX4.Missions.MissionItem.MissionItem(MavNet.Protocol.Generated.Enums.MavFrame, MavNet.Protocol.Generated.Enums.MavCmd, float, float, float, float, int, int, float, byte)
+  fullName.vb: MavNet.PX4.Missions.MissionItem.New(MavNet.Protocol.Generated.Enums.MavFrame, MavNet.Protocol.Generated.Enums.MavCmd, Single, Single, Single, Single, Integer, Integer, Single, Byte)
+  nameWithType: MissionItem.MissionItem(MavFrame, MavCmd, float, float, float, float, int, int, float, byte)
+  nameWithType.vb: MissionItem.New(MavFrame, MavCmd, Single, Single, Single, Single, Integer, Integer, Single, Byte)
+- uid: MavNet.PX4.Missions.MissionItem.#ctor*
+  name: MissionItem
+  href: api/MavNet.PX4.Missions.MissionItem.html#MavNet_PX4_Missions_MissionItem__ctor_
+  commentId: Overload:MavNet.PX4.Missions.MissionItem.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: MavNet.PX4.Missions.MissionItem.MissionItem
+  fullName.vb: MavNet.PX4.Missions.MissionItem.New
+  nameWithType: MissionItem.MissionItem
+  nameWithType.vb: MissionItem.New
+- uid: MavNet.PX4.Missions.MissionItem.AutoContinue
+  name: AutoContinue
+  href: api/MavNet.PX4.Missions.MissionItem.html#MavNet_PX4_Missions_MissionItem_AutoContinue
+  commentId: P:MavNet.PX4.Missions.MissionItem.AutoContinue
+  fullName: MavNet.PX4.Missions.MissionItem.AutoContinue
+  nameWithType: MissionItem.AutoContinue
+- uid: MavNet.PX4.Missions.MissionItem.AutoContinue*
+  name: AutoContinue
+  href: api/MavNet.PX4.Missions.MissionItem.html#MavNet_PX4_Missions_MissionItem_AutoContinue_
+  commentId: Overload:MavNet.PX4.Missions.MissionItem.AutoContinue
+  isSpec: "True"
+  fullName: MavNet.PX4.Missions.MissionItem.AutoContinue
+  nameWithType: MissionItem.AutoContinue
+- uid: MavNet.PX4.Missions.MissionItem.Command
+  name: Command
+  href: api/MavNet.PX4.Missions.MissionItem.html#MavNet_PX4_Missions_MissionItem_Command
+  commentId: P:MavNet.PX4.Missions.MissionItem.Command
+  fullName: MavNet.PX4.Missions.MissionItem.Command
+  nameWithType: MissionItem.Command
+- uid: MavNet.PX4.Missions.MissionItem.Command*
+  name: Command
+  href: api/MavNet.PX4.Missions.MissionItem.html#MavNet_PX4_Missions_MissionItem_Command_
+  commentId: Overload:MavNet.PX4.Missions.MissionItem.Command
+  isSpec: "True"
+  fullName: MavNet.PX4.Missions.MissionItem.Command
+  nameWithType: MissionItem.Command
+- uid: MavNet.PX4.Missions.MissionItem.Frame
+  name: Frame
+  href: api/MavNet.PX4.Missions.MissionItem.html#MavNet_PX4_Missions_MissionItem_Frame
+  commentId: P:MavNet.PX4.Missions.MissionItem.Frame
+  fullName: MavNet.PX4.Missions.MissionItem.Frame
+  nameWithType: MissionItem.Frame
+- uid: MavNet.PX4.Missions.MissionItem.Frame*
+  name: Frame
+  href: api/MavNet.PX4.Missions.MissionItem.html#MavNet_PX4_Missions_MissionItem_Frame_
+  commentId: Overload:MavNet.PX4.Missions.MissionItem.Frame
+  isSpec: "True"
+  fullName: MavNet.PX4.Missions.MissionItem.Frame
+  nameWithType: MissionItem.Frame
+- uid: MavNet.PX4.Missions.MissionItem.FromInt1e7(System.Int32)
+  name: FromInt1e7(int)
+  href: api/MavNet.PX4.Missions.MissionItem.html#MavNet_PX4_Missions_MissionItem_FromInt1e7_System_Int32_
+  commentId: M:MavNet.PX4.Missions.MissionItem.FromInt1e7(System.Int32)
+  name.vb: FromInt1e7(Integer)
+  fullName: MavNet.PX4.Missions.MissionItem.FromInt1e7(int)
+  fullName.vb: MavNet.PX4.Missions.MissionItem.FromInt1e7(Integer)
+  nameWithType: MissionItem.FromInt1e7(int)
+  nameWithType.vb: MissionItem.FromInt1e7(Integer)
+- uid: MavNet.PX4.Missions.MissionItem.FromInt1e7*
+  name: FromInt1e7
+  href: api/MavNet.PX4.Missions.MissionItem.html#MavNet_PX4_Missions_MissionItem_FromInt1e7_
+  commentId: Overload:MavNet.PX4.Missions.MissionItem.FromInt1e7
+  isSpec: "True"
+  fullName: MavNet.PX4.Missions.MissionItem.FromInt1e7
+  nameWithType: MissionItem.FromInt1e7
+- uid: MavNet.PX4.Missions.MissionItem.Land(System.Double,System.Double,System.Single,MavNet.Protocol.Generated.Enums.MavFrame)
+  name: Land(double, double, float, MavFrame)
+  href: api/MavNet.PX4.Missions.MissionItem.html#MavNet_PX4_Missions_MissionItem_Land_System_Double_System_Double_System_Single_MavNet_Protocol_Generated_Enums_MavFrame_
+  commentId: M:MavNet.PX4.Missions.MissionItem.Land(System.Double,System.Double,System.Single,MavNet.Protocol.Generated.Enums.MavFrame)
+  name.vb: Land(Double, Double, Single, MavFrame)
+  fullName: MavNet.PX4.Missions.MissionItem.Land(double, double, float, MavNet.Protocol.Generated.Enums.MavFrame)
+  fullName.vb: MavNet.PX4.Missions.MissionItem.Land(Double, Double, Single, MavNet.Protocol.Generated.Enums.MavFrame)
+  nameWithType: MissionItem.Land(double, double, float, MavFrame)
+  nameWithType.vb: MissionItem.Land(Double, Double, Single, MavFrame)
+- uid: MavNet.PX4.Missions.MissionItem.Land*
+  name: Land
+  href: api/MavNet.PX4.Missions.MissionItem.html#MavNet_PX4_Missions_MissionItem_Land_
+  commentId: Overload:MavNet.PX4.Missions.MissionItem.Land
+  isSpec: "True"
+  fullName: MavNet.PX4.Missions.MissionItem.Land
+  nameWithType: MissionItem.Land
+- uid: MavNet.PX4.Missions.MissionItem.Param1
+  name: Param1
+  href: api/MavNet.PX4.Missions.MissionItem.html#MavNet_PX4_Missions_MissionItem_Param1
+  commentId: P:MavNet.PX4.Missions.MissionItem.Param1
+  fullName: MavNet.PX4.Missions.MissionItem.Param1
+  nameWithType: MissionItem.Param1
+- uid: MavNet.PX4.Missions.MissionItem.Param1*
+  name: Param1
+  href: api/MavNet.PX4.Missions.MissionItem.html#MavNet_PX4_Missions_MissionItem_Param1_
+  commentId: Overload:MavNet.PX4.Missions.MissionItem.Param1
+  isSpec: "True"
+  fullName: MavNet.PX4.Missions.MissionItem.Param1
+  nameWithType: MissionItem.Param1
+- uid: MavNet.PX4.Missions.MissionItem.Param2
+  name: Param2
+  href: api/MavNet.PX4.Missions.MissionItem.html#MavNet_PX4_Missions_MissionItem_Param2
+  commentId: P:MavNet.PX4.Missions.MissionItem.Param2
+  fullName: MavNet.PX4.Missions.MissionItem.Param2
+  nameWithType: MissionItem.Param2
+- uid: MavNet.PX4.Missions.MissionItem.Param2*
+  name: Param2
+  href: api/MavNet.PX4.Missions.MissionItem.html#MavNet_PX4_Missions_MissionItem_Param2_
+  commentId: Overload:MavNet.PX4.Missions.MissionItem.Param2
+  isSpec: "True"
+  fullName: MavNet.PX4.Missions.MissionItem.Param2
+  nameWithType: MissionItem.Param2
+- uid: MavNet.PX4.Missions.MissionItem.Param3
+  name: Param3
+  href: api/MavNet.PX4.Missions.MissionItem.html#MavNet_PX4_Missions_MissionItem_Param3
+  commentId: P:MavNet.PX4.Missions.MissionItem.Param3
+  fullName: MavNet.PX4.Missions.MissionItem.Param3
+  nameWithType: MissionItem.Param3
+- uid: MavNet.PX4.Missions.MissionItem.Param3*
+  name: Param3
+  href: api/MavNet.PX4.Missions.MissionItem.html#MavNet_PX4_Missions_MissionItem_Param3_
+  commentId: Overload:MavNet.PX4.Missions.MissionItem.Param3
+  isSpec: "True"
+  fullName: MavNet.PX4.Missions.MissionItem.Param3
+  nameWithType: MissionItem.Param3
+- uid: MavNet.PX4.Missions.MissionItem.Param4
+  name: Param4
+  href: api/MavNet.PX4.Missions.MissionItem.html#MavNet_PX4_Missions_MissionItem_Param4
+  commentId: P:MavNet.PX4.Missions.MissionItem.Param4
+  fullName: MavNet.PX4.Missions.MissionItem.Param4
+  nameWithType: MissionItem.Param4
+- uid: MavNet.PX4.Missions.MissionItem.Param4*
+  name: Param4
+  href: api/MavNet.PX4.Missions.MissionItem.html#MavNet_PX4_Missions_MissionItem_Param4_
+  commentId: Overload:MavNet.PX4.Missions.MissionItem.Param4
+  isSpec: "True"
+  fullName: MavNet.PX4.Missions.MissionItem.Param4
+  nameWithType: MissionItem.Param4
+- uid: MavNet.PX4.Missions.MissionItem.ReturnToLaunch
+  name: ReturnToLaunch()
+  href: api/MavNet.PX4.Missions.MissionItem.html#MavNet_PX4_Missions_MissionItem_ReturnToLaunch
+  commentId: M:MavNet.PX4.Missions.MissionItem.ReturnToLaunch
+  fullName: MavNet.PX4.Missions.MissionItem.ReturnToLaunch()
+  nameWithType: MissionItem.ReturnToLaunch()
+- uid: MavNet.PX4.Missions.MissionItem.ReturnToLaunch*
+  name: ReturnToLaunch
+  href: api/MavNet.PX4.Missions.MissionItem.html#MavNet_PX4_Missions_MissionItem_ReturnToLaunch_
+  commentId: Overload:MavNet.PX4.Missions.MissionItem.ReturnToLaunch
+  isSpec: "True"
+  fullName: MavNet.PX4.Missions.MissionItem.ReturnToLaunch
+  nameWithType: MissionItem.ReturnToLaunch
+- uid: MavNet.PX4.Missions.MissionItem.Takeoff(System.Single,System.Single,MavNet.Protocol.Generated.Enums.MavFrame)
+  name: Takeoff(float, float, MavFrame)
+  href: api/MavNet.PX4.Missions.MissionItem.html#MavNet_PX4_Missions_MissionItem_Takeoff_System_Single_System_Single_MavNet_Protocol_Generated_Enums_MavFrame_
+  commentId: M:MavNet.PX4.Missions.MissionItem.Takeoff(System.Single,System.Single,MavNet.Protocol.Generated.Enums.MavFrame)
+  name.vb: Takeoff(Single, Single, MavFrame)
+  fullName: MavNet.PX4.Missions.MissionItem.Takeoff(float, float, MavNet.Protocol.Generated.Enums.MavFrame)
+  fullName.vb: MavNet.PX4.Missions.MissionItem.Takeoff(Single, Single, MavNet.Protocol.Generated.Enums.MavFrame)
+  nameWithType: MissionItem.Takeoff(float, float, MavFrame)
+  nameWithType.vb: MissionItem.Takeoff(Single, Single, MavFrame)
+- uid: MavNet.PX4.Missions.MissionItem.Takeoff*
+  name: Takeoff
+  href: api/MavNet.PX4.Missions.MissionItem.html#MavNet_PX4_Missions_MissionItem_Takeoff_
+  commentId: Overload:MavNet.PX4.Missions.MissionItem.Takeoff
+  isSpec: "True"
+  fullName: MavNet.PX4.Missions.MissionItem.Takeoff
+  nameWithType: MissionItem.Takeoff
+- uid: MavNet.PX4.Missions.MissionItem.ToInt1e7(System.Double)
+  name: ToInt1e7(double)
+  href: api/MavNet.PX4.Missions.MissionItem.html#MavNet_PX4_Missions_MissionItem_ToInt1e7_System_Double_
+  commentId: M:MavNet.PX4.Missions.MissionItem.ToInt1e7(System.Double)
+  name.vb: ToInt1e7(Double)
+  fullName: MavNet.PX4.Missions.MissionItem.ToInt1e7(double)
+  fullName.vb: MavNet.PX4.Missions.MissionItem.ToInt1e7(Double)
+  nameWithType: MissionItem.ToInt1e7(double)
+  nameWithType.vb: MissionItem.ToInt1e7(Double)
+- uid: MavNet.PX4.Missions.MissionItem.ToInt1e7*
+  name: ToInt1e7
+  href: api/MavNet.PX4.Missions.MissionItem.html#MavNet_PX4_Missions_MissionItem_ToInt1e7_
+  commentId: Overload:MavNet.PX4.Missions.MissionItem.ToInt1e7
+  isSpec: "True"
+  fullName: MavNet.PX4.Missions.MissionItem.ToInt1e7
+  nameWithType: MissionItem.ToInt1e7
+- uid: MavNet.PX4.Missions.MissionItem.Waypoint(System.Double,System.Double,System.Single,System.Single,System.Single,MavNet.Protocol.Generated.Enums.MavFrame)
+  name: Waypoint(double, double, float, float, float, MavFrame)
+  href: api/MavNet.PX4.Missions.MissionItem.html#MavNet_PX4_Missions_MissionItem_Waypoint_System_Double_System_Double_System_Single_System_Single_System_Single_MavNet_Protocol_Generated_Enums_MavFrame_
+  commentId: M:MavNet.PX4.Missions.MissionItem.Waypoint(System.Double,System.Double,System.Single,System.Single,System.Single,MavNet.Protocol.Generated.Enums.MavFrame)
+  name.vb: Waypoint(Double, Double, Single, Single, Single, MavFrame)
+  fullName: MavNet.PX4.Missions.MissionItem.Waypoint(double, double, float, float, float, MavNet.Protocol.Generated.Enums.MavFrame)
+  fullName.vb: MavNet.PX4.Missions.MissionItem.Waypoint(Double, Double, Single, Single, Single, MavNet.Protocol.Generated.Enums.MavFrame)
+  nameWithType: MissionItem.Waypoint(double, double, float, float, float, MavFrame)
+  nameWithType.vb: MissionItem.Waypoint(Double, Double, Single, Single, Single, MavFrame)
+- uid: MavNet.PX4.Missions.MissionItem.Waypoint*
+  name: Waypoint
+  href: api/MavNet.PX4.Missions.MissionItem.html#MavNet_PX4_Missions_MissionItem_Waypoint_
+  commentId: Overload:MavNet.PX4.Missions.MissionItem.Waypoint
+  isSpec: "True"
+  fullName: MavNet.PX4.Missions.MissionItem.Waypoint
+  nameWithType: MissionItem.Waypoint
+- uid: MavNet.PX4.Missions.MissionItem.X
+  name: X
+  href: api/MavNet.PX4.Missions.MissionItem.html#MavNet_PX4_Missions_MissionItem_X
+  commentId: P:MavNet.PX4.Missions.MissionItem.X
+  fullName: MavNet.PX4.Missions.MissionItem.X
+  nameWithType: MissionItem.X
+- uid: MavNet.PX4.Missions.MissionItem.X*
+  name: X
+  href: api/MavNet.PX4.Missions.MissionItem.html#MavNet_PX4_Missions_MissionItem_X_
+  commentId: Overload:MavNet.PX4.Missions.MissionItem.X
+  isSpec: "True"
+  fullName: MavNet.PX4.Missions.MissionItem.X
+  nameWithType: MissionItem.X
+- uid: MavNet.PX4.Missions.MissionItem.Y
+  name: Y
+  href: api/MavNet.PX4.Missions.MissionItem.html#MavNet_PX4_Missions_MissionItem_Y
+  commentId: P:MavNet.PX4.Missions.MissionItem.Y
+  fullName: MavNet.PX4.Missions.MissionItem.Y
+  nameWithType: MissionItem.Y
+- uid: MavNet.PX4.Missions.MissionItem.Y*
+  name: Y
+  href: api/MavNet.PX4.Missions.MissionItem.html#MavNet_PX4_Missions_MissionItem_Y_
+  commentId: Overload:MavNet.PX4.Missions.MissionItem.Y
+  isSpec: "True"
+  fullName: MavNet.PX4.Missions.MissionItem.Y
+  nameWithType: MissionItem.Y
+- uid: MavNet.PX4.Missions.MissionItem.Z
+  name: Z
+  href: api/MavNet.PX4.Missions.MissionItem.html#MavNet_PX4_Missions_MissionItem_Z
+  commentId: P:MavNet.PX4.Missions.MissionItem.Z
+  fullName: MavNet.PX4.Missions.MissionItem.Z
+  nameWithType: MissionItem.Z
+- uid: MavNet.PX4.Missions.MissionItem.Z*
+  name: Z
+  href: api/MavNet.PX4.Missions.MissionItem.html#MavNet_PX4_Missions_MissionItem_Z_
+  commentId: Overload:MavNet.PX4.Missions.MissionItem.Z
+  isSpec: "True"
+  fullName: MavNet.PX4.Missions.MissionItem.Z
+  nameWithType: MissionItem.Z
+- uid: MavNet.PX4.Missions.MissionTransactionStatus
+  name: MissionTransactionStatus
+  href: api/MavNet.PX4.Missions.MissionTransactionStatus.html
+  commentId: T:MavNet.PX4.Missions.MissionTransactionStatus
+  fullName: MavNet.PX4.Missions.MissionTransactionStatus
+  nameWithType: MissionTransactionStatus
+- uid: MavNet.PX4.Missions.MissionTransactionStatus.Accepted
+  name: Accepted
+  href: api/MavNet.PX4.Missions.MissionTransactionStatus.html#MavNet_PX4_Missions_MissionTransactionStatus_Accepted
+  commentId: F:MavNet.PX4.Missions.MissionTransactionStatus.Accepted
+  fullName: MavNet.PX4.Missions.MissionTransactionStatus.Accepted
+  nameWithType: MissionTransactionStatus.Accepted
+- uid: MavNet.PX4.Missions.MissionTransactionStatus.Cancelled
+  name: Cancelled
+  href: api/MavNet.PX4.Missions.MissionTransactionStatus.html#MavNet_PX4_Missions_MissionTransactionStatus_Cancelled
+  commentId: F:MavNet.PX4.Missions.MissionTransactionStatus.Cancelled
+  fullName: MavNet.PX4.Missions.MissionTransactionStatus.Cancelled
+  nameWithType: MissionTransactionStatus.Cancelled
+- uid: MavNet.PX4.Missions.MissionTransactionStatus.Rejected
+  name: Rejected
+  href: api/MavNet.PX4.Missions.MissionTransactionStatus.html#MavNet_PX4_Missions_MissionTransactionStatus_Rejected
+  commentId: F:MavNet.PX4.Missions.MissionTransactionStatus.Rejected
+  fullName: MavNet.PX4.Missions.MissionTransactionStatus.Rejected
+  nameWithType: MissionTransactionStatus.Rejected
+- uid: MavNet.PX4.Missions.MissionTransactionStatus.Timeout
+  name: Timeout
+  href: api/MavNet.PX4.Missions.MissionTransactionStatus.html#MavNet_PX4_Missions_MissionTransactionStatus_Timeout
+  commentId: F:MavNet.PX4.Missions.MissionTransactionStatus.Timeout
+  fullName: MavNet.PX4.Missions.MissionTransactionStatus.Timeout
+  nameWithType: MissionTransactionStatus.Timeout
+- uid: MavNet.PX4.Missions.MissionUploadResult
+  name: MissionUploadResult
+  href: api/MavNet.PX4.Missions.MissionUploadResult.html
+  commentId: T:MavNet.PX4.Missions.MissionUploadResult
+  fullName: MavNet.PX4.Missions.MissionUploadResult
+  nameWithType: MissionUploadResult
+- uid: MavNet.PX4.Missions.MissionUploadResult.#ctor(MavNet.PX4.Missions.MissionTransactionStatus,System.Nullable{MavNet.Protocol.Generated.Enums.MavMissionResult},System.Nullable{System.UInt32},System.TimeSpan)
+  name: MissionUploadResult(MissionTransactionStatus, MavMissionResult?, uint?, TimeSpan)
+  href: api/MavNet.PX4.Missions.MissionUploadResult.html#MavNet_PX4_Missions_MissionUploadResult__ctor_MavNet_PX4_Missions_MissionTransactionStatus_System_Nullable_MavNet_Protocol_Generated_Enums_MavMissionResult__System_Nullable_System_UInt32__System_TimeSpan_
+  commentId: M:MavNet.PX4.Missions.MissionUploadResult.#ctor(MavNet.PX4.Missions.MissionTransactionStatus,System.Nullable{MavNet.Protocol.Generated.Enums.MavMissionResult},System.Nullable{System.UInt32},System.TimeSpan)
+  name.vb: New(MissionTransactionStatus, MavMissionResult?, UInteger?, TimeSpan)
+  fullName: MavNet.PX4.Missions.MissionUploadResult.MissionUploadResult(MavNet.PX4.Missions.MissionTransactionStatus, MavNet.Protocol.Generated.Enums.MavMissionResult?, uint?, System.TimeSpan)
+  fullName.vb: MavNet.PX4.Missions.MissionUploadResult.New(MavNet.PX4.Missions.MissionTransactionStatus, MavNet.Protocol.Generated.Enums.MavMissionResult?, UInteger?, System.TimeSpan)
+  nameWithType: MissionUploadResult.MissionUploadResult(MissionTransactionStatus, MavMissionResult?, uint?, TimeSpan)
+  nameWithType.vb: MissionUploadResult.New(MissionTransactionStatus, MavMissionResult?, UInteger?, TimeSpan)
+- uid: MavNet.PX4.Missions.MissionUploadResult.#ctor*
+  name: MissionUploadResult
+  href: api/MavNet.PX4.Missions.MissionUploadResult.html#MavNet_PX4_Missions_MissionUploadResult__ctor_
+  commentId: Overload:MavNet.PX4.Missions.MissionUploadResult.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: MavNet.PX4.Missions.MissionUploadResult.MissionUploadResult
+  fullName.vb: MavNet.PX4.Missions.MissionUploadResult.New
+  nameWithType: MissionUploadResult.MissionUploadResult
+  nameWithType.vb: MissionUploadResult.New
+- uid: MavNet.PX4.Missions.MissionUploadResult.AckResult
+  name: AckResult
+  href: api/MavNet.PX4.Missions.MissionUploadResult.html#MavNet_PX4_Missions_MissionUploadResult_AckResult
+  commentId: P:MavNet.PX4.Missions.MissionUploadResult.AckResult
+  fullName: MavNet.PX4.Missions.MissionUploadResult.AckResult
+  nameWithType: MissionUploadResult.AckResult
+- uid: MavNet.PX4.Missions.MissionUploadResult.AckResult*
+  name: AckResult
+  href: api/MavNet.PX4.Missions.MissionUploadResult.html#MavNet_PX4_Missions_MissionUploadResult_AckResult_
+  commentId: Overload:MavNet.PX4.Missions.MissionUploadResult.AckResult
+  isSpec: "True"
+  fullName: MavNet.PX4.Missions.MissionUploadResult.AckResult
+  nameWithType: MissionUploadResult.AckResult
+- uid: MavNet.PX4.Missions.MissionUploadResult.Elapsed
+  name: Elapsed
+  href: api/MavNet.PX4.Missions.MissionUploadResult.html#MavNet_PX4_Missions_MissionUploadResult_Elapsed
+  commentId: P:MavNet.PX4.Missions.MissionUploadResult.Elapsed
+  fullName: MavNet.PX4.Missions.MissionUploadResult.Elapsed
+  nameWithType: MissionUploadResult.Elapsed
+- uid: MavNet.PX4.Missions.MissionUploadResult.Elapsed*
+  name: Elapsed
+  href: api/MavNet.PX4.Missions.MissionUploadResult.html#MavNet_PX4_Missions_MissionUploadResult_Elapsed_
+  commentId: Overload:MavNet.PX4.Missions.MissionUploadResult.Elapsed
+  isSpec: "True"
+  fullName: MavNet.PX4.Missions.MissionUploadResult.Elapsed
+  nameWithType: MissionUploadResult.Elapsed
+- uid: MavNet.PX4.Missions.MissionUploadResult.IsAccepted
+  name: IsAccepted
+  href: api/MavNet.PX4.Missions.MissionUploadResult.html#MavNet_PX4_Missions_MissionUploadResult_IsAccepted
+  commentId: P:MavNet.PX4.Missions.MissionUploadResult.IsAccepted
+  fullName: MavNet.PX4.Missions.MissionUploadResult.IsAccepted
+  nameWithType: MissionUploadResult.IsAccepted
+- uid: MavNet.PX4.Missions.MissionUploadResult.IsAccepted*
+  name: IsAccepted
+  href: api/MavNet.PX4.Missions.MissionUploadResult.html#MavNet_PX4_Missions_MissionUploadResult_IsAccepted_
+  commentId: Overload:MavNet.PX4.Missions.MissionUploadResult.IsAccepted
+  isSpec: "True"
+  fullName: MavNet.PX4.Missions.MissionUploadResult.IsAccepted
+  nameWithType: MissionUploadResult.IsAccepted
+- uid: MavNet.PX4.Missions.MissionUploadResult.OpaqueId
+  name: OpaqueId
+  href: api/MavNet.PX4.Missions.MissionUploadResult.html#MavNet_PX4_Missions_MissionUploadResult_OpaqueId
+  commentId: P:MavNet.PX4.Missions.MissionUploadResult.OpaqueId
+  fullName: MavNet.PX4.Missions.MissionUploadResult.OpaqueId
+  nameWithType: MissionUploadResult.OpaqueId
+- uid: MavNet.PX4.Missions.MissionUploadResult.OpaqueId*
+  name: OpaqueId
+  href: api/MavNet.PX4.Missions.MissionUploadResult.html#MavNet_PX4_Missions_MissionUploadResult_OpaqueId_
+  commentId: Overload:MavNet.PX4.Missions.MissionUploadResult.OpaqueId
+  isSpec: "True"
+  fullName: MavNet.PX4.Missions.MissionUploadResult.OpaqueId
+  nameWithType: MissionUploadResult.OpaqueId
+- uid: MavNet.PX4.Missions.MissionUploadResult.Status
+  name: Status
+  href: api/MavNet.PX4.Missions.MissionUploadResult.html#MavNet_PX4_Missions_MissionUploadResult_Status
+  commentId: P:MavNet.PX4.Missions.MissionUploadResult.Status
+  fullName: MavNet.PX4.Missions.MissionUploadResult.Status
+  nameWithType: MissionUploadResult.Status
+- uid: MavNet.PX4.Missions.MissionUploadResult.Status*
+  name: Status
+  href: api/MavNet.PX4.Missions.MissionUploadResult.html#MavNet_PX4_Missions_MissionUploadResult_Status_
+  commentId: Overload:MavNet.PX4.Missions.MissionUploadResult.Status
+  isSpec: "True"
+  fullName: MavNet.PX4.Missions.MissionUploadResult.Status
+  nameWithType: MissionUploadResult.Status
 - uid: MavNet.PX4.Px4Mode
   name: Px4Mode
   href: api/MavNet.PX4.Px4Mode.html
@@ -997,6 +1938,19 @@ references:
   isSpec: "True"
   fullName: MavNet.PX4.Vehicles.DroneState.Battery
   nameWithType: DroneState.Battery
+- uid: MavNet.PX4.Vehicles.DroneState.FenceOpaqueId
+  name: FenceOpaqueId
+  href: api/MavNet.PX4.Vehicles.DroneState.html#MavNet_PX4_Vehicles_DroneState_FenceOpaqueId
+  commentId: P:MavNet.PX4.Vehicles.DroneState.FenceOpaqueId
+  fullName: MavNet.PX4.Vehicles.DroneState.FenceOpaqueId
+  nameWithType: DroneState.FenceOpaqueId
+- uid: MavNet.PX4.Vehicles.DroneState.FenceOpaqueId*
+  name: FenceOpaqueId
+  href: api/MavNet.PX4.Vehicles.DroneState.html#MavNet_PX4_Vehicles_DroneState_FenceOpaqueId_
+  commentId: Overload:MavNet.PX4.Vehicles.DroneState.FenceOpaqueId
+  isSpec: "True"
+  fullName: MavNet.PX4.Vehicles.DroneState.FenceOpaqueId
+  nameWithType: DroneState.FenceOpaqueId
 - uid: MavNet.PX4.Vehicles.DroneState.Hdg
   name: Hdg
   href: api/MavNet.PX4.Vehicles.DroneState.html#MavNet_PX4_Vehicles_DroneState_Hdg
@@ -1049,6 +2003,71 @@ references:
   isSpec: "True"
   fullName: MavNet.PX4.Vehicles.DroneState.Lon
   nameWithType: DroneState.Lon
+- uid: MavNet.PX4.Vehicles.DroneState.MissionCurrentSeq
+  name: MissionCurrentSeq
+  href: api/MavNet.PX4.Vehicles.DroneState.html#MavNet_PX4_Vehicles_DroneState_MissionCurrentSeq
+  commentId: P:MavNet.PX4.Vehicles.DroneState.MissionCurrentSeq
+  fullName: MavNet.PX4.Vehicles.DroneState.MissionCurrentSeq
+  nameWithType: DroneState.MissionCurrentSeq
+- uid: MavNet.PX4.Vehicles.DroneState.MissionCurrentSeq*
+  name: MissionCurrentSeq
+  href: api/MavNet.PX4.Vehicles.DroneState.html#MavNet_PX4_Vehicles_DroneState_MissionCurrentSeq_
+  commentId: Overload:MavNet.PX4.Vehicles.DroneState.MissionCurrentSeq
+  isSpec: "True"
+  fullName: MavNet.PX4.Vehicles.DroneState.MissionCurrentSeq
+  nameWithType: DroneState.MissionCurrentSeq
+- uid: MavNet.PX4.Vehicles.DroneState.MissionOpaqueId
+  name: MissionOpaqueId
+  href: api/MavNet.PX4.Vehicles.DroneState.html#MavNet_PX4_Vehicles_DroneState_MissionOpaqueId
+  commentId: P:MavNet.PX4.Vehicles.DroneState.MissionOpaqueId
+  fullName: MavNet.PX4.Vehicles.DroneState.MissionOpaqueId
+  nameWithType: DroneState.MissionOpaqueId
+- uid: MavNet.PX4.Vehicles.DroneState.MissionOpaqueId*
+  name: MissionOpaqueId
+  href: api/MavNet.PX4.Vehicles.DroneState.html#MavNet_PX4_Vehicles_DroneState_MissionOpaqueId_
+  commentId: Overload:MavNet.PX4.Vehicles.DroneState.MissionOpaqueId
+  isSpec: "True"
+  fullName: MavNet.PX4.Vehicles.DroneState.MissionOpaqueId
+  nameWithType: DroneState.MissionOpaqueId
+- uid: MavNet.PX4.Vehicles.DroneState.MissionReachedCount
+  name: MissionReachedCount
+  href: api/MavNet.PX4.Vehicles.DroneState.html#MavNet_PX4_Vehicles_DroneState_MissionReachedCount
+  commentId: P:MavNet.PX4.Vehicles.DroneState.MissionReachedCount
+  fullName: MavNet.PX4.Vehicles.DroneState.MissionReachedCount
+  nameWithType: DroneState.MissionReachedCount
+- uid: MavNet.PX4.Vehicles.DroneState.MissionReachedCount*
+  name: MissionReachedCount
+  href: api/MavNet.PX4.Vehicles.DroneState.html#MavNet_PX4_Vehicles_DroneState_MissionReachedCount_
+  commentId: Overload:MavNet.PX4.Vehicles.DroneState.MissionReachedCount
+  isSpec: "True"
+  fullName: MavNet.PX4.Vehicles.DroneState.MissionReachedCount
+  nameWithType: DroneState.MissionReachedCount
+- uid: MavNet.PX4.Vehicles.DroneState.MissionState
+  name: MissionState
+  href: api/MavNet.PX4.Vehicles.DroneState.html#MavNet_PX4_Vehicles_DroneState_MissionState
+  commentId: P:MavNet.PX4.Vehicles.DroneState.MissionState
+  fullName: MavNet.PX4.Vehicles.DroneState.MissionState
+  nameWithType: DroneState.MissionState
+- uid: MavNet.PX4.Vehicles.DroneState.MissionState*
+  name: MissionState
+  href: api/MavNet.PX4.Vehicles.DroneState.html#MavNet_PX4_Vehicles_DroneState_MissionState_
+  commentId: Overload:MavNet.PX4.Vehicles.DroneState.MissionState
+  isSpec: "True"
+  fullName: MavNet.PX4.Vehicles.DroneState.MissionState
+  nameWithType: DroneState.MissionState
+- uid: MavNet.PX4.Vehicles.DroneState.MissionTotal
+  name: MissionTotal
+  href: api/MavNet.PX4.Vehicles.DroneState.html#MavNet_PX4_Vehicles_DroneState_MissionTotal
+  commentId: P:MavNet.PX4.Vehicles.DroneState.MissionTotal
+  fullName: MavNet.PX4.Vehicles.DroneState.MissionTotal
+  nameWithType: DroneState.MissionTotal
+- uid: MavNet.PX4.Vehicles.DroneState.MissionTotal*
+  name: MissionTotal
+  href: api/MavNet.PX4.Vehicles.DroneState.html#MavNet_PX4_Vehicles_DroneState_MissionTotal_
+  commentId: Overload:MavNet.PX4.Vehicles.DroneState.MissionTotal
+  isSpec: "True"
+  fullName: MavNet.PX4.Vehicles.DroneState.MissionTotal
+  nameWithType: DroneState.MissionTotal
 - uid: MavNet.PX4.Vehicles.DroneState.Mode
   name: Mode
   href: api/MavNet.PX4.Vehicles.DroneState.html#MavNet_PX4_Vehicles_DroneState_Mode
@@ -1062,6 +2081,19 @@ references:
   isSpec: "True"
   fullName: MavNet.PX4.Vehicles.DroneState.Mode
   nameWithType: DroneState.Mode
+- uid: MavNet.PX4.Vehicles.DroneState.RallyOpaqueId
+  name: RallyOpaqueId
+  href: api/MavNet.PX4.Vehicles.DroneState.html#MavNet_PX4_Vehicles_DroneState_RallyOpaqueId
+  commentId: P:MavNet.PX4.Vehicles.DroneState.RallyOpaqueId
+  fullName: MavNet.PX4.Vehicles.DroneState.RallyOpaqueId
+  nameWithType: DroneState.RallyOpaqueId
+- uid: MavNet.PX4.Vehicles.DroneState.RallyOpaqueId*
+  name: RallyOpaqueId
+  href: api/MavNet.PX4.Vehicles.DroneState.html#MavNet_PX4_Vehicles_DroneState_RallyOpaqueId_
+  commentId: Overload:MavNet.PX4.Vehicles.DroneState.RallyOpaqueId
+  isSpec: "True"
+  fullName: MavNet.PX4.Vehicles.DroneState.RallyOpaqueId
+  nameWithType: DroneState.RallyOpaqueId
 - uid: MavNet.PX4.Vehicles.DroneState.Sats
   name: Sats
   href: api/MavNet.PX4.Vehicles.DroneState.html#MavNet_PX4_Vehicles_DroneState_Sats
@@ -1622,6 +2654,60 @@ references:
   commentId: E:MavNet.Transport.Udp.IMavlinkConnection.HeartbeatReceived
   fullName: MavNet.Transport.Udp.IMavlinkConnection.HeartbeatReceived
   nameWithType: IMavlinkConnection.HeartbeatReceived
+- uid: MavNet.Transport.Udp.IMavlinkConnection.MissionAckReceived
+  name: MissionAckReceived
+  href: api/MavNet.Transport.Udp.IMavlinkConnection.html#MavNet_Transport_Udp_IMavlinkConnection_MissionAckReceived
+  commentId: E:MavNet.Transport.Udp.IMavlinkConnection.MissionAckReceived
+  fullName: MavNet.Transport.Udp.IMavlinkConnection.MissionAckReceived
+  nameWithType: IMavlinkConnection.MissionAckReceived
+- uid: MavNet.Transport.Udp.IMavlinkConnection.MissionClearAllReceived
+  name: MissionClearAllReceived
+  href: api/MavNet.Transport.Udp.IMavlinkConnection.html#MavNet_Transport_Udp_IMavlinkConnection_MissionClearAllReceived
+  commentId: E:MavNet.Transport.Udp.IMavlinkConnection.MissionClearAllReceived
+  fullName: MavNet.Transport.Udp.IMavlinkConnection.MissionClearAllReceived
+  nameWithType: IMavlinkConnection.MissionClearAllReceived
+- uid: MavNet.Transport.Udp.IMavlinkConnection.MissionCountReceived
+  name: MissionCountReceived
+  href: api/MavNet.Transport.Udp.IMavlinkConnection.html#MavNet_Transport_Udp_IMavlinkConnection_MissionCountReceived
+  commentId: E:MavNet.Transport.Udp.IMavlinkConnection.MissionCountReceived
+  fullName: MavNet.Transport.Udp.IMavlinkConnection.MissionCountReceived
+  nameWithType: IMavlinkConnection.MissionCountReceived
+- uid: MavNet.Transport.Udp.IMavlinkConnection.MissionCurrentReceived
+  name: MissionCurrentReceived
+  href: api/MavNet.Transport.Udp.IMavlinkConnection.html#MavNet_Transport_Udp_IMavlinkConnection_MissionCurrentReceived
+  commentId: E:MavNet.Transport.Udp.IMavlinkConnection.MissionCurrentReceived
+  fullName: MavNet.Transport.Udp.IMavlinkConnection.MissionCurrentReceived
+  nameWithType: IMavlinkConnection.MissionCurrentReceived
+- uid: MavNet.Transport.Udp.IMavlinkConnection.MissionItemIntReceived
+  name: MissionItemIntReceived
+  href: api/MavNet.Transport.Udp.IMavlinkConnection.html#MavNet_Transport_Udp_IMavlinkConnection_MissionItemIntReceived
+  commentId: E:MavNet.Transport.Udp.IMavlinkConnection.MissionItemIntReceived
+  fullName: MavNet.Transport.Udp.IMavlinkConnection.MissionItemIntReceived
+  nameWithType: IMavlinkConnection.MissionItemIntReceived
+- uid: MavNet.Transport.Udp.IMavlinkConnection.MissionItemReachedReceived
+  name: MissionItemReachedReceived
+  href: api/MavNet.Transport.Udp.IMavlinkConnection.html#MavNet_Transport_Udp_IMavlinkConnection_MissionItemReachedReceived
+  commentId: E:MavNet.Transport.Udp.IMavlinkConnection.MissionItemReachedReceived
+  fullName: MavNet.Transport.Udp.IMavlinkConnection.MissionItemReachedReceived
+  nameWithType: IMavlinkConnection.MissionItemReachedReceived
+- uid: MavNet.Transport.Udp.IMavlinkConnection.MissionRequestIntReceived
+  name: MissionRequestIntReceived
+  href: api/MavNet.Transport.Udp.IMavlinkConnection.html#MavNet_Transport_Udp_IMavlinkConnection_MissionRequestIntReceived
+  commentId: E:MavNet.Transport.Udp.IMavlinkConnection.MissionRequestIntReceived
+  fullName: MavNet.Transport.Udp.IMavlinkConnection.MissionRequestIntReceived
+  nameWithType: IMavlinkConnection.MissionRequestIntReceived
+- uid: MavNet.Transport.Udp.IMavlinkConnection.MissionRequestListReceived
+  name: MissionRequestListReceived
+  href: api/MavNet.Transport.Udp.IMavlinkConnection.html#MavNet_Transport_Udp_IMavlinkConnection_MissionRequestListReceived
+  commentId: E:MavNet.Transport.Udp.IMavlinkConnection.MissionRequestListReceived
+  fullName: MavNet.Transport.Udp.IMavlinkConnection.MissionRequestListReceived
+  nameWithType: IMavlinkConnection.MissionRequestListReceived
+- uid: MavNet.Transport.Udp.IMavlinkConnection.MissionRequestReceived
+  name: MissionRequestReceived
+  href: api/MavNet.Transport.Udp.IMavlinkConnection.html#MavNet_Transport_Udp_IMavlinkConnection_MissionRequestReceived
+  commentId: E:MavNet.Transport.Udp.IMavlinkConnection.MissionRequestReceived
+  fullName: MavNet.Transport.Udp.IMavlinkConnection.MissionRequestReceived
+  nameWithType: IMavlinkConnection.MissionRequestReceived
 - uid: MavNet.Transport.Udp.IMavlinkConnection.Send*
   name: Send
   href: api/MavNet.Transport.Udp.IMavlinkConnection.html#MavNet_Transport_Udp_IMavlinkConnection_Send_
@@ -1731,6 +2817,60 @@ references:
   isSpec: "True"
   fullName: MavNet.Transport.Udp.MavlinkConnection.LocalEndPoint
   nameWithType: MavlinkConnection.LocalEndPoint
+- uid: MavNet.Transport.Udp.MavlinkConnection.MissionAckReceived
+  name: MissionAckReceived
+  href: api/MavNet.Transport.Udp.MavlinkConnection.html#MavNet_Transport_Udp_MavlinkConnection_MissionAckReceived
+  commentId: E:MavNet.Transport.Udp.MavlinkConnection.MissionAckReceived
+  fullName: MavNet.Transport.Udp.MavlinkConnection.MissionAckReceived
+  nameWithType: MavlinkConnection.MissionAckReceived
+- uid: MavNet.Transport.Udp.MavlinkConnection.MissionClearAllReceived
+  name: MissionClearAllReceived
+  href: api/MavNet.Transport.Udp.MavlinkConnection.html#MavNet_Transport_Udp_MavlinkConnection_MissionClearAllReceived
+  commentId: E:MavNet.Transport.Udp.MavlinkConnection.MissionClearAllReceived
+  fullName: MavNet.Transport.Udp.MavlinkConnection.MissionClearAllReceived
+  nameWithType: MavlinkConnection.MissionClearAllReceived
+- uid: MavNet.Transport.Udp.MavlinkConnection.MissionCountReceived
+  name: MissionCountReceived
+  href: api/MavNet.Transport.Udp.MavlinkConnection.html#MavNet_Transport_Udp_MavlinkConnection_MissionCountReceived
+  commentId: E:MavNet.Transport.Udp.MavlinkConnection.MissionCountReceived
+  fullName: MavNet.Transport.Udp.MavlinkConnection.MissionCountReceived
+  nameWithType: MavlinkConnection.MissionCountReceived
+- uid: MavNet.Transport.Udp.MavlinkConnection.MissionCurrentReceived
+  name: MissionCurrentReceived
+  href: api/MavNet.Transport.Udp.MavlinkConnection.html#MavNet_Transport_Udp_MavlinkConnection_MissionCurrentReceived
+  commentId: E:MavNet.Transport.Udp.MavlinkConnection.MissionCurrentReceived
+  fullName: MavNet.Transport.Udp.MavlinkConnection.MissionCurrentReceived
+  nameWithType: MavlinkConnection.MissionCurrentReceived
+- uid: MavNet.Transport.Udp.MavlinkConnection.MissionItemIntReceived
+  name: MissionItemIntReceived
+  href: api/MavNet.Transport.Udp.MavlinkConnection.html#MavNet_Transport_Udp_MavlinkConnection_MissionItemIntReceived
+  commentId: E:MavNet.Transport.Udp.MavlinkConnection.MissionItemIntReceived
+  fullName: MavNet.Transport.Udp.MavlinkConnection.MissionItemIntReceived
+  nameWithType: MavlinkConnection.MissionItemIntReceived
+- uid: MavNet.Transport.Udp.MavlinkConnection.MissionItemReachedReceived
+  name: MissionItemReachedReceived
+  href: api/MavNet.Transport.Udp.MavlinkConnection.html#MavNet_Transport_Udp_MavlinkConnection_MissionItemReachedReceived
+  commentId: E:MavNet.Transport.Udp.MavlinkConnection.MissionItemReachedReceived
+  fullName: MavNet.Transport.Udp.MavlinkConnection.MissionItemReachedReceived
+  nameWithType: MavlinkConnection.MissionItemReachedReceived
+- uid: MavNet.Transport.Udp.MavlinkConnection.MissionRequestIntReceived
+  name: MissionRequestIntReceived
+  href: api/MavNet.Transport.Udp.MavlinkConnection.html#MavNet_Transport_Udp_MavlinkConnection_MissionRequestIntReceived
+  commentId: E:MavNet.Transport.Udp.MavlinkConnection.MissionRequestIntReceived
+  fullName: MavNet.Transport.Udp.MavlinkConnection.MissionRequestIntReceived
+  nameWithType: MavlinkConnection.MissionRequestIntReceived
+- uid: MavNet.Transport.Udp.MavlinkConnection.MissionRequestListReceived
+  name: MissionRequestListReceived
+  href: api/MavNet.Transport.Udp.MavlinkConnection.html#MavNet_Transport_Udp_MavlinkConnection_MissionRequestListReceived
+  commentId: E:MavNet.Transport.Udp.MavlinkConnection.MissionRequestListReceived
+  fullName: MavNet.Transport.Udp.MavlinkConnection.MissionRequestListReceived
+  nameWithType: MavlinkConnection.MissionRequestListReceived
+- uid: MavNet.Transport.Udp.MavlinkConnection.MissionRequestReceived
+  name: MissionRequestReceived
+  href: api/MavNet.Transport.Udp.MavlinkConnection.html#MavNet_Transport_Udp_MavlinkConnection_MissionRequestReceived
+  commentId: E:MavNet.Transport.Udp.MavlinkConnection.MissionRequestReceived
+  fullName: MavNet.Transport.Udp.MavlinkConnection.MissionRequestReceived
+  nameWithType: MavlinkConnection.MissionRequestReceived
 - uid: MavNet.Transport.Udp.MavlinkConnection.Send*
   name: Send
   href: api/MavNet.Transport.Udp.MavlinkConnection.html#MavNet_Transport_Udp_MavlinkConnection_Send_

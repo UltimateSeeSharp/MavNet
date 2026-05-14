@@ -1,0 +1,179 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Namespace MavNet.PX4.Missions | MavNet - MAVLink for .NET </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Namespace MavNet.PX4.Missions | MavNet - MAVLink for .NET ">
+      
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="../toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../logo.svg" alt="MavNet">
+            MavNet
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+
+      <div class="content">
+        <div class="actionbar">
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="MavNet.PX4.Missions">
+
+  <h1 id="MavNet_PX4_Missions" data-uid="MavNet.PX4.Missions" class="text-break">Namespace MavNet.PX4.Missions</h1>
+  <div class="markdown level0 summary"></div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="markdown level0 remarks"></div>
+
+    <h3 id="classes">
+Classes
+</h3>
+    <dl class="jumplist">
+      <dt><a class="xref" href="MavNet.PX4.Missions.MissionClient.html">MissionClient</a></dt>
+      <dd><p>Implements the MAVLink mission-protocol upload and download state machines for
+one <code>(target, <span class="xref">MavNet.Protocol.Generated.Enums.MavMissionType</span>)</code> pair on top of an
+<a class="xref" href="MavNet.Transport.Udp.IMavlinkConnection.html">IMavlinkConnection</a>. One <a class="xref" href="MavNet.PX4.Missions.MissionClient.html">MissionClient</a> handles one
+mission type (waypoints, fence, or rally) — Vehicle owns one per type so the
+three transactions can run independently per spec.</p>
+<p><b>Upload.</b> Caller invokes <a class="xref" href="MavNet.PX4.Missions.MissionClient.html#MavNet_PX4_Missions_MissionClient_UploadAsync_System_Collections_Generic_IReadOnlyList_MavNet_PX4_Missions_MissionItem__System_Threading_CancellationToken_">UploadAsync(IReadOnlyList&lt;MissionItem&gt;, CancellationToken)</a>. We send
+<code>MISSION_COUNT</code>, then for each <code>MISSION_REQUEST_INT</code> (or its
+deprecated <code>MISSION_REQUEST</code> sibling that ArduPilot still emits) we reply
+with a <code>MISSION_ITEM_INT</code>. After the final item the vehicle answers with
+<code>MISSION_ACK</code>, which terminates the transaction.</p><p><b>Download.</b> Caller invokes <a class="xref" href="MavNet.PX4.Missions.MissionClient.html#MavNet_PX4_Missions_MissionClient_DownloadAsync_System_Threading_CancellationToken_">DownloadAsync(CancellationToken)</a>. We send
+<code>MISSION_REQUEST_LIST</code>, the vehicle responds with <code>MISSION_COUNT</code>
+(carrying the on-vehicle <code>opaque_id</code>), then we send a
+<code>MISSION_REQUEST_INT</code> per item in order and collect each
+<code>MISSION_ITEM_INT</code> reply. After the final item we send a final
+<code>MISSION_ACK(MAV_MISSION_ACCEPTED)</code> per spec to close the transaction.</p><p><b>Timing.</b> Per the MAVLink spec: 1500 ms default timeout, 250 ms for
+the inner item loop, max 5 retries. Defaults are baked in but all three are
+constructor-injectable so tests stay sub-second.</p><p><b>Out-of-sequence is not an error.</b> If the vehicle re-requests an
+earlier seq during upload, we re-answer with that item rather than abort. If
+the vehicle answers with an unexpected seq during download, we just ignore it
+and let the watchdog re-request. Per spec only timeout exhaustion and a
+non-Accepted <code>MISSION_ACK</code> cause a transaction to fail.</p><p><b>Threading.</b> Inbound events fire on the connection's receive thread.
+All mutable state is guarded by an internal lock; the lock window only covers
+the state mutation, never the awaiter's continuation (the result <code>Task</code>
+uses <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.taskcreationoptions#system-threading-tasks-taskcreationoptions-runcontinuationsasynchronously">RunContinuationsAsynchronously</a>).</p><p><b>Single-flight.</b> Only one transaction may be in flight per
+<a class="xref" href="MavNet.PX4.Missions.MissionClient.html">MissionClient</a>, regardless of direction. A concurrent
+<a class="xref" href="MavNet.PX4.Missions.MissionClient.html#MavNet_PX4_Missions_MissionClient_UploadAsync_System_Collections_Generic_IReadOnlyList_MavNet_PX4_Missions_MissionItem__System_Threading_CancellationToken_">UploadAsync(IReadOnlyList&lt;MissionItem&gt;, CancellationToken)</a> or <a class="xref" href="MavNet.PX4.Missions.MissionClient.html#MavNet_PX4_Missions_MissionClient_DownloadAsync_System_Threading_CancellationToken_">DownloadAsync(CancellationToken)</a> throws
+<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.invalidoperationexception">InvalidOperationException</a>.</p>
+</dd>
+    </dl>
+    <h3 id="structs">
+Structs
+</h3>
+    <dl class="jumplist">
+      <dt><a class="xref" href="MavNet.PX4.Missions.MissionClearResult.html">MissionClearResult</a></dt>
+      <dd><p>Terminal state of one mission-clear transaction.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="MavNet.PX4.Missions.MissionDownloadResult.html">MissionDownloadResult</a></dt>
+      <dd><p>Terminal state of one mission download transaction.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="MavNet.PX4.Missions.MissionItem.html">MissionItem</a></dt>
+      <dd><p>Protocol-shaped mission item — mirrors the MAVLink <code>MISSION_ITEM_INT</code> wire
+layout but without the per-transaction fields (<code>Seq</code>, <code>TargetSystem</code>,
+<code>TargetComponent</code>, <code>MissionType</code>). <a class="xref" href="MavNet.PX4.Missions.MissionClient.html">MissionClient</a> stamps
+those in when it sends each item.</p>
+<p>Coordinate scaling matches the spec: for global frames, <a class="xref" href="MavNet.PX4.Missions.MissionItem.html#MavNet_PX4_Missions_MissionItem_X">X</a> /
+<a class="xref" href="MavNet.PX4.Missions.MissionItem.html#MavNet_PX4_Missions_MissionItem_Y">Y</a> are <code>degrees × 1e7</code>; for local frames, <code>metres × 1e4</code>.
+<a class="xref" href="MavNet.PX4.Missions.MissionItem.html#MavNet_PX4_Missions_MissionItem_Z">Z</a> is always a float. Use the static factories
+(<code>Waypoint</code>, <code>Takeoff</code>, <code>Land</code>, <code>ReturnToLaunch</code>) to avoid hand-scaling.</p><p>The same record is used for waypoint, geofence, and rally-point missions
+— the <code>Command</code> field plus <code>MAV_MISSION_TYPE</code> (passed to the
+<a class="xref" href="MavNet.PX4.Missions.MissionClient.html">MissionClient</a>) determine the semantics.</p>
+</dd>
+    </dl>
+    <dl class="jumplist">
+      <dt><a class="xref" href="MavNet.PX4.Missions.MissionUploadResult.html">MissionUploadResult</a></dt>
+      <dd><p>Terminal state of one mission upload transaction.</p>
+</dd>
+    </dl>
+    <h3 id="enums">
+Enums
+</h3>
+    <dl class="jumplist">
+      <dt><a class="xref" href="MavNet.PX4.Missions.MissionTransactionStatus.html">MissionTransactionStatus</a></dt>
+      <dd><p>How a mission upload transaction terminated.</p>
+</dd>
+    </dl>
+
+
+</article>
+
+        <div class="contribution d-print-none">
+        </div>
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
