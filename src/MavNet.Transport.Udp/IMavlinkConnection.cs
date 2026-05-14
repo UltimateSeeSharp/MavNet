@@ -26,6 +26,24 @@ public interface IMavlinkConnection : IAsyncDisposable
     event Action<MavId, SysStatus, DateTime>? SysStatusReceived;
     /// <summary>Inbound EXTENDED_SYS_STATE.</summary>
     event Action<MavId, ExtendedSysState, DateTime>? ExtendedSysStateReceived;
+    /// <summary>Inbound MISSION_REQUEST_LIST.</summary>
+    event Action<MavId, MissionRequestList, DateTime>? MissionRequestListReceived;
+    /// <summary>Inbound MISSION_COUNT.</summary>
+    event Action<MavId, MissionCount, DateTime>? MissionCountReceived;
+    /// <summary>Inbound MISSION_CLEAR_ALL.</summary>
+    event Action<MavId, MissionClearAll, DateTime>? MissionClearAllReceived;
+    /// <summary>Inbound MISSION_ITEM_REACHED.</summary>
+    event Action<MavId, MissionItemReached, DateTime>? MissionItemReachedReceived;
+    /// <summary>Inbound MISSION_ACK.</summary>
+    event Action<MavId, MissionAck, DateTime>? MissionAckReceived;
+    /// <summary>Inbound MISSION_CURRENT.</summary>
+    event Action<MavId, MissionCurrent, DateTime>? MissionCurrentReceived;
+    /// <summary>Inbound MISSION_REQUEST (deprecated, but ArduPilot still sends it — respond with a MISSION_ITEM_INT).</summary>
+    event Action<MavId, MissionRequest, DateTime>? MissionRequestReceived;
+    /// <summary>Inbound MISSION_REQUEST_INT.</summary>
+    event Action<MavId, MissionRequestInt, DateTime>? MissionRequestIntReceived;
+    /// <summary>Inbound MISSION_ITEM_INT.</summary>
+    event Action<MavId, MissionItemInt, DateTime>? MissionItemIntReceived;
 
     /// <summary>Send a generated MAVLink message. Performs MAVLink v2 wire truncation and CRC stamping.</summary>
     void Send<T>(T message) where T : IMavlinkMessage<T>;

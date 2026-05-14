@@ -21,6 +21,15 @@ internal sealed class FakeMavlinkConnection : IMavlinkConnection
     public event Action<MavId, GpsRawInt, DateTime>? GpsRawIntReceived;
     public event Action<MavId, SysStatus, DateTime>? SysStatusReceived;
     public event Action<MavId, ExtendedSysState, DateTime>? ExtendedSysStateReceived;
+    public event Action<MavId, MissionRequestList, DateTime>? MissionRequestListReceived;
+    public event Action<MavId, MissionCount, DateTime>? MissionCountReceived;
+    public event Action<MavId, MissionClearAll, DateTime>? MissionClearAllReceived;
+    public event Action<MavId, MissionItemReached, DateTime>? MissionItemReachedReceived;
+    public event Action<MavId, MissionAck, DateTime>? MissionAckReceived;
+    public event Action<MavId, MissionCurrent, DateTime>? MissionCurrentReceived;
+    public event Action<MavId, MissionRequest, DateTime>? MissionRequestReceived;
+    public event Action<MavId, MissionRequestInt, DateTime>? MissionRequestIntReceived;
+    public event Action<MavId, MissionItemInt, DateTime>? MissionItemIntReceived;
 
     public void Send<T>(T message) where T : IMavlinkMessage<T> => SentMessages.Add(message!);
 
@@ -31,6 +40,15 @@ internal sealed class FakeMavlinkConnection : IMavlinkConnection
     public void RaiseGpsRaw(MavId from, GpsRawInt g)                 => GpsRawIntReceived?.Invoke(from, g, DateTime.UtcNow);
     public void RaiseSysStatus(MavId from, SysStatus s)              => SysStatusReceived?.Invoke(from, s, DateTime.UtcNow);
     public void RaiseExtendedSysState(MavId from, ExtendedSysState e)=> ExtendedSysStateReceived?.Invoke(from, e, DateTime.UtcNow);
+    public void RaiseMissionRequestList(MavId from, MissionRequestList m) => MissionRequestListReceived?.Invoke(from, m, DateTime.UtcNow);
+    public void RaiseMissionCount(MavId from, MissionCount m)             => MissionCountReceived?.Invoke(from, m, DateTime.UtcNow);
+    public void RaiseMissionClearAll(MavId from, MissionClearAll m)       => MissionClearAllReceived?.Invoke(from, m, DateTime.UtcNow);
+    public void RaiseMissionItemReached(MavId from, MissionItemReached m) => MissionItemReachedReceived?.Invoke(from, m, DateTime.UtcNow);
+    public void RaiseMissionAck(MavId from, MissionAck m)                 => MissionAckReceived?.Invoke(from, m, DateTime.UtcNow);
+    public void RaiseMissionCurrent(MavId from, MissionCurrent m)         => MissionCurrentReceived?.Invoke(from, m, DateTime.UtcNow);
+    public void RaiseMissionRequest(MavId from, MissionRequest m)         => MissionRequestReceived?.Invoke(from, m, DateTime.UtcNow);
+    public void RaiseMissionRequestInt(MavId from, MissionRequestInt m)   => MissionRequestIntReceived?.Invoke(from, m, DateTime.UtcNow);
+    public void RaiseMissionItemInt(MavId from, MissionItemInt m)         => MissionItemIntReceived?.Invoke(from, m, DateTime.UtcNow);
 
     public ValueTask DisposeAsync() => ValueTask.CompletedTask;
 }

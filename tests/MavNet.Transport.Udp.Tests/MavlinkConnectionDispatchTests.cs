@@ -1,6 +1,7 @@
 using System.Net;
 using FluentAssertions;
 using MavNet.Core;
+using MavNet.Protocol;
 using MavNet.Protocol.Generated.Enums;
 using MavNet.Protocol.Generated.Messages;
 using MavNet.Transport.Udp;
@@ -165,4 +166,90 @@ public class MavlinkConnectionDispatchTests
         var act = async () => await conn.DisposeAsync();
         await act.Should().NotThrowAsync();
     }
+
+    /// <summary>
+    /// Shared scaffolding: spin up a connection, craft a frame for <typeparamref name="T"/>,
+    /// send it, and assert the corresponding event fires with the equivalent message.
+    /// Each mission-protocol message uses this; the per-message <see cref="Fact"/>s only
+    /// pin the event-name wiring on the dispatcher.
+    /// </summary>
+    private async Task RoundtripDispatch<T>(T msg,
+        Action<MavlinkConnection, TaskCompletionSource<T>> subscribe)
+        where T : IMavlinkMessage<T>
+    {
+        using var peer = new LoopbackPeer();
+        await using var conn = StartConnection(peer);
+        peer.Receive(System.TimeSpan.FromMilliseconds(100));
+
+        var tcs = new TaskCompletionSource<T>();
+        subscribe(conn, tcs);
+
+        var payload = new byte[T.MaxPayloadLength];
+        msg.Encode(payload);
+        var frame = FrameBuilder.BuildFrame(
+            T.MsgId, T.CrcExtra, payload, seq: 1, sysid: 1, compid: 1);
+        peer.SendTo(frame, conn.LocalEndPoint!);
+
+        (await WaitForEvent(tcs)).Should().Be(msg);
+    }
+
+    [Fact]
+    public Task MissionRequestList_inbound_fires_event() =>
+        RoundtripDispatch(
+            new MissionRequestList(1, 1, MavMissionType.Mission),
+            (c, tcs) => c.MissionRequestListReceived += (_, m, _) => tcs.TrySetResult(m));
+
+    [Fact]
+    public Task MissionCount_inbound_fires_event() =>
+        RoundtripDispatch(
+            new MissionCount(7, 1, 1, MavMissionType.Mission, 0xDEADBEEFu),
+            (c, tcs) => c.MissionCountReceived += (_, m, _) => tcs.TrySetResult(m));
+
+    [Fact]
+    public Task MissionClearAll_inbound_fires_event() =>
+        RoundtripDispatch(
+            new MissionClearAll(1, 1, MavMissionType.Fence),
+            (c, tcs) => c.MissionClearAllReceived += (_, m, _) => tcs.TrySetResult(m));
+
+    [Fact]
+    public Task MissionItemReached_inbound_fires_event() =>
+        RoundtripDispatch(
+            new MissionItemReached(Seq: 3),
+            (c, tcs) => c.MissionItemReachedReceived += (_, m, _) => tcs.TrySetResult(m));
+
+    [Fact]
+    public Task MissionAck_inbound_fires_event() =>
+        RoundtripDispatch(
+            new MissionAck(1, 1, MavMissionResult.MavMissionAccepted, MavMissionType.Mission, 0xCAFEBABEu),
+            (c, tcs) => c.MissionAckReceived += (_, m, _) => tcs.TrySetResult(m));
+
+    [Fact]
+    public Task MissionCurrent_inbound_fires_event() =>
+        RoundtripDispatch(
+            new MissionCurrent(2, 5, (MissionState)2, 0, 0xAA, 0xBB, 0xCC),
+            (c, tcs) => c.MissionCurrentReceived += (_, m, _) => tcs.TrySetResult(m));
+
+    [Fact]
+    public Task MissionRequest_inbound_fires_event() =>
+        RoundtripDispatch(
+            new MissionRequest(4, 1, 1, MavMissionType.Mission),
+            (c, tcs) => c.MissionRequestReceived += (_, m, _) => tcs.TrySetResult(m));
+
+    [Fact]
+    public Task MissionRequestInt_inbound_fires_event() =>
+        RoundtripDispatch(
+            new MissionRequestInt(4, 1, 1, MavMissionType.Mission),
+            (c, tcs) => c.MissionRequestIntReceived += (_, m, _) => tcs.TrySetResult(m));
+
+    [Fact]
+    public Task MissionItemInt_inbound_fires_event() =>
+        RoundtripDispatch(
+            new MissionItemInt(
+                Param1: 0f, Param2: 5f, Param3: 0f, Param4: 0f,
+                X: -47_123_456, Y: 151_234_567, Z: 50f,
+                Seq: 2, Command: (MavCmd)16,
+                TargetSystem: 1, TargetComponent: 1,
+                Frame: (MavFrame)3, Current: 0, Autocontinue: 1,
+                MissionType: MavMissionType.Mission),
+            (c, tcs) => c.MissionItemIntReceived += (_, m, _) => tcs.TrySetResult(m));
 }

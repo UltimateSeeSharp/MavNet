@@ -160,6 +160,68 @@ public class VehicleCommandCorrelationTests
     }
 
     [Fact]
+    public async Task StartMissionAsync_sends_MISSION_START_and_confirms_on_AUTO_MISSION_heartbeat()
+    {
+        var (drone, conn) = Build();
+        var task = drone.StartMissionAsync();
+
+        conn.RaiseCommandAck(Vehicle11, new CommandAck(MavCmd.MissionStart, MavResult.Accepted, 0, 0, 0, 0));
+        // PX4 main-mode 4, sub-mode 4 = AUTO.MISSION
+        conn.RaiseHeartbeat(Vehicle11, new Heartbeat(
+            CustomMode: (4u << 24) | (4u << 16),
+            Type: MavType.Quadrotor, Autopilot: MavAutopilot.Px4,
+            BaseMode: MavModeFlag.SafetyArmed | MavModeFlag.CustomModeEnabled,
+            SystemStatus: MavState.Active, MavlinkVersion: 3));
+
+        var outcome = await task;
+        outcome.Result.Should().Be(CommandResult.Confirmed);
+        var sent = (CommandLong)conn.SentMessages[0];
+        sent.Command.Should().Be(MavCmd.MissionStart);
+        sent.Param1.Should().Be(0f, "default firstItem = 0");
+        sent.Param2.Should().Be(-1f, "default lastItem = -1 means 'to end'");
+    }
+
+    [Fact]
+    public void StartMissionAsync_rejects_out_of_range_arguments()
+    {
+        var (drone, _) = Build();
+        Action negFirst = () => { _ = drone.StartMissionAsync(firstItem: -1); };
+        negFirst.Should().Throw<ArgumentOutOfRangeException>();
+
+        Action badLast = () => { _ = drone.StartMissionAsync(lastItem: -2); };
+        badLast.Should().Throw<ArgumentOutOfRangeException>();
+    }
+
+    [Fact]
+    public async Task SetCurrentMissionItem_sends_COMMAND_LONG_with_DO_SET_MISSION_CURRENT_and_seq()
+    {
+        var (drone, conn) = Build();
+        var task = drone.SetCurrentMissionItemAsync(seq: 2);
+
+        conn.RaiseCommandAck(Vehicle11, new CommandAck(MavCmd.DoSetMissionCurrent, MavResult.Accepted, 0, 0, 0, 0));
+        var outcome = await task;
+
+        conn.SentMessages.Should().HaveCount(1);
+        var sent = (CommandLong)conn.SentMessages[0];
+        sent.Command.Should().Be(MavCmd.DoSetMissionCurrent);
+        sent.Param1.Should().Be(2f, "seq is encoded as param1");
+        // SetCurrentMissionItemAsync passes no state matcher to ExecuteCommandAsync, so an
+        // Accepted ACK without a subsequent state change resolves as Sent once the timeout fires.
+        outcome.AckResult.Should().Be(MavResult.Accepted);
+    }
+
+    [Fact]
+    public void SetCurrentMissionItem_rejects_out_of_range_seq()
+    {
+        var (drone, _) = Build();
+        Action negative = () => { _ = drone.SetCurrentMissionItemAsync(seq: -1); };
+        negative.Should().Throw<ArgumentOutOfRangeException>();
+
+        Action tooBig = () => { _ = drone.SetCurrentMissionItemAsync(seq: 70000); };
+        tooBig.Should().Throw<ArgumentOutOfRangeException>();
+    }
+
+    [Fact]
     public async Task Issuing_a_second_command_cancels_the_first()
     {
         var (drone, conn) = Build(cmdTimeout: TimeSpan.FromMilliseconds(200));

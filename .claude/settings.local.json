@@ -1,7 +1,12 @@
 {
   "permissions": {
     "allow": [
-      "Bash(dir *)"
+      "Bash(dir *)",
+      "Bash(Get-ChildItem -Path \"C:\\\\Users\\\\Vinci\\\\source\\\\repos\\\\MavNet\" -Directory)",
+      "Bash(Select-Object Name)",
+      "Bash(grep -E \"\\(MavNet\\\\.\\(Core|Protocol|Protocol\\\\.Generated|Transport|PX4\\)\\\\/[^/]+\\\\.cs$\\)\")",
+      "Bash(Get-ChildItem -Path \"C:\\\\Users\\\\Vinci\\\\source\\\\repos\\\\MavNet\\\\src\" -Directory)",
+      "Bash(Select-Object -ExpandProperty Name)"
     ]
   }
 }

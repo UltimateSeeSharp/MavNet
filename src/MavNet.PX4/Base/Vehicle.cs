@@ -1,6 +1,7 @@
 using MavNet.Core;
 using MavNet.Protocol;
 using MavNet.PX4;
+using MavNet.PX4.Missions;
 using MavNet.Transport.Udp;
 using Microsoft.Extensions.Logging;
 using MavNet.Protocol.Generated.Enums;
@@ -66,6 +67,29 @@ public abstract class Vehicle : IAsyncDisposable, IStateObservable
     private double _battery;
     private MavLandedState _landedState = MavLandedState.Undefined;
 
+    // Mission-protocol clients — one per MAV_MISSION_TYPE (waypoints/fence/rally). Lazily
+    // created on first use so vehicles that never run missions pay nothing for the wiring.
+    // Each client subscribes to the same connection events but filters by mission_type, so
+    // the three transactions are independent and can run concurrently per spec.
+    private readonly object _missionsLock = new();
+    private MissionClient? _missionClient;
+    private MissionClient? _fenceClient;
+    private MissionClient? _rallyClient;
+
+    // Mission state — derived from MISSION_CURRENT and MISSION_ITEM_REACHED.
+    // Seq/Total use -1 as the "unknown" sentinel (we haven't seen a MISSION_CURRENT yet).
+    // Opaque ids use 0 per the spec ("0 if there is no plan uploaded, or if detecting plan
+    // changes is not supported").
+    private int _missionCurrentSeq = -1;
+    private int _missionTotal = -1;
+    private uint _missionOpaqueId;
+    private uint _fenceOpaqueId;
+    private uint _rallyOpaqueId;
+    private Protocol.Generated.Enums.MissionState _missionState;
+    private int _missionReachedCount;
+    private ushort _lastMissionItemReached;
+    private bool _haveMissionItemReached;
+
     /// <summary>MAVLink system id of this vehicle (e.g. 1 for a typical autopilot).</summary>
     public byte SystemId { get; }
 
@@ -126,6 +150,36 @@ public abstract class Vehicle : IAsyncDisposable, IStateObservable
     /// <summary>Landed/in-air state, updated from EXTENDED_SYS_STATE.</summary>
     public MavLandedState LandedState => _landedState;
 
+    /// <summary>Current mission item sequence (from MISSION_CURRENT), or <c>-1</c> if
+    /// no MISSION_CURRENT has been received yet.</summary>
+    public int MissionCurrentSeq => Volatile.Read(ref _missionCurrentSeq);
+
+    /// <summary>Total number of mission items reported by the vehicle (from MISSION_CURRENT's
+    /// <c>total</c> field), or <c>-1</c> if not received yet or the vehicle didn't include
+    /// the optional extension byte.</summary>
+    public int MissionTotal => Volatile.Read(ref _missionTotal);
+
+    /// <summary>On-vehicle waypoint-plan id from <c>MISSION_CURRENT.mission_id</c>. <c>0</c>
+    /// means "no plan loaded" or "vehicle doesn't support change-detection ids" per spec.
+    /// Compare against the value cached after upload/download to detect on-vehicle plan changes.</summary>
+    public uint MissionOpaqueId => Volatile.Read(ref _missionOpaqueId);
+
+    /// <summary>On-vehicle geofence-plan id from <c>MISSION_CURRENT.fence_id</c>. Same
+    /// semantics as <see cref="MissionOpaqueId"/>.</summary>
+    public uint FenceOpaqueId => Volatile.Read(ref _fenceOpaqueId);
+
+    /// <summary>On-vehicle rally-point-plan id from <c>MISSION_CURRENT.rally_points_id</c>.
+    /// Same semantics as <see cref="MissionOpaqueId"/>.</summary>
+    public uint RallyOpaqueId => Volatile.Read(ref _rallyOpaqueId);
+
+    /// <summary>Mission-execution state (Active / Paused / Complete / …) from
+    /// <c>MISSION_CURRENT.mission_state</c>.</summary>
+    public Protocol.Generated.Enums.MissionState MissionState => _missionState;
+
+    /// <summary>Total number of <c>MISSION_ITEM_REACHED</c> events seen since this Vehicle
+    /// was constructed. Increments once per reached waypoint.</summary>
+    public int MissionReachedCount => Volatile.Read(ref _missionReachedCount);
+
     /// <summary>
     /// Fires after every state-affecting message — high frequency (10–50 Hz typical). Prefer
     /// <see cref="SubscribeState(Action, StateRate)"/>: it lets you pick a throttle rate at
@@ -137,6 +191,11 @@ public abstract class Vehicle : IAsyncDisposable, IStateObservable
 
     /// <summary>Diagnostic: fires once per inbound HEARTBEAT with the decoded payload and wall-clock receive timestamp.</summary>
     public event Action<Heartbeat, DateTime>? HeartbeatReceived;
+
+    /// <summary>Fires once per inbound <c>MISSION_ITEM_REACHED</c> with the reached seq.
+    /// Useful for surfacing per-waypoint progress to the UI; <see cref="MissionReachedCount"/>
+    /// tracks the cumulative count.</summary>
+    public event Action<int>? MissionItemReached;
 
     /// <param name="connection">The transport. Subscribes to its typed events.</param>
     /// <param name="targetSystemId">Sender system id this Vehicle accepts messages from.</param>
@@ -169,6 +228,8 @@ public abstract class Vehicle : IAsyncDisposable, IStateObservable
         _connection.GpsRawIntReceived         += OnGpsRaw;
         _connection.SysStatusReceived         += OnSysStatus;
         _connection.ExtendedSysStateReceived  += OnExtendedSysState;
+        _connection.MissionCurrentReceived    += OnMissionCurrent;
+        _connection.MissionItemReachedReceived += OnMissionItemReached;
     }
 
     private bool IsMine(MavId sender) =>
@@ -244,6 +305,31 @@ public abstract class Vehicle : IAsyncDisposable, IStateObservable
     {
         if (!IsMine(sender)) return;
         _landedState = e.LandedState;
+        FireStateChanged();
+    }
+
+    private void OnMissionCurrent(MavId sender, MissionCurrent m, DateTime at)
+    {
+        if (!IsMine(sender)) return;
+        Volatile.Write(ref _missionCurrentSeq, m.Seq);
+        Volatile.Write(ref _missionTotal, m.Total);
+        Volatile.Write(ref _missionOpaqueId, m.MissionId);
+        Volatile.Write(ref _fenceOpaqueId, m.FenceId);
+        Volatile.Write(ref _rallyOpaqueId, m.RallyPointsId);
+        _missionState = m.MissionState;
+        FireStateChanged();
+    }
+
+    private void OnMissionItemReached(MavId sender, MissionItemReached m, DateTime at)
+    {
+        if (!IsMine(sender)) return;
+        // Filter exact duplicates — PX4 occasionally re-emits the same reached message on
+        // mode transitions. Count distinct reach events only.
+        if (_haveMissionItemReached && _lastMissionItemReached == m.Seq) return;
+        _lastMissionItemReached = m.Seq;
+        _haveMissionItemReached = true;
+        Interlocked.Increment(ref _missionReachedCount);
+        try { MissionItemReached?.Invoke(m.Seq); } catch { /* never break the receive loop */ }
         FireStateChanged();
     }
 
@@ -397,6 +483,123 @@ public abstract class Vehicle : IAsyncDisposable, IStateObservable
             hb => Px4Mode.Format(hb.CustomMode).StartsWith("AUTO.LAND", StringComparison.Ordinal),
             ct);
 
+    /// <summary>Set the current mission item by sequence number using
+    /// <c>MAV_CMD_DO_SET_MISSION_CURRENT</c>. The vehicle broadcasts an updated
+    /// <c>MISSION_CURRENT</c> on success, which is surfaced via
+    /// <see cref="MissionCurrentSeq"/> on the Vehicle. The COMMAND_LONG path resolves on ACK.</summary>
+    /// <exception cref="ArgumentOutOfRangeException">If <paramref name="seq"/> is outside <c>[0, ushort.MaxValue]</c>.</exception>
+    public Task<CommandOutcome> SetCurrentMissionItemAsync(int seq, CancellationToken ct = default)
+    {
+        if (seq < 0 || seq > ushort.MaxValue)
+            throw new ArgumentOutOfRangeException(nameof(seq), $"Must be in [0, {ushort.MaxValue}].");
+        return ExecuteCommandAsync(
+            BuildCommandLong(MavCmd.DoSetMissionCurrent, p1: seq),
+            stateMatcher: null,
+            ct);
+    }
+
+    /// <summary>Begin executing the on-vehicle mission via
+    /// <c>MAV_CMD_MISSION_START</c>. Resolves <see cref="CommandResult.Confirmed"/>
+    /// when the vehicle reports <c>AUTO.MISSION</c> in HEARTBEAT.
+    ///
+    /// <para>The vehicle must already have a mission uploaded (see
+    /// <see cref="UploadMissionAsync"/>) and typically must be armed.</para>
+    ///
+    /// <para><paramref name="firstItem"/> and <paramref name="lastItem"/> select the
+    /// sub-range to run; defaults run the whole mission (<c>0</c> through <c>-1</c>
+    /// per spec).</para>
+    /// </summary>
+    /// <exception cref="ArgumentOutOfRangeException">If <paramref name="firstItem"/> or
+    /// <paramref name="lastItem"/> are outside <c>[0, ushort.MaxValue]</c> (<c>-1</c>
+    /// is allowed for <paramref name="lastItem"/> and means "to the end").</exception>
+    public Task<CommandOutcome> StartMissionAsync(
+        int firstItem = 0, int lastItem = -1, CancellationToken ct = default)
+    {
+        if (firstItem < 0 || firstItem > ushort.MaxValue)
+            throw new ArgumentOutOfRangeException(nameof(firstItem));
+        if (lastItem < -1 || lastItem > ushort.MaxValue)
+            throw new ArgumentOutOfRangeException(nameof(lastItem));
+        return ExecuteCommandAsync(
+            BuildCommandLong(MavCmd.MissionStart, p1: firstItem, p2: lastItem),
+            hb => Px4Mode.Format(hb.CustomMode).StartsWith("AUTO.MISSION", StringComparison.Ordinal),
+            ct);
+    }
+
+    // ----- Mission protocol (waypoints / fence / rally) ---------------------
+
+    /// <summary>Upload <paramref name="items"/> as the on-vehicle waypoint plan. See
+    /// <see cref="MissionClient.UploadAsync"/> for timing, retry, and cancellation semantics.</summary>
+    public Task<MissionUploadResult> UploadMissionAsync(
+        IReadOnlyList<MissionItem> items, CancellationToken ct = default) =>
+        EnsureMissionClient().UploadAsync(items, ct);
+
+    /// <summary>Download the on-vehicle waypoint plan.</summary>
+    public Task<MissionDownloadResult> DownloadMissionAsync(CancellationToken ct = default) =>
+        EnsureMissionClient().DownloadAsync(ct);
+
+    /// <summary>Clear the on-vehicle waypoint plan.</summary>
+    public Task<MissionClearResult> ClearMissionAsync(CancellationToken ct = default) =>
+        EnsureMissionClient().ClearAsync(ct);
+
+    /// <summary>Upload the on-vehicle geofence plan.</summary>
+    public Task<MissionUploadResult> UploadFenceAsync(
+        IReadOnlyList<MissionItem> items, CancellationToken ct = default) =>
+        EnsureFenceClient().UploadAsync(items, ct);
+
+    /// <summary>Download the on-vehicle geofence plan.</summary>
+    public Task<MissionDownloadResult> DownloadFenceAsync(CancellationToken ct = default) =>
+        EnsureFenceClient().DownloadAsync(ct);
+
+    /// <summary>Clear the on-vehicle geofence plan.</summary>
+    public Task<MissionClearResult> ClearFenceAsync(CancellationToken ct = default) =>
+        EnsureFenceClient().ClearAsync(ct);
+
+    /// <summary>Upload the on-vehicle rally-point plan.</summary>
+    public Task<MissionUploadResult> UploadRallyAsync(
+        IReadOnlyList<MissionItem> items, CancellationToken ct = default) =>
+        EnsureRallyClient().UploadAsync(items, ct);
+
+    /// <summary>Download the on-vehicle rally-point plan.</summary>
+    public Task<MissionDownloadResult> DownloadRallyAsync(CancellationToken ct = default) =>
+        EnsureRallyClient().DownloadAsync(ct);
+
+    /// <summary>Clear the on-vehicle rally-point plan.</summary>
+    public Task<MissionClearResult> ClearRallyAsync(CancellationToken ct = default) =>
+        EnsureRallyClient().ClearAsync(ct);
+
+    private MissionClient EnsureMissionClient()
+    {
+        var existing = _missionClient;
+        if (existing is not null) return existing;
+        lock (_missionsLock)
+        {
+            return _missionClient ??= new MissionClient(
+                _connection, SystemId, ComponentId, MavMissionType.Mission);
+        }
+    }
+
+    private MissionClient EnsureFenceClient()
+    {
+        var existing = _fenceClient;
+        if (existing is not null) return existing;
+        lock (_missionsLock)
+        {
+            return _fenceClient ??= new MissionClient(
+                _connection, SystemId, ComponentId, MavMissionType.Fence);
+        }
+    }
+
+    private MissionClient EnsureRallyClient()
+    {
+        var existing = _rallyClient;
+        if (existing is not null) return existing;
+        lock (_missionsLock)
+        {
+            return _rallyClient ??= new MissionClient(
+                _connection, SystemId, ComponentId, MavMissionType.Rally);
+        }
+    }
+
     /// <summary>Send an arbitrary message through this Vehicle's underlying connection. Useful for custom commands that don't have a typed wrapper.</summary>
     protected void Send<T>(T message) where T : IMavlinkMessage<T> => _connection.Send(message);
 
@@ -446,8 +649,20 @@ public abstract class Vehicle : IAsyncDisposable, IStateObservable
     }
 
     /// <inheritdoc/>
-    public async ValueTask DisposeAsync()
+    public virtual async ValueTask DisposeAsync()
     {
+        // Dispose mission clients first so they can unsubscribe from a live connection.
+        MissionClient? mission, fence, rally;
+        lock (_missionsLock)
+        {
+            mission = _missionClient; _missionClient = null;
+            fence   = _fenceClient;   _fenceClient   = null;
+            rally   = _rallyClient;   _rallyClient   = null;
+        }
+        mission?.Dispose();
+        fence?.Dispose();
+        rally?.Dispose();
+
         _connection.HeartbeatReceived         -= OnHeartbeat;
         _connection.CommandAckReceived        -= OnCommandAck;
         _connection.GlobalPositionIntReceived -= OnGlobalPosition;
@@ -455,6 +670,8 @@ public abstract class Vehicle : IAsyncDisposable, IStateObservable
         _connection.GpsRawIntReceived         -= OnGpsRaw;
         _connection.SysStatusReceived         -= OnSysStatus;
         _connection.ExtendedSysStateReceived  -= OnExtendedSysState;
+        _connection.MissionCurrentReceived    -= OnMissionCurrent;
+        _connection.MissionItemReachedReceived -= OnMissionItemReached;
 
         lock (_subsLock)
         {

@@ -1,5 +1,6 @@
 using MavNet.Core;
 using MavNet.PX4.Base;
+using MavNet.PX4.Missions;
 using MavNet.Transport.Udp;
 using Microsoft.Extensions.Logging;
 using MavNet.Protocol.Generated.Enums;
@@ -24,12 +25,36 @@ public readonly record struct DroneState(
     bool Armed,
     double Battery,
     int Sats,
-    bool LinkUp);
+    bool LinkUp)
+{
+    /// <summary>Current mission item seq from MISSION_CURRENT, or <c>-1</c> if unknown.</summary>
+    public int MissionCurrentSeq { get; init; } = -1;
+
+    /// <summary>Total mission item count from MISSION_CURRENT, or <c>-1</c> if unknown.</summary>
+    public int MissionTotal { get; init; } = -1;
+
+    /// <summary>Cumulative count of MISSION_ITEM_REACHED events seen.</summary>
+    public int MissionReachedCount { get; init; }
+
+    /// <summary>Mission-execution state (Active / Paused / Complete / …).</summary>
+    public MissionState MissionState { get; init; }
+
+    /// <summary>On-vehicle waypoint-plan opaque id (0 = no plan / no change-tracking).</summary>
+    public uint MissionOpaqueId { get; init; }
+
+    /// <summary>On-vehicle geofence-plan opaque id (0 = no plan / no change-tracking).</summary>
+    public uint FenceOpaqueId { get; init; }
+
+    /// <summary>On-vehicle rally-point-plan opaque id (0 = no plan / no change-tracking).</summary>
+    public uint RallyOpaqueId { get; init; }
+}
 
 /// <summary>
 /// A multirotor vehicle. Currently a thin marker over <see cref="Vehicle"/> so
 /// consumers can pattern-match on type (<c>if (v is Drone)</c>) and so we have
-/// a clear extension point for multirotor-specific behaviour later.
+/// a clear extension point for multirotor-specific behaviour later. The mission
+/// protocol surface (upload / download / clear / fence / rally) lives on
+/// <see cref="Vehicle"/> since boats, rovers, and planes use the same protocol.
 ///
 /// <para>The static <see cref="ConnectAsync"/> factory is the one-liner entry
 /// point for the common case: parse URI → open <see cref="MavlinkConnection"/>
@@ -39,7 +64,16 @@ public sealed class Drone : Vehicle, IStateObservable<DroneState>
 {
     /// <summary>Capture an immutable snapshot of the current observable state.</summary>
     public DroneState Snapshot() => new(
-        Lat, Lon, Alt, Hdg, Vel, Mode, Armed, Battery, Sats, LinkUp);
+        Lat, Lon, Alt, Hdg, Vel, Mode, Armed, Battery, Sats, LinkUp)
+    {
+        MissionCurrentSeq    = MissionCurrentSeq,
+        MissionTotal         = MissionTotal,
+        MissionReachedCount  = MissionReachedCount,
+        MissionState         = MissionState,
+        MissionOpaqueId      = MissionOpaqueId,
+        FenceOpaqueId        = FenceOpaqueId,
+        RallyOpaqueId        = RallyOpaqueId,
+    };
 
     /// <inheritdoc cref="IStateObservable{TState}.SubscribeState(Action{TState}, StateRate)"/>
     public StateSubscription SubscribeState(Action<DroneState> handler, StateRate rate)
