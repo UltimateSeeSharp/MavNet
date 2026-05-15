@@ -7,6 +7,17 @@
     <LangVersion>latest</LangVersion>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
+
+    <!-- Static analysis. Recommended (not All) gives correctness/reliability
+         rules without the design-opinion noise that fights intentional
+         patterns (broad catch in the receive loop, no ConfigureAwait in a
+         non-UI lib). TreatWarningsAsErrors already makes findings gate CI —
+         no ci.yml change needed. Generated code is excluded via .editorconfig. -->
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
+    <AnalysisLevel>latest</AnalysisLevel>
+    <AnalysisMode>Recommended</AnalysisMode>
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+    <CodeAnalysisTreatWarningsAsErrors>true</CodeAnalysisTreatWarningsAsErrors>
   </PropertyGroup>
 
   <PropertyGroup>

@@ -25,7 +25,7 @@ With no args it uses repo-relative defaults: spec `specs/common.xml`, allowlist 
 The allowlist controls which messages get emitted as record structs. Enums are emitted for everything. **When you add a message to `allowlist.txt`:**
 
 1. Regenerate (above).
-2. Add a new `event Action<MavId, NewMsg, DateTime>?` and a `case NewMsg.MsgId:` arm in `src/MavNet.Transport.Udp/MavlinkConnection.cs` — the dispatcher silently drops msgids it doesn't know. Also add the event to `IMavlinkConnection` so test fakes stay in sync.
+2. Add a new `event Action<MavId, NewMsg, DateTime>?` and a `case NewMsg.MsgId:` arm in `src/MavNet.Transport.Udp/MavlinkConnection.cs` — the dispatcher silently drops msgids it doesn't know. Also add the event to `IMavlinkConnection` so test fakes stay in sync. `AllowlistWiringConsistencyTests` fails CI if the `IMavlinkConnection` event (or its impl) is missing for an inbound message; it cannot see the `case` arm, so the per-message dispatch `[Fact]` in step 4 covers that (a missing arm makes it time out). Genuinely send-only messages (e.g. `COMMAND_LONG`) go in that test's `SendOnly` set with justification.
 3. If the message is something a `Drone`/vehicle should surface, wire it through `src/MavNet.PX4/Base/Vehicle.cs` and `Vehicles/Drone.cs`.
 4. Add a roundtrip `[Fact]` for the new message in `tests/MavNet.Protocol.Generated.Tests/MessageRoundtripTests.cs` and a dispatch test in `tests/MavNet.Transport.Udp.Tests/MavlinkConnectionDispatchTests.cs`.
 
@@ -64,6 +64,14 @@ Drop the frame (return false) on: v1 magic, signed frames (`incompat & 0x01`), a
 - **Ship docs and tests alongside any change.** Every new feature, behavior change, or bug fix lands with: (1) the code, (2) a test that exercises it under `tests/<matching project>.Tests/`, and (3) any doc updates it makes obsolete — XML doc comments on the changed API, the matching article under `docs/articles/`, and any section of this `CLAUDE.md` that became stale. No "I'll add tests later" — if it's worth merging, it's worth proving and documenting in the same PR. Bug fixes specifically must start with a failing test that reproduces the bug, then the fix.
 - **Keep `README.md` and `ROADMAP.md` current too.** Whenever a change advances functionality, project scope, or status, update the project-status text in `README.md` (the **Done** / **Next** lists, milestone table, probe keybindings, articles list) and the matching row / milestone in `ROADMAP.md` (Current-state table, allowlist count, milestone definitions) in the same PR. Treat them as part of the deliverable, not optional polish. "Done = done on disk" — flip status as soon as the work lands, not when it ships to NuGet.
 
+## Static analysis
+
+`Directory.Build.props` enables the .NET analyzers at `AnalysisMode=Recommended` with `EnforceCodeStyleInBuild`. Since `TreatWarningsAsErrors=true`, every analyzer/style finding is a build error — CI enforces it with no `ci.yml` change.
+
+Generated code is excluded via `.editorconfig`, in two sections: the `MavNet.Protocol.Generated` tree, and a **separate** one for `src/MavNet.Protocol/Generated/MessageRegistry.cs` (it lives in the `Protocol` assembly, not `Protocol.Generated`, to avoid the circular reference, so one glob can't cover both). Use the `dir/**.cs` glob form — `dir/**/*.cs` does **not** match files directly in `dir`, only subdirectories.
+
+Suppressions are deliberately minimal and each carries a one-line, codebase-specific justification (CA1062/CA2007/IDE0058/CA1031 in the hand-written baseline; CA1848/CA1873 because logging is confined to cold lifecycle/error paths, never the per-frame path; CA1305 scoped to `tools/MavNet.CodeGen/**` because `Program.cs` pins the process to `InvariantCulture` for deterministic codegen). No blanket category disables — add a justified single-rule line or fix the code.
+
 ## Keeping this file current
 
-Update this file when something it states becomes wrong or incomplete: a build/run command changes, a layer's responsibility shifts, the codegen workflow or allowlist→dispatcher wiring changes, frame-decode invariants are relaxed/tightened, the threading model changes, or a new top-level project is added. Don't append change logs — edit the affected section in place and delete anything no longer true.
+Update this file when something it states becomes wrong or incomplete: a build/run command changes, a layer's responsibility shifts, the codegen workflow or allowlist→dispatcher wiring changes, frame-decode invariants are relaxed/tightened, the threading model changes, the analyzer mode or `.editorconfig` suppression policy changes, or a new top-level project is added. Don't append change logs — edit the affected section in place and delete anything no longer true.

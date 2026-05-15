@@ -1,0 +1,72 @@
+root = true
+
+# ---- Generated code: fully excluded from analysis ----
+# Two shapes exist. The Protocol.Generated tree holds the emitted message /
+# enum / command types; MessageRegistry.cs deliberately lives in the
+# MavNet.Protocol assembly (NOT Protocol.Generated) so MavlinkFrame.TryDecode
+# can reach it without Protocol referencing Protocol.Generated (circular).
+# That is why the registry needs its own path section here.
+# generated_code = true is honored inconsistently across the CA/IDE catalog
+# under TreatWarningsAsErrors, so pair it with a bulk severity = none, and
+# list IDE0005 explicitly (compiler-side, not always gated by the bulk rule).
+# NOTE: the `**.cs` form (not `**/*.cs`) is deliberate — `dir/**/*.cs` does
+# NOT match files directly in `dir`, only in subdirectories.
+[src/MavNet.Protocol.Generated/**.cs]
+generated_code = true
+dotnet_analyzer_diagnostic.severity = none
+dotnet_diagnostic.IDE0005.severity = none
+
+[src/MavNet.Protocol/Generated/MessageRegistry.cs]
+generated_code = true
+dotnet_analyzer_diagnostic.severity = none
+dotnet_diagnostic.IDE0005.severity = none
+
+# ---- Hand-written C#: conservative severity baseline ----
+# Intentionally tiny. Each line is justified against a real property of this
+# codebase. New entries require a one-line codebase-specific justification;
+# no blanket category disables.
+[*.cs]
+
+# CA1062: validate public-method args for null. The wire/decode public surface
+# is small and CRTP-constrained and takes non-nullable Span<byte>/ref struct;
+# defensive null guards on every method are noise here. Matches the existing
+# tests/Directory.Build.props NoWarn for parity.
+dotnet_diagnostic.CA1062.severity = none
+
+# CA2007: ConfigureAwait(false) on every await. This is a non-UI library with
+# no synchronization context; the hot await (ReceiveFromAsync) already uses
+# ConfigureAwait(false) deliberately. Requiring it everywhere is ceremony.
+dotnet_diagnostic.CA2007.severity = none
+
+# IDE0058: expression value is never used. Fights the deliberate
+# Socket.SendTo / fire-and-forget send path.
+dotnet_diagnostic.IDE0058.severity = none
+
+# CA1031: catch general Exception. INTENTIONAL and documented in CLAUDE.md —
+# a buggy subscriber must never kill the receive loop. Demoted to suggestion
+# so the design choice stays visible rather than silently overridden.
+dotnet_diagnostic.CA1031.severity = suggestion
+
+# CA1848 / CA1873: use LoggerMessage delegates / avoid expensive log args.
+# These pay off for HIGH-FREQUENCY logging. By design this library logs only
+# on connection lifecycle (Start/Dispose, once each) and rare error paths
+# (socket exception, heartbeat-send failure); the per-frame decode/dispatch
+# hot path logs nothing — the same no-per-frame-allocation discipline applied
+# to logging. A generated LoggerMessage partial class for ~5 cold lines is
+# pure boilerplate with no measurable benefit. Revisit if hot-path logging
+# is ever added.
+dotnet_diagnostic.CA1848.severity = none
+dotnet_diagnostic.CA1873.severity = none
+
+# ---- Codegen tool: CA1305 (locale-sensitive format/parse) ----
+# A code generator must emit byte-identical output on any host locale (the CI
+# codegen-drift gate depends on it). This is guaranteed by ONE mechanism, not
+# per-call discipline: Program.cs pins CurrentCulture / DefaultThreadCurrentCulture
+# to InvariantCulture at startup, so every format AND parse in the tool — the
+# ~30 interpolated StringBuilder.AppendLine sites and every int.Parse, present
+# and future — is deterministic. CA1305 does local analysis and cannot see that
+# process-wide invariant, so it is suppressed tool-wide: a single robust pin is
+# deliberately preferred over scattered IFormatProvider args that new code would
+# forget. Do NOT re-add per-call providers here — that reintroduces the smell.
+[tools/MavNet.CodeGen/**.cs]
+dotnet_diagnostic.CA1305.severity = none

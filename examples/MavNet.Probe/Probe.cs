@@ -17,7 +17,7 @@ namespace MavNet.Probe;
 ///   L  Land       R  RTL          M  Mission demo (upload + start)
 ///   Q  Quit
 /// </summary>
-internal sealed class Probe
+internal sealed class Probe : IDisposable
 {
     private const string DefaultUri = "udp://0.0.0.0:14550?rhost=127.0.0.1&rport=18570";
 
@@ -32,6 +32,12 @@ internal sealed class Probe
         _drone = drone;
         _drone.HeartbeatReceived += OnHeartbeat;
         _drone.MissionItemReached += seq => Log($"★ MISSION_ITEM_REACHED seq={seq} (total reached={_drone.MissionReachedCount})");
+    }
+
+    public void Dispose()
+    {
+        _cts.Dispose();
+        GC.SuppressFinalize(this);
     }
 
     public static async Task<int> Main(string[] args)
@@ -52,7 +58,7 @@ internal sealed class Probe
 
         await using (drone)
         {
-            var probe = new Probe(drone);
+            using var probe = new Probe(drone);
             Log($"connected to {drone.DeviceId} (type={drone.VehicleType})");
             Console.WriteLine();
             Console.WriteLine("Keys: A=Arm  D=Disarm  T=Takeoff(10m)  L=Land  R=RTL  M=Mission demo  Q=Quit");

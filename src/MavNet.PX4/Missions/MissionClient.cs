@@ -478,11 +478,8 @@ public sealed class MissionClient : IDisposable
     private bool IsMine(MavId sender) =>
         sender.SystemId == _targetSystem && sender.ComponentId == _targetComponent;
 
-    private void ThrowIfDisposed()
-    {
-        if (Volatile.Read(ref _disposed) != 0)
-            throw new ObjectDisposedException(nameof(MissionClient));
-    }
+    private void ThrowIfDisposed() =>
+        ObjectDisposedException.ThrowIf(Volatile.Read(ref _disposed) != 0, this);
 
     private void ThrowIfBusyLocked()
     {

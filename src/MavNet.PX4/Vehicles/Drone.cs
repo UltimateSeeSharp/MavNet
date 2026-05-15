@@ -99,16 +99,16 @@ public sealed class Drone : Vehicle, IStateObservable<DroneState>
     ///   <c>udp://localBind:localPort?rhost=remote&amp;rport=remotePort</c>.
     ///   See <see cref="ConnectionString"/>.</param>
     /// <param name="timeout">How long to wait for the first heartbeat before throwing.</param>
-    /// <param name="ct">Cancellation token.</param>
     /// <param name="connectionLogger">Optional logger for the underlying transport.</param>
     /// <param name="vehicleLogger">Optional logger for the Vehicle layer.</param>
+    /// <param name="ct">Cancellation token.</param>
     /// <exception cref="TimeoutException">No heartbeat arrived within <paramref name="timeout"/>.</exception>
     public static async Task<Drone> ConnectAsync(
         string connectionString,
         TimeSpan timeout,
-        CancellationToken ct = default,
         ILogger<MavlinkConnection>? connectionLogger = null,
-        ILogger<Vehicle>? vehicleLogger = null)
+        ILogger<Vehicle>? vehicleLogger = null,
+        CancellationToken ct = default)
     {
         var (local, remote) = Transport.Udp.ConnectionString.Parse(connectionString);
         var conn = new MavlinkConnection(local, remote, logger: connectionLogger);

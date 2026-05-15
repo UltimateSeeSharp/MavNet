@@ -47,7 +47,7 @@ internal static class RegistryEmitter
         foreach (var m in spec.Messages)
         {
             var crc = CrcExtraComputer.Compute(m);
-            var flags = m.HasExtensions ? "MessageFlags.HasExtensions" : "MessageFlags.None";
+            var flags = m.HasExtensions ? "MessageCapabilities.HasExtensions" : "MessageCapabilities.None";
             sb.AppendLine(
                 $"        yield return new MessageInfo({m.Id}u, {crc}, {m.MinPayloadLength}, {m.MaxPayloadLength}, \"{m.Name}\", {flags});");
         }
