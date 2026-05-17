@@ -1588,6 +1588,15 @@ references:
   isSpec: "True"
   fullName: MavNet.PX4.Missions.MissionItem.ReturnToLaunch
   nameWithType: MissionItem.ReturnToLaunch
+- uid: MavNet.PX4.Missions.MissionItem.Takeoff(System.Double,System.Double,System.Single,System.Single,MavNet.Protocol.Generated.Enums.MavFrame)
+  name: Takeoff(double, double, float, float, MavFrame)
+  href: api/MavNet.PX4.Missions.MissionItem.html#MavNet_PX4_Missions_MissionItem_Takeoff_System_Double_System_Double_System_Single_System_Single_MavNet_Protocol_Generated_Enums_MavFrame_
+  commentId: M:MavNet.PX4.Missions.MissionItem.Takeoff(System.Double,System.Double,System.Single,System.Single,MavNet.Protocol.Generated.Enums.MavFrame)
+  name.vb: Takeoff(Double, Double, Single, Single, MavFrame)
+  fullName: MavNet.PX4.Missions.MissionItem.Takeoff(double, double, float, float, MavNet.Protocol.Generated.Enums.MavFrame)
+  fullName.vb: MavNet.PX4.Missions.MissionItem.Takeoff(Double, Double, Single, Single, MavNet.Protocol.Generated.Enums.MavFrame)
+  nameWithType: MissionItem.Takeoff(double, double, float, float, MavFrame)
+  nameWithType.vb: MissionItem.Takeoff(Double, Double, Single, Single, MavFrame)
 - uid: MavNet.PX4.Missions.MissionItem.Takeoff(System.Single,System.Single,MavNet.Protocol.Generated.Enums.MavFrame)
   name: Takeoff(float, float, MavFrame)
   href: api/MavNet.PX4.Missions.MissionItem.html#MavNet_PX4_Missions_MissionItem_Takeoff_System_Single_System_Single_MavNet_Protocol_Generated_Enums_MavFrame_
@@ -1829,15 +1838,15 @@ references:
   commentId: T:MavNet.PX4.Vehicles.Drone
   fullName: MavNet.PX4.Vehicles.Drone
   nameWithType: Drone
-- uid: MavNet.PX4.Vehicles.Drone.ConnectAsync(System.String,System.TimeSpan,System.Threading.CancellationToken,Microsoft.Extensions.Logging.ILogger{MavNet.Transport.Udp.MavlinkConnection},Microsoft.Extensions.Logging.ILogger{MavNet.PX4.Base.Vehicle})
-  name: ConnectAsync(string, TimeSpan, CancellationToken, ILogger<MavlinkConnection>?, ILogger<Vehicle>?)
-  href: api/MavNet.PX4.Vehicles.Drone.html#MavNet_PX4_Vehicles_Drone_ConnectAsync_System_String_System_TimeSpan_System_Threading_CancellationToken_Microsoft_Extensions_Logging_ILogger_MavNet_Transport_Udp_MavlinkConnection__Microsoft_Extensions_Logging_ILogger_MavNet_PX4_Base_Vehicle__
-  commentId: M:MavNet.PX4.Vehicles.Drone.ConnectAsync(System.String,System.TimeSpan,System.Threading.CancellationToken,Microsoft.Extensions.Logging.ILogger{MavNet.Transport.Udp.MavlinkConnection},Microsoft.Extensions.Logging.ILogger{MavNet.PX4.Base.Vehicle})
-  name.vb: ConnectAsync(String, TimeSpan, CancellationToken, ILogger(Of MavlinkConnection), ILogger(Of Vehicle))
-  fullName: MavNet.PX4.Vehicles.Drone.ConnectAsync(string, System.TimeSpan, System.Threading.CancellationToken, Microsoft.Extensions.Logging.ILogger<MavNet.Transport.Udp.MavlinkConnection>?, Microsoft.Extensions.Logging.ILogger<MavNet.PX4.Base.Vehicle>?)
-  fullName.vb: MavNet.PX4.Vehicles.Drone.ConnectAsync(String, System.TimeSpan, System.Threading.CancellationToken, Microsoft.Extensions.Logging.ILogger(Of MavNet.Transport.Udp.MavlinkConnection), Microsoft.Extensions.Logging.ILogger(Of MavNet.PX4.Base.Vehicle))
-  nameWithType: Drone.ConnectAsync(string, TimeSpan, CancellationToken, ILogger<MavlinkConnection>?, ILogger<Vehicle>?)
-  nameWithType.vb: Drone.ConnectAsync(String, TimeSpan, CancellationToken, ILogger(Of MavlinkConnection), ILogger(Of Vehicle))
+- uid: MavNet.PX4.Vehicles.Drone.ConnectAsync(System.String,System.TimeSpan,Microsoft.Extensions.Logging.ILogger{MavNet.Transport.Udp.MavlinkConnection},Microsoft.Extensions.Logging.ILogger{MavNet.PX4.Base.Vehicle},System.Threading.CancellationToken)
+  name: ConnectAsync(string, TimeSpan, ILogger<MavlinkConnection>?, ILogger<Vehicle>?, CancellationToken)
+  href: api/MavNet.PX4.Vehicles.Drone.html#MavNet_PX4_Vehicles_Drone_ConnectAsync_System_String_System_TimeSpan_Microsoft_Extensions_Logging_ILogger_MavNet_Transport_Udp_MavlinkConnection__Microsoft_Extensions_Logging_ILogger_MavNet_PX4_Base_Vehicle__System_Threading_CancellationToken_
+  commentId: M:MavNet.PX4.Vehicles.Drone.ConnectAsync(System.String,System.TimeSpan,Microsoft.Extensions.Logging.ILogger{MavNet.Transport.Udp.MavlinkConnection},Microsoft.Extensions.Logging.ILogger{MavNet.PX4.Base.Vehicle},System.Threading.CancellationToken)
+  name.vb: ConnectAsync(String, TimeSpan, ILogger(Of MavlinkConnection), ILogger(Of Vehicle), CancellationToken)
+  fullName: MavNet.PX4.Vehicles.Drone.ConnectAsync(string, System.TimeSpan, Microsoft.Extensions.Logging.ILogger<MavNet.Transport.Udp.MavlinkConnection>?, Microsoft.Extensions.Logging.ILogger<MavNet.PX4.Base.Vehicle>?, System.Threading.CancellationToken)
+  fullName.vb: MavNet.PX4.Vehicles.Drone.ConnectAsync(String, System.TimeSpan, Microsoft.Extensions.Logging.ILogger(Of MavNet.Transport.Udp.MavlinkConnection), Microsoft.Extensions.Logging.ILogger(Of MavNet.PX4.Base.Vehicle), System.Threading.CancellationToken)
+  nameWithType: Drone.ConnectAsync(string, TimeSpan, ILogger<MavlinkConnection>?, ILogger<Vehicle>?, CancellationToken)
+  nameWithType.vb: Drone.ConnectAsync(String, TimeSpan, ILogger(Of MavlinkConnection), ILogger(Of Vehicle), CancellationToken)
 - uid: MavNet.PX4.Vehicles.Drone.ConnectAsync*
   name: ConnectAsync
   href: api/MavNet.PX4.Vehicles.Drone.html#MavNet_PX4_Vehicles_Drone_ConnectAsync_
@@ -2453,39 +2462,39 @@ references:
   isSpec: "True"
   fullName: MavNet.Protocol.MavlinkFrame.TryDecode
   nameWithType: MavlinkFrame.TryDecode
-- uid: MavNet.Protocol.MessageFlags
-  name: MessageFlags
-  href: api/MavNet.Protocol.MessageFlags.html
-  commentId: T:MavNet.Protocol.MessageFlags
-  fullName: MavNet.Protocol.MessageFlags
-  nameWithType: MessageFlags
-- uid: MavNet.Protocol.MessageFlags.HasExtensions
+- uid: MavNet.Protocol.MessageCapabilities
+  name: MessageCapabilities
+  href: api/MavNet.Protocol.MessageCapabilities.html
+  commentId: T:MavNet.Protocol.MessageCapabilities
+  fullName: MavNet.Protocol.MessageCapabilities
+  nameWithType: MessageCapabilities
+- uid: MavNet.Protocol.MessageCapabilities.HasExtensions
   name: HasExtensions
-  href: api/MavNet.Protocol.MessageFlags.html#MavNet_Protocol_MessageFlags_HasExtensions
-  commentId: F:MavNet.Protocol.MessageFlags.HasExtensions
-  fullName: MavNet.Protocol.MessageFlags.HasExtensions
-  nameWithType: MessageFlags.HasExtensions
-- uid: MavNet.Protocol.MessageFlags.None
+  href: api/MavNet.Protocol.MessageCapabilities.html#MavNet_Protocol_MessageCapabilities_HasExtensions
+  commentId: F:MavNet.Protocol.MessageCapabilities.HasExtensions
+  fullName: MavNet.Protocol.MessageCapabilities.HasExtensions
+  nameWithType: MessageCapabilities.HasExtensions
+- uid: MavNet.Protocol.MessageCapabilities.None
   name: None
-  href: api/MavNet.Protocol.MessageFlags.html#MavNet_Protocol_MessageFlags_None
-  commentId: F:MavNet.Protocol.MessageFlags.None
-  fullName: MavNet.Protocol.MessageFlags.None
-  nameWithType: MessageFlags.None
+  href: api/MavNet.Protocol.MessageCapabilities.html#MavNet_Protocol_MessageCapabilities_None
+  commentId: F:MavNet.Protocol.MessageCapabilities.None
+  fullName: MavNet.Protocol.MessageCapabilities.None
+  nameWithType: MessageCapabilities.None
 - uid: MavNet.Protocol.MessageInfo
   name: MessageInfo
   href: api/MavNet.Protocol.MessageInfo.html
   commentId: T:MavNet.Protocol.MessageInfo
   fullName: MavNet.Protocol.MessageInfo
   nameWithType: MessageInfo
-- uid: MavNet.Protocol.MessageInfo.#ctor(System.UInt32,System.Byte,System.Byte,System.Byte,System.String,MavNet.Protocol.MessageFlags)
-  name: MessageInfo(uint, byte, byte, byte, string, MessageFlags)
-  href: api/MavNet.Protocol.MessageInfo.html#MavNet_Protocol_MessageInfo__ctor_System_UInt32_System_Byte_System_Byte_System_Byte_System_String_MavNet_Protocol_MessageFlags_
-  commentId: M:MavNet.Protocol.MessageInfo.#ctor(System.UInt32,System.Byte,System.Byte,System.Byte,System.String,MavNet.Protocol.MessageFlags)
-  name.vb: New(UInteger, Byte, Byte, Byte, String, MessageFlags)
-  fullName: MavNet.Protocol.MessageInfo.MessageInfo(uint, byte, byte, byte, string, MavNet.Protocol.MessageFlags)
-  fullName.vb: MavNet.Protocol.MessageInfo.New(UInteger, Byte, Byte, Byte, String, MavNet.Protocol.MessageFlags)
-  nameWithType: MessageInfo.MessageInfo(uint, byte, byte, byte, string, MessageFlags)
-  nameWithType.vb: MessageInfo.New(UInteger, Byte, Byte, Byte, String, MessageFlags)
+- uid: MavNet.Protocol.MessageInfo.#ctor(System.UInt32,System.Byte,System.Byte,System.Byte,System.String,MavNet.Protocol.MessageCapabilities)
+  name: MessageInfo(uint, byte, byte, byte, string, MessageCapabilities)
+  href: api/MavNet.Protocol.MessageInfo.html#MavNet_Protocol_MessageInfo__ctor_System_UInt32_System_Byte_System_Byte_System_Byte_System_String_MavNet_Protocol_MessageCapabilities_
+  commentId: M:MavNet.Protocol.MessageInfo.#ctor(System.UInt32,System.Byte,System.Byte,System.Byte,System.String,MavNet.Protocol.MessageCapabilities)
+  name.vb: New(UInteger, Byte, Byte, Byte, String, MessageCapabilities)
+  fullName: MavNet.Protocol.MessageInfo.MessageInfo(uint, byte, byte, byte, string, MavNet.Protocol.MessageCapabilities)
+  fullName.vb: MavNet.Protocol.MessageInfo.New(UInteger, Byte, Byte, Byte, String, MavNet.Protocol.MessageCapabilities)
+  nameWithType: MessageInfo.MessageInfo(uint, byte, byte, byte, string, MessageCapabilities)
+  nameWithType.vb: MessageInfo.New(UInteger, Byte, Byte, Byte, String, MessageCapabilities)
 - uid: MavNet.Protocol.MessageInfo.#ctor*
   name: MessageInfo
   href: api/MavNet.Protocol.MessageInfo.html#MavNet_Protocol_MessageInfo__ctor_

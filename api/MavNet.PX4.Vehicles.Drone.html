@@ -88,7 +88,7 @@ consumers can pattern-match on type (<code>if (v is Drone)</code>) and so we hav
 a clear extension point for multirotor-specific behaviour later. The mission
 protocol surface (upload / download / clear / fence / rally) lives on
 <a class="xref" href="MavNet.PX4.Base.Vehicle.html">Vehicle</a> since boats, rovers, and planes use the same protocol.</p>
-<p>The static <a class="xref" href="MavNet.PX4.Vehicles.Drone.html#MavNet_PX4_Vehicles_Drone_ConnectAsync_System_String_System_TimeSpan_System_Threading_CancellationToken_Microsoft_Extensions_Logging_ILogger_MavNet_Transport_Udp_MavlinkConnection__Microsoft_Extensions_Logging_ILogger_MavNet_PX4_Base_Vehicle__">ConnectAsync(string, TimeSpan, CancellationToken, ILogger&lt;MavlinkConnection&gt;?, ILogger&lt;Vehicle&gt;?)</a> factory is the one-liner entry
+<p>The static <a class="xref" href="MavNet.PX4.Vehicles.Drone.html#MavNet_PX4_Vehicles_Drone_ConnectAsync_System_String_System_TimeSpan_Microsoft_Extensions_Logging_ILogger_MavNet_Transport_Udp_MavlinkConnection__Microsoft_Extensions_Logging_ILogger_MavNet_PX4_Base_Vehicle__System_Threading_CancellationToken_">ConnectAsync(string, TimeSpan, ILogger&lt;MavlinkConnection&gt;?, ILogger&lt;Vehicle&gt;?, CancellationToken)</a> factory is the one-liner entry
 point for the common case: parse URI → open <a class="xref" href="MavNet.Transport.Udp.MavlinkConnection.html">MavlinkConnection</a>
 → wait for first heartbeat → return a Drone that owns the connection.</p>
 </div>
@@ -298,8 +298,8 @@ point for the common case: parse URI → open <a class="xref" href="MavNet.Trans
 
   <a id="MavNet_PX4_Vehicles_Drone_ConnectAsync_" data-uid="MavNet.PX4.Vehicles.Drone.ConnectAsync*"></a>
 
-  <h3 id="MavNet_PX4_Vehicles_Drone_ConnectAsync_System_String_System_TimeSpan_System_Threading_CancellationToken_Microsoft_Extensions_Logging_ILogger_MavNet_Transport_Udp_MavlinkConnection__Microsoft_Extensions_Logging_ILogger_MavNet_PX4_Base_Vehicle__" data-uid="MavNet.PX4.Vehicles.Drone.ConnectAsync(System.String,System.TimeSpan,System.Threading.CancellationToken,Microsoft.Extensions.Logging.ILogger{MavNet.Transport.Udp.MavlinkConnection},Microsoft.Extensions.Logging.ILogger{MavNet.PX4.Base.Vehicle})">
-  ConnectAsync(string, TimeSpan, CancellationToken, ILogger&lt;MavlinkConnection&gt;?, ILogger&lt;Vehicle&gt;?)
+  <h3 id="MavNet_PX4_Vehicles_Drone_ConnectAsync_System_String_System_TimeSpan_Microsoft_Extensions_Logging_ILogger_MavNet_Transport_Udp_MavlinkConnection__Microsoft_Extensions_Logging_ILogger_MavNet_PX4_Base_Vehicle__System_Threading_CancellationToken_" data-uid="MavNet.PX4.Vehicles.Drone.ConnectAsync(System.String,System.TimeSpan,Microsoft.Extensions.Logging.ILogger{MavNet.Transport.Udp.MavlinkConnection},Microsoft.Extensions.Logging.ILogger{MavNet.PX4.Base.Vehicle},System.Threading.CancellationToken)">
+  ConnectAsync(string, TimeSpan, ILogger&lt;MavlinkConnection&gt;?, ILogger&lt;Vehicle&gt;?, CancellationToken)
   <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Vehicles/Drone.cs/#L106"><i class="bi bi-code-slash"></i></a>
   </h3>
 
@@ -310,7 +310,7 @@ connection. Disposing the Drone closes the socket.</p>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static Task&lt;Drone&gt; ConnectAsync(string connectionString, TimeSpan timeout, CancellationToken ct = default, ILogger&lt;MavlinkConnection&gt;? connectionLogger = null, ILogger&lt;Vehicle&gt;? vehicleLogger = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public static Task&lt;Drone&gt; ConnectAsync(string connectionString, TimeSpan timeout, ILogger&lt;MavlinkConnection&gt;? connectionLogger = null, ILogger&lt;Vehicle&gt;? vehicleLogger = null, CancellationToken ct = default)</code></pre>
   </div>
 
   <h4 class="section">Parameters</h4>
@@ -323,14 +323,14 @@ See <a class="xref" href="MavNet.Transport.Udp.ConnectionString.html">Connection
     <dt><code>timeout</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.timespan">TimeSpan</a></dt>
     <dd><p>How long to wait for the first heartbeat before throwing.</p>
 </dd>
-    <dt><code>ct</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
-    <dd><p>Cancellation token.</p>
-</dd>
     <dt><code>connectionLogger</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.extensions.logging.ilogger-1">ILogger</a>&lt;<a class="xref" href="MavNet.Transport.Udp.MavlinkConnection.html">MavlinkConnection</a>&gt;</dt>
     <dd><p>Optional logger for the underlying transport.</p>
 </dd>
     <dt><code>vehicleLogger</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.extensions.logging.ilogger-1">ILogger</a>&lt;<a class="xref" href="MavNet.PX4.Base.Vehicle.html">Vehicle</a>&gt;</dt>
     <dd><p>Optional logger for the Vehicle layer.</p>
+</dd>
+    <dt><code>ct</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></dt>
+    <dd><p>Cancellation token.</p>
 </dd>
   </dl>
 

@@ -139,8 +139,8 @@ by encoders for truncation, and by inspection/replay tooling.</p>
 
   <a id="MavNet_Protocol_MessageInfo__ctor_" data-uid="MavNet.Protocol.MessageInfo.#ctor*"></a>
 
-  <h3 id="MavNet_Protocol_MessageInfo__ctor_System_UInt32_System_Byte_System_Byte_System_Byte_System_String_MavNet_Protocol_MessageFlags_" data-uid="MavNet.Protocol.MessageInfo.#ctor(System.UInt32,System.Byte,System.Byte,System.Byte,System.String,MavNet.Protocol.MessageFlags)">
-  MessageInfo(uint, byte, byte, byte, string, MessageFlags)
+  <h3 id="MavNet_Protocol_MessageInfo__ctor_System_UInt32_System_Byte_System_Byte_System_Byte_System_String_MavNet_Protocol_MessageCapabilities_" data-uid="MavNet.Protocol.MessageInfo.#ctor(System.UInt32,System.Byte,System.Byte,System.Byte,System.String,MavNet.Protocol.MessageCapabilities)">
+  MessageInfo(uint, byte, byte, byte, string, MessageCapabilities)
   <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.Protocol/MessageInfo.cs/#L16"><i class="bi bi-code-slash"></i></a>
   </h3>
 
@@ -151,7 +151,7 @@ by encoders for truncation, and by inspection/replay tooling.</p>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public MessageInfo(uint MsgId, byte CrcExtra, byte MinPayloadLength, byte MaxPayloadLength, string Name, MessageFlags Flags = MessageFlags.None)</code></pre>
+    <pre><code class="lang-csharp hljs">public MessageInfo(uint MsgId, byte CrcExtra, byte MinPayloadLength, byte MaxPayloadLength, string Name, MessageCapabilities Flags = MessageCapabilities.None)</code></pre>
   </div>
 
   <h4 class="section">Parameters</h4>
@@ -173,7 +173,7 @@ this length before deserialising. Wire payload longer than this is malformed.</p
     <dt><code>Name</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
     <dd><p>SHOUTY_SNAKE_CASE message name from the dialect XML (e.g. &quot;HEARTBEAT&quot;).</p>
 </dd>
-    <dt><code>Flags</code> <a class="xref" href="MavNet.Protocol.MessageFlags.html">MessageFlags</a></dt>
+    <dt><code>Flags</code> <a class="xref" href="MavNet.Protocol.MessageCapabilities.html">MessageCapabilities</a></dt>
     <dd><p>Capability hints derived from the spec (HasExtensions, etc.).</p>
 </dd>
   </dl>
@@ -237,7 +237,7 @@ this length before deserialising. Wire payload longer than this is malformed.</p
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public MessageFlags Flags { get; init; }</code></pre>
+    <pre><code class="lang-csharp hljs">public MessageCapabilities Flags { get; init; }</code></pre>
   </div>
 
 
@@ -246,7 +246,7 @@ this length before deserialising. Wire payload longer than this is malformed.</p
 
   <h4 class="section">Property Value</h4>
   <dl class="parameters">
-    <dt><a class="xref" href="MavNet.Protocol.MessageFlags.html">MessageFlags</a></dt>
+    <dt><a class="xref" href="MavNet.Protocol.MessageCapabilities.html">MessageCapabilities</a></dt>
     <dd></dd>
   </dl>
 

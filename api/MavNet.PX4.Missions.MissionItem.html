@@ -525,7 +525,7 @@ those in when it sends each item.</p>
 
   <h3 id="MavNet_PX4_Missions_MissionItem_FromInt1e7_System_Int32_" data-uid="MavNet.PX4.Missions.MissionItem.FromInt1e7(System.Int32)">
   FromInt1e7(int)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Missions/MissionItem.cs/#L97"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Missions/MissionItem.cs/#L119"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Decode MAVLink int32 (× 1e7) back to degrees.</p>
@@ -606,7 +606,7 @@ is the minimum altitude (m) the autopilot may abort a landing at (param1).</p>
 
   <h3 id="MavNet_PX4_Missions_MissionItem_ReturnToLaunch" data-uid="MavNet.PX4.Missions.MissionItem.ReturnToLaunch">
   ReturnToLaunch()
-  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Missions/MissionItem.cs/#L85"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Missions/MissionItem.cs/#L107"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Build a NAV_RETURN_TO_LAUNCH item.</p>
@@ -636,12 +636,63 @@ is the minimum altitude (m) the autopilot may abort a landing at (param1).</p>
 
   <a id="MavNet_PX4_Missions_MissionItem_Takeoff_" data-uid="MavNet.PX4.Missions.MissionItem.Takeoff*"></a>
 
-  <h3 id="MavNet_PX4_Missions_MissionItem_Takeoff_System_Single_System_Single_MavNet_Protocol_Generated_Enums_MavFrame_" data-uid="MavNet.PX4.Missions.MissionItem.Takeoff(System.Single,System.Single,MavNet.Protocol.Generated.Enums.MavFrame)">
-  Takeoff(float, float, MavFrame)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Missions/MissionItem.cs/#L69"><i class="bi bi-code-slash"></i></a>
+  <h3 id="MavNet_PX4_Missions_MissionItem_Takeoff_System_Double_System_Double_System_Single_System_Single_MavNet_Protocol_Generated_Enums_MavFrame_" data-uid="MavNet.PX4.Missions.MissionItem.Takeoff(System.Double,System.Double,System.Single,System.Single,MavNet.Protocol.Generated.Enums.MavFrame)">
+  Takeoff(double, double, float, float, MavFrame)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Missions/MissionItem.cs/#L91"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"><p>Build a NAV_TAKEOFF item at the given altitude.</p>
+  <div class="markdown level1 summary"><p>Build a NAV_TAKEOFF item at an explicit coordinate
+(<code class="paramref">latDeg</code>, <code class="paramref">lonDeg</code>, <code class="paramref">altMeters</code>).</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static MissionItem Takeoff(double latDeg, double lonDeg, float altMeters, float pitch = 0, MavFrame frame = MavFrame.GlobalRelativeAltInt)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>latDeg</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd></dd>
+    <dt><code>lonDeg</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">double</a></dt>
+    <dd></dd>
+    <dt><code>altMeters</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+    <dt><code>pitch</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a></dt>
+    <dd></dd>
+    <dt><code>frame</code> <span class="xref">MavFrame</span></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="MavNet.PX4.Missions.MissionItem.html">MissionItem</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="MavNet_PX4_Missions_MissionItem_Takeoff_" data-uid="MavNet.PX4.Missions.MissionItem.Takeoff*"></a>
+
+  <h3 id="MavNet_PX4_Missions_MissionItem_Takeoff_System_Single_System_Single_MavNet_Protocol_Generated_Enums_MavFrame_" data-uid="MavNet.PX4.Missions.MissionItem.Takeoff(System.Single,System.Single,MavNet.Protocol.Generated.Enums.MavFrame)">
+  Takeoff(float, float, MavFrame)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Missions/MissionItem.cs/#L74"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Build a NAV_TAKEOFF item with <a class="xref" href="MavNet.PX4.Missions.MissionItem.html#MavNet_PX4_Missions_MissionItem_X">X</a>/<a class="xref" href="MavNet.PX4.Missions.MissionItem.html#MavNet_PX4_Missions_MissionItem_Y">Y</a> emitted as
+<code>0</code> and <a class="xref" href="MavNet.PX4.Missions.MissionItem.html#MavNet_PX4_Missions_MissionItem_Z">Z</a> = <code class="paramref">altMeters</code>. Per the
+<code>MISSION_ITEM_INT</code> encoding <code>0</code> is the literal coordinate <code>0.0000000°</code>,
+not an &quot;unset&quot;/&quot;current position&quot; sentinel — the protocol has no unset. Use
+<a class="xref" href="MavNet.PX4.Missions.MissionItem.html#MavNet_PX4_Missions_MissionItem_Takeoff_System_Double_System_Double_System_Single_System_Single_MavNet_Protocol_Generated_Enums_MavFrame_">Takeoff(double, double, float, float, MavFrame)</a> to send a takeoff
+coordinate.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
 
@@ -679,7 +730,7 @@ is the minimum altitude (m) the autopilot may abort a landing at (param1).</p>
 
   <h3 id="MavNet_PX4_Missions_MissionItem_ToInt1e7_System_Double_" data-uid="MavNet.PX4.Missions.MissionItem.ToInt1e7(System.Double)">
   ToInt1e7(double)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Missions/MissionItem.cs/#L93"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/UltimateSeeSharp/MavNet/blob/main/src/MavNet.PX4/Missions/MissionItem.cs/#L115"><i class="bi bi-code-slash"></i></a>
   </h3>
 
   <div class="markdown level1 summary"><p>Encode degrees to MAVLink int32 (× 1e7), rounding half-away-from-zero.</p>

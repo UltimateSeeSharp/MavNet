@@ -87,7 +87,7 @@ consumers can pattern-match on type (<code>if (v is Drone)</code>) and so we hav
 a clear extension point for multirotor-specific behaviour later. The mission
 protocol surface (upload / download / clear / fence / rally) lives on
 <a class="xref" href="MavNet.PX4.Base.Vehicle.html">Vehicle</a> since boats, rovers, and planes use the same protocol.</p>
-<p>The static <a class="xref" href="MavNet.PX4.Vehicles.Drone.html#MavNet_PX4_Vehicles_Drone_ConnectAsync_System_String_System_TimeSpan_System_Threading_CancellationToken_Microsoft_Extensions_Logging_ILogger_MavNet_Transport_Udp_MavlinkConnection__Microsoft_Extensions_Logging_ILogger_MavNet_PX4_Base_Vehicle__">ConnectAsync(string, TimeSpan, CancellationToken, ILogger&lt;MavlinkConnection&gt;?, ILogger&lt;Vehicle&gt;?)</a> factory is the one-liner entry
+<p>The static <a class="xref" href="MavNet.PX4.Vehicles.Drone.html#MavNet_PX4_Vehicles_Drone_ConnectAsync_System_String_System_TimeSpan_Microsoft_Extensions_Logging_ILogger_MavNet_Transport_Udp_MavlinkConnection__Microsoft_Extensions_Logging_ILogger_MavNet_PX4_Base_Vehicle__System_Threading_CancellationToken_">ConnectAsync(string, TimeSpan, ILogger&lt;MavlinkConnection&gt;?, ILogger&lt;Vehicle&gt;?, CancellationToken)</a> factory is the one-liner entry
 point for the common case: parse URI → open <a class="xref" href="MavNet.Transport.Udp.MavlinkConnection.html">MavlinkConnection</a>
 → wait for first heartbeat → return a Drone that owns the connection.</p>
 </dd>
