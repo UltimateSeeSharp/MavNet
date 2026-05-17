@@ -23,6 +23,7 @@ Path to a "full" C# MAVLink SDK. This document is the single source of truth for
 | Rate-controlled state subscription | Done | `MavNet.Core/IStateObservable` |
 | Test harness (xUnit + FluentAssertions), CI matrix, codegen-drift check | Done | `tests/`, `.github/workflows/ci.yml` |
 | NuGet + SourceLink + deterministic builds | Done | `Directory.Build.props` |
+| Static analysis: .NET analyzers (`Recommended`) + code-style in build, generated code excluded, allowlist-wiring consistency test | Done | `Directory.Build.props`, `.editorconfig`, `tests/MavNet.Transport.Udp.Tests/AllowlistWiringConsistencyTests.cs` |
 | Docs site (DocFX) with architecture + getting-started | Thin | `docs/articles/` |
 
 **Allowlisted messages today (17):** HEARTBEAT, COMMAND_LONG / ACK, GLOBAL_POSITION_INT, VFR_HUD, GPS_RAW_INT, SYS_STATUS, EXTENDED_SYS_STATE, and the 9 MISSION_* messages (REQUEST_LIST, COUNT, CLEAR_ALL, ITEM_REACHED, ACK, CURRENT, REQUEST, REQUEST_INT, ITEM_INT).
@@ -132,7 +133,7 @@ The long tail of "is it a full SDK." Each is independently shippable.
 
 ## Cross-cutting workstreams (every milestone)
 
-- **Allowlist hygiene:** every new message follows the CLAUDE.md "Code generation" 4-step ritual (regen, dispatcher event + switch arm, `IMavlinkConnection` event, roundtrip test + dispatch test).
+- **Allowlist hygiene:** every new message follows the CLAUDE.md "Code generation" 4-step ritual (regen, dispatcher event + switch arm, `IMavlinkConnection` event, roundtrip test + dispatch test). `AllowlistWiringConsistencyTests` auto-enforces the `IMavlinkConnection` event half (interface + impl); the `case` arm stays covered by the per-message dispatch `[Fact]`.
 - **Threading-friendly API for GCS:** events fire on the receive thread (CLAUDE.md "Threading model"); every new event-producing layer ships with an `IAsyncEnumerable<T>` adapter or `Channel<T>` helper so Blazor/WPF consumers do not have to marshal manually. Lives in `MavNet.Core` as `EventStream<T>`.
 - **Sample apps:** one new sample per ~2 milestones, in `examples/` — `MavNet.Probe` (have), `MavNet.MissionCli`, `MavNet.ParamDumper`, `MavNet.LogDownloader`, `MavNet.MiniGcs` (Blazor).
 - **Docs ship in the same PR as code and tests.** Update `CLAUDE.md` "Architecture" when a new top-level project lands.

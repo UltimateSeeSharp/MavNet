@@ -682,5 +682,7 @@ public abstract class Vehicle : IAsyncDisposable, IStateObservable
 
         if (_ownsConnection)
             await _connection.DisposeAsync().ConfigureAwait(false);
+
+        GC.SuppressFinalize(this);
     }
 }

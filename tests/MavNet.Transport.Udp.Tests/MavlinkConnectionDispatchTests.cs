@@ -173,7 +173,7 @@ public class MavlinkConnectionDispatchTests
     /// Each mission-protocol message uses this; the per-message <see cref="Fact"/>s only
     /// pin the event-name wiring on the dispatcher.
     /// </summary>
-    private async Task RoundtripDispatch<T>(T msg,
+    private static async Task RoundtripDispatch<T>(T msg,
         Action<MavlinkConnection, TaskCompletionSource<T>> subscribe)
         where T : IMavlinkMessage<T>
     {

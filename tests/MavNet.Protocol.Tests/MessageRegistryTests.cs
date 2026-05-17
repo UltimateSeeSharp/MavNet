@@ -47,11 +47,11 @@ public class MessageRegistryTests
     public void Extension_messages_have_min_less_than_max()
     {
         MessageRegistry.TryGet(CommandAckId, out var ack).Should().BeTrue();
-        ack.Flags.HasFlag(MessageFlags.HasExtensions).Should().BeTrue();
+        ack.Flags.HasFlag(MessageCapabilities.HasExtensions).Should().BeTrue();
         ack.MinPayloadLength.Should().BeLessThan(ack.MaxPayloadLength);
 
         MessageRegistry.TryGet(SysStatusId, out var sys).Should().BeTrue();
-        sys.Flags.HasFlag(MessageFlags.HasExtensions).Should().BeTrue();
+        sys.Flags.HasFlag(MessageCapabilities.HasExtensions).Should().BeTrue();
         sys.MinPayloadLength.Should().BeLessThan(sys.MaxPayloadLength);
     }
 

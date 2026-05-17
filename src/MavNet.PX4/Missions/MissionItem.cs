@@ -65,7 +65,12 @@ public readonly record struct MissionItem(
             Y: ToInt1e7(lonDeg),
             Z: 0f);
 
-    /// <summary>Build a NAV_TAKEOFF item at the given altitude.</summary>
+    /// <summary>Build a NAV_TAKEOFF item with <see cref="X"/>/<see cref="Y"/> emitted as
+    /// <c>0</c> and <see cref="Z"/> = <paramref name="altMeters"/>. Per the
+    /// <c>MISSION_ITEM_INT</c> encoding <c>0</c> is the literal coordinate <c>0.0000000°</c>,
+    /// not an "unset"/"current position" sentinel — the protocol has no unset. Use
+    /// <see cref="Takeoff(double, double, float, float, MavFrame)"/> to send a takeoff
+    /// coordinate.</summary>
     public static MissionItem Takeoff(
         float altMeters,
         float pitch = 0f,
@@ -79,6 +84,23 @@ public readonly record struct MissionItem(
             Param4: float.NaN,
             X: 0,
             Y: 0,
+            Z: altMeters);
+
+    /// <summary>Build a NAV_TAKEOFF item at an explicit coordinate
+    /// (<paramref name="latDeg"/>, <paramref name="lonDeg"/>, <paramref name="altMeters"/>).</summary>
+    public static MissionItem Takeoff(
+        double latDeg, double lonDeg, float altMeters,
+        float pitch = 0f,
+        MavFrame frame = MavFrame.GlobalRelativeAltInt) =>
+        new(
+            Frame: frame,
+            Command: MavCmd.NavTakeoff,
+            Param1: pitch,
+            Param2: 0f,
+            Param3: 0f,
+            Param4: float.NaN,
+            X: ToInt1e7(latDeg),
+            Y: ToInt1e7(lonDeg),
             Z: altMeters);
 
     /// <summary>Build a NAV_RETURN_TO_LAUNCH item.</summary>
@@ -98,7 +120,8 @@ public readonly record struct MissionItem(
 
     /// <summary>Wrap this item with the per-transaction stamping (sequence number, target,
     /// mission type) into a wire-shaped <see cref="MissionItemInt"/>. The <c>Current</c>
-    /// field is always emitted as 0 — autopilots track the active item via MISSION_CURRENT.</summary>
+    /// field is always emitted as <c>0</c>; the mission protocol tracks the active item
+    /// via <c>MISSION_CURRENT</c>.</summary>
     internal MissionItemInt ToWire(ushort seq, byte targetSystem, byte targetComponent, MavMissionType missionType) =>
         new(
             Param1: Param1, Param2: Param2, Param3: Param3, Param4: Param4,

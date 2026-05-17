@@ -37,7 +37,7 @@ public class MissionClientTests
         return (client, conn);
     }
 
-    private static IReadOnlyList<MissionItem> ThreeWaypoints() => new[]
+    private static MissionItem[] ThreeWaypoints() => new[]
     {
         MissionItem.Waypoint(47.0, 8.5, 30f),
         MissionItem.Waypoint(47.001, 8.501, 30f),

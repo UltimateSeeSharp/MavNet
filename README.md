@@ -30,6 +30,7 @@ A condensed view. Full version in [ROADMAP.md](ROADMAP.md).
 - Mission protocol: upload / download / clear / start state machines for waypoints, geofence and rally points; live `MISSION_CURRENT` / `MISSION_ITEM_REACHED` on `Vehicle`
 - Rate-controlled state subscription
 - Test harness, CI matrix, codegen-drift check, SourceLink, deterministic builds
+- Static analysis: .NET analyzers (`Recommended` + code-style in build, generated code excluded), allowlist→`IMavlinkConnection` wiring consistency test
 
 **Next, in order**
 
@@ -115,7 +116,7 @@ Do not hand-edit them. Regenerate with:
 dotnet run --project tools/MavNet.CodeGen
 ```
 
-When adding a message to `tools/MavNet.CodeGen/allowlist.txt`, regenerate, then add its typed event and dispatch case in `src/MavNet.Transport.Udp/MavlinkConnection.cs`. Surface it through `Vehicle` or `Drone` only when it belongs in the high-level API.
+When adding a message to `tools/MavNet.CodeGen/allowlist.txt`, regenerate, then add its typed event and dispatch case in `src/MavNet.Transport.Udp/MavlinkConnection.cs`. Surface it through `Vehicle` or `Drone` only when it belongs in the high-level API. `AllowlistWiringConsistencyTests` fails the build if the `IMavlinkConnection` event for an inbound message is forgotten (send-only messages are listed explicitly).
 
 ## Docs
 

@@ -30,7 +30,7 @@ public class VehicleMissionFacadeTests
         return (drone, conn);
     }
 
-    private static IReadOnlyList<MissionItem> OneWaypoint() => new[]
+    private static MissionItem[] OneWaypoint() => new[]
     {
         MissionItem.Waypoint(47.0, 8.5, 30f),
     };

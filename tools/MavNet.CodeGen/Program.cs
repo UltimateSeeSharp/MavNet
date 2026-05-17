@@ -1,6 +1,14 @@
+using System.Globalization;
 using MavNet.CodeGen;
 using MavNet.CodeGen.Emitters;
 
+// A code generator MUST emit byte-identical output regardless of the host
+// machine's locale (the CI codegen-drift gate depends on it). Pin the whole
+// process to the invariant culture up front so every number/string format in
+// the emitters is deterministic — present and future — without threading an
+// IFormatProvider through ~30 call sites.
+CultureInfo.CurrentCulture = CultureInfo.InvariantCulture;
+CultureInfo.DefaultThreadCurrentCulture = CultureInfo.InvariantCulture;
 
 // CLI: --spec <root.xml> --allowlist <file> --generated-out <dir> --registry-out <dir>
 // Defaults assume the repo layout: specs/ at the root, generator output split between

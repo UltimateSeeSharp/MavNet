@@ -19,7 +19,7 @@ public readonly record struct MessageInfo(
     byte MinPayloadLength,
     byte MaxPayloadLength,
     string Name,
-    MessageFlags Flags = MessageFlags.None)
+    MessageCapabilities Flags = MessageCapabilities.None)
 {
     /// <summary>Wire-length range check. Used by the parser before CRC validation.</summary>
     public bool IsValidPayloadLength(int length) =>
@@ -28,7 +28,7 @@ public readonly record struct MessageInfo(
 
 /// <summary>Capability hints sourced from the dialect XML. Cheap to extend without breaking ABI.</summary>
 [System.Flags]
-public enum MessageFlags : byte
+public enum MessageCapabilities : byte
 {
     /// <summary>No capability flags set.</summary>
     None          = 0,
